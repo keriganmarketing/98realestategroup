@@ -1,0 +1,414 @@
+/*--------------------------------------------------------------
+# Alignments
+--------------------------------------------------------------*/
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 1.5em;
+    margin-bottom: 1em;
+}
+
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.text-center {
+	text-align: center;
+}
+
+/*--------------------------------------------------------------
+# Widgets
+--------------------------------------------------------------*/
+.widget {
+	margin: 0 0 1.5em;
+}
+
+/* Make sure select elements fit in widgets. */
+.widget select {
+	max-width: 100%;
+}
+
+/*------------------------------------------------------------
+## Page-Listing
+------------------------------------------------------------*/
+.property-left{
+	padding-left:0;
+}
+
+
+
+/*--------------------------------------------------------------
+## Comments
+--------------------------------------------------------------*/
+.comment-content a {
+	word-wrap: break-word;
+}
+
+.bypostauthor {
+	display: block;
+}
+
+/*--------------------------------------------------------------
+# Media
+--------------------------------------------------------------*/
+.page-content .wp-smiley,
+.entry-content .wp-smiley,
+.comment-content .wp-smiley {
+	border: none;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding: 0;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+/*--------------------------------------------------------------
+## Captions
+--------------------------------------------------------------*/
+.wp-caption {
+	margin-bottom: 1.5em;
+	max-width: 100%;
+}
+
+.wp-caption img[class*="wp-image-"] {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wp-caption .wp-caption-text {
+	margin: 0.8075em 0;
+}
+
+.wp-caption-text {
+	text-align: center;
+}
+
+/*--------------------------------------------------------------
+## Area Pages
+--------------------------------------------------------------*/
+.area-content{
+    padding-left:30px !important;
+    padding-right:30px !important;
+}
+#btn-view-area-listing{
+    margin-bottom:30px;
+}
+#CDSWIDSSP{
+    width:inherit !important;
+}
+#CDSWIDSSP .widSSPData {
+    margin-top:30px;
+    width:100%;
+}
+    
+/*--------------------------------------------------------------
+## Galleries
+--------------------------------------------------------------*/
+.gallery {
+	margin-bottom: 1.5em;
+}
+
+.gallery-item {
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+	width: 100%;
+}
+
+.gallery-columns-2 .gallery-item {
+	max-width: 50%;
+}
+
+.gallery-columns-3 .gallery-item {
+	max-width: 33.33%;
+}
+
+.gallery-columns-4 .gallery-item {
+	max-width: 25%;
+}
+
+.gallery-columns-5 .gallery-item {
+	max-width: 20%;
+}
+
+.gallery-columns-6 .gallery-item {
+	max-width: 16.66%;
+}
+
+.gallery-columns-7 .gallery-item {
+	max-width: 14.28%;
+}
+
+.gallery-columns-8 .gallery-item {
+	max-width: 12.5%;
+}
+
+.gallery-columns-9 .gallery-item {
+	max-width: 11.11%;
+}
+
+.gallery-caption {
+	display: block;
+}
+
+/* MID */
+
+#building {
+	/*overflow: hidden;*/
+    margin-top: -46px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    width:100%;
+    max-width: 100%;
+}
+
+.building-photo {
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+	#building {
+		margin-top: -406px;
+        position: absolute;
+        overflow:visible;
+	}
+    .building-photo img {
+        margin-left: 50%;
+    }
+	.home #mid .entry-content {
+		padding: 40px 40px 0 20px; 
+	}
+
+}
+
+
+
+/** News Contact **/
+#news-contact {
+	padding:36px 0;
+	background: #4d4b47;
+}
+
+.form-group input.ph {
+    width: 60px;
+    display: inline-block;
+    margin-right: 3px;
+}
+.form-group input.ph3 {
+    width: 80px;
+}
+
+
+/** Bot **/
+#bot { background:#ece9e2; }
+
+/** Bot Bot **/
+#bot-bot { background:#d5d2cc; }
+
+#news-contact h2 { 
+	font-size: 20px;
+	font-weight: bold;
+	color:#FFF;
+}
+
+#news-contact h3 a,
+#news-contact h3 { 
+	font-size: 18px;
+	font-weight: normal;
+	color:#FFF;
+}
+
+#news-contact .author a,
+#news-contact .author { 
+	font-size: 14px;
+	font-weight: normal;
+	color:#b0aa98;
+}
+
+.leadform label {
+    display:block;
+    text-transform:uppercase;
+	font-size: 14px;
+	color: #b0aa98;
+	margin-top: 5px;
+	margin-bottom: -2px;
+}
+
+.leadform label.radio-inline {
+    display:inline-block;
+    padding:0 6px 10px 2px;
+    text-transform:capitalize;
+    color: #555;
+    font-size: 16px;
+}
+
+.leadform .form-group {
+    margin-bottom: 4px;
+}
+
+.leadform textarea {
+	height:128px;
+	margin-bottom: 10px;
+}
+
+.leadform {
+    padding-bottom:20px;
+}
+
+.leadform h2 {
+    margin-top:30px;
+}
+
+/* social media */
+#socialmedia {
+	padding-top: 30px;
+}
+
+.nav-social,
+.social a {
+	display: inline-block !important;
+    height: 50px;
+    width: 50px;
+    text-indent: -10000px;
+    background: url('/wp-content/plugins/kma-social-media-links/social-media-sprite-lg.png') no-repeat rgba(0,0,0,.2);
+	background-position: 0 0;
+    background-size: auto 256%;
+    border-radius: 50%;
+	margin: 7px 3px 0;
+	overflow: hidden !important;
+	color:rgba(255,255,255,.8);
+	transition: all ease-in .5s;
+}
+
+.nav-social { text-indent:100000px !important; margin-bottom: -8px; }
+
+.social .googleplus {
+	background-position: 14.2% -16%;
+	background-color: #555;
+}
+.social .twitter {
+	background-position: 5.8% -16%;
+	background-color: #24a4f2;
+}
+.nav-social.facebook,
+.social .facebook {
+	background-position: -3% -16%;
+	background-color: #3B5998;
+}
+.social .instagram {
+	background-position: 75.7% -16%;
+}
+.social .vimeo {
+	background-position: 40.9% -16%;
+}
+.nav-social.youtube,
+.social .youtube {
+	background-position: 23.09% -16%;
+}
+.nav-social.linkedin,
+.social .linkedin {
+	background-position: 58.2% -13%;
+}
+.social .rss {
+    background-position: 49.5% -14%;
+}
+.social a:focus,
+.social a:hover {
+	color:rgba(255,255,255,1);
+} 
+
+
+/** Footer Widget Container **/
+.footer-widget-container {
+	padding:30px 10px;
+}
+.footer-widget-container .widget_nav_menu ul li,
+.footer-widget-container .widget_nav_menu ul {
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+
+h4.widget-title,
+.footer-widget-container .widget_nav_menu ul li a {
+	display: block;
+	font-family: 'Raleway';
+	font-weight: 800;
+	color: #c41230;
+	font-size: 20px;
+	text-decoration: none;
+	padding: 30px 0 10px;
+	margin: 0;
+}
+
+.footer-widget-container .widget_nav_menu ul ul li a {
+	font-family: 'Raleway';
+	color: #4d4b47;
+	font-size: 16px;
+	text-decoration: underline;
+	line-height: 1.5em;
+	font-weight: 100;
+	padding: 0 0 10px;
+	margin: 0;
+}
+
+.footer-widget-container .widget_nav_menu ul ul li a:hover {
+	text-decoration: none; 
+}
+
+.footer-widget-container .widget_text {
+	font-family: 'Raleway';
+	color: #4d4b47;
+	font-size: 16px;
+	line-height: 1.5em;
+}
+
+p.siteby,
+p.copyright {
+	font-size: .8em;
+	color:rgba(0,0,0,.5);
+	display: inline-block;
+	margin: 20px auto 0;
+}
+
+p.siteby svg {
+	width: 15px;
+	enable-background:new 0 0 12.5 8.7;
+}
+
+p.siteby svg path{
+	fill:#FAA41A;
+}
+
+#tvcInputTable1 input {
+    padding: .25rem .5rem;
+    border: 1px solid #ddd;
+    margin: .25rem .25rem .25rem 1rem;
+	font-size: 16px;
+	width:150px;
+}
+#tvcInputTable1 input.radio {
+	width: auto;
+}
+
+#tvcInputTable1 p {
+	margin: 0;
+	padding:0;
+}

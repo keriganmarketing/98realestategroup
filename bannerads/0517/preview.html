@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head data-gwd-animation-mode="proMode">
+  <link href="https://fonts.googleapis.com/css?family=Heebo:300,700" rel="stylesheet">
+  <script data-source="custom.elements.min.js" type="text/javascript" src="custom.elements.min.js"></script>
+  <meta name="generator" content="Google Web Designer 1.2.1.0121">
+  <meta name="template" content="Banner 2.1.2">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style type="text/css" id="gwd-lightbox-style">
+    .gwd-lightbox {
+        overflow: hidden;
+        border: 0;
+    }
+  </style>
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <style type="text/css">
+    html,
+    body {
+        font-family: 'Heebo', sans-serif;
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+    a { cursor: pointer; text-decoration:underline; color:cornflowerblue; }
+    a.active { font-weight:bold; text-decoration:none; color:black; }
+    #container { 
+      padding:50px;    
+      text-align: center;
+    }
+    iframe {
+        background: url('https://s-media-cache-ak0.pinimg.com/originals/d9/49/3f/d9493fac92bfdcf18a413a26861fb2fd.gif') center no-repeat #FFF;
+        background-size:400px;
+        box-shadow: inset 0 0 2px #ddd;
+    }
+  </style>
+    
+</head>
+
+<body>
+  <div id="container" >
+    <h1>98 Real Estate Group Banner Ads</h1>
+    <p><a class="toggler active" href="#" data-source="https://98realestategroup.com/bannerads/0517/300x250/"
+          data-height="250" data-width="300" >Square 300x250</a> &nbsp; | &nbsp; <a class="toggler" href="#"
+            data-source="https://98realestategroup.com/bannerads/0517/728x90/" data-height="90" data-width="728"
+    >Leaderboard 728x90</a> &nbsp; | &nbsp; <a class="toggler" href="#" data-source="https://98realestategroup.com/bannerads/0517/320x50/" data-height="50" data-width="320" >Mobile 320x50</a></p>
+    <div class="ad-container">
+    <iframe src="https://98realestategroup.com/bannerads/0517/300x250/" style="width:300px; height:250px; overflow:hidden; border:none;" border="0" ></iframe>
+    </div>
+  </div>
+  <script>
+  $(document).ready(function() {
+
+      $('a.toggler').on('click', function(event) {
+          event.preventDefault();
+          var frame = $('.ad-container iframe'),     
+              link = $(this).attr('data-source'), 
+              height = $(this).attr('data-height') + 'px', 
+              width = $(this).attr('data-width') + 'px'; 
+              
+          frame.attr('src', link);
+          frame.css('width', width);
+          frame.css('height', height);
+          $('a.toggler').removeClass('active');
+          $(this).addClass('active');
+      });
+
+  });
+  </script>
+</body>
+</html>

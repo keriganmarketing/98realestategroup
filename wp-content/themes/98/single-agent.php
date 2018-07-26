@@ -1,0 +1,107 @@
+<?php
+/**
+ * The template for displaying a realtor
+ * @package Ninetyeight Real Estate Group
+ */
+
+get_header(); ?>
+
+<div id="mid">
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+			<div class="container">
+				<div class="row">
+                    <div class="col-sm-12" >
+                    <?php while ( have_posts() ) : the_post(); ?>
+                        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+                            <div class="entry-content agent">
+                                <div class="row">
+                                    
+                                    <div class="col-md-8">
+                                        <div class="agent-info full text-xs-center text-md-left">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <h1 class="agent-name"><?php echo $post->contact_info_name; ?></h1>
+                                                    <p class="title"><?php echo $post->contact_info_title; ?></p>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <?php if($post->contact_info_mls_id != '' && $post->contact_info_mls_id != 'NA') { ?>
+                                                    <p class="text-xs-center pull-md-right agent-button"><a href="#sold" class="btn btn-info" >Properties I've Sold</a></p>
+                                                    <p class="text-xs-center pull-md-right agent-button"><a href="#mylistings" class="btn btn-info" >My Listings</a></p>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                            <div class="line"></div>
+                                            
+                                            <div id="bio">
+                                                <p><?php echo wp_trim_words( $post->post_content, $num_words = 120, $more = null ); ?> <a id="loadmore" >Read full bio.</a></p>
+                                            </div>
+                                            
+                                            <script>
+                                            $( "#loadmore" ).click(function() {  
+                                                $("#bio").html('<?php echo str_replace("'","",preg_replace( "/\r|\n/", "", apply_filters('the_content', $post->post_content))); ?>');
+                                            });
+                                            </script>
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" >
+                                        <div class="agent-medium text-xs-center">
+                                            <img src="<?php echo $post->contact_info_photo; ?>" style="width:200px;" class="m-x-auto img-fluid">
+                                        </div>
+                                        <div class="agent-info photo text-xs-center"> 
+                                            <div class="line"></div>
+                                            <p class="email"><span class="datalabel">Email:</span> <a href="mailto:<?php echo $post->contact_info_email; ?>" ><?php echo $post->contact_info_email; ?></a></p>
+                                            <?php if($post->contact_info_cell_phone != '') { ?>
+                                            <p class="phone clicktocall"><span class="datalabel">Cell:</span> <a href="tel:<?php echo $post->contact_info_cell_phone; ?>" ><?php echo $post->contact_info_cell_phone; ?></a></p>
+                                            <?php } ?>
+                                            <p class="phone clicktocall"><span class="datalabel">Office:</span> <a href="tel:<?php echo $post->contact_info_office_phone; ?>" ><?php echo $post->contact_info_office_phone; ?></a></p>
+                                            <?php if($post->contact_info_website!=''){ ?>
+                                            <p class="website url"><span class="datalabel">Website:</span> <a href="//<?php echo $post->contact_info_website; ?>" target="_blank" ><?php echo $post->contact_info_website; ?></a></p>
+                                            <?php } ?>
+                                            <?php if($post->contact_info_blog!=''){ ?>
+                                            <p class="website url"><span class="datalabel">Blog:</span> <a href="//<?php echo $post->contact_info_blog; ?>" target="_blank" ><?php echo $post->contact_info_blog; ?></a></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </article>
+                    <?php endwhile; // End of the loop. ?>  
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-wide">
+
+                <a id="mylistings" class="pad-anchor"></a>
+                <h2 class="text-center">My Listings</h2>
+                <hr>
+                <div class="row">
+            
+                    
+                </div>
+
+                <a id="sold" class="pad-anchor"></a>
+                <h2 class="text-center">Properties I've Sold</h2>
+                <p class="text-center"><em>In the last 6 months</em></p>
+                <hr>
+                <div class="row">
+            
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                    <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>
+                    </div>
+                </div>      
+
+            </div>
+            
+		</main><!-- #main -->
+	</div><!-- #primary -->
+    <?php get_sidebar(); ?>
+</div>
+<?php get_footer();
