@@ -23,7 +23,7 @@ $photos =[
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <div class="container-fluid">
+    <div class="container-wide">
         <div class="row">
             <div class="property-left col-md-4 no-gutter area-info-pictures">
                 <div class="row" >

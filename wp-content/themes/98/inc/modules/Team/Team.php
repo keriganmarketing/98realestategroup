@@ -114,28 +114,50 @@ class Team
         }, 0, 2);
     }
 
-    public function getImageSizes( $url ) {
+    public function getImageId($imageUrl) {
+        $attachment_id = 0;
 
-        // Split the $url into two parts with the wp-content directory as the separator
-        $parsed_url  = explode( parse_url( WP_CONTENT_URL, PHP_URL_PATH ), $url );
+        $dir = wp_upload_dir();
 
-        // Get the host of the current site and the host of the $url, ignoring www
-        $this_host = str_ireplace( 'www.', '', parse_url( home_url(), PHP_URL_HOST ) );
-        $file_host = str_ireplace( 'www.', '', parse_url( $url, PHP_URL_HOST ) );
+        if ( false !== strpos( $imageUrl, $dir['baseurl'] . '/' ) ) { // Is URL in uploads directory?
 
-        // Return nothing if there aren't any $url parts or if the current host and $url host do not match
-        if ( ! isset( $parsed_url[1] ) || empty( $parsed_url[1] ) || ( $this_host != $file_host ) ) {
-            return;
+            $file = basename( $imageUrl );
+
+            $query_args = array(
+                'post_type'   => 'attachment',
+                'post_status' => 'inherit',
+                'fields'      => 'ids',
+                'meta_query'  => array(
+                    array(
+                        'value'   => $file,
+                        'compare' => 'LIKE',
+                        'key'     => '_wp_attachment_metadata',
+                    ),
+                )
+            );
+
+            $query = new \WP_Query( $query_args );
+
+            if ( $query->have_posts() ) {
+
+                foreach ( $query->posts as $post_id ) {
+
+                    $meta = wp_get_attachment_metadata( $post_id );
+                    $original_file       = basename( $meta['file'] );
+                    $cropped_image_files = wp_list_pluck( $meta['sizes'], 'file' );
+
+                    if ( $original_file === $file || in_array( $file, $cropped_image_files ) ) {
+                        $attachment_id = $post_id;
+                        break;
+                    }
+
+                }
+
+            }
+
         }
 
-        // Now we're going to quickly search the DB for any attachment GUID with a partial path match
-
-        // Example: /uploads/2013/05/test-image.jpg
-        global $wpdb;
-        $attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->prefix}posts WHERE guid RLIKE %s;", $parsed_url[1] ) );
-
-        // Returns null if no attachment is found
-        return (isset($attachment[0]) ? $attachment[0] : '' );
+        return $attachment_id;
     }
 
     public function getTeam($args = [])
@@ -153,6 +175,8 @@ class Team
 
         $output = [];
         foreach ($request as $item) {
+
+            $imageId = $this->getImageId($item->contact_info_photo);
             array_push($output, [
                 'id'           => (isset($itemID) ? $item->ID : null),
                 'name'         => $item->post_title,
@@ -162,10 +186,10 @@ class Team
                 'cell_phone'   => (isset($item->contact_info_cell_phone) ? $item->contact_info_cell_phone : null),
                 'slug'         => (isset($item->post_name) ? $item->post_name : null),
                 'images'       => [
-                    'thumbnail' => wp_get_attachment_image_src($this->getImageSizes($item->contact_info_photo), 'thumbnail'),
-                    'medium'    => wp_get_attachment_image_src($this->getImageSizes($item->contact_info_photo), 'medium'),
-                    'large'     => wp_get_attachment_image_src($this->getImageSizes($item->contact_info_photo), 'large'),
-                    'full'      => wp_get_attachment_image_src($this->getImageSizes($item->contact_info_photo), 'full')
+                    'thumbnail' => wp_get_attachment_image_src($imageId, 'thumbnail'),
+                    'medium'    => wp_get_attachment_image_src($imageId, 'medium'),
+                    'large'     => wp_get_attachment_image_src($imageId, 'large'),
+                    'full'      => wp_get_attachment_image_src($imageId, 'full')
                 ],
                 'link'         => get_permalink($item->ID),
             ]);
@@ -204,7 +228,7 @@ class Team
             ob_start();
 
             echo'<div class="columns is-multiline team">';
-            foreach($data as $member){
+            foreach($data as $agent){
                 include(locate_template('template-parts/partials/mini-team.php'));
             }
             echo '</div>';
