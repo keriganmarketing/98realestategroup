@@ -10,6 +10,7 @@
 use Includes\Modules\Team\Team;
 use Includes\Modules\Leads\Leads;
 use Includes\Modules\Helpers\CleanWP;
+use Includes\Modules\MLS\FeaturedProperties;
 
 require('vendor/autoload.php');
 
@@ -17,6 +18,8 @@ new CleanWP();
 
 $team = new Team();
 $team->setupAdmin();
+
+new FeaturedProperties;
 
 if ( ! function_exists( 'ninetyeight_setup' ) ) :
 /**

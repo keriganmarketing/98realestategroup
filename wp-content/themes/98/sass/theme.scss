@@ -843,11 +843,16 @@ span.icon img {
 	padding:20px 0;
 }
 
+#featured-properties h2, 
 #mid h2 {
 	color:#c41230;
 	/*font-size: 32px;*/
     font-family: 'Raleway';
     margin-top:1rem;
+}
+
+#featured-properties .row {
+    padding-top: 1rem;
 }
 
 #mid p {

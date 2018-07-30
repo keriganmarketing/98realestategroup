@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying all pages.
  *
@@ -55,6 +56,7 @@ get_header(); ?>
             </div>
         </div>
     </div>
+    
     <div id="featured-properties">
 
         <?php include(locate_template('template-parts/partials/featured-properties.php')); ?>
