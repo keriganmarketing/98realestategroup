@@ -1,12 +1,13 @@
 <template>
-    <form class="navbar-form form-inline" method="post" action="/properties/" >
+    <form class="navbar-form form-inline" method="get" action="/properties/" >
+        <input type="hidden" name="q" value="search" >
         <div class="container no-gutter">
             <div class="row">
                 <div class="col-lg-4">
                     <p class="search-form-label">PROPERTY<br>QUICK SEARCH</p>
                 </div>
                 <div class="col-sm-6 col-sm-6 col-lg-2">
-                    <input type="text" class="form-control" name="keyword[]" placeholder="Address / MLS# / Keyword" >
+                    <input type="text" class="form-control" name="omni" placeholder="Address, Subdivision or MLS#" >
                 </div>
                 <div class="col-sm-6 col-lg-2">
                     <area-field></area-field>
@@ -22,7 +23,6 @@
                     aria-haspopup="true" 
                     aria-expanded="false" 
                     >Filter</button>
-                <input type="hidden" name="cmd" value="mlssearch" >
                 <button type="submit" class="btn btn-danger col-xs-6 col-sm-3 col-lg-1" >Search</button>
             </div>
         </div>

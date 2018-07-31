@@ -2,7 +2,7 @@
     <div>
         <div><label>Total Sqft</label></div>
         <select 
-            name="sq_ft" 
+            name="sqft" 
             v-model="selected" 
             class="custom-select">
             <option value="Any">Any</option>

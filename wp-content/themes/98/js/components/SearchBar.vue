@@ -1,9 +1,10 @@
 <template>
-    <form class="navbar-form form-inline" method="post" >
+    <form class="navbar-form form-inline" method="get" >
+        <input type="hidden" name="q" value="search" >
         <div class="row">
             <div class="col-sm-6 col-sm-6 col-lg-3">
                 <label>Keyword</label>
-                <input type="text" class="form-control" placeholder="City, address, subdivision or zip" >
+                <input type="text" class="form-control" name="omni" placeholder="Address, Subdivision or MLS#" >
             </div>
             <div class="col-sm-6 col-lg-3">
                 <label>City / Area</label>
@@ -28,7 +29,6 @@
                     aria-haspopup="true" 
                     aria-expanded="false" 
                     >Advanced Options</button>
-                <input type="hidden" name="cmd" value="mlssearch" >
                 <button type="submit" class="btn btn-danger col-xs-4 col" >Search</button>
             </div>
         </div>
@@ -54,13 +54,13 @@
                     <div class="col-xs-6">
                         <bedrooms-field
                             class="mb-4"
-                            :field-value="searchTerms.bedrooms"
+                            :field-value="searchTerms.beds"
                         ></bedrooms-field>
                     </div>
                     <div class="col-xs-6">
                         <bathrooms-field
                             class="mb-4"
-                            :field-value="searchTerms.bathrooms"
+                            :field-value="searchTerms.baths"
                         ></bathrooms-field>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="col-xs-6">
                         <sqft-field
                             class="mb-4"
-                            :field-value="searchTerms.sq_ft"
+                            :field-value="searchTerms.sqft"
                         ></sqft-field>
                     </div>
                     <div class="col-xs-6">
@@ -118,15 +118,15 @@
                         propertyType: 'Single Family Home',
                         minPrice: '200000',
                         maxPrice: '',
-                        sq_ft: '',
+                        sqft: '',
                         acreage: '',
                         status: ['active'],
                         details: [],
-                        bedrooms: '',
-                        bathrooms: '',
-                        openHouses: 0,
-                        sortBy: 'date_modified',
-                        orderBy: 'DESC',
+                        beds: '',
+                        baths: '',
+                        waterfront: '',
+                        waterview: '',
+                        foreclosure: '',
                         page: 1
                     }
                 }

@@ -139,15 +139,8 @@ class FeaturedProperties
             $featuredList[] = $fprop->post_title;
         }
 
-        //temp
-        $featuredList = [
-            '673330', '672438', '674517', '663888'
-        ];
-
-        $client     = new Client(['base_uri' => 'https://mothership.kerigan.com/api/v1/']);
+        $client     = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
         $mlsNumbers = implode('|', $featuredList);
-
-        //echo $mlsNumbers;
 
         $apiCall = $client->request(
             'GET', 'listings?mlsNumbers=' . $mlsNumbers
@@ -155,9 +148,7 @@ class FeaturedProperties
 
         $results = json_decode($apiCall->getBody());
 
-        //echo '<pre>',print_r($results),'</pre>';
-
-        return $results;
+        return $results->data;
     }
 
 }

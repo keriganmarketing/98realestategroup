@@ -2,7 +2,7 @@
     <div>
         <div><label>Bedrooms</label></div>
         <select
-            name="bedroooms"
+            name="beds"
             class="custom-select"
             v-model="selected"
         >

@@ -10,13 +10,7 @@ Vue.component('property-type', require('./components/fields/PropertyType.vue'));
 Vue.component('area-field', require('./components/fields/Area.vue'));
 Vue.component('details-field', require('./components/fields/Details.vue'));
 
-//Vue.component('google-map', require('./components/GoogleMap.vue'));
-//Vue.component('map-search', require('./components/MapSearch.vue'));
-//Vue.component('mini-listing', require('./components/MiniListing.vue'));
-//Vue.component('property-pagination', require('./components/PropertyPagination.vue'));
-//Vue.component('property-photo', require('./components/PropertyPhoto.vue'));
-//Vue.component('property-gallery', require('./components/PropertyGallery.vue'));
 Vue.component('search-bar', require('./components/SearchBar.vue'));
 Vue.component('quick-search', require('./components/QuickSearch.vue'));
-//Vue.component('sortbar', require('./components/Sortbar.vue'));
+Vue.component('sort-form', require('./components/SortForm.vue'));
 

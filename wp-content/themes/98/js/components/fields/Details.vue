@@ -10,8 +10,8 @@
             <span class="custom-control-label">Waterview</span>
         </label>
         <label class="custom-control custom-checkbox">
-            <input type="checkbox" name="foreclosures" class="custom-control-input" v-model="foreclosures">
-            <span for="foreclosures" class="custom-control-label">Foreclosure / Short Sale</span>
+            <input type="checkbox" name="forclosure" class="custom-control-input" v-model="forclosure">
+            <span for="forclosure" class="custom-control-label">Foreclosure / Short Sale</span>
         </label>
     </div>
 </template>
@@ -27,9 +27,9 @@
                 type: String,
                 default: this.waterview
             },
-            dataForeclosures: {
+            dataForeclosure: {
                 type: String,
-                default: this.foreclosures
+                default: this.forclosure
             },
         },
 
@@ -37,7 +37,7 @@
             return {
                 waterfront: this.dataWaterfront,
                 waterview: this.dataWaterview,
-                foreclosures: this.dataForeclosures
+                forclosure: this.dataForeclosure
             }
         }
 
