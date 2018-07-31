@@ -287,7 +287,7 @@ ul#primary-menu {
 		/*min-height: 114px;*/
 	}
     #searchbar form {
-        padding: 9px 10px 10px;
+        padding: 9px 0 10px;
     }
 }
 @media (max-width: 769px) and (orientation: portrait) { 
@@ -487,8 +487,13 @@ ul#primary-menu li.menu-item a:hover {
 #searchbar form {
 	position: relative;
     z-index: 5;
-    padding: 9px 10px 10px;
+    padding: 9px 0 10px;
     margin: 0;
+}
+
+.custom-select {
+    border-radius: 0;
+    width: 100%;
 }
 
 #searchbar form .parentoption {
@@ -1269,7 +1274,7 @@ h2.entry-title a {
 
 .custom-control-label::before {
     position: absolute;
-    top: .35rem;
+    top: .15rem;
     left: 0rem;
     display: block;
     width: 1.25rem;
@@ -1287,7 +1292,7 @@ h2.entry-title a {
 
 .custom-control-label::after {
     position: absolute;
-    top: .35rem;
+    top: .15rem;
     left: 0rem;
     display: block;
     width: 1.25rem;
@@ -1313,4 +1318,23 @@ h2.entry-title a {
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+}
+
+.custom-checkbox {
+    display: block;
+    margin: .25rem 0;
+}
+
+.custom-control + .custom-control {
+    margin-left: 0;
+}
+
+@media screen and (min-width:1070px){
+    .custom-checkbox {
+        display: inline-block;
+        margin: .0;
+    }
+    .custom-control + .custom-control {
+        margin-left: 1rem;
+    }
 }

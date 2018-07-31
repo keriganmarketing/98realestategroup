@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "autoprefixer": "^8.0.0",
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "4.0.0-alpha.6",
     "chart.js": "^2.7.1",
@@ -23,6 +24,8 @@
     "glob": "^7.1.2",
     "jquery": "^3.0.0",
     "purgecss-webpack-plugin": "^0.20.0",
-    "tether": "^1.4.0"
+    "tether": "^1.4.0",
+    "vue-progressbar": "^0.7.5",
+    "vue-select": "^2.4.0"
   }
 }

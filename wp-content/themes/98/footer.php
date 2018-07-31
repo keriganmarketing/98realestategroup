@@ -11,7 +11,8 @@
 
 ?>
 	<div id="bot">
-		<div class="container no-gutter">
+		<div class="container">
+			<div class="row no-gutter">
 			<div class="col-md-6 col-lg-3">
 				<div class="footer-widget-container">
 					<?php dynamic_sidebar( 'footer-1' ); ?>
@@ -32,6 +33,7 @@
 					<?php dynamic_sidebar( 'footer-4' ); ?>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 	<div id="bot-bot">

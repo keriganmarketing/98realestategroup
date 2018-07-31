@@ -24,21 +24,14 @@ get_header(); ?>
             
             endwhile; // End of the loop. ?>
 
-			<div class="container">
-                <?php if(is_page(9) && !isset($_GET['linkbuilder'])){ 
-                    include(locate_template('template-parts/partials/search-bar.php'));
-                 } ?>
+                <div class="container">
+                    <search-bar :search-terms='<?php echo json_encode($_POST); ?>'></search-bar>
+                </div>
+                <div class="properties grid pb-4">
+                    <div class="container-wide mx-auto">
 
-				<div class="clearfix"></div>
-			</div>
-
-            <?php if(isset($results)){ ?>
-            <div class="container-wide">
-
-
-
-            </div>
-            <?php } ?>
+                    </div>
+                </div>
 			
 		</main><!-- #main -->
 	</div><!-- #primary -->

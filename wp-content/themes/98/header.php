@@ -50,9 +50,9 @@
 			</div>
 		</header>
 		<div id="searchbar">
-			<?php  if(!is_page(9) && !is_page(43)){ 
-				include(locate_template('template-parts/partials/mini-search-bar.php'));
-			 } ?>
+			<?php if(!is_page(9) && !is_page(43)){ ?>
+				<quick-search></quick-search>
+			<?php } ?>
 		</div>
 	</div>
 

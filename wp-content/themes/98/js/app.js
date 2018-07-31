@@ -1,7 +1,8 @@
 require("babel-polyfill");
 
 window.jQuery = window.$ = require('jquery');
-window.Vue = require('vue')
+window.Vue = require('vue');
+window.axios = require("axios");
 
 import tether from 'tether';
 global.Tether = tether;
@@ -15,6 +16,9 @@ require('bootstrap');
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
+
+require('./load-components');
 
 let app = new Vue({
 
