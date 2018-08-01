@@ -11,7 +11,7 @@ $preferredPhoto = ($photos[0]->media_type = 'Photo' ? $photos[0]->url : get_temp
 
 ?>
 <div class="feat-prop-container">    
-    <a class="listing-link" href="/listing/?mls=<?php echo $listing->mls_account; ?>"></a>
+    <a class="listing-link" href="/listing/<?php echo $listing->mls_account; ?>"></a>
     <div class="embed-responsive embed-responsive-16by9">
         <div class="feat-prop-photo">
             <?php if ( $isNew && $listing->status == 'Active' ) { ?>

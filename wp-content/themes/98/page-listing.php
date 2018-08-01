@@ -1,4 +1,6 @@
 <?php
+
+use Includes\Modules\MLS\FullListing;
 /**
  * The template for displaying all pages.
  *
@@ -12,24 +14,12 @@
  * @package Ninetyeight Real Estate Group
  */
 
-if(isset($_GET['mls']) && $_GET['mls'] != ''){
-	$_SESSION['mls'] = $_GET['mls'];
-	$location = '/listing/'.$_GET['mls'].'/';
-	header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
-	header("Location: $location");
-}
+$fullListing = new FullListing();
+$listing = $fullListing->getListingInfo();
 
-function setogurl(){
-	$pathFragments = explode('/',$_SERVER['REQUEST_URI']);
-	$end = end(array_filter($pathFragments, function($value) { return $value !== ''; }));
-	$mlsNum = $end;
-    return $location = 'http://98realestategroup.com/listing/'.$mlsNum.'/';
-}
+echo '<pre>',print_r($listing),'</pre>';
 
-add_filter( 'wpseo_title', 'filter_wp_title' );
-add_filter( 'wpseo_opengraph_url', 'setogurl' );
-add_filter( 'wpseo_canonical', 'setogurl' );
-add_filter( 'wpseo_opengraph_image', 'filter_wp_mainimage');
+$isFav = false;
 
 get_header(); ?>
 
@@ -72,9 +62,9 @@ get_header(); ?>
 
 										<?php if ($current_user->ID != 0){ ?>
 											<?php if ( $isFav ){ ?>
-												<a href="?defav=<?php echo $MLS_ACCT; ?>&referral=true" class="btn btn-primary"><img src="<?php echo getSvg( 'stared' ); ?>" alt="save to favorites" style="width: 20px; vertical-align: sub; margin: 0 3px 0 0;"> Remove from favorites</a>
+												<a href="?defav=<?php echo $MLS_ACCT; ?>&referral=true" class="btn btn-primary"><img src="<?php echo get_template_directory_uri() . '/img/stared.svg'; ?>" alt="save to favorites" style="width: 20px; vertical-align: sub; margin: 0 3px 0 0;"> Remove from favorites</a>
 												<?php }else{ ?>
-												<a href="?fav=<?php echo $MLS_ACCT; ?>&referral=true" class="btn btn-danger"><img src="<?php echo getSvg( 'star' ); ?>" alt="save to favorites" style="width: 20px; vertical-align: sub; margin: 0 3px 0 0;"> Save to favorites</a>
+												<a href="?fav=<?php echo $MLS_ACCT; ?>&referral=true" class="btn btn-danger"><img src="<?php echo get_template_directory_uri() . '/img/star.svg'; ?>" alt="save to favorites" style="width: 20px; vertical-align: sub; margin: 0 3px 0 0;"> Save to favorites</a>
 											<?php } ?>
 										<?php }else{
 											$redirect_to = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";

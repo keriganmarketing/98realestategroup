@@ -1,8 +1,19 @@
 <?php
+
+use Includes\Modules\MLS\AgentListings;
+use Includes\Modules\Team\Team;
 /**
  * The template for displaying a realtor
  * @package Ninetyeight Real Estate Group
  */
+
+$team          = new Team();
+$agent         = $team->getSingle($post->post_title);
+
+// echo '<pre>',print_r($agent),'</pre>';
+
+$agentListings = new AgentListings($post->contact_info_mls_id);
+$listings      = $agentListings->getListings();
 
 get_header(); ?>
 
@@ -78,18 +89,24 @@ get_header(); ?>
                 <a id="mylistings" class="pad-anchor"></a>
                 <h2 class="text-center">My Listings</h2>
                 <hr>
-                <div class="row">
-            
-                    
+                <div class="row justify-content-center">
+                    <?php foreach($listings['active'] as $listing){ ?>
+                        <div class="feat-prop col-md-6 col-xl-3 text-center">
+                            <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
+                        </div>
+                    <?php } ?>
                 </div>
 
                 <a id="sold" class="pad-anchor"></a>
                 <h2 class="text-center">Properties I've Sold</h2>
                 <p class="text-center"><em>In the last 6 months</em></p>
                 <hr>
-                <div class="row">
-            
-                    
+                <div class="row justify-content-center">
+                    <?php foreach($listings['sold'] as $listing){ ?>
+                        <div class="feat-prop col-md-6 col-xl-3 text-center">
+                            <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
+                        </div>
+                    <?php } ?>
                 </div>
 
                 <div class="row">

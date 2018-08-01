@@ -185,6 +185,7 @@ class Team
                 'office_phone' => (isset($item->contact_info_office_phone) ? $item->contact_info_office_phone : null),
                 'cell_phone'   => (isset($item->contact_info_cell_phone) ? $item->contact_info_cell_phone : null),
                 'slug'         => (isset($item->post_name) ? $item->post_name : null),
+                'mlsid'        => (isset($item->contact_info_mls_id) ? $item->contact_info_mls_id : null),
                 'images'       => [
                     'thumbnail' => wp_get_attachment_image_src($imageId, 'thumbnail'),
                     'medium'    => wp_get_attachment_image_src($imageId, 'medium'),
