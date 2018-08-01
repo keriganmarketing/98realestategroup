@@ -19,7 +19,6 @@ $listings       = new QuickSearch();
 $searchResults  = $listings->getSearchResults();
 $currentRequest = $listings->getCurrentRequest();
 $resultMeta     = $listings->getResultMeta();
-
 get_header(); ?>
 
 <div id="mid">
@@ -32,35 +31,52 @@ get_header(); ?>
             
             endwhile; // End of the loop. ?>
 
-                <div class="container">
-                    <search-bar :search-terms='<?php echo $currentRequest; ?>'></search-bar>
-                </div>
+            <div class="container">
+                <search-bar :search-terms='<?php echo $currentRequest; ?>'></search-bar>
                 <hr>
-                <div class="properties grid pb-4">
-                    <div class="container-wide mx-auto">
-                        <div class="row justify-content-between mb-2">
-                            <div class="col-sm-6">
-                                <p class="small">
-                                    Showing <?php echo $resultMeta->pagination->count; ?> 
-                                    of <?php echo $resultMeta->pagination->total; ?> | 
-                                    page <?php echo $resultMeta->pagination->current_page; ?> 
-                                    of <?php echo $resultMeta->pagination->total_pages; ?> 
-                            </p>
-                            </div>
-                            <div class="col-sm-6 text-md-right">
-                                <sort-form field-value="<?php echo $listings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
-                            </div>              
+            </div>
+            
+            <?php if(isset($searchResults->data) > 0){ ?>
+            <div class="properties grid pb-4">
+                <div class="container">
+                    <div class="row justify-content-between mb-4">
+                        <div class="col-sm-6">
+                            <small class="text-muted">
+                                Showing <?php echo $resultMeta->count; ?> 
+                                of <?php echo $resultMeta->total; ?> | 
+                                page <?php echo $resultMeta->current_page; ?> 
+                                of <?php echo $resultMeta->total_pages; ?> 
+                            </small>
                         </div>
-                        <div class="row justify-content-center">
-                        <?php foreach($searchResults->data as $listing){ ?>
-                            <div class="feat-prop col-md-6 col-xl-3 text-center">
-                                <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
-                            </div>
-                        <?php } ?>
-                        </div>
+                        <div class="col-sm-6 text-md-right">
+                            <sort-form field-value="<?php echo $listings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
+                        </div>     
                     </div>
                 </div>
-			
+                <div class="container-wide mx-auto">
+                    <div class="row justify-content-center">
+                    <?php foreach($searchResults->data as $listing){ ?>
+                        <div class="feat-prop col-md-6 col-xl-3 text-center">
+                            <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
+                        </div>
+                    <?php } ?>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto text-xs-center">
+                <div class="pb-4">
+                    <?php $listings->buildPagination(); ?>
+                </div>
+                <hr>
+                <div class="pb-4">
+                    <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>
+                </div>
+            </div>
+            <?php }else{ ?>
+            <div class="container">
+                <p>There were no properties found using your search criteria. Please broaden your search and try again.</p>
+            </div>
+            <?php } ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 </div>

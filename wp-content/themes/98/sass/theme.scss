@@ -567,6 +567,10 @@ ul#primary-menu li.menu-item a:hover {
     z-index: 1;
 }
 
+#mid .pagination a { text-decoration: none; }
+#mid a.disabled { text-decoration: none; color: #999; }
+#mid .pagination .active a { color: #FFF; }
+
 /** Home page buttons **/
 .huge-button {
 	padding:0 !important;
