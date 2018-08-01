@@ -37,18 +37,14 @@ class QuickSearch
         ];
         $this->searchParams = [];
         $this->searchResults = [];
-        $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : null);
+        $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);
 
+        //set default if no search performed
         if(!$this->searchRequested){
-            $this->searchParams = [
-                'area' => 'Mexico Beach',
-                'minPrice' => 200000,
-                'status'   => ['Active']
-            ];
+            $this->searchRequested = [];
         }
 
         $this->contactTheMothership();
-
     }
 
     public function getSearchResults()
@@ -73,13 +69,14 @@ class QuickSearch
 
     public function filterRequest()
     {
-        foreach($_GET as $key => $var){
+        foreach($this->searchRequested as $key => $var){
             if(in_array($key, $this->approvedParams)){
                 $this->searchParams[$key] = $var;
             }
         }
     }
 
+    //build URL for mothership contact
     public function makeRequest()
     {
         $this->filterRequest();
@@ -100,8 +97,6 @@ class QuickSearch
             }
         }
 
-        $this->$formattedRequest = $request;
-
         return $request . '&page=' . get_query_var( 'page' );
     }
 
@@ -115,10 +110,33 @@ class QuickSearch
         $this->searchResults = json_decode($apiCall->getBody());
     }
 
+    // build a usable URL for pagination
+    public function buildURL()
+    {
+        $request = '?q=search';
+        foreach($this->searchParams as $key => $var){
+            if(is_array($var)){
+                $request .= '&' . $key . '=';
+                foreach($var as $k => $v){
+                    $request .= '&' . $key . '[]=' . $v;
+                    $i++;
+                }
+            }else{
+                if($var != '' && $var != 'Any'){
+                    $request .= '&' . $key . '=' . $var;
+                }
+            }
+        }
+
+        return $request;
+    }
+
     public function buildPagination()
     {
+        global $wp;
+        
         $pages = $this->getResultMeta();
-        $request = $wp->request . $this->$formattedRequest;
+        $request = '/' . $wp->request . $this->buildURL();
         $currentPage = $pages->current_page;
 
         echo '<nav aria-label="search results pagination"><ul class="pagination">';
