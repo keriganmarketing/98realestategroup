@@ -2,11 +2,14 @@
     <form class="navbar-form form-inline" method="get" >
         <input type="hidden" name="q" value="search" >
         <div class="row">
-            <div class="col-sm-6 col-sm-6 col-lg-3">
-                <label>Keyword</label>
-                <input type="text" class="form-control" name="omni" placeholder="Address, Subdivision or MLS#" >
-            </div>
-            <div class="col-sm-6 col-lg-3">
+            <omni-bar
+                class="col-sm-6 col-sm-6 col-lg-3"
+                v-model="omni"
+                :options="omniTerms"
+                :filter-function="applySearchFilter"
+            >
+            </omni-bar>
+            <!-- <div class="col-sm-6 col-lg-3">
                 <label>City / Area</label>
                 <area-field
                     :field-value="searchTerms.area"
@@ -19,22 +22,22 @@
                     :field-value="searchTerms.propertyType"
                 >
                 </property-type>
-            </div>
+            </div> -->
             <div class="col-sm-6 col-lg-3">
-                <label class="col-xs-12">&nbsp;</label>
+                <!-- <label class="col-xs-12">&nbsp;</label>
                 <button
                     @click="toggleAdvanced"
-                    type="button" 
-                    class="btn btn-primary dropdown-toggle col-xs-8 col" 
-                    aria-haspopup="true" 
-                    aria-expanded="false" 
-                    >Advanced Options</button>
-                <button type="submit" class="btn btn-danger col-xs-4 col" >Search</button>
+                    type="button"
+                    class="btn btn-primary dropdown-toggle col-xs-8 col"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    >Advanced Options</button> -->
+                <button type="submit" class="btn btn-danger col-xs-4 col">Search</button>
             </div>
         </div>
-        <div v-if="advancedOpen" id="advanced-menu" class="advanced-menu row">
+        <!-- <div v-if="advancedOpen" id="advanced-menu" class="advanced-menu row">
             <div class="col-lg-6 col-xl-12">
-                
+
                 <div class="row">
                     <div class="col-xs-6 col-xl-2">
                         <min-price-field
@@ -81,7 +84,7 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-md-6 col-lg-12 col-xl-6">
-                
+
                         <status-field
                             class="mb-6"
                             :search-terms="searchTerms.status"
@@ -99,9 +102,8 @@
 
                     </div>
                 </div>
-
-            </div>
-        </div>
+            </div> -->
+        <!-- </div> -->
     </form>
 </template>
 
@@ -130,22 +132,39 @@
                 }
             }
         },
-
         data(){
             return {
+                omni: null,
+                omniTerms: [
+                    "Anthrax",
+                    "Dark Angel",
+                    "Death Angel",
+                    "Destruction",
+                    "Exodus",
+                    "Flotsam and Jetsam",
+                    "Kreator",
+                    "Megadeth",
+                    "Metallica",
+                    "Overkill",
+                    "Sepultura",
+                    "Slayer",
+                    "Testament"
+                ],
                 advancedOpen: false,
                 mapViewSelected: false,
+                url: 'https://rafgc.kerigan.com/api/v1/omnibar'
             }
         },
-
         created(){
             this.advancedOpen = false;
         },
-
         methods: {
             toggleAdvanced(event){
                 if (event) event.preventDefault();
                 this.advancedOpen = !this.advancedOpen;
+            },
+            applySearchFilter(search, omniTerms) {
+                return omniTerms.filter(term => term.toLowerCase().startsWith(search.toLowerCase()))
             }
         }
     }

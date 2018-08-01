@@ -3,6 +3,7 @@ require("babel-polyfill");
 window.jQuery = window.$ = require('jquery');
 window.Vue = require('vue');
 window.axios = require("axios");
+window._ = require("lodash");
 
 import tether from 'tether';
 global.Tether = tether;

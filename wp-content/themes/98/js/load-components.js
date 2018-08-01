@@ -1,3 +1,4 @@
+Vue.component('omni-bar', require('./components/fields/OmniBar.vue'));
 Vue.component('acreage-field', require('./components/fields/Acreage.vue'));
 Vue.component('sqft-field', require('./components/fields/TotalSqft.vue'));
 Vue.component('bathrooms-field', require('./components/fields/Bathrooms.vue'));
