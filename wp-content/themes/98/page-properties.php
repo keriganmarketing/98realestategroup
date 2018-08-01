@@ -31,14 +31,14 @@ get_header(); ?>
             
             endwhile; // End of the loop. ?>
 
-            <div class="container">
+            <div class="container-wide">
                 <search-bar :search-terms='<?php echo $currentRequest; ?>'></search-bar>
                 <hr>
             </div>
             
             <?php if(isset($searchResults->data) > 0){ ?>
             <div class="properties grid pb-4">
-                <div class="container">
+                <div class="container-wide">
                     <div class="row justify-content-between mb-4">
                         <div class="col-sm-6">
                             <small class="text-muted">

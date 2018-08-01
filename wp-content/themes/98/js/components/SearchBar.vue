@@ -33,45 +33,43 @@
             </div>
         </div>
         <div v-if="advancedOpen" id="advanced-menu" class="advanced-menu row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-xl-12">
                 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-xl-2">
                         <min-price-field
                             class="mb-4"
                             :field-value="searchTerms.minPrice"
                         >
                         </min-price-field>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-xl-2">
                         <max-price-field
                             class="mb-4"
                             :field-value="searchTerms.maxPrice"
                         ></max-price-field>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6">
+
+                    <div class="col-xs-6 col-xl-2">
                         <bedrooms-field
                             class="mb-4"
                             :field-value="searchTerms.beds"
                         ></bedrooms-field>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-xl-2">
                         <bathrooms-field
                             class="mb-4"
                             :field-value="searchTerms.baths"
                         ></bathrooms-field>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6">
+
+                    <div class="col-xs-6 col-xl-2">
                         <sqft-field
                             class="mb-4"
                             :field-value="searchTerms.sqft"
                         ></sqft-field>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-xl-2">
                         <acreage-field
                             class="mb-4"
                             :field-value="searchTerms.acreage"
@@ -79,10 +77,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-xl-12">
 
                 <div class="row">
-                    <div class="col-xs-12 col-md-6 col-lg-12">
+                    <div class="col-xs-12 col-md-6 col-lg-12 col-xl-6">
                 
                         <status-field
                             class="mb-6"
@@ -90,7 +88,7 @@
                         ></status-field>
 
                     </div>
-                    <div class="col-xs-12 col-md-6 col-lg-12">
+                    <div class="col-xs-12 col-md-6 col-lg-12 col-xl-6">
 
                         <details-field
                             class="mb-6"

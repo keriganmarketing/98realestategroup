@@ -59,10 +59,15 @@ body {
     padding: 0 15px;
     margin: 0 auto;
 }
+@media (min-width: 767px) {
+    .container-wide {
+        padding: 0 30px;
+    }
+}
 
 @media (min-width: 1920px) {
     .container-wide {
-        max-width: 1880px;
+        max-width: 1920px;
     }
 }
 
@@ -287,7 +292,7 @@ ul#primary-menu {
 		/*min-height: 114px;*/
 	}
     #searchbar form {
-        padding: 9px 0 10px;
+        padding: 9px 10px 10px;
     }
 }
 @media (max-width: 769px) and (orientation: portrait) { 
@@ -487,7 +492,6 @@ ul#primary-menu li.menu-item a:hover {
 #searchbar form {
 	position: relative;
     z-index: 5;
-    padding: 9px 0 10px;
     margin: 0;
 }
 
@@ -510,6 +514,12 @@ ul#primary-menu li.menu-item a:hover {
 @media (max-width:767px){
 	#searchbar {
 		padding-bottom: 8px;
+	}
+}
+
+@media (min-width:767px){
+	#searchbar {
+		padding: 9px;
 	}
 }
 

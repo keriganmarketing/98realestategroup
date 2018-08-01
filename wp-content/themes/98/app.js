@@ -5825,8 +5825,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -28738,68 +28736,64 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "advanced-menu"
     }
   }, [_c('div', {
-    staticClass: "col-lg-6"
+    staticClass: "col-lg-6 col-xl-12"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-xs-6"
+    staticClass: "col-xs-6 col-xl-2"
   }, [_c('min-price-field', {
     staticClass: "mb-4",
     attrs: {
       "field-value": _vm.searchTerms.minPrice
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-6"
+    staticClass: "col-xs-6 col-xl-2"
   }, [_c('max-price-field', {
     staticClass: "mb-4",
     attrs: {
       "field-value": _vm.searchTerms.maxPrice
     }
-  })], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-6"
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-6 col-xl-2"
   }, [_c('bedrooms-field', {
     staticClass: "mb-4",
     attrs: {
       "field-value": _vm.searchTerms.beds
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-6"
+    staticClass: "col-xs-6 col-xl-2"
   }, [_c('bathrooms-field', {
     staticClass: "mb-4",
     attrs: {
       "field-value": _vm.searchTerms.baths
     }
-  })], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-6"
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-6 col-xl-2"
   }, [_c('sqft-field', {
     staticClass: "mb-4",
     attrs: {
       "field-value": _vm.searchTerms.sqft
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-6"
+    staticClass: "col-xs-6 col-xl-2"
   }, [_c('acreage-field', {
     staticClass: "mb-4",
     attrs: {
       "field-value": _vm.searchTerms.acreage
     }
   })], 1)])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-6"
+    staticClass: "col-lg-6 col-xl-12"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-xs-12 col-md-6 col-lg-12"
+    staticClass: "col-xs-12 col-md-6 col-lg-12 col-xl-6"
   }, [_c('status-field', {
     staticClass: "mb-6",
     attrs: {
       "search-terms": _vm.searchTerms.status
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-6 col-lg-12"
+    staticClass: "col-xs-12 col-md-6 col-lg-12 col-xl-6"
   }, [_c('details-field', {
     staticClass: "mb-6",
     attrs: {
