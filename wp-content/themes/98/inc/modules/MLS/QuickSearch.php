@@ -139,13 +139,24 @@ class QuickSearch
             $startPage = ($currentPage > 2 ? $currentPage - 2 : 1 );
             $endPage   = ($currentPage < $pages->total_pages - 2 ? $currentPage + 2 : $pages->total_pages );
 
+            if($startPage != 1){
+                echo '<li class="page-item"><a class="page-link" href="'. $request . '&page=1">1</a></li>';
+            }
+            if($startPage > 3){
+                echo '<li class="page-item disabled"><a class="page-link disabled" tabindex="-1" >...</a></li>';
+                $startPage = ( $currentPage < $pages->total_pages - 2 ? $currentPage - 1 : $startPage);
+                $endPage   = ( $currentPage < $pages->total_pages - 3 ? $currentPage + 1 : $endPage);
+            }
+
             for($i = $startPage; $i <= $endPage; $i++){
                 $link = $request . '&page=' . $i;
                 echo '<li class="page-item' . ($currentPage == $i ? ' active' : '') . '"><a class="page-link" href="'. $link .'">' . $i .'</a></li>';
             }
 
-            if($endPage < $pages->total_pages - 3){
+            if($endPage < $pages->total_pages - 1){
                 echo '<li class="page-item disabled"><a class="page-link disabled" tabindex="-1" >...</a></li>';
+            }
+            if($endPage < $pages->total_pages){
                 echo '<li class="page-item"><a class="page-link" href="'. $request . '&page=' . $pages->total_pages .'">'. $pages->total_pages .'</a></li>';
             }
         }
