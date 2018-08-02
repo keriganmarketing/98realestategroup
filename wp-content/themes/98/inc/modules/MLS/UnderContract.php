@@ -2,13 +2,11 @@
 
 namespace Includes\Modules\MLS;
 
-use GuzzleHttp\Client;
-
-class Waterfront extends CuratedResults {
+class UnderContract extends CuratedResults {
 
     public function __construct()
     {
-        parent::set('endPoint', 'waterfront');
+        parent::set('endPoint', 'contingent-pending');
         parent::set('searchParams', [
             'sort'   => $this->getSort()
         ]);

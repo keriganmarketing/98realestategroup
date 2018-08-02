@@ -37,9 +37,11 @@ get_header(); ?>
                                                     <p class="title"><?php echo $post->contact_info_title; ?></p>
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <?php if($post->contact_info_mls_id != '' && $post->contact_info_mls_id != 'NA') { ?>
-                                                    <p class="text-xs-center pull-md-right agent-button"><a href="#sold" class="btn btn-info" >Properties I've Sold</a></p>
-                                                    <p class="text-xs-center pull-md-right agent-button"><a href="#mylistings" class="btn btn-info" >My Listings</a></p>
+                                                    <?php if(count($listings['sold']) > 0){ ?>
+                                                        <p class="text-xs-center pull-md-right agent-button"><a href="#sold" class="btn btn-info" >Properties I've Sold</a></p>
+                                                    <?php } ?>
+                                                    <?php if(count($listings['active']) > 0){ ?>
+                                                        <p class="text-xs-center pull-md-right agent-button"><a href="#mylistings" class="btn btn-info" >My Listings</a></p>
                                                     <?php } ?>
                                                 </div>
                                             </div>
@@ -85,7 +87,7 @@ get_header(); ?>
             </div>
 
             <div class="container-wide">
-
+                <?php if(count($listings['active']) > 0){ ?>
                 <a id="mylistings" class="pad-anchor"></a>
                 <h2 class="text-center">My Listings</h2>
                 <hr>
@@ -96,7 +98,8 @@ get_header(); ?>
                         </div>
                     <?php } ?>
                 </div>
-
+                <?php } ?>
+                <?php if(count($listings['sold']) > 0){ ?>
                 <a id="sold" class="pad-anchor"></a>
                 <h2 class="text-center">Properties I've Sold</h2>
                 <p class="text-center"><em>In the last 6 months</em></p>
@@ -114,7 +117,7 @@ get_header(); ?>
                     <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>
                     </div>
                 </div>      
-
+                <?php } ?>
             </div>
             
 		</main><!-- #main -->

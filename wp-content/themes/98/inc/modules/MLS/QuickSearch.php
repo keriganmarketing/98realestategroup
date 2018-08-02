@@ -35,7 +35,9 @@ class QuickSearch
             'sort',
             'page'
         ];
-        $this->searchParams = [];
+        $this->searchParams = [
+            'sort' => 'date_modified|desc'
+        ];
         $this->searchResults = [];
         $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);
 
@@ -71,7 +73,7 @@ class QuickSearch
 
     public function getSort()
     {
-        return isset($this->searchRequested['sort']) ? $this->searchRequested['sort'] : 'price|desc';
+        return isset($this->searchParams['sort']) ? $this->searchParams['sort'] : 'date_modified|desc';
     }
 
     public function filterRequest()

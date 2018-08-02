@@ -22,7 +22,6 @@ class SearchPagination {
                 $request .= '&' . $key . '=';
                 foreach($var as $k => $v){
                     $request .= '&' . $key . '[]=' . $v;
-                    $i++;
                 }
             }else{
                 if($var != '' && $var != 'Any'){

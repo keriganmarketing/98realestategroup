@@ -114,7 +114,8 @@
                 type: Object,
                 default: () => {
                     return {
-                        omni: 'Mexico Beach',
+                        omni: '',
+                        area: 'Mexico Beach',
                         propertyType: 'Single Family Home',
                         minPrice: '200000',
                         maxPrice: '',

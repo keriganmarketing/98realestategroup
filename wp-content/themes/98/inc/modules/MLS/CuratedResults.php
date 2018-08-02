@@ -15,17 +15,24 @@ class CuratedResults {
     {
         $this->searchResults   = [];
         $this->searchParams    = [
-            'sort' => $this->getSort()
+            'sort' => 'date_modified|desc'
         ];
-
-        $this->searchRequested = $_GET;
-
-        echo '<pre>',print_r($this->searchParams),'</pre>';
     }
 
     protected function set($var, $value)
     {
         $this->$var = $value;
+    }
+
+    public function setParams()
+    {
+        if(isset($_GET['q'])){
+            foreach($_GET as $key => $var){
+                if($key != 'q'){
+                    $this->searchParams[$key] = $var;
+                }
+            }
+        }
     }
 
     public function getResultMeta()
@@ -40,7 +47,7 @@ class CuratedResults {
 
     public function getSort()
     {
-        return isset($this->searchRequested['sort']) ? $this->searchRequested['sort'] : 'date_modified|desc';
+        return isset($this->searchParams['sort']) ? $this->searchParams['sort'] : 'date_modified|desc';
     }
 
     public function makeRequest()
@@ -63,6 +70,8 @@ class CuratedResults {
             }
         }
 
+        echo $request;
+
         return $request . '&page=' . get_query_var( 'page' );
     }
 
@@ -78,6 +87,7 @@ class CuratedResults {
 
     public function getListings()
     {
+        $this->setParams();
         $this->contactTheMothership();
         return $this->searchResults;
     }
