@@ -25,32 +25,32 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-            <?php while ( have_posts() ) : the_post(); 
-            
+            <?php while ( have_posts() ) : the_post();
+
             get_template_part( 'template-parts/content', 'page' );
-            
+
             endwhile; // End of the loop. ?>
 
             <div class="container-wide">
                 <search-bar :search-terms='<?php echo $currentRequest; ?>'></search-bar>
                 <hr>
             </div>
-            
+
             <?php if(isset($searchResults->data) > 0){ ?>
             <div class="properties grid pb-4">
                 <div class="container-wide">
                     <div class="row justify-content-between mb-4">
                         <div class="col-sm-6">
                             <small class="text-muted">
-                                Showing <?php echo $resultMeta->count; ?> 
-                                of <?php echo $resultMeta->total; ?> | 
-                                page <?php echo $resultMeta->current_page; ?> 
-                                of <?php echo $resultMeta->total_pages; ?> 
+                                Showing <?php echo $resultMeta->count; ?>
+                                of <?php echo $resultMeta->total; ?> |
+                                page <?php echo $resultMeta->current_page; ?>
+                                of <?php echo $resultMeta->total_pages; ?>
                             </small>
                         </div>
                         <div class="col-sm-6 text-md-right">
                             <sort-form field-value="<?php echo $listings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
-                        </div>     
+                        </div>
                     </div>
                 </div>
                 <div class="container-wide mx-auto">

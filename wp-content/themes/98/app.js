@@ -5857,16 +5857,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             omni: null,
-            omniTerms: ["Anthrax", "Dark Angel", "Death Angel", "Destruction", "Exodus", "Flotsam and Jetsam", "Kreator", "Megadeth", "Metallica", "Overkill", "Sepultura", "Slayer", "Testament"],
+            omniTerms: [],
             advancedOpen: false,
             mapViewSelected: false,
-            url: 'https://rafgc.kerigan.com/api/v1/omnibar'
+            baseUrl: 'https://rafgc.kerigan.com/api/v1/omnibar'
         };
     },
     created: function created() {
         this.advancedOpen = false;
     },
 
+    watch: {
+        omni: function omni(newOmni, oldOmni) {
+            if (newOmni.length > 2) {
+                this.search();
+            }
+        }
+    },
     methods: {
         toggleAdvanced: function toggleAdvanced(event) {
             if (event) event.preventDefault();
@@ -5874,9 +5881,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         applySearchFilter: function applySearchFilter(search, omniTerms) {
             return omniTerms.filter(function (term) {
-                return term.toLowerCase().startsWith(search.toLowerCase());
+                return term.value.toLowerCase().startsWith(search.toLowerCase());
             });
-        }
+        },
+
+        search: _.debounce(function () {
+            var vm = this;
+            var config = {
+                method: 'get',
+                url: this.baseUrl + '?search=' + this.omni
+            };
+            axios(config).then(function (response) {
+                console.log(response);
+                vm.omniTerms = response.data;
+            });
+        }, 250)
     }
 });
 
@@ -6327,7 +6346,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        OnClickOutsidee: OnClickOutsidee
+        OnClickOutside: __WEBPACK_IMPORTED_MODULE_0__OnClickOutside_vue___default.a
     },
     props: ['value', 'options', 'filterFunction'],
     data: function data() {
@@ -6340,6 +6359,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         filteredOptions: function filteredOptions() {
             return this.filterFunction(this.search, this.options);
+        }
+    },
+    watch: {
+        search: function search(newValue, oldValue) {
+            if (newValue.length > 2) {
+                this.filter(newValue);
+            }
         }
     },
     methods: {
@@ -6356,10 +6382,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.isOpen = false;
             this.$refs.button.focus();
         },
-        select: function select(option) {
-            this.$emit('input', option);
+        select: function select(search) {
+            this.$emit('input', search);
             this.search = '';
             this.close();
+        },
+        filter: function filter(search) {
+            this.$emit('input', search);
+        },
+        toTitleCase: function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function (txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
         }
     }
 });
@@ -46086,17 +46120,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "omni"
     }
-  }), _vm._v(" "), _vm._m(0)], 1)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-sm-6 col-lg-3"
-  }, [_c('button', {
+  }), _vm._v(" "), _c('button', {
     staticClass: "btn btn-danger col-xs-4 col",
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("Search")])])
-}]}
+  }, [_vm._v("Search")])], 1)])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -46655,7 +46685,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.open
     }
-  }, [(_vm.value !== null) ? _c('span', [_vm._v(_vm._s(_vm.value))]) : _c('span', {
+  }, [(_vm.value !== null) ? _c('span', [_vm._v(_vm._s(_vm.toTitleCase(_vm.value)))]) : _c('span', {
     staticClass: "search-select-placeholder"
   }, [_vm._v("Address / MLS# / Community")])]), _vm._v(" "), _c('div', {
     directives: [{
@@ -46706,10 +46736,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "search-select-option",
       on: {
         "click": function($event) {
-          _vm.select(option)
+          _vm.select(option.value)
         }
       }
-    }, [_vm._v("\n                " + _vm._s(option) + "\n                ")])
+    }, [_vm._v("\n                " + _vm._s(_vm.toTitleCase(option.value)) + "\n                ")])
   })), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",

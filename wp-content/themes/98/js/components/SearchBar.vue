@@ -22,9 +22,9 @@
                     :field-value="searchTerms.propertyType"
                 >
                 </property-type>
-            </div> -->
+            </div>
             <div class="col-sm-6 col-lg-3">
-                <!-- <label class="col-xs-12">&nbsp;</label>
+                <label class="col-xs-12">&nbsp;</label>
                 <button
                     @click="toggleAdvanced"
                     type="button"
@@ -102,8 +102,8 @@
 
                     </div>
                 </div>
-            </div> -->
-        <!-- </div> -->
+            </div>
+        </div> -->
     </form>
 </template>
 
@@ -135,28 +135,21 @@
         data(){
             return {
                 omni: null,
-                omniTerms: [
-                    "Anthrax",
-                    "Dark Angel",
-                    "Death Angel",
-                    "Destruction",
-                    "Exodus",
-                    "Flotsam and Jetsam",
-                    "Kreator",
-                    "Megadeth",
-                    "Metallica",
-                    "Overkill",
-                    "Sepultura",
-                    "Slayer",
-                    "Testament"
-                ],
+                omniTerms: [],
                 advancedOpen: false,
                 mapViewSelected: false,
-                url: 'https://rafgc.kerigan.com/api/v1/omnibar'
+                baseUrl: 'https://rafgc.kerigan.com/api/v1/omnibar'
             }
         },
         created(){
             this.advancedOpen = false;
+        },
+        watch: {
+            omni: function (newOmni, oldOmni) {
+                if (newOmni.length > 2) {
+                    this.search();
+                }
+            }
         },
         methods: {
             toggleAdvanced(event){
@@ -164,8 +157,23 @@
                 this.advancedOpen = !this.advancedOpen;
             },
             applySearchFilter(search, omniTerms) {
-                return omniTerms.filter(term => term.toLowerCase().startsWith(search.toLowerCase()))
-            }
+                return omniTerms.filter(term => term.value.toLowerCase().startsWith(search.toLowerCase()))
+            },
+            search: _.debounce(
+                function () {
+                    let vm = this;
+                    let config = {
+                        method: 'get',
+                        url: this.baseUrl + '?search=' +this.omni,
+                    };
+                    axios(config)
+                        .then(response => {
+                            console.log(response);
+                            vm.omniTerms = response.data;
+                        })
+                },
+                250
+            )
         }
     }
 </script>

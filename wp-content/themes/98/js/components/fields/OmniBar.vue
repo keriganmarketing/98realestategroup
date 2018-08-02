@@ -8,7 +8,7 @@
             type="button"
             class="search-select-input"
         >
-            <span v-if="value !== null">{{ value }}</span>
+            <span v-if="value !== null">{{ toTitleCase(value) }}</span>
             <span v-else class="search-select-placeholder">Address / MLS# / Community</span>
         </button>
         <div ref="dropdown" v-show="isOpen" class="search-select-dropdown">
@@ -25,9 +25,9 @@
                     class="search-select-option"
                     v-for="(option, i) in filteredOptions"
                     :key="option.id"
-                    @click="select(option)"
+                    @click="select(option.value)"
                 >
-                {{ option }}
+                {{ toTitleCase(option.value) }}
                 </li>
             </ul>
         <div
@@ -42,7 +42,7 @@
 import OnClickOutside from './OnClickOutside.vue';
 export default {
     components: {
-        OnClickOutsidee
+        OnClickOutside
     },
     props: ['value', 'options', 'filterFunction'],
     data() {
@@ -54,6 +54,13 @@ export default {
     computed : {
         filteredOptions() {
             return this.filterFunction(this.search, this.options)
+        }
+    },
+    watch: {
+        search: function (newValue, oldValue) {
+            if (newValue.length > 2) {
+                this.filter(newValue);
+            }
         }
     },
     methods: {
@@ -68,10 +75,18 @@ export default {
             this.isOpen = false
             this.$refs.button.focus();
         },
-        select(option) {
-            this.$emit('input', option)
+        select(search) {
+            this.$emit('input', search)
             this.search = ''
             this.close()
+        },
+        filter(search) {
+            this.$emit('input', search)
+        },
+        toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt){
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
         }
     }
 }
