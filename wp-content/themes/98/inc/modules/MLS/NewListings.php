@@ -4,26 +4,14 @@ namespace Includes\Modules\MLS;
 
 use GuzzleHttp\Client;
 
-class NewListings {
+class NewListings extends CuratedResults {
 
     public function __construct()
     {
+        parent::set('endPoint', 'new-listings');
+        parent::set('searchParams', [
+            'sort'   => $this->getSort()
+        ]);
     }
 
-    public function contactTheMothership()
-    {
-        $client  = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
-        $apiCall = $client->request(
-            'GET', 'new-listings'
-        );
-
-        $response = json_decode($apiCall->getBody());
-
-        return $response->data;
-    }
-
-    public function getListings()
-    {
-        return $this->contactTheMothership();
-    }
 }

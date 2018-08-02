@@ -12,7 +12,7 @@ class OfficeListings extends CuratedResults {
         parent::set('endPoint', 'our-properties/' . $this->officeID);
         parent::set('searchParams', [
             'sort'   => $this->getSort(),
-            'status' => 'active'
+            'status' => ['active' => 'Active']
         ]);
     }
 

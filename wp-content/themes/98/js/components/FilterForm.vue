@@ -2,8 +2,6 @@
     <form class="form form-inline d-inline-block" method="get" >
         <input type="hidden" name="q" value="search" >
         <input v-if="searchTerms.omni" type="hidden" name="omni" :value="searchTerms.omni" >
-        <input v-if="searchTerms.area" type="hidden" name="area" :value="searchTerms.area" >
-        <input v-if="searchTerms.propertyType" type="hidden" name="propertyType" :value="searchTerms.propertyType" >
         <input v-if="searchTerms.minPrice" type="hidden" name="minPrice" :value="searchTerms.minPrice" >
         <input v-if="searchTerms.maxPrice" type="hidden" name="maxPrice" :value="searchTerms.maxPrice" >
         <input v-if="searchTerms.sqft" type="hidden" name="sqft" :value="searchTerms.sqft" >
@@ -22,14 +20,10 @@
             :name="'status[' + index + ']'" 
             :key="status" 
             :value="status" >
-        <select name="sort" 
-            v-model="selected" 
-            class="custom-select" 
-            style="width:auto;" >
-            <option value="list_price|desc">Price - high to low</option>
-			<option value="list_price|asc">Price - low to high</option>
-            <option value="date_modified|desc">Date Modified </option>
-        </select><button type="submit" class="btn btn-info" >Sort</button>    
+        <input v-if="searchTerms.sort" type="hidden" name="sort" :value="searchTerms.sort" >
+        <area-field class="d-inline-block" :field-value="searchTerms.area" ></area-field>
+        <property-type class="d-inline-block" :field-value="searchTerms.propertyType" ></property-type>
+        <button type="submit" class="btn btn-info" >Filter</button>    
     </form>
 </template>
 
@@ -38,7 +32,7 @@
         props: {
             fieldValue: {
                 type: String,
-                default: 'date_modified|desc'
+                default: 'price|desc'
             },
             searchTerms: {
                 type: Object,

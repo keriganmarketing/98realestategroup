@@ -1,6 +1,6 @@
 <?php
 
-use Includes\Modules\MLS\SoldListings;
+use Includes\Modules\MLS\Waterfront;
 
 /**
  * The template for displaying all pages.
@@ -15,11 +15,11 @@ use Includes\Modules\MLS\SoldListings;
  * @package Ninetyeight Real Estate Group
  */
 
-$soldListings   = new SoldListings();
-$searchResults  = $soldListings->getListings();
-$currentRequest = $soldListings->getCurrentRequest();
-$resultMeta     = $soldListings->getResultMeta();
-$listings       = $searchResults->data;
+$waterfrontListings = new Waterfront();
+$searchResults      = $waterfrontListings->getListings();
+$currentRequest     = $waterfrontListings->getCurrentRequest();
+$resultMeta         = $waterfrontListings->getResultMeta();
+$listings           = $searchResults->data;
 
 get_header(); ?>
 
@@ -42,8 +42,8 @@ get_header(); ?>
                 <div class="container-wide">
                     <div class="row justify-content-between mb-4">
                         <div class="col-sm-8">
-                            <sort-form field-value="<?php echo $soldListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
-                            <filter-form field-value="<?php echo $soldListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></filter-form>
+                            <sort-form field-value="<?php echo $waterfrontListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
+                            <filter-form field-value="<?php echo $waterfrontListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></filter-form>
                             <small class="text-muted" style="display:inline; padding-left:10px;" >
                                 Showing <?php echo $resultMeta->count; ?> 
                                 of <?php echo $resultMeta->total; ?> | 
@@ -68,7 +68,7 @@ get_header(); ?>
             </div>
             <div class="container mx-auto text-xs-center">
                 <div class="pb-4">
-                    <?php $soldListings->buildPagination(); ?>
+                    <?php $waterfrontListings->buildPagination(); ?>
                 </div>
                 <hr>
                 <div class="pb-4">

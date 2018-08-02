@@ -40,15 +40,18 @@ get_header(); ?>
             <div class="properties grid pb-4">
                 <div class="container-wide">
                     <div class="row justify-content-between mb-4">
-                        <div class="col-sm-6">
-                            <small class="text-muted">
+                        <div class="col-sm-8">
+                            <sort-form field-value="<?php echo $officeListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
+                            <filter-form field-value="<?php echo $officeListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></filter-form>
+                            <small class="text-muted" style="display:inline; padding-left:10px;" >
                                 Showing <?php echo $resultMeta->count; ?> 
                                 of <?php echo $resultMeta->total; ?> | 
                                 page <?php echo $resultMeta->current_page; ?> 
                                 of <?php echo $resultMeta->total_pages; ?> 
                             </small>
                         </div>
-                        <div class="col-sm-6 text-md-right">
+                        <div class="col-sm-4 text-md-right">
+                        
                         </div>     
                     </div>
                 </div>
