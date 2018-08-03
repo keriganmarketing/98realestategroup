@@ -221,6 +221,24 @@ class Team
         return $output;
     }
 
+    public function getAgentNames() {
+		$request = get_posts( [
+			'post_type'      => 'agent',
+			'posts_per_page' => -1,
+			'orderby'        => 'menu_order',
+			'order'          => 'ASC',
+			'offset'         => 0,
+			'post_status'    => 'publish',
+		] );
+
+		$output = [];
+		foreach ( $request as $item ) {
+			array_push( $output, ( isset( $item->post_title ) ? $item->post_title : null ) );
+		}
+
+		return $output;
+	}
+
     public function setupShortcode()
     {
         add_shortcode( 'team', function( $atts ){
@@ -242,8 +260,22 @@ class Team
     public function assembleAgentData( $agentName )
     {
         $agentData = $this->getSingle($agentName);
-        $agentData['short_ids']  = trim(implode('|', explode(',', $agentData['short_ids'])));
         return $agentData;
+    }
+
+    public function getAgentByMLS($mlsId)
+    {
+        $output = $this->getTeam([
+            'meta_query' => [
+                [
+                    'key'     => 'contact_info_mls_id',
+                    'value'   => $mlsId,
+                    'compare' => 'LIKE',
+                ]
+            ]
+        ]);
+
+        return (isset($output[0]) ? $output[0] : null);
     }
 
 }

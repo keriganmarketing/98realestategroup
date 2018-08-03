@@ -7,15 +7,19 @@ class FullListing
 {
     protected $mlsNumber;
     protected $listingInfo;
-    protected $media;
+    public $media;
 
     /**
      * Search Constructor
      * @param string $mlsNumber - Basically just the $_GET variables
      */
-    public function __construct()
+    public function __construct($mlsNumber='')
     {
-        $this->getMlsNumber();
+        if($mlsNumber==''){
+            $this->getMlsNumber();
+        }else{
+            $this->mlsNumber = $mlsNumber;
+        }
         $this->create();
         $this->assembleMedia();
         $this->setListingSeo();

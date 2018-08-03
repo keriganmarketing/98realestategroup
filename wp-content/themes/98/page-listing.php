@@ -30,6 +30,9 @@ $location     = $listing->location;
 
 $address      = $listing->street_num . ' ' . $listing->street_name . ' ' . $listing->city . ', ' . $listing->state . ' ' . $listing->zip;
 
+$team = new Team();
+$agent = $team->getAgentByMLS($listing->listing_agent);
+
 //echo '<pre>',print_r($listing),'</pre>';
 
 get_header(); ?>
@@ -68,9 +71,11 @@ get_header(); ?>
 							<div class="col-md-6">
 								<div id="req-info-btn" class="text-center">
 									<form class="form form-inline" action="/contact/" method="get" style="display:inline;" >
-										<input type="hidden" name="reason" value="requestinfo" />
-										<input type="hidden" name="mls" value="<?php echo $listing->mls_account; ?>" />
-										<input type="hidden" name="la_code" value="<?php echo $listing->listing_agent; ?>" />
+										<input type="hidden" name="reason_for_contact" value="Property inquiry" />
+										<input type="hidden" name="mls_number" value="<?php echo $listing->mls_account; ?>" />
+										<?php if(isset($agent)){ ?>
+										<input type="hidden" name="selected_agent" value="<?php echo $agent['name']; ?>" />
+										<?php } ?>
 										<button type="submit" class="btn btn-primary" >Request Info</button>
 
 										<?php if ($current_user->ID != 0){ ?>
