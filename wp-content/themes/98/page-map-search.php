@@ -1,4 +1,8 @@
 <?php
+
+use Includes\Modules\MLS\MapSearch;
+use function GuzzleHttp\json_encode;
+
 /**
  * The template for displaying all pages.
  *
@@ -11,9 +15,13 @@
  *
  * @package Ninetyeight Real Estate Group
  */
-$_SESSION['view'] = 'map';
-get_header(); ?>
 
+$listings       = new MapSearch();
+$searchResults  = $listings->getSearchResults();
+$currentRequest = $listings->getCurrentRequest();
+$resultMeta     = $listings->getResultMeta();
+get_header(); 
+?>
 <div id="mid">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
@@ -34,20 +42,27 @@ get_header(); ?>
                 </article><!-- #post-## -->
 
             <?php endwhile; // End of the loop. ?>
-			
-			<div class="container-fluid">
-				<div class="row">
-					<?php //getTemplateFile('search-criteria'); ?>
-				</div>
-				<div class="row">
-					<?php //getTemplateFile('map-search'); ?>
-				</div>	
-                <div class="row">
-                    <div class="col-xs-12">
-                    <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>
-                    </div>
+            
+            <div class="container-wide">
+                <search-bar :search-terms='<?php echo $currentRequest; ?>'></search-bar>
+                <hr>
+                <?php if(isset($searchResults->data) > 0){ ?>
+                <google-map 
+                    :latitude="29.862642" 
+                    :longitude="-85.329176" 
+                    :zoom="10" 
+                    :search-terms='<?php echo $currentRequest; ?>'
+                ></google-map>
+                
+                <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>
+
+            </div>
+            <?php }else{ ?>
+                <div class="container">
+                    <p>There were no properties found using your search criteria. Please broaden your search and try again.</p>
                 </div>
-			</div>
+            <?php } ?>
+            &nbsp;
 		</main><!-- #main -->
 	</div><!-- #primary -->
     <?php get_sidebar(); ?>

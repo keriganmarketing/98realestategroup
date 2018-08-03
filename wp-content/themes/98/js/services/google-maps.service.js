@@ -1,5 +1,4 @@
 import GoogleMapsLoader from 'google-maps';
-import GeoLocator from './geolocator.service';
 import MarkerClusterer from 'marker-clusterer-plus';
 
 export default class GoogleMap {
@@ -9,26 +8,6 @@ export default class GoogleMap {
         this.apiKey = api;
         this.visibleMarkers = [];
         this.google = {};
-        this.markerShape = {
-            path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
-            scale: 0.7,
-            strokeWeight: 2,
-            strokeColor: '#FFF',
-            strokeOpacity: 0.5,
-            fillColor: '#555',
-            fillOpacity: 1,
-            rotation: 0
-        };
-        this.selectedShape = {
-            path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
-            scale: 0.7,
-            strokeWeight: 4,
-            strokeColor: '#55ff00',
-            strokeOpacity: 0.5,
-            fillColor: '#555',
-            fillOpacity: 1,
-            rotation: 0
-        };
     }
 
     load() {
@@ -66,31 +45,31 @@ export default class GoogleMap {
                 gridSize: 80,
                 ignoreHidden: true,
                 styles: [{
-                    url: '/img/m1.png',
+                    url: '/wp-content/themes/98/img/m1.png',
                     height: 50,
                     width: 50,
                     textColor: '#333333',
                     textSize: 12
                 }, {
-                    url: '/img/m2.png',
+                    url: '/wp-content/themes/98/img/m2.png',
                     height: 60,
                     width: 60,
                     textColor: '#333333',
                     textSize: 12
                 }, {
-                    url: '/img/m3.png',
+                    url: '/wp-content/themes/98/img/m3.png',
                     width: 70,
                     height: 70,
                     textColor: '#333333',
                     textSize: 13
                 }, {
-                    url: '/img/m4.png',
+                    url: '/wp-content/themes/98/img/m4.png',
                     width: 80,
                     height: 80,
                     textColor: '#333333',
                     textSize: 13
                 }, {
-                    url: '/img/m5.png',
+                    url: '/wp-content/themes/98/img/m5.png',
                     width: 90,
                     height: 90,
                     textColor: '#333333',
@@ -121,21 +100,20 @@ export default class GoogleMap {
 
         for (let i = 0; i < markers.length; i++) {
 
-            let latLng = new google.maps.LatLng(markers[i].latitude, markers[i].longitude)
+            let latLng = new google.maps.LatLng(markers[i].location.lat, markers[i].location.long)
             if (bounds.contains(latLng)) {
+                let listingClass = 'RES';
                 let marker = new google.maps.Marker({
                     position: latLng,
                     map: mapData.map,
                     draggable: false,
                     flat: true,
-                    icon: instance.markerShape
+                    icon: '/wp-content/themes/98/img/map-pin-' + listingClass + '-' + markers[i].status.toLowerCase() + '.png'
                 });
                 visibleMarkers.push(marker);
 
                 marker.addListener('click', function () {
-                    instance.resetIcons(visibleMarkers);
                     mapData.selected = markers[i];
-                    this.setIcon(instance.selectedShape);
                     window.dispatchEvent(new CustomEvent('marker_updated', {
                         detail: markers[i]
                     }));

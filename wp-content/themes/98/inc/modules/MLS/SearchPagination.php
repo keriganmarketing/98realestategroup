@@ -34,7 +34,7 @@ class SearchPagination {
     }
 
     public function buildPagination()
-    {
+    {        
         global $wp;
         
         $pages = $this->searchMeta;

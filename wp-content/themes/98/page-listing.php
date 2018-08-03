@@ -33,7 +33,7 @@ $address      = $listing->street_num . ' ' . $listing->street_name . ' ' . $list
 $team = new Team();
 $agent = $team->getAgentByMLS($listing->listing_agent);
 
-//echo '<pre>',print_r($listing),'</pre>';
+// echo '<pre>',print_r($listing),'</pre>';
 
 get_header(); ?>
 
@@ -63,7 +63,7 @@ get_header(); ?>
 								<h1 class="listing-page-location"><?php echo $listing->street_num.' '.$listing->street_name; ?></h1>
 								<h2 class="listing-page-area"><?php echo $listing->city; ?>, FL</h2>
 								<?php if($listing->status == 'Sold'){ ?>
-									<h3 class="listing-page-price">Sold on <?php echo date( 'M j, Y', strtotime( $listing->sold_on )); ?> for $<?php echo number_format($listing->sold_on); ?></h3>
+									<h3 class="listing-page-price">Sold on <?php echo date( 'M j, Y', strtotime( $listing->sold_on )); ?> for $<?php echo number_format($listing->sold_for); ?></h3>
 								<?php } else { ?>
 									<h3 class="listing-page-price">$<?php echo number_format($listing->price); ?></h3>
 								<?php } ?>
@@ -119,6 +119,7 @@ get_header(); ?>
 								<h3 class="left"><span>Media & Files</span></h3>
 								<table class="table">
 								<?php
+									if(!isset($listing->sold_on)){
 									if(isset($media['vtours'])){
 										foreach($media['vtours'] as $vtour){
 											echo '<tr><td>'.$vtour->media_type.'</td><td><a href="'.$vtour->url.'" target="_blank" ><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Open Tour</a></td></tr>';
@@ -141,6 +142,7 @@ get_header(); ?>
 											echo '<tr><td>'.$link->media_type.'</td><td><a href="'.$link->url.'" target="_blank" ><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Open Link</a></td></tr>';
 										}
 									}
+								}
 
 									ob_flush();
 								?>

@@ -15,3 +15,5 @@ Vue.component('quick-search', require('./components/QuickSearch.vue'));
 Vue.component('sort-form', require('./components/SortForm.vue'));
 Vue.component('filter-form', require('./components/FilterForm.vue'));
 Vue.component('photo-gallery', require('./components/PhotoGallery.vue'));
+Vue.component('google-map', require('./components/GoogleMap.vue'));
+Vue.component('mini-listing', require('./components/MiniListing.vue'));

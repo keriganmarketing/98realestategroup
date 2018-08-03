@@ -23,7 +23,7 @@
             <ul ref="options" v-show="filteredOptions.length > 0" class="search-select-options">
                 <li
                     class="search-select-option"
-                    v-for="(option, i) in filteredOptions"
+                    v-for="option in filteredOptions"
                     :key="option.id"
                     @click="select(option.value)"
                 >
