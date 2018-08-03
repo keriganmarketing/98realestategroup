@@ -5646,6 +5646,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         searchTerms: {
             type: Object,
             default: function _default() {}
+        },
+        hideArea: {
+            type: Boolean,
+            default: false
+        },
+        hideType: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -27821,7 +27829,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\FilterForm.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\FilterForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FilterForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -27855,7 +27863,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\QuickSearch.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\QuickSearch.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] QuickSearch.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -27889,7 +27897,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\SearchBar.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\SearchBar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SearchBar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -27923,7 +27931,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\SortForm.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\SortForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SortForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -27957,7 +27965,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Acreage.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Acreage.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Acreage.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -27991,7 +27999,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Area.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Area.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Area.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28025,7 +28033,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Bathrooms.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Bathrooms.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Bathrooms.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28059,7 +28067,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Bedrooms.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Bedrooms.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Bedrooms.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28093,7 +28101,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Details.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Details.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Details.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28127,7 +28135,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\MaxPrice.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\MaxPrice.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] MaxPrice.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28161,7 +28169,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\MinPrice.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\MinPrice.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] MinPrice.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28195,7 +28203,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\PropertyType.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\PropertyType.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PropertyType.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28229,7 +28237,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Status.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Status.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Status.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28263,7 +28271,7 @@ var Component = __webpack_require__(11)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\TotalSqft.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\TotalSqft.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TotalSqft.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29159,17 +29167,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "value": _vm.searchTerms.sort
     }
-  }) : _vm._e(), _vm._v(" "), _c('area-field', {
+  }) : _vm._e(), _vm._v(" "), (!_vm.hideArea) ? _c('area-field', {
     staticClass: "d-inline-block",
     attrs: {
       "field-value": _vm.searchTerms.area
     }
-  }), _vm._v(" "), _c('property-type', {
+  }) : _vm._e(), _vm._v(" "), (!_vm.hideType) ? _c('property-type', {
     staticClass: "d-inline-block",
     attrs: {
       "field-value": _vm.searchTerms.propertyType
     }
-  }), _vm._v(" "), _c('button', {
+  }) : _vm._e(), _vm._v(" "), _c('button', {
     staticClass: "btn btn-info",
     attrs: {
       "type": "submit"

@@ -1,4 +1,7 @@
 <?php
+
+use Includes\Modules\MLS\AreaListings;
+
 /**
  * Template part for displaying page content in page.php.
  *
@@ -6,7 +9,6 @@
  *
  * @package Ninetyeight Real Estate Group
  */
-
 
 $hero_image = get_field('hero_image');
 $image1 = get_field('image_1');
@@ -19,6 +21,12 @@ $photos =[
     $image3,
     $image4 
 ]; 
+
+$areaListings       = new AreaListings('Mexico Beach');
+$searchResults      = $areaListings->getListings();
+$currentRequest     = $areaListings->getCurrentRequest();
+$resultMeta         = $areaListings->getResultMeta();
+$listings           = $searchResults->data;
 
 ?>
 
@@ -71,58 +79,60 @@ $photos =[
             </div>
             <div class="col-md-7">
                 <div class="entry-content area-content">
+                    <?php if(isset($listings) > 0){ ?>
                     <a id="btn-view-area-listing" class="btn btn-primary pull-md-right" href="#area-listings" >View Area Listings</a>
+                    <?php } ?>
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
             </div>
         </div>
     </div>
 </article><!-- #post-## -->
-<div class="area-listings">
-    <div class="container-fluid" >
-        
-         
-    </div>
+<div class="container-wide">
+    <hr>
 </div>
-<div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true" style="padding: 0 8px 3px;" >×</button>
-        <div class="modal-content">
-            <div class="modal-body">
-                <img src="" alt="" style="min-width: 615px;" />
+
+<?php if(isset($listings) > 0){ ?>
+<a name="area-listings"></a>
+<div class="properties grid pb-4">
+    <div class="container-wide">
+        <div class="row justify-content-between mb-4">
+            <div class="col-sm-8">
+                <sort-form field-value="<?php echo $areaListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
+                <filter-form :hide-area="true" field-value="<?php echo $areaListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></filter-form>
+                <small class="text-muted" style="display:inline; padding-left:10px;" >
+                    Showing <?php echo $resultMeta->count; ?> 
+                    of <?php echo $resultMeta->total; ?> | 
+                    page <?php echo $resultMeta->current_page; ?> 
+                    of <?php echo $resultMeta->total_pages; ?> 
+                </small>
             </div>
+            <div class="col-sm-4 text-md-right">
+                
+            </div>     
+        </div>
+    </div>
+    <div class="container-wide mx-auto">
+        <div class="row justify-content-center">
+        <?php foreach($searchResults->data as $listing){ ?>
+            <div class="feat-prop col-md-6 col-xl-3 text-center">
+                <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
+            </div>
+        <?php } ?>
         </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function() {
-    var $lightbox = $('#lightbox');
-    
-    $('[data-target="#lightbox"]').on('click', function(event) {
-        var $img = $(this).find('img'), 
-            src = $img.attr('src'),
-            alt = $img.attr('alt'),
-            css = {
-                'width': '100%',
-                'maxWidth': $(window).width() - 0,
-                'maxHeight': $(window).height() - 0
-            };
-    
-        $lightbox.find('.close').addClass('hidden');
-        $lightbox.find('img').attr('src', src);
-        $lightbox.find('img').attr('alt', alt);
-        $lightbox.find('img').css(css);
-    });
-    
-    $lightbox.on('shown.bs.modal', function (e) {
-        var $img = $lightbox.find('img');
-            
-        $lightbox.find('.modal-dialog').css({
-            //'width': '100%',
-            //'maxWidth': '90%'
-        });
-        $lightbox.find('.close').removeClass('hidden');
-    });
-});
-</script>
+<div class="container mx-auto text-xs-center">
+    <div class="pb-4">
+        <?php $areaListings->buildPagination(); ?>
+    </div>
+    <hr>
+    <div class="pb-4">
+        <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>
+    </div>
+</div>
+<?php }else{ ?>
+<div class="container">
+    <p>There were no properties found using your search criteria. Please broaden your search and try again.</p>
+</div>
+<?php } ?>

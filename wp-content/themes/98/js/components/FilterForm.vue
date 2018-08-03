@@ -21,8 +21,8 @@
             :key="status" 
             :value="status" >
         <input v-if="searchTerms.sort" type="hidden" name="sort" :value="searchTerms.sort" >
-        <area-field class="d-inline-block" :field-value="searchTerms.area" ></area-field>
-        <property-type class="d-inline-block" :field-value="searchTerms.propertyType" ></property-type>
+        <area-field v-if="!hideArea" class="d-inline-block" :field-value="searchTerms.area" ></area-field>
+        <property-type v-if="!hideType" class="d-inline-block" :field-value="searchTerms.propertyType" ></property-type>
         <button type="submit" class="btn btn-info" >Filter</button>    
     </form>
 </template>
@@ -37,6 +37,14 @@
             searchTerms: {
                 type: Object,
                 default: () => {}
+            },
+            hideArea: {
+                type: Boolean,
+                default: false
+            },
+            hideType: {
+                type: Boolean,
+                default: false
             }
         },
 
