@@ -86,7 +86,7 @@ $preferredPhoto = ($photos[0]->media_type = 'Photo' ? $photos[0]->url : get_temp
                     <div class="col-xs-6 text-xs-center">
                         <span class="icon"><img src="<?php echo get_template_directory_uri() . '/img/acres.svg'; ?>" alt="acres"
                                                 class="img-responsive lazy"></span>
-                        <span class="acres-num icon-data"><?php echo $listing->acreage; ?></span>
+                        <span class="acres-num icon-data">&nbsp;<?php echo $listing->acreage; ?>&nbsp;</span>
                         <span class="icon-label">ACRES</span>
                     </div>
                 <?php } ?>

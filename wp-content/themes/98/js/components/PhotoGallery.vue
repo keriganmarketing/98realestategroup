@@ -1,12 +1,10 @@
 <template>
     <div>
         <div class="photo-gallery">
-            <div class="row" >
-                <div class="col-xs-6 col-lg-4 col-xl-3" v-for="(photo, index) in photos" v-bind:key="photo.id" >
-                    <div class="photo-tile has-text-centered">
-                        <div class="embed-responsive embed-responsive-4by3">
-                            <img @click="openViewer(index)" class="embed-responsive-item" style="height:auto;" :id="'photo-' + photo.id" :src="photo.url" :alt="photo.name" >
-                        </div>
+            <div :class="itemClass" v-for="(photo, index) in photos" v-bind:key="photo.id" >
+                <div class="photo-tile has-text-centered">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <img @click="openViewer(index)" class="embed-responsive-item" style="height:auto;" :id="'photo-' + photo.id" :src="photo.url" :alt="photo.name" >
                     </div>
                 </div>
             </div>
@@ -58,6 +56,10 @@
             virtualTour: {
                 type: Object,
                 default: null
+            },
+            itemClass: {
+                type: Array,
+                default: () => []
             }
         },
         data () {
@@ -119,8 +121,8 @@
 </script>
 
 <style scoped>
-    .photo-gallery {
-        padding: 2rem 0;
+    .photo-tile {
+        overflow: hidden;
     }
     .modal-frame {
         z-index: 999999999999999;

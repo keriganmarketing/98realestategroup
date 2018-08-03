@@ -7,6 +7,7 @@ class FullListing
 {
     protected $mlsNumber;
     protected $listingInfo;
+    protected $media;
 
     /**
      * Search Constructor
@@ -16,6 +17,7 @@ class FullListing
     {
         $this->getMlsNumber();
         $this->create();
+        $this->assembleMedia();
         $this->setListingSeo();
     }
 
@@ -46,26 +48,26 @@ class FullListing
     public function setListingSeo()
     {
         add_filter('wpseo_title', function () {
-            $title = $this->listingInfo->street_number . ' ' . $this->listingInfo->street_name .' '. $this->listingInfo->street_suffix;
-            $title = ($this->listingInfo->unit_number != '' ? $title . ' ' . $this->listingInfo->unit_number : $title);
+            $title = $this->listingInfo->street_num . ' ' . $this->listingInfo->street_name;
+            $title = ($this->listingInfo->unit_num != '' ? $title . ' ' . $this->listingInfo->unit_num : $title);
             $metaTitle = $title . ' | $' . number_format($this->listingInfo->price) . ' | ' . $this->listingInfo->city . ' | ' . get_bloginfo('name');
             return $metaTitle;
         });
 
         add_filter('wpseo_metadesc', function () {
-            return strip_tags($this->listingInfo->description);
+            return strip_tags($this->listingInfo->remarks);
         });
 
         add_filter('wpseo_opengraph_image', function () {
-            return ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+            return ($this->media['photos'][0]->url != '' ? $this->media['photos'][0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
         });
 
         add_filter('wpseo_canonical',  function () {
-            return get_the_permalink() . '?mls=' . $this->listingInfo->mls_account;
+            return get_the_permalink() . $this->listingInfo->mls_account . '/';
         });
 
         add_filter('wpseo_opengraph_url', function ($ogUrl) {
-            return get_the_permalink() . '?mls=' . $this->listingInfo->mls_account;
+            return get_the_permalink() . $this->listingInfo->mls_account . '/';
         }, 100, 1);
     }
 
@@ -82,6 +84,11 @@ class FullListing
             if($var->media_type == 'Hyperlink'){ $return['links'][] = $var; }
         }
 
-        return $return;
+        $this->media = $return;
+    }
+
+    public function getMedia()
+    {
+        return $this->media;
     }
 }

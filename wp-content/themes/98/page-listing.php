@@ -17,18 +17,20 @@ use Includes\Modules\MLS\Favorites;
  * @package Ninetyeight Real Estate Group
  */
 
-$fullListing = new FullListing();
-$listing = $fullListing->getListingInfo();
+$fullListing =  new FullListing();
+$listing      = $fullListing->getListingInfo();
 $favorite     = new Favorites();
 $current_user = wp_get_current_user();
 $isFav        = $favorite->checkFavorites( $listing->mls_account );
-$media        = $fullListing->assembleMedia();
+$media        = $fullListing->getMedia();
 $photos       = $media['photos'];
-$tour         = is_array($media['vtours']) ? $media['vtours'][0] : null;
+$tour         = (isset($media['vtours']) ? $media['vtours'][0] : null);
 $mainPhoto    = (isset($media['photos'][0]->url) ? $media['photos'][0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
 $location     = $listing->location;
 
 $address      = $listing->street_num . ' ' . $listing->street_name . ' ' . $listing->city . ', ' . $listing->state . ' ' . $listing->zip;
+
+//echo '<pre>',print_r($listing),'</pre>';
 
 get_header(); ?>
 
@@ -46,7 +48,11 @@ get_header(); ?>
 								<img src="<?php echo $mainPhoto; ?>" data-src="<?php echo $mainPhoto; ?>" class="img-responsive" alt="MLS Property <?php echo $listing->mls_account; ?>" />
 							</div>
 						</div>
-						<photo-gallery :virtual-tour='<?php echo json_encode($tour); ?>' :data-photos='<?php echo json_encode($photos); ?>' ></photo-gallery>
+						<photo-gallery 
+							class="row no-gutter"
+							:virtual-tour='<?php echo json_encode($tour); ?>' 
+							:data-photos='<?php echo json_encode($photos); ?>'
+							item-class="col-xs-6 col-lg-4 col-xl-3" ></photo-gallery>
 					</div>
 					<div class="property-right col-md-7">
 						<div class="row">
@@ -92,10 +98,10 @@ get_header(); ?>
 								<table class="table">
 								<tr><td>MLS Number</td><td><?php echo $listing->mls_account; ?></td></tr>
 								<tr><td>Status</td><td><?php echo $listing->status; ?></td></tr>
-								<?php if($listing->list_date != ''){ ?><tr><td>List Date</td><td><?php echo date('M d, Y', $listing->list_date); ?></td></tr><?php } ?>
-								<?php if($listing->date_modified != '' && date('Ymd', $listing->date_modified) != date('Ymd', $listing->list_date)){ ?><tr><td>Listing Updated</td><td><?php echo  date('M d, Y', $$listing->date_modified); ?></td></tr><?php } ?>
+								<?php if($listing->list_date != ''){ ?><tr><td>List Date</td><td><?php echo date('M d, Y', strtotime($listing->list_date)); ?></td></tr><?php } ?>
+								<?php if($listing->date_modified != '' && date('Ymd', strtotime($listing->date_modified)) != date('Ymd', strtotime($listing->list_date))){ ?><tr><td>Listing Updated</td><td><?php echo  date('M d, Y', strtotime($listing->date_modified)); ?></td></tr><?php } ?>
 								<?php if($listing->bedrooms != '' && $listing->bedrooms != '0'){ ?><tr><td>Bedrooms</td><td><?php echo $listing->bedrooms; ?></td></tr><?php } ?>
-								<?php if($listing->bathrooms != '' && $listing->bathrooms != '0'){ ?><tr><td>Bathrooms</td><td><?php echo $listing->bathrooms; ?></td></tr><?php } ?>
+								<?php if($listing->total_bathrooms != '' && $listing->total_bathrooms != '0'){ ?><tr><td>Bathrooms</td><td><?php echo $listing->total_bathrooms; ?></td></tr><?php } ?>
 								<?php if($listing->stories != '' && $listing->stories != '0'){ ?><tr><td>Stories</td><td><?php echo $listing->stories; ?></td></tr><?php } ?>
 								<?php if($listing->acreage != '' && $listing->acreage != '0'){ ?><tr><td>Acreage</td><td><?php echo $listing->acreage; ?> Acres</td></tr><?php } ?>
 								<?php if($listing->total_hc_sqft != '' && $listing->total_hc_sqft != '0'){ ?><tr><td>H/C SqFt</td><td><?php echo number_format($listing->total_hc_sqft); ?> SqFt</td></tr><?php } ?>
@@ -108,24 +114,24 @@ get_header(); ?>
 								<h3 class="left"><span>Media & Files</span></h3>
 								<table class="table">
 								<?php
-									if(is_array($media['vtours'])){
+									if(isset($media['vtours'])){
 										foreach($media['vtours'] as $vtour){
 											echo '<tr><td>'.$vtour->media_type.'</td><td><a href="'.$vtour->url.'" target="_blank" ><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Open Tour</a></td></tr>';
 											$vTourLink = $vtour->url;
 										}
 										$vTour = TRUE;
 									}
-									if(is_array($media['docs'])){
+									if(isset($media['docs'])){
 										foreach($media['docs'] as $faxedDoc){
 											echo '<tr><td>'.$faxedDoc->media_type.'</td><td><a href="http://rafgc.net/RAFSGReports/media/'.$faxedDoc->file_name.'" target="_blank" ><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Open Document</a></td></tr>';
 										}
 									}
-									if(is_array($media['files'])){
+									if(isset($media['files'])){
 										foreach($media['files'] as $file){
 											echo '<tr><td>'.$file->media_type.'</td><td><a href="http://rafgc.net/RAFSGReports/media/'.$file->file_name.'" target="_blank" ><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Open File</a></td></tr>';
 										}
 									}
-									if(is_array($media['links'])){
+									if(isset($media['links'])){
 										foreach($media['links'] as $link){
 											echo '<tr><td>'.$link->media_type.'</td><td><a href="'.$link->url.'" target="_blank" ><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Open Link</a></td></tr>';
 										}

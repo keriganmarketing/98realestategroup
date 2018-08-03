@@ -16,13 +16,14 @@ $image2 = get_field('image_2');
 $image3 = get_field('image_3');
 $image4 = get_field('image_4');
 $photos =[
-    $image1,
-    $image2,
-    $image3,
-    $image4 
+    ['url' => $image1],
+    ['url' => $image2],
+    ['url' => $image3],
+    ['url' => $image4] 
 ]; 
+$area = get_field('db_name');
 
-$areaListings       = new AreaListings('Mexico Beach');
+$areaListings       = new AreaListings($area);
 $searchResults      = $areaListings->getListings();
 $currentRequest     = $areaListings->getCurrentRequest();
 $resultMeta         = $areaListings->getResultMeta();
@@ -42,17 +43,7 @@ $listings           = $searchResults->data;
                             </div>
                         </div>
                     </div>
-                    <?php foreach($photos as $photo){ ?>
-                        <div class="hidden-sm-down col-md-6">
-                            <div class="embed-responsive embed-responsive-16by9" style="margin:0;">
-                            <div class="sub-photo-container area-sub-photos">
-                                <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox">
-                                    <img src="<?php echo $photo; ?>" data-src="<?php echo $photo; ?>" class="img-fluid" alt="Area Photo" />
-                                </a>
-                            </div>
-                            </div>
-                        </div>
-                    <?php } ?>
+                    <photo-gallery :data-photos='<?php echo json_encode($photos); ?>' item-class="hidden-sm-down col-md-6" ></photo-gallery>
                 </div>
                 <div class="row">
                     <div id="TA_selfserveprop860" class="TA_selfserveprop offset-sm-1 col-sm-11" style="margin-bottom:20px;">
