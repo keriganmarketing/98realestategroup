@@ -17,7 +17,7 @@
                     <div class="photo-container" style="height: 80vh; overflow:hidden; padding:1rem;" @click="closeViewer()" >
                         <img :src="activePhoto.url" :alt="activePhoto.name" style="max-width:100%;max-height:100%;" />
                     </div>
-                    <div v-if="virtualTour.url" class="text-xs-center" style="height: 7vh;" >
+                    <div v-if="hasVirtualTour" class="text-xs-center" style="height: 7vh;" >
                         <a class="btn btn-primary" :href="virtualTour.url" target="_blank" >Open Virtual Tour</a>
                     </div>
                     <div class="text-xs-center" style="height: 7vh;" >
@@ -62,12 +62,16 @@
                 next: null,
                 galleryIsOpen: false,
                 activePhoto: {},
-                numPhotos: 0
+                numPhotos: 0,
+                hasVirtualTour: false
             }
         },
         mounted () {
             this.photos = this.dataPhotos;
             this.numPhotos = this.photos.length;
+            if(this.virtualTour.url != null){
+                this.hasVirtualTour = true;
+            }
         },
         methods: {
             openViewer(index){

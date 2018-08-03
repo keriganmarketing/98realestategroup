@@ -16988,12 +16988,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             next: null,
             galleryIsOpen: false,
             activePhoto: {},
-            numPhotos: 0
+            numPhotos: 0,
+            hasVirtualTour: false
         };
     },
     mounted: function mounted() {
         this.photos = this.dataPhotos;
         this.numPhotos = this.photos.length;
+        if (this.virtualTour.url != null) {
+            this.hasVirtualTour = true;
+        }
     },
 
     methods: {
@@ -57718,7 +57722,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": _vm.activePhoto.url,
       "alt": _vm.activePhoto.name
     }
-  })]), _vm._v(" "), (_vm.virtualTour.url) ? _c('div', {
+  })]), _vm._v(" "), (_vm.hasVirtualTour) ? _c('div', {
     staticClass: "text-xs-center",
     staticStyle: {
       "height": "7vh"
