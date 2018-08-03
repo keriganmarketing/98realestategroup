@@ -54,7 +54,7 @@ get_header(); ?>
 								<?php if($listing->status == 'Sold'){ ?>
 									<h3 class="listing-page-price">Sold on <?php echo date( 'M j, Y', strtotime( $listing->sold_on )); ?> for $<?php echo number_format($listing->sold_on); ?></h3>
 								<?php } else { ?>
-									<h3 class="listing-page-price">$<?php echo number_format($listing->list_price); ?></h3>
+									<h3 class="listing-page-price">$<?php echo number_format($listing->price); ?></h3>
 								<?php } ?>
 							</div>
 							<div class="col-md-6">
