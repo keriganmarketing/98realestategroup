@@ -70,7 +70,7 @@ class CuratedResults {
             }
         }
 
-        echo $request;
+        // echo $request;
 
         return $request . '&page=' . get_query_var( 'page' );
     }
