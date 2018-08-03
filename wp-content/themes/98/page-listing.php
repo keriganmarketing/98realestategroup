@@ -28,6 +28,8 @@ $tour         = is_array($media['vtours']) ? $media['vtours'][0] : null;
 $mainPhoto    = (isset($media['photos'][0]->url) ? $media['photos'][0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
 $location     = $listing->location;
 
+$address      = $listing->street_num . ' ' . $listing->street_name . ' ' . $listing->city . ', ' . $listing->state . ' ' . $listing->zip;
+
 get_header(); ?>
 
 <div id="mid">
@@ -181,8 +183,15 @@ get_header(); ?>
 								<p>Due to new roads in our area, some properties may now show up in exactly the right location.</p>
 								<div class="listing-map-frame">
 									<div class="embed-responsive embed-responsive-4by3">
-										<div class="embed-responsive-item" id="map" ></div>
-										<?php echo '<pre>',print_r($location),'</pre>'; ?>
+										<div class="embed-responsive-item" id="map" style="border:1px solid #ddd;" ></div>
+										<iframe 
+											class="embed-responsive-item"
+											frameborder="0" 
+											scrolling="no" 
+											marginheight="0" 
+											marginwidth="0" 
+											src="https://maps.google.com/maps?q=<?php echo urlencode($address); ?><?php //echo $location->lat; ?><?php //echo $location->long; ?>&hl=es;z=14&amp;output=embed"
+										></iframe>
 									</div>
 								</div>
 							</div>
