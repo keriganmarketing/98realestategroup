@@ -238,4 +238,12 @@ class Team
 
         } );
     }
+
+    public function assembleAgentData( $agentName )
+    {
+        $agentData = $this->getSingle($agentName);
+        $agentData['short_ids']  = trim(implode('|', explode(',', $agentData['short_ids'])));
+        return $agentData;
+    }
+
 }

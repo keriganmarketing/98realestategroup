@@ -2,7 +2,7 @@
 
 namespace Includes\Modules\Leads;
 
-use Includes\Modules\Agents\Agents;
+use Includes\Modules\Team\Team;
 
 class HomeValuation extends Leads
 {
@@ -32,7 +32,7 @@ class HomeValuation extends Leads
             $dataSubmitted['listing_city'], $dataSubmitted['listing_state'], $dataSubmitted['listing_zip']
         );
 
-        $agent = new Agents();
+        $agent = new Team();
         $agentInfo = $agent->assembleAgentData($dataSubmitted['selected_agent']);
         parent::set('adminEmail', ($agentInfo['email_address'] != '' ? $agentInfo['email_address'] : $this->adminEmail));
 

@@ -1,7 +1,6 @@
 <?php
 
-use Includes\Modules\MLS\QuickSearch;
-
+use Includes\Modules\MLS\NewListings;
 
 /**
  * The template for displaying all pages.
@@ -15,42 +14,45 @@ use Includes\Modules\MLS\QuickSearch;
  *
  * @package Ninetyeight Real Estate Group
  */
-$listings       = new QuickSearch();
-$searchResults  = $listings->getSearchResults();
-$currentRequest = $listings->getCurrentRequest();
-$resultMeta     = $listings->getResultMeta();
+
+$newListings    = new NewListings();
+$searchResults  = $newListings->getListings();
+$currentRequest = $newListings->getCurrentRequest();
+$resultMeta     = $newListings->getResultMeta();
+$listings       = $searchResults->data;
 get_header(); ?>
 
 <div id="mid">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-            <?php while ( have_posts() ) : the_post();
-
+            <?php while ( have_posts() ) : the_post(); 
+            
             get_template_part( 'template-parts/content', 'page' );
-
+            
             endwhile; // End of the loop. ?>
 
             <div class="container-wide">
-                <search-bar :search-terms='<?php echo $currentRequest; ?>'></search-bar>
                 <hr>
             </div>
-
-            <?php if(isset($searchResults->data) > 0){ ?>
+            
+            <?php if(isset($listings) > 0){ ?>
             <div class="properties grid pb-4">
                 <div class="container-wide">
                     <div class="row justify-content-between mb-4">
-                        <div class="col-sm-6">
-                            <small class="text-muted">
-                                Showing <?php echo $resultMeta->count; ?>
-                                of <?php echo $resultMeta->total; ?> |
-                                page <?php echo $resultMeta->current_page; ?>
-                                of <?php echo $resultMeta->total_pages; ?>
+                        <div class="col-sm-8">
+                            <sort-form field-value="<?php echo $newListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
+                            <filter-form field-value="<?php echo $newListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></filter-form>
+                            <small class="text-muted" style="display:inline; padding-left:10px;" >
+                                Showing <?php echo $resultMeta->count; ?> 
+                                of <?php echo $resultMeta->total; ?> | 
+                                page <?php echo $resultMeta->current_page; ?> 
+                                of <?php echo $resultMeta->total_pages; ?> 
                             </small>
                         </div>
-                        <div class="col-sm-6 text-md-right">
-                            <sort-form field-value="<?php echo $listings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
-                        </div>
+                        <div class="col-sm-4 text-md-right">
+                            
+                        </div>     
                     </div>
                 </div>
                 <div class="container-wide mx-auto">
@@ -65,7 +67,7 @@ get_header(); ?>
             </div>
             <div class="container mx-auto text-xs-center">
                 <div class="pb-4">
-                    <?php $listings->buildPagination(); ?>
+                    <?php $newListings->buildPagination(); ?>
                 </div>
                 <hr>
                 <div class="pb-4">

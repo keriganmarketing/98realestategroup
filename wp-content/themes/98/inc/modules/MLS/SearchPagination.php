@@ -55,7 +55,7 @@ class SearchPagination {
             </a></li>';
         }
 
-        if($pages->total_pages >= 5){
+        if($pages->total_pages >= 3){
             $startPage = ($currentPage > 2 ? $currentPage - 2 : 1 );
             $endPage   = ($currentPage < $pages->total_pages - 2 ? $currentPage + 2 : $pages->total_pages );
 

@@ -2,7 +2,7 @@
 
 namespace Includes\Modules\Leads;
 
-use Includes\Modules\Agents\Agents;
+use Includes\Modules\Team\Team;
 
 class RequestInfo extends Leads
 {
@@ -26,7 +26,7 @@ class RequestInfo extends Leads
             (isset($dataSubmitted['first_name']) ? $dataSubmitted['first_name'] . ' ' . $dataSubmitted['last_name'] : '')
         );
 
-        $agent = new Agents();
+        $agent = new Team();
         $agentInfo = $agent->assembleAgentData($dataSubmitted['selected_agent']);
         parent::set('adminEmail', (isset($agentInfo['email_address']) && $agentInfo['email_address'] != '' ? $agentInfo['email_address'] : $this->adminEmail));
 

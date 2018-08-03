@@ -1,120 +1,183 @@
 <template>
-    <div>
-        <input
-            v-model="omni"
-            @click="showResults=true"
-            @focus="onFocus"
-            @keydown.tab="tabPressed"
-            @blur="onBlur()"
-            name="omni"
-            type="text"
-            autocomplete="new-omni"
-            placeholder="City, address, subdivision or zip"
-            :class="{
-                'omni-input-open': showResults == true,
-                'omni-input-closed': showResults == false
-            }"
-            class="text-grey-darkest px-3 py-2 h-10 w-full shadow block"
+<on-click-outside :do="close">
+    <div class="search-select" :class="{ 'is-active': isOpen }">
+        <label>Keyword</label>
+        <button
+            ref="button"
+            @click="open"
+            type="button"
+            class="search-select-input"
         >
+            <span v-if="value !== null">{{ toTitleCase(value) }}</span>
+            <span v-else class="search-select-placeholder">Address / MLS# / Community</span>
+        </button>
+        <div ref="dropdown" v-show="isOpen" class="search-select-dropdown">
+            <input
+                ref="search"
+                class="search-select-search"
+                name="omni"
+                v-model="search"
+                @keydown.esc="close"
+                autocomplete="off"
 
-        <div
-            v-if="showResults"
-            :class="{
-                'omni-results-open': showResults == true,
-                'omni-results-closed': showResults == false,
-                'h-10': results.length < 2,
-                'h-48': results.length > 1
-            }"
-            class="block shadow w-full border z-50 absolute text-grey-darker hover:border-grey bg-white overflow-hidden overflow-y-scroll"
-        >
-            <ul class="list-reset mb-px">
-                <li v-for="result in results" :key="result.text">
-                    <strong><span class="block px-2 py-2">{{ result.text }}</span></strong>
-                    <ul class="list-reset mb-2">
-                        <li
-                            class="hover:bg-teal hover:text-white cursor-pointer px-4 py-2"
-                            v-for="child in result.children"
-                            :key="child.id"
-                            @click="onResultsClick(child.text)"
-                            @mousedown.prevent="onBlur"
-                        >
-                            <span class="block">{{ child.text }}</span>
-                        </li>
-                    </ul>
+            >
+            <ul ref="options" v-show="filteredOptions.length > 0" class="search-select-options">
+                <li
+                    class="search-select-option"
+                    v-for="(option, i) in filteredOptions"
+                    :key="option.id"
+                    @click="select(option.value)"
+                >
+                {{ toTitleCase(option.value) }}
                 </li>
-
             </ul>
+        <div
+            v-show="filteredOptions.length === 0"
+            class="search-select-empty">No results found for {{ search }}</div>
         </div>
     </div>
+</on-click-outside>
 </template>
 
 <script>
-class Results {
-    constructor () {
-        this.results = {
-            text: 'Start typing to begin searching...'
-        }
-    }
-}
-
+import OnClickOutside from './OnClickOutside.vue';
 export default {
-    props: {
-        fieldValue: {
-            type: String,
-            default: this.fieldValue
+    components: {
+        OnClickOutside
+    },
+    props: ['value', 'options', 'filterFunction'],
+    data() {
+        return {
+            isOpen: false,
+            search: '',
         }
     },
-    data () {
-        return {
-            omni: this.fieldValue,
-            results: new Results,
-            showResults: false
+    computed : {
+        filteredOptions() {
+            return this.filterFunction(this.search, this.options)
         }
     },
     watch: {
-        omni: function (newOmni, oldOmni) {
-            if (newOmni.length == 0) {
-                this.results = new Results;
-            } else {
-                this.search();
+        search: function (newValue, oldValue) {
+            if (newValue.length > 2) {
+                this.filter(newValue);
             }
         }
     },
     methods: {
-        search: _.debounce(
-            function () {
-                let vm = this;
-                let config = {
-                    method: 'get',
-                    url: 'https://mothership.kerigan.com/api/v1/omnibar?search=' + this.omni,
-                };
-
-                this.results = [
-                    {text: 'Searching...'}
-                ];
-                axios(config)
-                    .then(response => {
-                        vm.results = response.data.results;
-                    })
-            },
-            250
-        ),
-        onFocus () {
-            this.showResults = true;
+        open() {
+            this.isOpen = true
+            this.$nextTick(() => {
+                this.$refs.search.focus()
+            })
         },
-        onResultsClick(value) {
-            this.omni = value;
-            this.showResults = false;
+        close() {
+            if (! this.isOpen) return
+            this.isOpen = false
+            this.$refs.button.focus();
         },
-        onBlur() {
-            let vm = this;
-            setTimeout(function(){
-                vm.showResults = false;
-            }, 200);
+        select(option) {
+            this.search = option
+            this.$emit('input', option)
+            this.close()
         },
-        tabPressed () {
-            this.omni = this.results[0].children[0].text;
+        filter(search) {
+            this.$emit('input', search)
+        },
+        toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt){
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
         }
     }
 }
 </script>
+
+<style scoped>
+.search-select {
+    position: relative;
+}
+.search-select-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-align: left;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    padding: 0.5rem 0.75rem;
+    background-color: #fff;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.search-select-input:focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
+  box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
+}
+.search-select-placeholder {
+  color: #8795a1;
+}
+.search-select.is-active .search-select-input {
+  -webkit-box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
+  box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
+}
+.search-select-dropdown {
+  margin: 0.25rem;
+  position: absolute;
+  right: 0;
+  left: 0;
+  background-color: #fff;
+  padding: 0.5rem;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+.search-select-search {
+  display: block;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background-color: #fff;
+  color: #2A2D2E;
+  border-radius: 0.25rem;
+}
+.search-select-search:focus {
+  outline: 0;
+}
+.search-select-options {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 14rem;
+}
+.search-select-option {
+  padding: 0.5rem 0.75rem;
+  color: #2A2D2E;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.search-select-option:hover {
+  background-color: #432021;
+  color: #fff;
+}
+.search-select-option.is-active,
+.search-select-option.is-active:hover {
+  background-color: #432021;
+  color: #fff;
+}
+.search-select-empty {
+  padding: 0.5rem 0.75rem;
+  color: #b8c2cc;
+}
+</style>
+
