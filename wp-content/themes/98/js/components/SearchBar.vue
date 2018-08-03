@@ -2,13 +2,14 @@
     <form class="navbar-form form-inline" method="get" >
         <input type="hidden" name="q" value="search" >
         <div class="row">
-            <omni-bar
-                class="col-sm-6 col-sm-6 col-lg-3"
-                v-model="omni"
-                :options="omniTerms"
-                :filter-function="applySearchFilter"
-            >
-            </omni-bar>
+            <div class="col-sm-6 col-sm-6 col-lg-3">
+            <label>Keyword</label>
+                <omni-bar
+                    v-model="omni"
+                    :options="omniTerms"
+                    :filter-function="applySearchFilter"
+                ></omni-bar>
+            </div>
             <div class="col-sm-6 col-lg-3">
                 <label>City / Area</label>
                 <area-field

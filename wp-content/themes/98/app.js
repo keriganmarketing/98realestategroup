@@ -17121,21 +17121,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {},
 
     data: function data() {
         return {
-            advancedSearch: false
+            advancedSearch: false,
+            omni: null,
+            omniTerms: [],
+            baseUrl: 'https://rafgc.kerigan.com/api/v1/omnibar'
         };
     },
 
 
+    watch: {
+        omni: function omni(newOmni, oldOmni) {
+            if (newOmni.length > 2) {
+                this.search();
+            }
+        }
+    },
+
     methods: {
         toggleAdvanced: function toggleAdvanced() {
             this.advancedSearch = !this.advancedSearch;
-        }
+        },
+        applySearchFilter: function applySearchFilter(search, omniTerms) {
+            return omniTerms.filter(function (term) {
+                return term.value.toLowerCase().startsWith(search.toLowerCase());
+            });
+        },
+
+        search: _.debounce(function () {
+            console.log(this.omni);
+            var vm = this;
+            var config = {
+                method: 'get',
+                url: vm.baseUrl + '?search=' + vm.omni
+            };
+            axios(config).then(function (response) {
+                vm.omniTerms = response.data;
+            });
+        }, 100)
     }
 });
 
@@ -17145,6 +17177,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -17730,7 +17763,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OnClickOutside_vue__ = __webpack_require__(400);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OnClickOutside_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__OnClickOutside_vue__);
-//
 //
 //
 //
@@ -26124,7 +26156,7 @@ exports.push([module.i, "\n.photo-gallery[data-v-02546d45] {\n    padding: 2rem 
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(133)();
-exports.push([module.i, "\n.search-select[data-v-84157a2e] {\r\n    position: relative;\n}\n.search-select-input[data-v-84157a2e] {\r\n    -webkit-appearance: none;\r\n    -moz-appearance: none;\r\n    appearance: none;\r\n    text-align: left;\r\n    display: block;\r\n    width: 100%;\r\n    border-width: 1px;\r\n    padding: 0.5rem 0.75rem;\r\n    background-color: #fff;\r\n    cursor: pointer;\r\n    -webkit-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\n}\n.search-select-input[data-v-84157a2e]:focus {\r\n  outline: 0;\r\n  -webkit-box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);\r\n          box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);\n}\n.search-select-placeholder[data-v-84157a2e] {\r\n  color: #8795a1;\n}\n.search-select.is-active .search-select-input[data-v-84157a2e] {\r\n  -webkit-box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);\r\n          box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);\n}\n.search-select-dropdown[data-v-84157a2e] {\r\n  margin: 0.25rem;\r\n  position: absolute;\r\n  right: 0;\r\n  left: 0;\r\n  background-color: #fff;\r\n  padding: 0.5rem;\r\n  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\r\n          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\r\n  z-index: 50;\n}\n.search-select-search[data-v-84157a2e] {\r\n  display: block;\r\n  margin-bottom: 0.5rem;\r\n  width: 100%;\r\n  padding: 0.5rem 0.75rem;\r\n  background-color: #fff;\r\n  color: #2A2D2E;\r\n  border-radius: 0.25rem;\n}\n.search-select-search[data-v-84157a2e]:focus {\r\n  outline: 0;\n}\n.search-select-options[data-v-84157a2e] {\r\n  list-style: none;\r\n  padding: 0;\r\n  position: relative;\r\n  overflow-y: auto;\r\n  -webkit-overflow-scrolling: touch;\r\n  max-height: 14rem;\n}\n.search-select-option[data-v-84157a2e] {\r\n  padding: 0.5rem 0.75rem;\r\n  color: #2A2D2E;\r\n  cursor: pointer;\r\n  border-radius: 0.25rem;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\n.search-select-option[data-v-84157a2e]:hover {\r\n  background-color: #432021;\r\n  color: #fff;\n}\n.search-select-option.is-active[data-v-84157a2e],\r\n.search-select-option.is-active[data-v-84157a2e]:hover {\r\n  background-color: #432021;\r\n  color: #fff;\n}\n.search-select-empty[data-v-84157a2e] {\r\n  padding: 0.5rem 0.75rem;\r\n  color: #b8c2cc;\n}\r\n", ""]);
+exports.push([module.i, "\n.search-select[data-v-84157a2e] {\r\n    position: relative;\n}\n.search-select-input[data-v-84157a2e] {\r\n    -webkit-appearance: none;\r\n    -moz-appearance: none;\r\n    appearance: none;\r\n    text-align: left;\r\n    display: block;\r\n    width: 100%;\r\n    border-width: 1px;\r\n    padding: 0.38rem 0.7rem;\r\n    background-color: #fff;\r\n    cursor: pointer;\r\n    -webkit-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n    border: 1px solid #ddd;\n}\n.search-select-input[data-v-84157a2e]:focus {\r\n  outline: 0;\r\n  -webkit-box-shadow: none;\r\n          box-shadow: none;\n}\n.search-select-placeholder[data-v-84157a2e] {\r\n  color: #8795a1;\n}\n.search-select.is-active .search-select-input[data-v-84157a2e] {\r\n  -webkit-box-shadow: none;\r\n          box-shadow: none;\n}\n.search-select-dropdown[data-v-84157a2e] {\r\n  position: absolute;\r\n  right: 0;\r\n  left: 0;\r\n  background-color: #fff;\r\n  padding: 0.5rem;\r\n  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\r\n          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\r\n  z-index: 50;\r\n  border: 1px solid #ddd;\n}\n.search-select-search[data-v-84157a2e] {\r\n  display: block;\r\n  margin-bottom: 0.5rem;\r\n  width: 100%;\r\n  padding: 0.38rem 0.7rem;\r\n  background-color: #fff;\r\n  color: #2A2D2E;\r\n  border-radius: 0;\r\n  border: 1px solid #ddd;\n}\n.search-select-search[data-v-84157a2e]:focus {\r\n  outline: 0;\n}\n.search-select-options[data-v-84157a2e] {\r\n  list-style: none;\r\n  padding: 0;\r\n  position: relative;\r\n  overflow-y: auto;\r\n  -webkit-overflow-scrolling: touch;\r\n  max-height: 14rem;\n}\n.search-select-option[data-v-84157a2e] {\r\n  padding: 0.5rem 0.75rem;\r\n  color: #2A2D2E;\r\n  cursor: pointer;\r\n  border-radius: 0.25rem;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\n.search-select-option[data-v-84157a2e]:hover {\r\n  background-color: #432021;\r\n  color: #fff;\n}\n.search-select-option.is-active[data-v-84157a2e],\r\n.search-select-option.is-active[data-v-84157a2e]:hover {\r\n  background-color: #432021;\r\n  color: #fff;\n}\n.search-select-empty[data-v-84157a2e] {\r\n  padding: 0.5rem 0.75rem;\r\n  color: #b8c2cc;\n}\r\n", ""]);
 
 /***/ }),
 /* 379 */
@@ -58321,8 +58353,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "row"
-  }, [_c('omni-bar', {
-    staticClass: "col-sm-6 col-sm-6 col-lg-3",
+  }, [_c('div', {
+    staticClass: "col-sm-6 col-sm-6 col-lg-3"
+  }, [_c('label', [_vm._v("Keyword")]), _vm._v(" "), _c('omni-bar', {
     attrs: {
       "options": _vm.omniTerms,
       "filter-function": _vm.applySearchFilter
@@ -58334,7 +58367,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "omni"
     }
-  }), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "col-sm-6 col-lg-3"
   }, [_c('label', [_vm._v("City / Area")]), _vm._v(" "), _c('area-field', {
     attrs: {
@@ -58365,7 +58398,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("Search")])])], 1), _vm._v(" "), (_vm.advancedOpen) ? _c('div', {
+  }, [_vm._v("Search")])])]), _vm._v(" "), (_vm.advancedOpen) ? _c('div', {
     staticClass: "advanced-menu row",
     attrs: {
       "id": "advanced-menu"
@@ -59147,7 +59180,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'is-active': _vm.isOpen
     }
-  }, [_c('label', [_vm._v("Keyword")]), _vm._v(" "), _c('button', {
+  }, [_c('button', {
     ref: "button",
     staticClass: "search-select-input",
     attrs: {
@@ -59158,7 +59191,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [(_vm.value !== null) ? _c('span', [_vm._v(_vm._s(_vm.toTitleCase(_vm.value)))]) : _c('span', {
     staticClass: "search-select-placeholder"
-  }, [_vm._v("Address / MLS# / Community")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Address/MLS#/Community")])]), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -59251,7 +59284,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container no-gutter"
   }, [_c('div', {
     staticClass: "row"
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-6 col-sm-6 col-lg-2"
+  }, [_c('omni-bar', {
+    attrs: {
+      "options": _vm.omniTerms,
+      "filter-function": _vm.applySearchFilter
+    },
+    model: {
+      value: (_vm.omni),
+      callback: function($$v) {
+        _vm.omni = $$v
+      },
+      expression: "omni"
+    }
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "col-sm-6 col-lg-2"
   }, [_c('area-field')], 1), _vm._v(" "), _c('div', {
     staticClass: "col-sm-6 col-lg-2"
@@ -59325,17 +59372,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('p', {
     staticClass: "search-form-label"
   }, [_vm._v("PROPERTY"), _c('br'), _vm._v("QUICK SEARCH")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-sm-6 col-sm-6 col-lg-2"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "name": "omni",
-      "placeholder": "Address, Subdivision or MLS#"
-    }
-  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {

@@ -7,7 +7,11 @@
                     <p class="search-form-label">PROPERTY<br>QUICK SEARCH</p>
                 </div>
                 <div class="col-sm-6 col-sm-6 col-lg-2">
-                    <input type="text" class="form-control" name="omni" placeholder="Address, Subdivision or MLS#" >
+                    <omni-bar
+                        v-model="omni"
+                        :options="omniTerms"
+                        :filter-function="applySearchFilter"
+                    ></omni-bar>
                 </div>
                 <div class="col-sm-6 col-lg-2">
                     <area-field></area-field>
@@ -94,14 +98,43 @@
 
         data() {
             return {
-                advancedSearch: false
+                advancedSearch: false,
+                omni: null,
+                omniTerms: [],
+                baseUrl: 'https://rafgc.kerigan.com/api/v1/omnibar'
+            }
+        },
+
+        watch: {
+            omni: function (newOmni, oldOmni) {
+                if (newOmni.length > 2) {
+                    this.search();
+                }
             }
         },
 
         methods: {
             toggleAdvanced(){
                 this.advancedSearch = !this.advancedSearch;
-            }
+            },
+            applySearchFilter(search, omniTerms) {
+                return omniTerms.filter(term => term.value.toLowerCase().startsWith(search.toLowerCase()))
+            },
+            search: _.debounce(
+                function () {
+                    console.log(this.omni);
+                    let vm = this;
+                    let config = {
+                        method: 'get',
+                        url: vm.baseUrl + '?search=' + vm.omni,
+                    };
+                    axios(config)
+                        .then(response => {
+                            vm.omniTerms = response.data;
+                        })
+                },
+                100
+            )
         }
     }
 </script>

@@ -1,7 +1,6 @@
 <template>
 <on-click-outside :do="close">
     <div class="search-select" :class="{ 'is-active': isOpen }">
-        <label>Keyword</label>
         <button
             ref="button"
             @click="open"
@@ -9,7 +8,7 @@
             class="search-select-input"
         >
             <span v-if="value !== null">{{ toTitleCase(value) }}</span>
-            <span v-else class="search-select-placeholder">Address / MLS# / Community</span>
+            <span v-else class="search-select-placeholder">Address/MLS#/Community</span>
         </button>
         <div ref="dropdown" v-show="isOpen" class="search-select-dropdown">
             <input
@@ -105,28 +104,28 @@ export default {
     display: block;
     width: 100%;
     border-width: 1px;
-    padding: 0.5rem 0.75rem;
+    padding: 0.38rem 0.7rem;
     background-color: #fff;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    border: 1px solid #ddd;
 }
 .search-select-input:focus {
   outline: 0;
-  -webkit-box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
-  box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .search-select-placeholder {
   color: #8795a1;
 }
 .search-select.is-active .search-select-input {
-  -webkit-box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
-  box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .search-select-dropdown {
-  margin: 0.25rem;
   position: absolute;
   right: 0;
   left: 0;
@@ -135,15 +134,17 @@ export default {
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   z-index: 50;
+  border: 1px solid #ddd;
 }
 .search-select-search {
   display: block;
   margin-bottom: 0.5rem;
   width: 100%;
-  padding: 0.5rem 0.75rem;
+  padding: 0.38rem 0.7rem;
   background-color: #fff;
   color: #2A2D2E;
-  border-radius: 0.25rem;
+  border-radius: 0;
+  border: 1px solid #ddd;
 }
 .search-select-search:focus {
   outline: 0;
