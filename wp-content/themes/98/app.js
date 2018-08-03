@@ -16965,6 +16965,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -16975,10 +16980,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         virtualTour: {
-            type: Array,
-            default: function _default() {
-                return [];
-            }
+            type: Object,
+            default: null
         }
     },
     data: function data() {
@@ -16989,13 +16992,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             galleryIsOpen: false,
             activePhoto: {},
             numPhotos: 0,
-            hasVirtualTour: false
+            hasVirtualTour: false,
+            tourOpen: false,
+            photoOpen: true
         };
     },
     mounted: function mounted() {
         this.photos = this.dataPhotos;
         this.numPhotos = this.photos.length;
-        if (this.virtualTour.url != null) {
+        if (this.virtualTour != null) {
             this.hasVirtualTour = true;
         }
     },
@@ -17010,6 +17015,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             //console.log(this.activePhoto);
         },
+        openTour: function openTour() {
+            this.tourOpen = true;
+            this.photoOpen = false;
+        },
+        closeTour: function closeTour() {
+            this.tourOpen = false;
+            this.photoOpen = true;
+        },
         closeViewer: function closeViewer() {
             this.galleryIsOpen = false;
             this.$root.modalOpen = false;
@@ -17018,11 +17031,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var newNum = index !== this.numPhotos - 1 ? index + 1 : 0;
             this.activePhoto = this.photos[newNum];
             this.activePhoto.index = newNum;
+            this.closeTour();
         },
         prevPhoto: function prevPhoto(index) {
             var newNum = index !== 0 ? index - 1 : this.numPhotos - 1;
             this.activePhoto = this.photos[newNum];
             this.activePhoto.index = newNum;
+            this.closeTour();
         }
     }
 });
@@ -57733,7 +57748,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-frame"
   }, [_c('div', {
     staticClass: "modal-container"
-  }, [_c('div', {
+  }, [(_vm.photoOpen) ? _c('div', {
     staticClass: "photo-container",
     staticStyle: {
       "height": "80vh",
@@ -57754,18 +57769,60 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": _vm.activePhoto.url,
       "alt": _vm.activePhoto.name
     }
-  })]), _vm._v(" "), (_vm.hasVirtualTour) ? _c('div', {
+  })]) : _vm._e(), _vm._v(" "), (_vm.tourOpen) ? _c('div', {
+    staticClass: "photo-container",
+    staticStyle: {
+      "height": "80vh",
+      "width": "100%",
+      "overflow": "hidden",
+      "padding": "1rem"
+    },
+    on: {
+      "click": function($event) {
+        _vm.closeViewer()
+      }
+    }
+  }, [_c('iframe', {
+    staticStyle: {
+      "overflow": "hidden"
+    },
+    attrs: {
+      "src": _vm.virtualTour.url,
+      "height": "100%",
+      "width": "100%",
+      "border": "0"
+    }
+  })]) : _vm._e(), _vm._v(" "), (_vm.hasVirtualTour) ? _c('div', {
     staticClass: "text-xs-center",
     staticStyle: {
       "height": "7vh"
     }
-  }, [_c('a', {
+  }, [(!_vm.tourOpen) ? _c('a', {
     staticClass: "btn btn-primary",
+    staticStyle: {
+      "color": "#FFF"
+    },
+    on: {
+      "click": _vm.openTour
+    }
+  }, [_vm._v("Open Virtual Tour")]) : _vm._e(), _vm._v(" "), (_vm.tourOpen) ? _c('a', {
+    staticClass: "btn btn-primary",
+    staticStyle: {
+      "color": "#FFF"
+    },
+    on: {
+      "click": _vm.closeTour
+    }
+  }, [_vm._v("Close Virtual Tour")]) : _vm._e(), _vm._v(" "), (_vm.tourOpen) ? _c('a', {
+    staticClass: "btn btn-primary",
+    staticStyle: {
+      "color": "#FFF"
+    },
     attrs: {
-      "href": _vm.virtualTour.url,
+      "src": _vm.virtualTour.url,
       "target": "_blank"
     }
-  }, [_vm._v("Open Virtual Tour")])]) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_vm._v("Open in new Tab")]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "text-xs-center",
     staticStyle: {
       "height": "7vh"
@@ -57777,7 +57834,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "click": function($event) {
-        _vm.prevPhoto(_vm.activePhoto.index)
+        _vm.prevPhoto(_vm.activePhoto.index);
       }
     }
   }, [_c('svg', {
@@ -57812,7 +57869,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "click": function($event) {
-        _vm.nextPhoto(_vm.activePhoto.index)
+        _vm.nextPhoto(_vm.activePhoto.index);
       }
     }
   }, [_c('svg', {

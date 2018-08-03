@@ -14,14 +14,19 @@
         <portal to="modal" >
             <div class="modal-frame"  v-if="galleryIsOpen" >
                 <div class="modal-container">
-                    <div class="photo-container" style="height: 80vh; overflow:hidden; padding:1rem;" @click="closeViewer()" >
+                    <div v-if="photoOpen" class="photo-container" style="height: 80vh; overflow:hidden; padding:1rem;" @click="closeViewer()" >
                         <img :src="activePhoto.url" :alt="activePhoto.name" style="max-width:100%;max-height:100%;" />
                     </div>
+                    <div v-if="tourOpen" class="photo-container" style="height: 80vh; width:100%; overflow:hidden; padding:1rem;" @click="closeViewer()" >
+                        <iframe :src="virtualTour.url" height="100%" width="100%" border="0" style="overflow:hidden;" ></iframe>
+                    </div>
                     <div v-if="hasVirtualTour" class="text-xs-center" style="height: 7vh;" >
-                        <a class="btn btn-primary" :href="virtualTour.url" target="_blank" >Open Virtual Tour</a>
+                        <a class="btn btn-primary" v-if="!tourOpen" style="color:#FFF;" @click="openTour" >Open Virtual Tour</a>
+                        <a class="btn btn-primary" v-if="tourOpen" style="color:#FFF;" @click="closeTour" >Close Virtual Tour</a>
+                        <a class="btn btn-primary" v-if="tourOpen" style="color:#FFF;" :src="virtualTour.url" target="_blank" >Open in new Tab</a>
                     </div>
                     <div class="text-xs-center" style="height: 7vh;" >
-                        <a class="dirbutton" style="margin: 0 1rem;" @click="prevPhoto(activePhoto.index)">
+                        <a class="dirbutton" style="margin: 0 1rem;" @click="prevPhoto(activePhoto.index);">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 viewBox="0 0 306 306" style="transform: rotate(180deg); height:30px; enable-background:new 0 0 306 306;"  xml:space="preserve">
                                 <polygon fill="#FFF" points="94.35,0 58.65,35.7 175.95,153 58.65,270.3 94.35,306 247.35,153"></polygon>
@@ -30,7 +35,7 @@
                         
                         <a @click="closeViewer" class="btn btn-info">close</a>
 
-                        <a class="dirbutton" style="margin: 0 1rem;" @click="nextPhoto(activePhoto.index)">
+                        <a class="dirbutton" style="margin: 0 1rem;" @click="nextPhoto(activePhoto.index);">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 viewBox="0 0 306 306" style="height:30px; enable-background:new 0 0 306 306;"  xml:space="preserve">
                                 <polygon fill="#FFF" points="94.35,0 58.65,35.7 175.95,153 58.65,270.3 94.35,306 247.35,153"></polygon>
@@ -51,8 +56,8 @@
                 default: () => []
             },
             virtualTour: {
-                type: Array,
-                default: () => []
+                type: Object,
+                default: null
             }
         },
         data () {
@@ -63,13 +68,15 @@
                 galleryIsOpen: false,
                 activePhoto: {},
                 numPhotos: 0,
-                hasVirtualTour: false
+                hasVirtualTour: false,
+                tourOpen: false,
+                photoOpen: true
             }
         },
         mounted () {
             this.photos = this.dataPhotos;
             this.numPhotos = this.photos.length;
-            if(this.virtualTour.url != null){
+            if(this.virtualTour != null){
                 this.hasVirtualTour = true;
             }
         },
@@ -83,6 +90,14 @@
 
                 //console.log(this.activePhoto);
             },
+            openTour(){
+                this.tourOpen = true;
+                this.photoOpen = false;
+            },
+            closeTour(){
+                this.tourOpen = false;
+                this.photoOpen = true;
+            },
             closeViewer(){
                 this.galleryIsOpen = false;
                 this.$root.modalOpen = false;
@@ -91,11 +106,13 @@
                 let newNum = (index !== this.numPhotos-1 ? index+1 : 0);
                 this.activePhoto = this.photos[newNum];
                 this.activePhoto.index = newNum;
+                this.closeTour();
             },
             prevPhoto(index){
                 let newNum = (index !== 0 ? index-1 : this.numPhotos-1);
                 this.activePhoto = this.photos[newNum];
                 this.activePhoto.index = newNum;
+                this.closeTour();
             }
         }
     }
