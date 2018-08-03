@@ -6401,6 +6401,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -47056,7 +47057,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "search",
     staticClass: "search-select-search",
     attrs: {
-      "name": "omni"
+      "name": "omni",
+      "autocomplete": "off"
     },
     domProps: {
       "value": (_vm.search)

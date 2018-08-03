@@ -18,6 +18,7 @@
                 name="omni"
                 v-model="search"
                 @keydown.esc="close"
+                autocomplete="off"
 
             >
             <ul ref="options" v-show="filteredOptions.length > 0" class="search-select-options">
