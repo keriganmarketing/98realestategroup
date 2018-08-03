@@ -5943,16 +5943,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         search: _.debounce(function () {
+            console.log(this.omni);
             var vm = this;
             var config = {
                 method: 'get',
-                url: this.baseUrl + '?search=' + this.omni
+                url: vm.baseUrl + '?search=' + vm.omni
             };
             axios(config).then(function (response) {
-                console.log(response);
                 vm.omniTerms = response.data;
             });
-        }, 250)
+        }, 100)
     }
 });
 
@@ -6441,9 +6441,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.isOpen = false;
             this.$refs.button.focus();
         },
-        select: function select(search) {
-            this.$emit('input', search);
-            this.search = '';
+        select: function select(option) {
+            this.search = option;
+            this.$emit('input', option);
             this.close();
         },
         filter: function filter(search) {
@@ -46213,12 +46213,109 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "omni"
     }
-  }), _vm._v(" "), _c('button', {
+  }), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-6 col-lg-3"
+  }, [_c('label', [_vm._v("City / Area")]), _vm._v(" "), _c('area-field', {
+    attrs: {
+      "field-value": _vm.searchTerms.area
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-6 col-lg-3"
+  }, [_c('label', [_vm._v("Property Type")]), _vm._v(" "), _c('property-type', {
+    attrs: {
+      "field-value": _vm.searchTerms.propertyType
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-6 col-lg-3"
+  }, [_c('label', {
+    staticClass: "col-xs-12"
+  }, [_vm._v(" ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary dropdown-toggle col-xs-8 col",
+    attrs: {
+      "type": "button",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    },
+    on: {
+      "click": _vm.toggleAdvanced
+    }
+  }, [_vm._v("Advanced Options")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-danger col-xs-4 col",
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("Search")])], 1)])
+  }, [_vm._v("Search")])])], 1), _vm._v(" "), (_vm.advancedOpen) ? _c('div', {
+    staticClass: "advanced-menu row",
+    attrs: {
+      "id": "advanced-menu"
+    }
+  }, [_c('div', {
+    staticClass: "col-lg-6 col-xl-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-6 col-xl-2"
+  }, [_c('min-price-field', {
+    staticClass: "mb-4",
+    attrs: {
+      "field-value": _vm.searchTerms.minPrice
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-6 col-xl-2"
+  }, [_c('max-price-field', {
+    staticClass: "mb-4",
+    attrs: {
+      "field-value": _vm.searchTerms.maxPrice
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-6 col-xl-2"
+  }, [_c('bedrooms-field', {
+    staticClass: "mb-4",
+    attrs: {
+      "field-value": _vm.searchTerms.beds
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-6 col-xl-2"
+  }, [_c('bathrooms-field', {
+    staticClass: "mb-4",
+    attrs: {
+      "field-value": _vm.searchTerms.baths
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-6 col-xl-2"
+  }, [_c('sqft-field', {
+    staticClass: "mb-4",
+    attrs: {
+      "field-value": _vm.searchTerms.sqft
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-6 col-xl-2"
+  }, [_c('acreage-field', {
+    staticClass: "mb-4",
+    attrs: {
+      "field-value": _vm.searchTerms.acreage
+    }
+  })], 1)])]), _vm._v(" "), _c('div', {
+    staticClass: "col-lg-6 col-xl-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 col-md-6 col-lg-12 col-xl-6"
+  }, [_c('status-field', {
+    staticClass: "mb-6",
+    attrs: {
+      "search-terms": _vm.searchTerms.status
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-6 col-lg-12 col-xl-6"
+  }, [_c('details-field', {
+    staticClass: "mb-6",
+    attrs: {
+      "data-waterfront": _vm.searchTerms.waterfront,
+      "data-waterview": _vm.searchTerms.waterview,
+      "data-foreclosures": _vm.searchTerms.foreclosures
+    }
+  })], 1)])])]) : _vm._e()])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

@@ -75,9 +75,9 @@ export default {
             this.isOpen = false
             this.$refs.button.focus();
         },
-        select(search) {
-            this.$emit('input', search)
-            this.search = ''
+        select(option) {
+            this.search = option
+            this.$emit('input', option)
             this.close()
         },
         filter(search) {

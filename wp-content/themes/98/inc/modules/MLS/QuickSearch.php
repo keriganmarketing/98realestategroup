@@ -46,13 +46,6 @@ class QuickSearch
             $this->searchRequested = [];
         }
 
-        // if(empty($this->searchParams)) {
-        //     $this->searchParams = [
-        //         'omni' => 'Mexico Beach',
-        //         'minPrice' => 200000,
-        //     ];
-        // }
-
         $this->contactTheMothership();
     }
 

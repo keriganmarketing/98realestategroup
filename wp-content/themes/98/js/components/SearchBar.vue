@@ -9,7 +9,7 @@
                 :filter-function="applySearchFilter"
             >
             </omni-bar>
-            <!-- <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-3">
                 <label>City / Area</label>
                 <area-field
                     :field-value="searchTerms.area"
@@ -31,11 +31,11 @@
                     class="btn btn-primary dropdown-toggle col-xs-8 col"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    >Advanced Options</button> -->
+                    >Advanced Options</button>
                 <button type="submit" class="btn btn-danger col-xs-4 col">Search</button>
             </div>
         </div>
-        <!-- <div v-if="advancedOpen" id="advanced-menu" class="advanced-menu row">
+        <div v-if="advancedOpen" id="advanced-menu" class="advanced-menu row">
             <div class="col-lg-6 col-xl-12">
 
                 <div class="row">
@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </form>
 </template>
 
@@ -162,18 +162,18 @@
             },
             search: _.debounce(
                 function () {
+                    console.log(this.omni);
                     let vm = this;
                     let config = {
                         method: 'get',
-                        url: this.baseUrl + '?search=' +this.omni,
+                        url: vm.baseUrl + '?search=' + vm.omni,
                     };
                     axios(config)
                         .then(response => {
-                            console.log(response);
                             vm.omniTerms = response.data;
                         })
                 },
-                250
+                100
             )
         }
     }
