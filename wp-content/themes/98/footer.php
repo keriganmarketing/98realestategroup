@@ -66,9 +66,8 @@
 			</div>
 		</div>
 	</div>
-
+	<portal-target name="modal"></portal-target>
 </div>
-
 <?php wp_footer(); ?>
 
 </body>

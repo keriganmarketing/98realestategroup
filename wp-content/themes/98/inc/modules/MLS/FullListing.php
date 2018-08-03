@@ -14,7 +14,7 @@ class FullListing
      */
     public function __construct()
     {
-        $this->mlsNumber = $this->getMlsNumber();
+        $this->getMlsNumber();
         $this->create();
         $this->setListingSeo();
     }
@@ -26,8 +26,8 @@ class FullListing
 
     public function getMlsNumber()
     {
-        $pathFragments = explode('/',$_SERVER['REQUEST_URI']);
-        return end(array_filter($pathFragments, function($value) { return $value !== ''; }));
+        $pathFragments = explode('listing/',$_SERVER['REQUEST_URI']);
+        $this->mlsNumber = str_replace('/','',end($pathFragments));
     }
 
     public function create()
@@ -37,7 +37,7 @@ class FullListing
             'GET', 'listing/' . $this->mlsNumber
         );
 
-        $results = json_decode($raw->getBody());
+        $results = json_decode($apiCall->getBody());
         $this->listingInfo = $results;
 
         return $results;
@@ -67,5 +67,21 @@ class FullListing
         add_filter('wpseo_opengraph_url', function ($ogUrl) {
             return get_the_permalink() . '?mls=' . $this->listingInfo->mls_account;
         }, 100, 1);
+    }
+
+    public function assembleMedia()
+    {
+        $media  = $this->listingInfo->media_objects->data;
+        $return = [ 'photos','vtours','docs','files','links'];
+    
+        foreach($media as $var){
+            if($var->media_type == 'Photo'){ $return['photos'][] = $var; } 
+            if($var->media_type == 'Virtual Tour'){ $return['vtours'][] = $var; }
+            if($var->media_type == 'Faxed in Documents'){ $return['docs'][] = $var; }
+            if($var->media_type == 'File'){ $return['files'][] = $var; }
+            if($var->media_type == 'Hyperlink'){ $return['links'][] = $var; }
+        }
+
+        return $return;
     }
 }

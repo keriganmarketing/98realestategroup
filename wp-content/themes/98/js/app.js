@@ -21,6 +21,9 @@ require('bootstrap');
 
 require('./load-components');
 
+import PortalVue from 'portal-vue'
+Vue.use(PortalVue)
+
 let app = new Vue({
 
     el: '#page',
