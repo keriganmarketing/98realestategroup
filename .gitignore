@@ -8,8 +8,6 @@ tags/
 **/cachecd
 # Untracked prod/dev files
 wp-config.php
-wp-content/themes/98/vendor/
-wp-content/themes/98/node_modules/
 
 # Untracked prod files
 # wp-content/uploads/**
