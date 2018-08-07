@@ -816,6 +816,11 @@ a.favorite {
     padding: 0 2px 1px;
     border-radius: 0 0 5px 5px;
     background-color: rgba(0,0,0,.2);
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(0,0,0,.5);
+    }
 }
 
 a.favorite path {
@@ -836,7 +841,9 @@ a.favorite:hover path {
     background-color: rgba(0,0,0,.5);
     color: #FFF;
     font-size: .9em;
-   text-transform: uppercase;
+    text-transform: uppercase;
+    text-align: left;
+    border-radius: 0 4px 4px 0;
 }
 
 span.icon img {

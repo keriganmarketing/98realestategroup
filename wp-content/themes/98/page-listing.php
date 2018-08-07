@@ -21,7 +21,7 @@ $fullListing =  new FullListing();
 $listing      = $fullListing->getListingInfo();
 $favorite     = new Favorites();
 $current_user = wp_get_current_user();
-$isFav        = $favorite->checkFavorites( $listing->mls_account );
+$isFav        = $favorite->checkFavorites( $listing->mls_account, $current_user->ID );
 $media        = $fullListing->getMedia();
 $photos       = $media['photos'];
 $tour         = (isset($media['vtours']) ? $media['vtours'][0] : null);
@@ -33,7 +33,7 @@ $address      = $listing->street_num . ' ' . $listing->street_name . ' ' . $list
 $team = new Team();
 $agent = $team->getAgentByMLS($listing->listing_agent);
 
-// echo '<pre>',print_r($listing),'</pre>';
+//  echo '<pre>',print_r($current_user),'</pre>';
 
 get_header(); ?>
 
@@ -79,14 +79,14 @@ get_header(); ?>
 										<button type="submit" class="btn btn-primary" >Request Info</button>
 
 										<?php if ($current_user->ID != 0){ ?>
-											<?php if ( $isFav ){ ?>
-												<a href="?defav=<?php echo $listing->mls_account; ?>&referral=true" class="btn btn-primary"><img src="<?php echo get_template_directory_uri() . '/img/stared.svg'; ?>" alt="save to favorites" style="width: 20px; vertical-align: sub; margin: 0 3px 0 0;"> Remove from favorites</a>
-												<?php }else{ ?>
-												<a href="?fav=<?php echo $listing->mls_account; ?>&referral=true" class="btn btn-danger"><img src="<?php echo get_template_directory_uri() . '/img/star.svg'; ?>" alt="save to favorites" style="width: 20px; vertical-align: sub; margin: 0 3px 0 0;"> Save to favorites</a>
-											<?php } ?>
+											<favorite-button 
+												:icon-only="false"
+												:is-fav="<?php echo ($isFav == 1 ? true : 0); ?>" 
+												:mls-number="<?php echo $listing->mls_account; ?>"
+												:user-id="<?php echo $current_user->ID; ?>" >
+											</favorite-button>
 										<?php }else{
-											$redirect_to = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-											?>
+											$redirect_to = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
 											<a href="/sign-in?redirect_to=<?php echo $redirect_to; ?>" class="btn btn-danger">Sign in to save this property</a>
 										<?php } ?>
 

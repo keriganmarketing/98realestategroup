@@ -60,11 +60,6 @@ class MapSearch
         return json_encode($this->searchResults->data);
     }
 
-    public function getResultMeta()
-    {
-        return isset($this->searchResults->meta->pagination) ? $this->searchResults->meta->pagination : null;
-    }
-
     public function getCurrentRequest()
     {
         return json_encode($this->searchParams);
@@ -105,14 +100,16 @@ class MapSearch
             }
         }
 
-        return $request . '&page=' . get_query_var( 'page' );
+        echo $request;
+
+        return $request;
     }
 
     public function contactTheMothership()
     {
         $client     = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
         $apiCall = $client->request(
-            'GET', 'map-search' . $this->makeRequest() . '&page=' . get_query_var( 'page' )
+            'GET', 'map-search' . $this->makeRequest()
         );
 
         $this->searchResults = json_decode($apiCall->getBody());

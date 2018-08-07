@@ -58,8 +58,8 @@
                 default: null
             },
             itemClass: {
-                type: Array,
-                default: () => []
+                type: String,
+                default: ''
             }
         },
         data () {

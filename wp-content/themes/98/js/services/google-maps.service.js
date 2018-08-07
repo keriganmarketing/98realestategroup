@@ -100,7 +100,7 @@ export default class GoogleMap {
 
         for (let i = 0; i < markers.length; i++) {
 
-            let latLng = new google.maps.LatLng(markers[i].location.lat, markers[i].location.long)
+            let latLng = new google.maps.LatLng(markers[i].lat, markers[i].long)
             if (bounds.contains(latLng)) {
                 let listingClass = 'RES';
                 let marker = new google.maps.Marker({

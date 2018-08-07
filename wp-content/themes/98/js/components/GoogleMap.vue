@@ -43,8 +43,7 @@ import GoogleMap from '../services/google-maps.service.js';
                 selectedProperty: {},
                 searchData: {},
                 params: '',
-                errors: [],
-                pins: []
+                errors: []
             }
         },
         mounted () {
@@ -116,9 +115,13 @@ import GoogleMap from '../services/google-maps.service.js';
 
                 axios.get("https://rafgc.kerigan.com/api/v1/map-search" + request)
                 .then(response => {
-                    vm.config.markers = response.data.data;
+                    response.data.data.forEach(pin => {
+                        if(pin.long < -85.042914){
+                            vm.config.markers.push(pin);
+                        }
+                    })
+                    // vm.config.markers = response.data.data;
                     vm.renderMap();
-                    this.pins = response.data.data; 
                 })
                 .catch(e => {
                     this.errors.push(e)

@@ -1,4 +1,6 @@
 <?php
+use Includes\Modules\Team\Team;
+use Includes\Modules\MLS\Favorites;
 
 if(date('Ymd', strtotime($listing->list_date)) >= date('Ymd', strtotime('-10 days'))){
     $isNew = TRUE;
@@ -6,11 +8,21 @@ if(date('Ymd', strtotime($listing->list_date)) >= date('Ymd', strtotime('-10 day
     $isNew = FALSE;
 }
 
+$favorite     = new Favorites();
+$current_user = wp_get_current_user();
+$isFav        = $favorite->checkFavorites( $listing->mls_account, $current_user->ID );
+
 $photos = $listing->media_objects->data;
 $preferredPhoto = ($photos[0]->media_type = 'Photo' ? $photos[0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
 
 ?>
 <div class="feat-prop-container">    
+    <favorite-button 
+        :icon-only="true"
+        :is-fav="<?php echo ($isFav == 1 ? true : 0); ?>" 
+        :mls-number="<?php echo $listing->mls_account; ?>"
+        :user-id="<?php echo $current_user->ID; ?>" >
+    </favorite-button>
     <a class="listing-link" href="/listing/<?php echo $listing->mls_account; ?>"></a>
     <div class="embed-responsive embed-responsive-16by9">
         <div class="feat-prop-photo">
@@ -18,7 +30,7 @@ $preferredPhoto = ($photos[0]->media_type = 'Photo' ? $photos[0]->url : get_temp
                 <span class="status-flag just-listed">Just Listed</span>
             <?php } ?>
             <?php if ( $listing->status == 'Sold' ) { ?>
-                <span class="status-flag sold">Sold on <?php echo date( 'M j, Y', strtotime( $listing->sold_on ) ); ?>
+                <span class="status-flag sold">Sold on <?php echo date( 'M j, Y', strtotime( $listing->sold_on ) ); ?><br>
                     for $<?php echo number_format( $listing->sold_for ); ?></span>
             <?php } ?>
             <?php if ( $listing->status == 'Pending' ) { ?>
@@ -66,7 +78,7 @@ $preferredPhoto = ($photos[0]->media_type = 'Photo' ? $photos[0]->url : get_temp
                         <span class="icon"><img src="<?php echo get_template_directory_uri() . '/img/sqft.svg'; ?>" alt="sqft"
                                                 class="img-responsive lazy"></span>
                         <span class="sqft-num icon-data"><?php echo number_format( $listing->total_hc_sqft ); ?></span>
-                        <span class="icon-label">H/C SQFT</span>
+                        <span class="icon-label">SQFT</span>
                     </div>
                     <div class="col-xs-3 text-xs-center">
                         <span class="icon"><img src="<?php echo get_template_directory_uri() . '/img/lotsize.svg'; ?>" alt="lot size"

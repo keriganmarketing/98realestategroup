@@ -42,7 +42,6 @@
 				<div class="col-xs-12 col-sm-4">
 					<div class="social">
 					<?php
-						//print_r(getSocialLinks());
 						$socialLinks = getSocialLinks();
 						foreach($socialLinks as $socialId => $socialLink){
 							echo '<a class="'.$socialId.'" href="'.$socialLink.'" target="_blank" ></a>';

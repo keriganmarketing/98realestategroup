@@ -18,12 +18,15 @@ $sessionAgent = (isset($_SESSION['agent_override']) ? $_SESSION['agent_override'
 $overrideFields = (isset($sessionAgent) && $sessionAgent != '' ? true : false);
 
 //IS USER LOGGED IN?
-$currentUser = get_user_meta( get_current_user_id() );
-$currentUserInfo = get_userdata( get_current_user_id() );
+$currentUser            = get_user_meta( get_current_user_id() );
+$currentUserInfo        = get_userdata( get_current_user_id() );
 $yourname               = ($currentUser['first_name'][0] != '' ? $currentUser['first_name'][0] : $yourname);
 $yourname               = ($currentUser['last_name'][0] != '' ? $yourname.' '.$currentUser['last_name'][0] : $yourname);
 $youremail              = (isset($currentUserInfo->user_email) ? $currentUserInfo->user_email : $youremail);
 $phone                  = (isset($currentUser['phone1'][0]) ? $currentUser['phone1'][0] : $phone);
+
+echo '<pre>',print_r($currentUser),'</pre>';
+echo '<pre>',print_r($currentUserInfo),'</pre>';
 
 $selectedAgent = (isset($currentUser['selected_agent'][0]) ? $currentUser['selected_agent'][0] : null); //get agent from user data.
 $selectedAgent = (isset($_GET['selected_agent']) ? $_GET['selected_agent'] : $selectedAgent ); //IF GET, then override.
@@ -68,16 +71,16 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
     <div class="col-sm-6"> 
 		<div class="form-group">
 			<label>NAME<span class="req">*</span></label>
-			<input name="full_name" type="text" class="form-control" value="" required>
+			<input name="full_name" type="text" class="form-control" value="<?php echo $yourname; ?>" required>
 		</div> 
         <div class="form-group">      
             <label>EMAIL ADDRESS<span class="req">*</span></label>
-            <input name="email_address" type="email" class="form-control" value="" required>
+            <input name="email_address" type="email" class="form-control" value="<?php echo $youremail; ?>" required>
         </div> 
         <div class="form-group"> 
             <label>PHONE*</label>
             <div class="phone-group">
-                <input type="tel" name="phone_number" class="form-control" value="<?php echo (!$passCheck ? $phone : ''); ?>" placeholder="Phone Number" >
+                <input type="tel" name="phone_number" class="form-control" value="<?php echo $phone; ?>" placeholder="(850) ###-####" >
             </div>
         </div> 
         <div class="form-group">    			

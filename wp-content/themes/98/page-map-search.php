@@ -19,7 +19,6 @@ use function GuzzleHttp\json_encode;
 $listings       = new MapSearch();
 $searchResults  = $listings->getSearchResults();
 $currentRequest = $listings->getCurrentRequest();
-$resultMeta     = $listings->getResultMeta();
 get_header(); 
 ?>
 <div id="mid">

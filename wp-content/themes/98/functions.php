@@ -11,6 +11,7 @@ use Includes\Modules\Team\Team;
 use Includes\Modules\Leads\Leads;
 use Includes\Modules\Helpers\CleanWP;
 use Includes\Modules\MLS\FeaturedProperties;
+use Includes\Modules\MLS\Favorites;
 
 require('vendor/autoload.php');
 
@@ -20,6 +21,10 @@ $team = new Team();
 $team->setupAdmin();
 
 new FeaturedProperties;
+
+$favorites = new Favorites;
+$favorites->setupAdmin();
+$favorites->addRoutes();
 
 if ( ! function_exists( 'ninetyeight_setup' ) ) :
 /**
@@ -456,3 +461,19 @@ add_filter( 'views_edit-lead', 'removeActionLinks' );
 add_filter( 'views_edit-favorite', 'removeActionLinks' );
 add_filter( 'views_edit-search', 'removeActionLinks' );
 add_filter( 'views_edit-agent', 'removeActionLinks' );
+
+// [getfavorites num="" ]
+function getfavorites_func( $atts, $content = null ) {
+    $favorites = new Favorites();
+    $listings = $favorites->getfavorites();
+    ?>
+    <div class="row justify-content-center align-items-center text-center">
+        <?php foreach($listings as $listing){ ?>
+            <div class="feat-prop col-md-6 col-xl-3 text-center">
+                <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
+            </div>
+        <?php } ?>
+    </div>
+    <?php
+}
+add_shortcode( 'getfavorites', 'getfavorites_func' );

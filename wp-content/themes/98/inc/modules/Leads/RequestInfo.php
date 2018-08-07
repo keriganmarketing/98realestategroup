@@ -78,8 +78,8 @@ class RequestInfo extends Leads
         parent::sendEmail(
             [
                 'to'        => $this->adminEmail,
-                'from'      => $this->siteName . ' <noreply@' . $this->domain . '>',
-                'subject'   => $this->postType . ' from website',
+                'from'      => get_bloginfo().' <noreply@98realestategroup.com>',
+                'subject'   => 'You have received a new lead from the website',
                 'cc'        => $this->ccEmail,
                 'bcc'       => $this->bccEmail,
                 'replyto'   => $fullName . '<' . $emailAddress . '>',

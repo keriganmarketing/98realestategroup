@@ -17,3 +17,4 @@ Vue.component('filter-form', require('./components/FilterForm.vue'));
 Vue.component('photo-gallery', require('./components/PhotoGallery.vue'));
 Vue.component('google-map', require('./components/GoogleMap.vue'));
 Vue.component('mini-listing', require('./components/MiniListing.vue'));
+Vue.component('favorite-button', require('./components/FavoriteButton.vue'));

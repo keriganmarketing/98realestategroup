@@ -4,7 +4,6 @@ use Includes\Modules\MLS\FeaturedProperties;
 
 $featuredProperties = new FeaturedProperties();
 $listings = $featuredProperties->getFeaturedProp();
-//echo '<pre>',print_r($listings),'</pre>';
 
 $tendaysago = strtotime('-10 days');
 $tendaysago = date('Y-m-d',$tendaysago);
@@ -19,6 +18,7 @@ $tendaysago = date('Y-m-d',$tendaysago);
                 <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
             </div>
         <?php } ?>
+        
         </div>
         <p class="text-xs-center"><a href="/properties" class="btn btn-danger btn-lg"  >ALL PROPERTIES</a></p>
     </div>

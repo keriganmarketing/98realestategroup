@@ -18,11 +18,10 @@ require('bootstrap');
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-
 require('./load-components');
 
-import PortalVue from 'portal-vue'
-Vue.use(PortalVue)
+import PortalVue from 'portal-vue';
+Vue.use(PortalVue);
 
 let app = new Vue({
 
