@@ -1,34 +1,4 @@
 
-# BEGIN WordPress
-<IfModule mod_rewrite.c>
-
-RewriteEngine On
-RewriteBase /
-
-#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/mls.cfm\?action=resdetails&mls=([^&\s]+) [NC]
-#RewriteRule ^ /listing/%1? [NE,NC,R,L]
-
-#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/mls.cfm\?action=comdetails&mls=([^&\s]+) [NC]
-#RewriteRule ^ /listing/%1? [NE,NC,R,L]
-
-#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/mls.cfm\?action=landdetails&mls=([^&\s]+) [NC]
-#RewriteRule ^ /listing/%1? [NE,NC,R,L]
-
-#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/mls.cfm\?action=search_res&ftr_waterfront=Gulf%20Front [NC]
-#RewriteRule ^ /properties/beachfront-properties/? [NE,NC,R,L]
-
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
-
-</IfModule>
-
-<IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin *
-</IfModule>
-
-# END WordPress
 
 <ifModule mod_gzip.c>
     mod_gzip_on Yes
@@ -111,3 +81,38 @@ redirect 301 /properties-98-sold.cfm http://www.98realestategroup.com/properties
 redirect 301 /photoalbum.cfm http://www.98realestategroup.com/98-real-estate-photos/
 redirect 301 /gollywhopper.cfm http://www.thegollywhopper.com/
 redirect 301 /gollywhopper http://www.thegollywhopper.com/
+
+#SITEGUARD_PLUGIN_SETTINGS_START
+#SITEGUARD_PLUGIN_SETTINGS_END
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+RewriteBase /
+
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/mls.cfm\?action=resdetails&mls=([^&\s]+) [NC]
+#RewriteRule ^ /listing/%1? [NE,NC,R,L]
+
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/mls.cfm\?action=comdetails&mls=([^&\s]+) [NC]
+#RewriteRule ^ /listing/%1? [NE,NC,R,L]
+
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/mls.cfm\?action=landdetails&mls=([^&\s]+) [NC]
+#RewriteRule ^ /listing/%1? [NE,NC,R,L]
+
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/mls.cfm\?action=search_res&ftr_waterfront=Gulf%20Front [NC]
+#RewriteRule ^ /properties/beachfront-properties/? [NE,NC,R,L]
+
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin *
+</IfModule>
+
+# END WordPress
+
