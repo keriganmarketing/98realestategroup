@@ -8,6 +8,7 @@
                     v-model="omni"
                     :options="omniTerms"
                     :filter-function="applySearchFilter"
+                    :field-value="searchTerms.omni"
                 ></omni-bar>
             </div>
             <div class="col-sm-6 col-lg-3">
@@ -110,30 +111,7 @@
 
 <script>
     export default {
-        props: {
-            searchTerms: {
-                type: Object,
-                default: () => {
-                    return {
-                        omni: '',
-                        area: 'Mexico Beach',
-                        propertyType: 'Single Family Home',
-                        minPrice: '200000',
-                        maxPrice: '',
-                        sqft: '',
-                        acreage: '',
-                        status: ['active'],
-                        details: [],
-                        beds: '',
-                        baths: '',
-                        waterfront: '',
-                        waterview: '',
-                        foreclosure: '',
-                        page: 1
-                    }
-                }
-            }
-        },
+        props: ['searchTerms'],
         data(){
             return {
                 omni: null,

@@ -33305,7 +33305,7 @@ var GoogleMap = function () {
             });
 
             mapData.markerClusterer = new __WEBPACK_IMPORTED_MODULE_1_marker_clusterer_plus___default.a(mapData.map, this.visibleMarkers, {
-                maxZoom: 17,
+                maxZoom: 15,
                 gridSize: 80,
                 ignoreHidden: true,
                 styles: [{
@@ -34221,32 +34221,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        searchTerms: {
-            type: Object,
-            default: function _default() {
-                return {
-                    omni: '',
-                    area: 'Mexico Beach',
-                    propertyType: 'Single Family Home',
-                    minPrice: '200000',
-                    maxPrice: '',
-                    sqft: '',
-                    acreage: '',
-                    status: ['active'],
-                    details: [],
-                    beds: '',
-                    baths: '',
-                    waterfront: '',
-                    waterview: '',
-                    foreclosure: '',
-                    page: 1
-                };
-            }
-        }
-    },
+    props: ['searchTerms'],
     data: function data() {
         return {
             omni: null,
@@ -34743,12 +34721,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         OnClickOutside: __WEBPACK_IMPORTED_MODULE_0__OnClickOutside_vue___default.a
     },
-    props: ['value', 'options', 'filterFunction'],
+    props: ['value', 'options', 'filterFunction', 'fieldValue'],
     data: function data() {
         return {
             isOpen: false,
             search: ''
         };
+    },
+    mounted: function mounted() {
+        if (this.fieldValue !== '') {
+            this.select(this.fieldValue);
+        }
     },
 
     computed: {
@@ -77610,7 +77593,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', [_vm._v("Keyword")]), _vm._v(" "), _c('omni-bar', {
     attrs: {
       "options": _vm.omniTerms,
-      "filter-function": _vm.applySearchFilter
+      "filter-function": _vm.applySearchFilter,
+      "field-value": _vm.searchTerms.omni
     },
     model: {
       value: (_vm.omni),

@@ -41,7 +41,7 @@ export default class GoogleMap {
             mapData.map,
             this.visibleMarkers,
             {
-                maxZoom: 17,
+                maxZoom: 15,
                 gridSize: 80,
                 ignoreHidden: true,
                 styles: [{

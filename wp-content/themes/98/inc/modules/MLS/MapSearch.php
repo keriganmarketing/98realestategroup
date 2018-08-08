@@ -36,7 +36,8 @@ class MapSearch
             'page'
         ];
         $this->searchParams = [
-            'status' => 'Active'
+            'omni'   => '',
+            'status' => ['active' => 'Active']
         ];
         $this->searchResults = [];
         $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);

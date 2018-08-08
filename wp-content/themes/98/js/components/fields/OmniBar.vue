@@ -44,11 +44,16 @@ export default {
     components: {
         OnClickOutside
     },
-    props: ['value', 'options', 'filterFunction'],
+    props: ['value', 'options', 'filterFunction','fieldValue'],
     data() {
         return {
             isOpen: false,
             search: '',
+        }
+    },
+    mounted(){
+        if(this.fieldValue !== '') {
+            this.select(this.fieldValue);
         }
     },
     computed : {
