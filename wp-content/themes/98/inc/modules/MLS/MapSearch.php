@@ -100,8 +100,6 @@ class MapSearch
             }
         }
 
-        echo $request;
-
         return $request;
     }
 

@@ -110,12 +110,22 @@ import GoogleMap from '../services/google-maps.service.js';
                 let request = '?q=search';
 
                 Object.keys(this.searchTerms).forEach(key => {
-                    if (this.searchTerms[key] !== 'Any'){
-                        request += '&' + key + '=' + this.searchTerms[key];
+                    if (this.searchTerms[key] !== 'Any' && this.searchTerms[key] !== ''){
+                        if(typeof this.searchTerms[key] === 'object'){
+                            request += '&' + key + '=';
+                            Object.keys(this.searchTerms[key]).forEach(k => {
+                                request += this.searchTerms[key][k] + '|';
+                            });
+                        }else{
+                            request += '&' + key + '=' + this.searchTerms[key];
+                        }
                     }
                 });
 
-                axios.get("https://rafgc.kerigan.com/api/v1/map-search" + request)
+                let endpoint = "https://rafgc.kerigan.com/api/v1/map-search" + request
+                console.log(endpoint);
+
+                axios.get(endpoint)
                 .then(response => {
                     response.data.data.forEach(pin => {
                         if(pin.long < -85.042914){
