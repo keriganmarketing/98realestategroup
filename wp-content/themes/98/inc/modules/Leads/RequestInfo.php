@@ -29,8 +29,8 @@ class RequestInfo extends Leads
 
         $agent = new Team();
         $agentInfo = $agent->assembleAgentData($dataSubmitted['selected_agent']);
-        //parent::set('adminEmail', (isset($agentInfo['email_address']) && $agentInfo['email_address'] != '' ? $agentInfo['email_address'] : $this->adminEmail));
-        parent::set('adminEmail', 'bryan@kerigan.com');
+        parent::set('adminEmail', (isset($agentInfo['email_address']) && $agentInfo['email_address'] != '' ? $agentInfo['email_address'] : $this->adminEmail));
+        //parent::set('adminEmail', 'bryan@kerigan.com');
 
         parent::addToDashboard($dataSubmitted);
         if(parent::validateSubmission($dataSubmitted)){
