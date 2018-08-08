@@ -11,6 +11,7 @@
                         v-model="omni"
                         :options="omniTerms"
                         :filter-function="applySearchFilter"
+                        field-value=""
                     ></omni-bar>
                 </div>
                 <div class="col-sm-6 col-lg-2">
