@@ -2,7 +2,7 @@
     <div class="google-map" style="display:flex; width:100%; flex-wrap: wrap" >
         <div ref="map" class="col-xs-12 col-md-9 col-lg-10" style="min-height: 600px; flex-grow:1" ></div>
         <div v-if="propOpen" class="col-xs-12 col-md-3 col-lg-2">
-            <mini-listing :listingData="selectedProperty" ></mini-listing>
+            <mini-listing :listingData="selectedProperty"></mini-listing>
         </div>
     </div>
 </template>
@@ -96,7 +96,7 @@ import GoogleMap from '../services/google-maps.service.js';
                     .then(rendered => {
                         vm.renderedMap = rendered;
                         window.addEventListener('marker_updated', function (event) {
-                            vm.getProperty(event.detail.mls_account)
+                            vm.getProperty(event.detail.mls_acct)
                         });
                     });
             },
@@ -110,7 +110,9 @@ import GoogleMap from '../services/google-maps.service.js';
                 let request = '?q=search';
 
                 Object.keys(this.searchTerms).forEach(key => {
-                    request += '&' + key + '=' + this.searchTerms[key];
+                    if (this.searchTerms[key] !== 'Any'){
+                        request += '&' + key + '=' + this.searchTerms[key];
+                    }
                 });
 
                 axios.get("https://rafgc.kerigan.com/api/v1/map-search" + request)
