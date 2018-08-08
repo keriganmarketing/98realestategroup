@@ -15,6 +15,7 @@ class CuratedResults {
     {
         $this->searchResults   = [];
         $this->searchParams    = [
+            'omni'   => '',
             'sort' => 'date_modified|desc'
         ];
     }

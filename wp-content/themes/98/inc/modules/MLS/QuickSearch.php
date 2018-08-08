@@ -36,6 +36,7 @@ class QuickSearch
             'page'
         ];
         $this->searchParams = [
+            'omni'   => '',
             'sort' => 'date_modified|desc'
         ];
         $this->searchResults = [];
