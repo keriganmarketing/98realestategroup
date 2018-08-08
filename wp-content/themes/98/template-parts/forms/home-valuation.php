@@ -12,9 +12,6 @@ $mlsnumber           = (isset($_GET['mls_number']) ? $_GET['mls_number'] : '');
 $agentOptions        = '';
 $listing_state       = '';
 
-$sessionAgent = (isset($_SESSION['agent_override']) ? $_SESSION['agent_override'] : null);
-$overrideFields = (isset($sessionAgent) && $sessionAgent != '' ? true : false);
-
 //IS USER LOGGED IN?
 $currentUser     = get_user_meta(get_current_user_id());
 $currentUserInfo = get_userdata(get_current_user_id());
@@ -23,17 +20,16 @@ $yourname        = ($currentUser['last_name'][0] != '' ? $yourname . ' ' . $curr
 $youremail       = (isset($currentUserInfo->user_email) ? $currentUserInfo->user_email : $youremail);
 $phone           = (isset($currentUser['phone1'][0]) ? $currentUser['phone1'][0] : $phone);
 
-$selectedAgent = (isset($currentUser['selected_agent'][0]) ? $currentUser['selected_agent'][0] : null); //get agent from user data.
-$selectedAgent = (isset($_GET['selected_agent']) ? $_GET['selected_agent'] : $selectedAgent ); //IF GET, then override.
-$selectedAgent = (isset($sessionAgent) && $sessionAgent != '' ? $sessionAgent : $selectedAgent);
+$selectedAgent = (isset($_GET['selected_agent']) ? $_GET['selected_agent'] : null); //IF GET, then override.
+$selectedAgent = (isset($currentUser['your_agent'][0]) && $currentUser['your_agent'][0] != '' ? $currentUser['your_agent'][0] : $selectedAgent ); //get agent from user data.
 $selectedAgent = (isset($_GET['selected_agent']) && isset($_GET['reason']) && $_GET['reason'] == 'Just reaching out' ? $_GET['selected_agent'] : $selectedAgent ); //IF GET and from team, then override.
 
 //SELECT OPTIONS
 $agents     = new Team();
-$agentArray = $agents->getAgentNames();
+$agentArray = $agents->getTeam();
 foreach($agentArray as $agent){
     if($agent != 'Kristy Lee'){
-        $agentOptions .= '<option value="'.$agent.'" '.($selectedAgent == $agent ? 'selected' : '').' '.($overrideFields && $selectedAgent != $agent ? 'disabled' : '') .'>'.$agent.'</option>';
+	    $agentOptions .= '<option value="'.$agent['name'].'" '.($selectedAgent == $agent['slug'] ? 'selected' : '').' >'.$agent['name'].'</option>';
     }
 }
 

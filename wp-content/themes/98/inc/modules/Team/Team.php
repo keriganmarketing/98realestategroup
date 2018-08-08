@@ -209,6 +209,16 @@ class Team
         return $output[0];
     }
 
+    public function getSingleBySlug($slug)
+    {
+        $output = $this->getTeam([
+            'slug'           => $slug,
+            'posts_per_page' => 1,
+        ]);
+
+        return $output[0];
+    }
+
     public function getTeamNames()
     {
         $request = $this->getTeam([]);
