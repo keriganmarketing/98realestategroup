@@ -67,11 +67,6 @@
 
 <script>
 export default {
-    props: {
-        listingData: {
-            type: Object,
-            default: () => []
-        }
-    }
+    props: ['listingData']
 }
 </script>
