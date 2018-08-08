@@ -34059,6 +34059,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {},
@@ -78746,7 +78747,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('omni-bar', {
     attrs: {
       "options": _vm.omniTerms,
-      "filter-function": _vm.applySearchFilter
+      "filter-function": _vm.applySearchFilter,
+      "field-value": ""
     },
     model: {
       value: (_vm.omni),

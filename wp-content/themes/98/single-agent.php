@@ -48,14 +48,8 @@ get_header(); ?>
                                             <div class="line"></div>
                                             
                                             <div id="bio">
-                                                <p><?php echo wp_trim_words( $post->post_content, $num_words = 120, $more = null ); ?> <a id="loadmore" >Read full bio.</a></p>
+                                                <?php echo $post->post_content; ?>
                                             </div>
-                                            
-                                            <script>
-                                            $( "#loadmore" ).click(function() {  
-                                                $("#bio").html('<?php echo str_replace("'","",preg_replace( "/\r|\n/", "", apply_filters('the_content', $post->post_content))); ?>');
-                                            });
-                                            </script>
                                         
                                         </div>
                                     </div>
