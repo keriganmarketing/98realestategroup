@@ -19,6 +19,8 @@ use Includes\Modules\Leads\Leads;
 $leads        = new Leads();
 $favorite     = new Favorites();
 $current_user = wp_get_current_user();
+$userMeta     = get_user_meta($current_user->ID);
+$adminemail   = 'zachchilds@gmail.com';
 
 //SELECT OPTIONS
 $agents     = new Team();
@@ -33,7 +35,6 @@ foreach($agentArray as $agent){
 
 if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $_POST['formID'] == 'agentselect'){
 
-    
     if( $currentAgent != '' ){
         update_user_meta( $current_user->ID, 'your_agent', $_POST['youragent'], $currentAgent );
     } else {
@@ -69,6 +70,9 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
         }
     }
     $submittedData .= '</tbody></table>';
+
+    //echo $adminemail;
+    $adminemail = 'bryan@kerigan.com';
 
     $leads->sendEmail(
         [

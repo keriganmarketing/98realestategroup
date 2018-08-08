@@ -22,7 +22,7 @@ $yourname               = ($currentUser['last_name'][0] != '' ? $yourname.' '.$c
 $youremail              = (isset($currentUserInfo->user_email) ? $currentUserInfo->user_email : $youremail);
 $phone                  = (isset($currentUser['phone1'][0]) ? $currentUser['phone1'][0] : $phone);
 
-$selectedAgent = (isset($currentUser['selected_agent'][0]) ? $currentUser['selected_agent'][0] : null); //get agent from user data.
+$selectedAgent = (isset($currentUser['your_agent'][0]) ? $currentUser['your_agent'][0] : null); //get agent from user data.
 
 $formID                 = (isset($_POST['formID']) ? $_POST['formID'] : '');
 $securityFlag           = (isset($_POST['secu']) ? $_POST['secu'] : '');

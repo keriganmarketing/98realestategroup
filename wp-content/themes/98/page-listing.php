@@ -74,7 +74,7 @@ get_header(); ?>
 										<input type="hidden" name="reason_for_contact" value="Property inquiry" />
 										<input type="hidden" name="mls_number" value="<?php echo $listing->mls_account; ?>" />
 										<?php if(isset($agent)){ ?>
-										<input type="hidden" name="selected_agent" value="<?php echo $agent['name']; ?>" />
+										<input type="hidden" name="selected_agent" value="<?php echo $agent['slug']; ?>" />
 										<?php } ?>
 										<button type="submit" class="btn btn-primary" >Request Info</button>
 
