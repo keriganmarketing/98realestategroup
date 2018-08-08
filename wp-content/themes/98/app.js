@@ -16981,7 +16981,7 @@ var GoogleMap = function () {
 
                 var latLng = new google.maps.LatLng(markers[i].lat, markers[i].long);
                 if (bounds.contains(latLng)) {
-                    var listingClass = 'RES';
+                    var listingClass = markers[i].class_name;
                     var marker = new google.maps.Marker({
                         position: latLng,
                         map: mapData.map,
@@ -61608,7 +61608,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('img', {
     staticClass: "img-responsive",
     attrs: {
-      "src": _vm.listingData.media_objects.data[0].url,
+      "src": _vm.listingData.photo_url,
       "alt": 'MLS Property ' + _vm.listingData.mls_account + ' for sale in ' + _vm.listingData.city
     }
   })])]), _vm._v(" "), _c('div', {

@@ -2,7 +2,7 @@
     <div class="feat-prop-container">    
         <div class="embed-responsive embed-responsive-16by9">
             <div class="feat-prop-photo">
-                <img :src="listingData.media_objects.data[0].url" class="img-responsive"
+                <img :src="listingData.photo_url" class="img-responsive"
                         :alt="'MLS Property ' + listingData.mls_account + ' for sale in ' + listingData.city"/>
             </div>
         </div>
