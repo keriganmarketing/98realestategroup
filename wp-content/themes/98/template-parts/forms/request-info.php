@@ -26,7 +26,6 @@ $selectedAgent = (isset($_GET['selected_agent']) ? $_GET['selected_agent'] : nul
 $selectedAgent = (isset($currentUser['your_agent'][0]) && $currentUser['your_agent'][0] != '' ? $currentUser['your_agent'][0] : $selectedAgent ); //get agent from user data.
 $selectedAgent = (isset($_GET['selected_agent']) && isset($_GET['reason']) && $_GET['reason'] == 'Just reaching out' ? $_GET['selected_agent'] : $selectedAgent ); //IF GET and from team, then override.
 
-
 //SELECT OPTIONS
 $agents     = new Team();
 $agentArray = $agents->getTeam();
@@ -94,6 +93,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         <div class="form-group">   
             <label>YOUR AGENT<span class="req">*</span></label>
             <select class="form-control" name="selected_agent">
+                <option value="" >First Available</option>
                 <?php echo $agentOptions; ?>
             </select>
         </div>
