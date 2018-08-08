@@ -78,7 +78,8 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         <div class="col-md-4 form-group <?php echo ( $selectedAgent=='' && $formSubmitted ? 'has-error' : ''); ?>">    										
             <label for="name" class="control-label">Your Agent<span class="req">*</span></label>
             <select class="form-control" name="selected_agent">
-            <?php echo $agentOptions; ?>
+                <option value="" >First Available</option>
+                <?php echo $agentOptions; ?>
             </select>
         </div>
     </div>

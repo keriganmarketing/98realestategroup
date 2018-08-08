@@ -269,7 +269,7 @@ class Team
 
     public function assembleAgentData( $agentName )
     {
-        $agentData = $this->getSingle($agentName);
+        $agentData = $this->getSingleBySlug($agentName);
         return $agentData;
     }
 

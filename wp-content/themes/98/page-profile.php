@@ -72,7 +72,7 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
     $submittedData .= '</tbody></table>';
 
     //echo $adminemail;
-    $adminemail = 'bryan@kerigan.com';
+    //$adminemail = 'bryan@kerigan.com';
 
     $leads->sendEmail(
         [
