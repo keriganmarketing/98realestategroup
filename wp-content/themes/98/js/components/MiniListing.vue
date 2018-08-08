@@ -17,7 +17,7 @@
             </div>
 
             <div class="feat-prop-section price">
-                <p><span class="price">${{ listingData.price }}</span></p>
+                <p><span class="price">${{ listingData.price.toLocaleString() }}</span></p>
             </div>
 
             <div class="feat-prop-section" style="padding-bottom:1rem;">
