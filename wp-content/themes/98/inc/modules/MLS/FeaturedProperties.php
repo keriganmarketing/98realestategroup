@@ -151,4 +151,21 @@ class FeaturedProperties
         return $results->data;
     }
 
+    public function getUrlBuilder(){
+        $request = (isset($_GET['mlsnumbers']) ? $_GET['mlsnumbers'] : []);
+
+        $mlsNums = explode(' ', $request);
+
+        $client     = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
+        $mlsNumbers = implode('|', $mlsNums);
+
+        $apiCall = $client->request(
+            'GET', 'listings?mlsNumbers=' . $mlsNumbers
+        );
+
+        $results = json_decode($apiCall->getBody());
+
+        return $results->data;
+    }
+
 }

@@ -907,7 +907,6 @@ function clients_dashboard_widget_function() {
           
         }
         
-        
         add_thickbox();
         echo '<div id="assignagent'.$client->ID.'" class="modal hide fade" style="display:none;">
 
@@ -1013,8 +1012,36 @@ function clients_dashboard_widget_function() {
       
     }
 
-    //delete_usermeta( 25, 'your_agent' );
+    //delete_usermeta( 25, 'your_agent' );  
+    //print_r($current_user);
   
-  //print_r($current_user);
-  
+}
+
+//ADD URL BUILDER DASHBOARD WIDGET
+function add_mls_urlbuilder_widget() {
+
+	wp_add_dashboard_widget(
+		'mls_urlbuilder_widget',         // Widget slug.
+		'URL Builder',         // Title.
+		'mls_urlbuilder_widget_function' // Display function.
+	);
+}
+add_action( 'wp_dashboard_setup', 'add_mls_urlbuilder_widget' );
+
+function mls_urlbuilder_widget_function() {
+	echo '<p>Create a URL that contains specific MLS listings. These links do not expire. Separate MLS numbers with a space (no commas or #). </p>';
+
+	echo '<form class="form" action="/properties/url-builder/" method="get" target="_blank" style="margin-bottom:20px;">
+              <table>
+                  <tr>
+                      <td>
+                          <span class="input-group-addon">MLS#</span>
+                          <input name="mlsnumbers" class="form-control" >
+                      </td>
+                      <td>
+                          <button class="button button-info" type="submit" >GO</button>
+                      </td>
+                  </tr>
+              </table>
+          </form>';
 }
