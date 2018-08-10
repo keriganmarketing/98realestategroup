@@ -26,7 +26,7 @@ import GoogleMap from '../services/google-maps.service.js';
             },
             api: {
                 type: String,
-                default: 'AIzaSyCRXeRhZCIYcKhtc-rfHCejAJsEW9rYtt4'
+                default: ''
             },
             searchTerms: {
                 type: Object,

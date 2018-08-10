@@ -51,6 +51,7 @@ get_header();
                     :longitude="-85.329176" 
                     :zoom="10" 
                     :search-terms='<?php echo $currentRequest; ?>'
+                    api="<?php echo GOOGLE_MAPS_API; ?>"
                 ></google-map>
                 
                 <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>
