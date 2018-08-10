@@ -13,13 +13,13 @@ $current_user = wp_get_current_user();
 $isFav        = $favorite->checkFavorites( $listing->mls_account, $current_user->ID );
 
 $photos = $listing->media_objects->data;
-$preferredPhoto = ($photos[0]->media_type = 'Photo' ? $photos[0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
+$preferredPhoto = (isset($photos[0]) && $photos[0]->media_type = 'Photo' ? $photos[0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
 
 ?>
-<div class="feat-prop-container">    
-    <favorite-button 
+<div class="feat-prop-container">
+    <favorite-button
         :icon-only="true"
-        :is-fav="<?php echo ($isFav == 1 ? true : 0); ?>" 
+        :is-fav="<?php echo ($isFav == 1 ? true : 0); ?>"
         :mls-number="<?php echo $listing->mls_account; ?>"
         :user-id="<?php echo $current_user->ID; ?>" >
     </favorite-button>
