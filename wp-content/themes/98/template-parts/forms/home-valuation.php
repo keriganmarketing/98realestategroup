@@ -60,7 +60,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 
     <div class="row" >
         <div class="col-md-6 form-group">    										
-            <label for="yourname" class="control-label">Name<span class="req">*</span></label>
+            <label for="full_name" class="control-label">Name<span class="req">*</span></label>
             <input type="text" class="form-control <?php echo ( $yourname && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($yourname != '' ? $yourname : ''); ?>" value="" name="full_name" required >
         </div>
         <div class="col-md-6 form-group">
@@ -102,7 +102,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
                 </div>
                 <div class="col-sm-4 form-group" id="addr2">
                     <label>&nbsp;</label>
-                    <input type="text" class="form-control" value="" placeholder="Apt/Suite" name="listing_address_2" required>
+                    <input type="text" class="form-control" value="" placeholder="Apt/Suite" name="listing_address_2">
                 </div>
                 <div class="col-xs-7 col-sm-5 form-group" id="city">
                     <input type="text" class="form-control" value="" placeholder="City" name="listing_city" required>
@@ -184,13 +184,18 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         <div class="col-sm-8">
             <div class="form-group">
                 <label for="property_details" class="control-label">Property Details</label>
-                <textarea class="form-control" name="pdetails"></textarea>
+                <textarea class="form-control" name="property_details"></textarea>
             </div>
         </div>
     </div>
+    <div class="row" >
+        <div class="col-xs-12 form-group">&nbsp;</div>
+    </div>
 
     <div class="row" >
-        <div class="col-sm-3 form-group">&nbsp;</div>
+        <div class="col-xs-12 form-group">
+            <div class="g-recaptcha" data-sitekey="6LcuEg8UAAAAAO6jN3pzgpggylUDnGQPOd6-loWQ"></div>
+        </div>
     </div>
     <div class="row">
         <div id="listing-request" class="col-xs-12">

@@ -27,6 +27,10 @@ class RequestInfo extends Leads
             (isset($dataSubmitted['first_name']) ? $dataSubmitted['first_name'] . ' ' . $dataSubmitted['last_name'] : '')
         );
 
+        if(parent::checkSpam($dataSubmitted)){
+            return null; //fail silently if spam
+        }
+
         $agent = new Team();
         $agentInfo = $agent->assembleAgentData($dataSubmitted['selected_agent']);
         parent::set('adminEmail', (isset($agentInfo['email_address']) && $agentInfo['email_address'] != '' ? $agentInfo['email_address'] : $this->adminEmail));
@@ -38,9 +42,17 @@ class RequestInfo extends Leads
             <strong>Your request has been received. We will review your submission and get back with you soon.</strong>
             </div>';
         }else{
+            $errors = parent::get('errors');
             echo '<div class="alert alert-danger" role="alert">
-            <strong>Errors were found. Please correct the indicated fields below.</strong>
-            </div>';
+            <strong>Errors were found. Please correct the indicated fields below.</strong>';
+            if(count($errors) > 0){
+                echo '<ul>';
+                foreach($errors as $error){
+                    echo '<li>'.$error.'</li>';
+                }
+                echo '</ul>';
+            }
+            echo '</div>';
             return;
         }
         $this->sendNotifications($dataSubmitted);
@@ -92,7 +104,7 @@ class RequestInfo extends Leads
         parent::sendEmail(
             [
                 'to'        => $fullName . '<' . $emailAddress . '>',
-                'from'      => $this->siteName . ' <noreply@' . $this->domain . '>',
+                'from'      => get_bloginfo().' <noreply@98realestategroup.com>',
                 'subject'   => 'Your website submission has been received',
                 'bcc'       => $this->bccEmail,
                 'headline'  => 'Thank you',

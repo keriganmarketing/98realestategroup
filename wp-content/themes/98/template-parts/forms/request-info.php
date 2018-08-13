@@ -4,14 +4,14 @@ use Includes\Modules\Team\Team;
 use Includes\Modules\Leads\RequestInfo;
 
 //DEFAULT FORM VARS
-$yourname               = (isset($_GET['full_name']) ? $_GET['full_name'] : '');
-$youremail              = (isset($_GET['email_address']) ? $_GET['email_address'] : '');
-$phone                  = (isset($_GET['phone_number']) ? $_GET['phone_number'] : '');
-$reason                 = (isset($_GET['reason_for_contact']) ? $_GET['reason_for_contact'] : '');
-$mlsnumber              = (isset($_GET['mls_number']) ? $_GET['mls_number'] : '');
+$yourname               = (isset($_GET['full_name']) ? $_GET['full_name'] : (isset($_POST['full_name']) ? $_POST['full_name'] : ''));
+$youremail              = (isset($_GET['email_address']) ? $_GET['email_address'] : (isset($_POST['email_address']) ? $_POST['email_address'] : ''));
+$phone                  = (isset($_GET['phone_number']) ? $_GET['phone_number'] : (isset($_POST['phone_number']) ? $_POST['phone_number'] : ''));
+$reason                 = (isset($_GET['reason_for_contact']) ? $_GET['reason_for_contact'] : (isset($_POST['reason_for_contact']) ? $_POST['reason_for_contact'] : ''));
+$mlsnumber              = (isset($_GET['mls_number']) ? $_GET['mls_number'] : (isset($_POST['mls_number']) ? $_POST['mls_number'] : ''));
+$message                = (isset($_POST['message']) ? $_POST['message'] : '');
 $emailformattedbadly    = FALSE;
 $passCheck              = FALSE;
-$message                = '';
 $agentOptions           = '';
 
 //IS USER LOGGED IN?
@@ -62,27 +62,49 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 <input type="hidden" name="formID" value="requestinfo" >
 <div class="row">
     <div class="col-sm-6"> 
+        <div class="row">
+        <div class="col-lg-6">
 		<div class="form-group">
 			<label>NAME<span class="req">*</span></label>
 			<input name="full_name" type="text" class="form-control" value="<?php echo $yourname; ?>" required>
 		</div> 
-        <div class="form-group">      
-            <label>EMAIL ADDRESS<span class="req">*</span></label>
-            <input name="email_address" type="email" class="form-control" value="<?php echo $youremail; ?>" required>
-        </div> 
+        </div>
+        <div class="col-lg-6">
         <div class="form-group"> 
             <label>PHONE*</label>
             <div class="phone-group">
                 <input type="tel" name="phone_number" class="form-control" value="<?php echo $phone; ?>" placeholder="(850) ###-####" >
             </div>
         </div> 
+        </div>
+        </div>
+        
+        <div class="form-group">      
+            <label>EMAIL ADDRESS<span class="req">*</span></label>
+            <input name="email_address" type="email" class="form-control" value="<?php echo $youremail; ?>" required>
+        </div> 
+
+        <div class="row">
+        <div class="col-lg-6">
+        <div class="form-group">   
+            <label>YOUR AGENT<span class="req">*</span></label>
+            <select class="form-control custom-select" name="selected_agent">
+                <option value="" >First Available</option>
+                <?php echo $agentOptions; ?>
+            </select>
+        </div>
+        </div>
+        <div class="col-lg-6">
         <div class="form-group">    			
             <label>REASON FOR CONTACT<span class="req">*</span></label>							
-            <select class="form-control" name="reason_for_contact" id="reason" >
+            <select class="form-control custom-select" name="reason_for_contact" id="reason" >
                 <option value="">Select one</option>
                 <?php echo $reasonOptions; ?>
             </select>
         </div>
+        </div>
+        </div>
+
     </div>
     <div class="col-sm-6">
         <div class="form-group q-mls <?php echo ($mlsnumber == '' ? 'hidden-xs-up' : ''); ?>">
@@ -90,23 +112,14 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
             <input type="text" class="form-control" value="<?php echo ($mlsnumber != '' ? $mlsnumber : ''); ?>" name="mls_number" placeholder="MLS number" />
         </div>
         
-        <div class="form-group">   
-            <label>YOUR AGENT<span class="req">*</span></label>
-            <select class="form-control" name="selected_agent">
-                <option value="" >First Available</option>
-                <?php echo $agentOptions; ?>
-            </select>
-        </div>
-
         <div class="form-group">
             <label>MESSAGE</label>
-            <textarea name="message" rows="4" class="form-control"></textarea>
+            <textarea style="height:113px;" name="message" rows="4" class="form-control"><?php echo $message; ?></textarea>
         </div>
         
-        <div class="form-group">
+            <div data-size="normal" data-theme="dark" style="display:inline-block;" class="g-recaptcha" data-sitekey="6LcuEg8UAAAAAO6jN3pzgpggylUDnGQPOd6-loWQ"></div>
 			<input type="text" name="secu" style="position: absolute; height: 1px; top: -50px; left: -50px; width: 1px; padding: 0; margin: 0; visibility: hidden;" >
-            <button type="submit" class="btn btn-danger btn-md pull-md-right" >SEND</button>
-        </div>
+            <button style="margin-top: 1rem;" type="submit" class="btn btn-danger btn-md pull-xs-right" >SEND</button>
     </div>
 </div> 
 </form>

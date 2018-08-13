@@ -157,6 +157,10 @@ function ninetyeight_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'ninetyeight_scripts' );
 
+add_action( 'wp_head', function(){
+    echo '<script src="https://www.google.com/recaptcha/api.js"></script>';
+});
+
 //DISABLE WP CORE CRAP
 remove_action('wp_head', 'rsd_link'); // Removes the Really Simple Discovery link
 remove_action('wp_head', 'wlwmanifest_link'); // Removes the Windows Live Writer link

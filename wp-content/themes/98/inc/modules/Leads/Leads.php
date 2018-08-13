@@ -13,6 +13,7 @@ class Leads
     public    $bccEmail;
     public    $additionalFields;
     public    $siteName;
+    public    $errors;
 
     /**
      * Leads constructor.
@@ -34,6 +35,8 @@ class Leads
         $this->assembleLeadData([
             //'name' => 'label'
         ]);
+
+        $this->errors = [];
     }
 
     protected function set($var, $value)
@@ -70,6 +73,10 @@ class Leads
         $fullName = (isset($dataSubmitted['full_name']) ? $dataSubmitted['full_name'] : null);
         $dataSubmitted['full_name'] = (isset($dataSubmitted['first_name']) && isset($dataSubmitted['last_name']) ? $dataSubmitted['first_name'] . ' ' . $dataSubmitted['last_name'] : $fullName);
 
+        if($this->checkSpam($dataSubmitted)){
+            return null; //fail silently if spam
+        }
+
         $this->addToDashboard($dataSubmitted);
         if(!$this->validateSubmission($dataSubmitted)){ return false; }
         $this->sendNotifications($dataSubmitted);
@@ -86,12 +93,19 @@ class Leads
         $passCheck = true;
         if ($dataSubmitted['email_address'] == '') {
             $passCheck = false;
+            $this->errors[] = 'Email cannot be left blank.';
         } elseif (!filter_var($dataSubmitted['email_address'], FILTER_VALIDATE_EMAIL) && !preg_match('/@.+\./',
-                $dataSubmitted['email_address'])) {
+            $dataSubmitted['email_address'])) {
             $passCheck = false;
+            $this->errors[] = 'The provided email was improperly formatted.';
         }
         if ($dataSubmitted['full_name'] == '') {
             $passCheck = false;
+            $this->errors[] = 'Name is required.';
+        }
+        if($dataSubmitted['g-recaptcha-response'] == ''){ 
+            $passCheck = false;
+            $this->errors[] = 'Please indicate that you are not a robot.';
         }
 
         return $passCheck;
@@ -175,6 +189,27 @@ class Leads
         }
 
         return $resultArray;
+    }
+
+    protected function checkSpam($leadInfo)
+    {
+        // $akismet = new Akismet(site_url(), AKISMET_KEY);
+        // $akismet->setCommentAuthor($leadInfo['fullname']);
+        // $akismet->setCommentAuthorEmail($leadInfo['email_address']);
+        // if(isset($leadInfo['message']) && $leadInfo['message'] != ''){
+        //     $akismet->setCommentContent($leadInfo['message']);
+        // }
+
+        // if($akismet->isCommentSpam()){
+        //     //$akismet->submitSpam();
+        //     echo 'SPAM!';
+        //     return true; // comment is spam
+        // }else{
+        //     //$akismet->submitHam();
+        //     echo 'HAM!';
+        //     return false; // comment is not spam
+        // }
+        return false;
     }
 
     /*

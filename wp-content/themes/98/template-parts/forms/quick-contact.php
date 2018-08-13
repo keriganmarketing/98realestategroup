@@ -44,20 +44,28 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 <input type="hidden" value="" name="mls_number" >
 <div class="row">
     <div class="col-sm-6">
-		<div class="form-group">
-			<label>NAME*</label>
-			<input name="full_name" type="text" class="form-control" value="<?php echo $yourname; ?>" required>
-		</div> 
-        <div class="form-group">      
-            <label>EMAIL ADDRESS*</label>
-            <input name="email_address" type="email" class="form-control" value="<?php echo $youremail; ?>" required>
-        </div> 
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>NAME*</label>
+                    <input name="full_name" type="text" class="form-control" value="<?php echo $yourname; ?>" required>
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">      
+                    <label>EMAIL ADDRESS*</label>
+                    <input name="email_address" type="email" class="form-control" value="<?php echo $youremail; ?>" required>
+                </div> 
+            </div>
+        </div>
         <div class="form-group"> 
             <label>PHONE*</label>
             <div class="phone-group">
                 <input type="tel" name="phone_number" class="form-control" value="<?php echo $phone; ?>" placeholder="(850) ###-####" >
             </div>
         </div> 
+
+        <div data-size="normal" data-theme="dark" style="display:inline-block; margin-top:1rem;" class="g-recaptcha" data-sitekey="6LcuEg8UAAAAAO6jN3pzgpggylUDnGQPOd6-loWQ"></div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">

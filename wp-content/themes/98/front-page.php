@@ -92,12 +92,12 @@ get_header(); ?>
 
     <div id="news-contact">
         <div class="container">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <h2>Market News</h2>
                 <?php
                 $args = array(
                     'post_type' => 'post',
-                    'posts_per_page' => 3,
+                    'posts_per_page' => 2,
                     'orderby' => 'date',
                     'order' => 'DESC',
                     'offset' => 0,
@@ -121,7 +121,7 @@ get_header(); ?>
                 ?>
                 <a href="<?php echo get_home_url(); ?>" class="btn btn-info">MORE NEWS</a>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
                 <h2>Quick Contact</h2>
                 <?php include(locate_template('template-parts/forms/quick-contact.php')); ?>
             </div>
