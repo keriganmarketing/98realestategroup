@@ -119,7 +119,7 @@ get_header(); ?>
 
                 endwhile;
                 ?>
-                <a href="<?php echo get_home_url(); ?>" class="btn btn-info">MORE NEWS</a>
+                <a href="/our-blog/" class="btn btn-info">MORE NEWS</a>
             </div>
             <div class="col-sm-8">
                 <h2>Quick Contact</h2>
