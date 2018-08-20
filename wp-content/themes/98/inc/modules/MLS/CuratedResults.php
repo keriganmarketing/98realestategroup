@@ -16,7 +16,8 @@ class CuratedResults {
         $this->searchResults   = [];
         $this->searchParams    = [
             'omni'   => '',
-            'sort' => 'date_modified|desc'
+            'sort' => 'date_modified|desc',
+            'excludes' => 'Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
         ];
     }
 
