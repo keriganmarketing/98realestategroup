@@ -15,7 +15,7 @@ use Includes\Modules\MLS\SoldListings;
  * @package Ninetyeight Real Estate Group
  */
 
-$soldListings   = new SoldListings();
+$soldListings   = new SoldListings(180);
 $searchResults  = $soldListings->getListings();
 $currentRequest = $soldListings->getCurrentRequest();
 $resultMeta     = $soldListings->getResultMeta();
