@@ -38,7 +38,6 @@ class QuickSearch
         $this->searchParams = [
             'omni'   => '',
             'sort' => 'date_modified|desc',
-            'excludes' => 'Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
         ];
         $this->searchResults = [];
         $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);
@@ -101,14 +100,14 @@ class QuickSearch
             }
         }
 
-        return $request . '&page=' . get_query_var( 'page' );
+        return $request . '&page=' . get_query_var( 'page' ) . '&excludes=Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County';
     }
 
     public function contactTheMothership()
     {
         $client     = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
         $apiCall = $client->request(
-            'GET', 'search' . $this->makeRequest() . '&page=' . get_query_var( 'page' )
+            'GET', 'search' . $this->makeRequest()
         );
 
         $this->searchResults = json_decode($apiCall->getBody());

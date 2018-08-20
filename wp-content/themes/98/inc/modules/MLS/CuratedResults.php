@@ -17,7 +17,6 @@ class CuratedResults {
         $this->searchParams    = [
             'omni'   => '',
             'sort' => 'date_modified|desc',
-            'excludes' => 'Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
         ];
     }
 
@@ -74,7 +73,7 @@ class CuratedResults {
 
         // echo $request;
 
-        return $request . '&page=' . get_query_var( 'page' );
+        return $request . '&page=' . get_query_var( 'page' ) . '&excludes=Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County';
     }
 
     public function contactTheMothership()

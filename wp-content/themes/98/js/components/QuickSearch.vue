@@ -88,6 +88,7 @@
                 </div>
             </div>
         </div>
+        <input name="page" value="1" type="hidden" >
     </form>
 </template>
 
