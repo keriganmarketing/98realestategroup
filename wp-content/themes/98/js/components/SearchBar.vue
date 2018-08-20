@@ -138,7 +138,7 @@
                 this.advancedOpen = !this.advancedOpen;
             },
             applySearchFilter(search, omniTerms) {
-                return omniTerms.filter(term => term.value.toLowerCase().startsWith(search.toLowerCase()))
+                return omniTerms.filter(term => term.value.toLowerCase().includes(search.toLowerCase()))
             },
             search: _.debounce(
                 function () {
