@@ -20,13 +20,13 @@
                 <div class="col-sm-6 col-lg-2">
                     <property-type></property-type>
                 </div>
-                <button 
-                    @click="toggleAdvanced" 
-                    type="button" 
-                    class="btn btn-primary dropdown-toggle col-xs-6 col-sm-3 col-lg-1" 
-                    data-toggle="dropdown" 
-                    aria-haspopup="true" 
-                    aria-expanded="false" 
+                <button
+                    @click="toggleAdvanced"
+                    type="button"
+                    class="btn btn-primary dropdown-toggle col-xs-6 col-sm-3 col-lg-1"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
                     >Filter</button>
                 <button type="submit" class="btn btn-danger col-xs-6 col-sm-3 col-lg-1" >Search</button>
             </div>
@@ -35,7 +35,7 @@
             <div class="container-wide">
                 <div class="row">
                     <div class="col-md-4 col-lg-6">
-                
+
                         <div class="row">
                             <div class="col-xs-6 col-md-12 col-lg-6">
                                 <min-price-field
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-lg-6">
-                        
+
                         <status-field
                             class="mb-6"
                         ></status-field>
@@ -120,7 +120,7 @@
                 this.advancedSearch = !this.advancedSearch;
             },
             applySearchFilter(search, omniTerms) {
-                return omniTerms.filter(term => term.value.toLowerCase().startsWith(search.toLowerCase()))
+                return omniTerms.filter(term => term.value.toLowerCase().includes(search.toLowerCase()))
             },
             search: _.debounce(
                 function () {
