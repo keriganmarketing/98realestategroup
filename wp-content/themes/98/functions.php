@@ -12,6 +12,7 @@ use Includes\Modules\Leads\Leads;
 use Includes\Modules\Helpers\CleanWP;
 use Includes\Modules\MLS\FeaturedProperties;
 use Includes\Modules\MLS\Favorites;
+use Includes\Modules\Leads\LeadDashboard;
 
 require('vendor/autoload.php');
 
@@ -25,6 +26,11 @@ new FeaturedProperties;
 $favorites = new Favorites;
 $favorites->setupAdmin();
 $favorites->addRoutes();
+
+$leadDashboard = new LeadDashboard();
+if (is_admin()) {
+    $leadDashboard->createPage();
+}
 
 if ( ! function_exists( 'ninetyeight_setup' ) ) :
 /**
@@ -813,213 +819,6 @@ function requestinfo_dashboard_widget_function() {
     }
 }
 
-
-//ADD CUSTOMERS DASHBOARD WIDGET
-function add_clients_dashboard_widget() {
-    
-	wp_add_dashboard_widget(
-         'clients_dashboard_widget',         // Widget slug.
-         'My Customers',         // Title.
-         'clients_dashboard_widget_function' // Display function.
-    );	
-}
-add_action( 'wp_dashboard_setup', 'add_clients_dashboard_widget' );
-
-function clients_dashboard_widget_function() {
-  
-    $current_user = wp_get_current_user(); 
-    
-    $args = array(
-        'blog_id'      => $GLOBALS['blog_id'],
-        //'role'         => 'Subscriber',
-        'role__in'     => array(),
-        'role__not_in' => array(),
-        'meta_key'     => '',
-        'meta_value'   => '',
-        'meta_compare' => '',
-        'meta_query'   => array(),
-        'date_query'   => array(),        
-        'include'      => array(),
-        'exclude'      => array(),
-        'orderby'      => 'login',
-        'order'        => 'ASC',
-        'offset'       => '',
-        'search'       => '',
-        'number'       => '',   
-        'count_total'  => false,
-        'fields'       => 'all',
-        'who'          => ''
-    ); 
-    $clientlist = get_users( $args );
-  
-    $teamObject = new Team;
-    $agentarray = $teamObject->getTeam();
-  
-    foreach($clientlist as $client){ 
-      
-        $myagent = get_user_meta($client->ID, 'your_agent', true);
-        $leadowner = str_replace(' ', '-', strtolower($current_user->display_name));
-        //if($myagent == ''){ $leadowner = 'zach-childs'; } 
-      
-        //print_r($client->roles[0]);
-        
-        if( ($myagent == $leadowner && $myagent != '') || ( current_user_can( 'manage_options' ) && $client->roles[0] == 'subscriber' )  ){ 
-          
-          //get counts
-          $favlist = get_posts( array(
-              'posts_per_page'  => -1, 
-              'orderby'   	    => 'post_date',
-              'post_type'       => 'favorite',
-              'post_status'     => 'publish',	
-              'author'          => $client->ID
-          ) );  
-          
-          $numfavs = count( $favlist );
-          
-          $searchlist = get_posts( array(
-              'posts_per_page'  => -1,
-              'orderby'   	    => 'post_date',
-              'post_type'       => 'search',
-              'post_status'     => 'publish',	
-              'author'          => $client->ID
-          ) );  
-          
-          $numsearches = count( $searchlist );
-          
-          if($myagent != ''){
-              if($leadowner == 'kma' || $leadowner == 'zach-childs') { $admininfo = ' ( assigned to '.ucwords(str_replace('-',' ',$myagent)).' )'; } else { $admininfo = ''; }
-              if($leadowner == 'kma' || $leadowner == 'zach-childs') { 
-                  $admininfo = ' ( no agent selected )'; 
-                  $admininfo .= ' <a href="#TB_inline?width=300&height=200&inlineId=assignagent'.$client->ID.'" role="button" data-toggle="modal" class="button button-info thickbox" style="float:right;" >Change Agent</a>';
-              } else { $admininfo = ''; }
-          }else{
-              if($leadowner == 'kma' || $leadowner == 'zach-childs') { 
-                  $admininfo = ' ( no agent selected )'; 
-                  $admininfo .= ' <a href="#TB_inline?width=300&height=200&inlineId=assignagent'.$client->ID.'" role="button" data-toggle="modal" class="button button-info thickbox" style="float:right;" >Assign Agent</a>';
-              } else { $admininfo = ''; }
-          }
-          $name = $client->display_name.$admininfo;
-          
-          
-          
-          //show info
-          echo '<p><strong>'.$client->display_name.$admininfo.'</strong>'.
-                 '<br>'.'<a href="'.$client->user_email.'" >'.$client->user_email.'</a></p>
-                 <a class="button button-primary" href="/wp-admin/edit.php?s&post_status=all&post_type=search&action=-1&m=0&author_admin_filter='.$client->ID.'&filter_action=Filter&paged=1&action2=-1">View Searches ('.$numsearches.')</a> <a class="button button-primary" href="/wp-admin/edit.php?s&post_status=all&post_type=favorite&action=-1&m=0&author_admin_filter='.$client->ID.'&filter_action=Filter&paged=1&action2=-1">View Favorites ('.$numfavs.')</a>';
-          
-          echo '<hr>';
-          
-        }
-        
-        add_thickbox();
-        echo '<div id="assignagent'.$client->ID.'" class="modal hide fade" style="display:none;">
-
-                
-
-                <div style="margin:20px;">
-                    <h3>Assign Agent to this Customer</h3>
-                    <p>Change this to associate the lead with an agent. Once selected, an email notification will be sent to the agent.<br>Selecting "First Available" will not make any changes.</p>
-                    <form class="form" id="agentselect"  enctype="multipart/form-data" method="post" action="#agent-select-form">
-                        <input type="hidden" name="formID" value="agentselect" >
-                        <input type="hidden" name="cid" value="'.$client->ID.'">
-                        <input type="hidden" name="cname" value="'.$client->display_name.'">
-                        <input type="hidden" name="cemail" value="'.$client->user_email.'">
-                        <label>Select Agent: </label>
-                        <select class="form-control" name="youragent">
-                            <option value="" >First Available</option>';
-                            foreach($agentarray as $agent){
-                              if($agent['showindropdown']=='on'){
-                                echo '<option value="'.$agent['slug'].'" >'.$agent['name'].'</option>';
-                              }
-                            }
-                        echo '</select>
-
-                        <input type="text" name="secu" style="position: absolute; height: 1px; top: -50px; left: -50px; width: 1px; padding: 0; margin: 0; visibility: hidden;" >
-                        <button type="submit" class="button button-primary" >SAVE</button>
-
-                    </form>
-                </div>
-            </div>';
-        
-    }
-  
-  
-    
-
-    if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $_POST['formID'] == 'agentselect'){
-        if($_POST['youragent']!=''){
-            if( get_user_meta( $_POST['cid'], 'your_agent', true) ){
-                update_user_meta( $_POST['cid'], 'your_agent', $_POST['youragent'] );
-            } else {
-                add_user_meta( $_POST['cid'], 'your_agent', $_POST['youragent'] );
-            }
-        }
-      
-        $mlsLead = new mlsLeads();
-      
-        foreach($agentarray as $agent){
-            if( $_POST['youragent'] == $agent['slug'] ){ 
-                $adminemail = $agent['email'];
-                $agentName = $agent['name'];
-            }
-        }
-            
-        $postvars = array(
-            'Name' => $_POST['cname'],
-            'Email Address' => $_POST['cemail'],
-            //'Phone Number' => $ph1.'-'.$ph2.'-'.$ph3,
-            //'Additional Info' => htmlentities(stripslashes($_POST['additionalinfo'])),
-        );
-      
-        $sendadmin = array(
-            'to'		=> $adminemail,
-            'from'		=> get_bloginfo().' <noreply@98realestategroup.com>',
-            'subject'	=> 'You have been assigned a new lead from the website',
-            'bcc'		=> 'support@kerigan.com',
-        );
-
-        $fontstyle = 'font-family: sans-serif;';
-        $headlinestyle = 'style="font-size:20px; '.$fontstyle.' color:#C41230;"';
-        $copystyle = 'style="font-size:16px; '.$fontstyle.' color:#333;"';
-        $labelstyle = 'style="padding:4px 8px; background:#F7F6F3; border:1px solid #E3E0D3; font-weight:bold; '.$fontstyle.' font-size:14px; color:#4D4B47; width:150px;"';
-        $datastyle = 'style="padding:4px 8px; background:#F7F6F3; border:1px solid #E3E0D3; '.$fontstyle.' font-size:14px;"';
-
-        $headline = '<h2 '.$headlinestyle.'>New Lead Assignment</h2>';	
-        $adminintrocopy = '<p '.$copystyle.'>You have been assigned a new lead from the website. Details are below:</p>';
-        $dateofemail = '<p '.$copystyle.'>Date Submitted: '.date('M j, Y').' @ '.date('g:i a').'</p>';
-
-        $submittedData = '<table cellpadding="0" cellspacing="0" border="0" style="width:100%" ><tbody>';
-        foreach($postvars as $key => $var ){
-            if(!is_array($var)){
-                $submittedData .= '<tr><td '.$labelstyle.' >'.$key.'</td><td '.$datastyle.'>'.$var.'</td></tr>';
-            }else{
-                $submittedData .= '<tr><td '.$labelstyle.' >'.$key.'</td><td '.$datastyle.'>';
-                foreach($var as $k => $v){
-                    $submittedData .= '<span style="display:block;width:100%;">'.$v.'</span><br>';
-                }
-                $submittedData .= '</ul></td></tr>'; 
-            }
-        }
-        $submittedData .= '</tbody></table>';
-        $submittedData .= '<p '.$copystyle.'><a class="button button-primary" target="_blank" href="http://www.98realestategroup.com/wp-admin/edit.php?s&post_status=all&post_type=search&action=-1&m=0&author_admin_filter='.$_POST['cid'].'&filter_action=Filter&paged=1&action2=-1">View Searches</a> <a class="button button-primary" target="_blank" href="http://www.98realestategroup.com/wp-admin/edit.php?s&post_status=all&post_type=favorite&action=-1&m=0&author_admin_filter='.$_POST['cid'].'&filter_action=Filter&paged=1&action2=-1">View Favorites</a></p>';
-
-        $adminContent = $adminintrocopy.$submittedData.$dateofemail;
-
-        $emaildata = array(
-            'headline'	=> $headline, 
-            'introcopy'	=> $adminContent,
-        );
-      
-        $mlsLead->sendEmail($sendadmin, $emaildata);
-      
-        echo '<script>parent.window.location.reload();</script>';
-      
-    }
-
-    //delete_usermeta( 25, 'your_agent' );  
-    //print_r($current_user);
-  
-}
 
 //ADD URL BUILDER DASHBOARD WIDGET
 function add_mls_urlbuilder_widget() {

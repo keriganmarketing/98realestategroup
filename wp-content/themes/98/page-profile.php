@@ -53,8 +53,11 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
     $youremail = $current_user->data->user_email;
 
     $postvars = array(
-        'Name' => $yourname,
+        'Name' => get_user_meta($current_user->data->ID,'first_name',true).' '.get_user_meta($current_user->data->ID,'last_name',true),
+        'Website Username' => $yourname,
         'Email Address' => $youremail,
+        'Date Registered' => $current_user->user_registered,
+        'Saved Properties' => implode(',', $favorites->getfavorites())
     );
 
     $submittedData = '<table cellpadding="0" cellspacing="0" border="0" style="width:100%" ><tbody>';
@@ -82,7 +85,7 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
             'bcc'       => 'support@kerigan.com',
             'replyto'   => $yourname . '<' . $youremail . '>',
             'headline'  => 'New Lead!',
-            'introcopy' => 'You have received a new lead from the website. Details are below:',
+            'introcopy' => 'A user account on the website has selected you as their agent. Their contact information is below:',
             'leadData'  => $submittedData
         ]
     );
