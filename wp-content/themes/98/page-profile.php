@@ -17,7 +17,7 @@ use Includes\Modules\Leads\Leads;
  * @package Ninetyeight Real Estate Group
  */
 $leads        = new Leads();
-$favorite     = new Favorites();
+$favorites     = new Favorites();
 $current_user = wp_get_current_user();
 $userMeta     = get_user_meta($current_user->ID);
 $adminemail   = 'zachchilds@gmail.com';
@@ -40,24 +40,28 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
     } else {
         add_user_meta( $current_user->ID, 'your_agent', $_POST['youragent'] );
     }
-  
+
     foreach($agentArray as $agent){
-        if( $_POST['youragent'] == $agent['slug'] ){ 
+        if( $_POST['youragent'] == $agent['slug'] ){
             $adminemail = $agent['email'];
             $agentName = $agent['name'];
         }
     }
-  
+
     $current_user = wp_get_current_user();
     $yourname = $current_user->data->display_name;
     $youremail = $current_user->data->user_email;
 
+    $savedArray = [];
+    foreach($favorites->getfavorites() as $favorite) {
+        array_push($savedArray, $favorite->mls_account);
+    }
     $postvars = array(
         'Name' => get_user_meta($current_user->data->ID,'first_name',true).' '.get_user_meta($current_user->data->ID,'last_name',true),
         'Website Username' => $yourname,
         'Email Address' => $youremail,
         'Date Registered' => $current_user->user_registered,
-        'Saved Properties' => implode(',', $favorites->getfavorites())
+        'Saved Properties' => implode(',', $savedArray)
     );
 
     $submittedData = '<table cellpadding="0" cellspacing="0" border="0" style="width:100%" ><tbody>';
@@ -69,7 +73,7 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
             foreach($var as $k => $v){
                 $submittedData .= '<span style="display:block;width:100%;">'.$v.'</span><br>';
             }
-            $submittedData .= '</ul></td></tr>'; 
+            $submittedData .= '</ul></td></tr>';
         }
     }
     $submittedData .= '</tbody></table>';
@@ -89,7 +93,6 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
             'leadData'  => $submittedData
         ]
     );
-  
 }
 get_header(); ?>
 
@@ -106,9 +109,9 @@ get_header(); ?>
                             <div class="entry-content">
 
                                 <?php
-                                    the_content();                                  
+                                    the_content();
                                 ?>
-                                
+
                                 <h2>Your Agent</h2>
                                 <p>Like working with one of our agents? Select them from the list to keep working with them.</p>
                                 <a id="agent-select-form" class="pad-anchor"></a>
@@ -116,15 +119,15 @@ get_header(); ?>
                                     <input type="hidden" name="formID" value="agentselect" >
                                     <div class="row">
                                         <div class="col-sm-6 col-md-4">
-                                            <div class="form-group <?php if($youragent == '' && $_POST && $_POST['formID']=='agentselect'){ echo 'has-error'; } ?>">   
+                                            <div class="form-group <?php if($youragent == '' && $_POST && $_POST['formID']=='agentselect'){ echo 'has-error'; } ?>">
                                                 <select class="form-control" name="youragent">
                                                   <option value="" >First Available</option>
                                                   <?php
                                                       foreach($agentarray as $agent){
                                                           if($agent['showindropdown']=='on'){
                                                           echo '<option value="'.$agent['slug'].'" ';
-                                                          if( get_user_meta($current_user->ID, 'your_agent', true) == $agent['slug'] ){ 
-                                                              echo ' selected'; 
+                                                          if( get_user_meta($current_user->ID, 'your_agent', true) == $agent['slug'] ){
+                                                              echo ' selected';
                                                           }
                                                           echo ' >'.$agent['name'].'</option>';
                                                           }
@@ -140,23 +143,23 @@ get_header(); ?>
                                         </div>
                                     </div>
                                 </form>
-                                        
-                                
+
+
                                 <h2>Properties of Interest</h2>
                                 <p>Just click the star to remove the property from your list.</p>
                                 <?php echo do_shortcode('[getfavorites]'); ?>
-                                
+
                                 <!-- <h2>Saved Searches</h2>
                                 <p>Open a search that you've previously saved.</p>
                                 <?php echo do_shortcode('[getsearches]'); ?> -->
-                                
+
                             </div><!-- .entry-content -->
 
                         </article><!-- #post-## -->
 
 
                     <?php endwhile; // End of the loop. ?>
-                        
+
                     </div>
                 </div>
             </div>

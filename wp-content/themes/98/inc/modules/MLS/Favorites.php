@@ -1,6 +1,6 @@
 <?php
 
-namespace Includes\Modules\MLS; 
+namespace Includes\Modules\MLS;
 
 use GuzzleHttp\Client;
 use KeriganSolutions\CPT\CustomPostType;
@@ -51,14 +51,14 @@ class Favorites {
                 'posts_per_page'   => -1,
                 'offset'           => 0,
                 'post_type'        => 'Favorite',
-                'post_status'      => 'publish',	
+                'post_status'      => 'publish',
                 'post_author'      => $user_id
             );
 
-            $favs = get_posts( $request );    
+            $favs = get_posts( $request );
             $favList = [];
-        
-            foreach ( $favs as $fav ){            
+
+            foreach ( $favs as $fav ){
                 $favList[] = $fav->favorite_info_mlsnum;
             }
 
@@ -81,7 +81,7 @@ class Favorites {
     /**
 	 * Add REST API routes
 	 */
-    public function addRoutes() 
+    public function addRoutes()
     {
         register_rest_route( 'kerigansolutions/v1', '/add-favorite',
             [
@@ -110,7 +110,7 @@ class Favorites {
                 'posts_per_page'   => -1,
                 'offset'           => 0,
                 'post_type'        => 'Favorite',
-                'post_status'      => 'publish',	
+                'post_status'      => 'publish',
                 'post_author'      => $userId,
                 'meta_key'         => 'favorite_info_mlsnum',
                 'meta_value'       => $mls
@@ -130,7 +130,7 @@ class Favorites {
 
     public function addFavorite( $mls )
     {
-        $mls = (isset($_GET['mls']) ? $_GET['mls'] : $mls); 
+        $mls = (isset($_GET['mls']) ? $_GET['mls'] : $mls);
         $current_user = get_user_by('ID', (isset($_GET['userid']) ? $_GET['userid'] : get_current_user_id()));
 
         $postContent = [
@@ -138,8 +138,8 @@ class Favorites {
             'post_status' => 'publish',
             'post_type' => 'Favorite',
             'post_title' => 'Favorite - '.$mls.' - '.$current_user->display_name,
-            'comment_status' => 'closed',   
-            'ping_status' => 'closed',  
+            'comment_status' => 'closed',
+            'ping_status' => 'closed',
             'meta_input' => [ //POST META
                 'favorite_info_mlsnum' => $mls,
                 'favorite_info_date' => date('M j, Y').' @ '.date('g:i a e'),
@@ -152,26 +152,26 @@ class Favorites {
 
         return wp_insert_post( $postContent, true );
     }
-    
+
     public function deleteFavorite( $mls )
     {
-        $mls = (isset($_GET['mls']) ? $_GET['mls'] : $mls); 
+        $mls = (isset($_GET['mls']) ? $_GET['mls'] : $mls);
         $user_id = (isset($_GET['userid']) ? $_GET['userid'] : get_current_user_id());
-        
+
         $request = array(
             'posts_per_page'   => -1,
             'offset'           => 0,
             'post_type'        => 'Favorite',
-            'post_status'      => 'publish',	
+            'post_status'      => 'publish',
             'post_author'      => $user_id,
             'meta_key'         => 'favorite_info_mlsnum',
 	        'meta_value'       => $mls,
         );
 
         $favs= get_posts( $request );
-        
+
         foreach($favs as $dFav){
             wp_delete_post( $dFav->ID );
-        } 
+        }
     }
 }
