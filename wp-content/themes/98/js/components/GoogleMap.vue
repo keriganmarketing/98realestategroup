@@ -111,6 +111,7 @@ import GoogleMap from '../services/google-maps.service.js';
 
                 Object.keys(this.searchTerms).forEach(key => {
                     if (this.searchTerms[key] !== 'Any' && this.searchTerms[key] !== ''){
+                        console.log(typeof this.searchTerms[key]);
                         if(typeof this.searchTerms[key] === 'object'){
                             request += '&' + key + '=';
                             Object.keys(this.searchTerms[key]).forEach(k => {
@@ -122,7 +123,7 @@ import GoogleMap from '../services/google-maps.service.js';
                     }
                 });
 
-                let endpoint = "https://rafgc.kerigan.com/api/v1/map-search" + request
+                let endpoint = encodeURI("https://rafgc.kerigan.com/api/v1/map-search" + request);
                 console.log(endpoint);
 
                 axios.get(endpoint)
