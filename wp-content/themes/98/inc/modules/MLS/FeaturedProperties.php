@@ -155,6 +155,7 @@ class FeaturedProperties
         $request = (isset($_GET['mlsnumbers']) ? $_GET['mlsnumbers'] : []);
 
         $mlsNums = explode(' ', $request);
+        echo 'hi!';
 
         $client     = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
         $mlsNumbers = implode('|', $mlsNums);
