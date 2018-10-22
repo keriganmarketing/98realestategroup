@@ -27,7 +27,7 @@ class FullListing
 
     public function getListingInfo()
     {
-        return $this->listingInfo;
+        return $this->listingInfo->data;
     }
 
     public function getMlsNumber()
@@ -52,14 +52,14 @@ class FullListing
     public function setListingSeo()
     {
         add_filter('wpseo_title', function () {
-            $title = $this->listingInfo->street_num . ' ' . $this->listingInfo->street_name;
-            $title = ($this->listingInfo->unit_num != '' ? $title . ' ' . $this->listingInfo->unit_num : $title);
-            $metaTitle = $title . ' | $' . number_format($this->listingInfo->price) . ' | ' . $this->listingInfo->city . ' | ' . get_bloginfo('name');
+            $title = $this->listingInfo->data->street_num . ' ' . $this->listingInfo->data->street_name;
+            $title = ($this->listingInfo->data->unit_num != '' ? $title . ' ' . $this->listingInfo->data->unit_num : $title);
+            $metaTitle = $title . ' | $' . number_format($this->listingInfo->data->price) . ' | ' . $this->listingInfo->data->city . ' | ' . get_bloginfo('name');
             return $metaTitle;
         });
 
         add_filter('wpseo_metadesc', function () {
-            return strip_tags($this->listingInfo->remarks);
+            return strip_tags($this->listingInfo->data->remarks);
         });
 
         add_filter('wpseo_opengraph_image', function () {
@@ -67,11 +67,11 @@ class FullListing
         });
 
         add_filter('wpseo_canonical',  function () {
-            return get_the_permalink() . $this->listingInfo->mls_account . '/';
+            return get_the_permalink() . $this->listingInfo->data->mls_account . '/';
         });
 
         add_filter('wpseo_opengraph_url', function ($ogUrl) {
-            return get_the_permalink() . $this->listingInfo->mls_account . '/';
+            return get_the_permalink() . $this->listingInfo->data->mls_account . '/';
         }, 100, 1);
     }
 
@@ -80,7 +80,7 @@ class FullListing
         $media  = $this->listingInfo->data->media_objects->data;
         $return = [ 'photos','vtours','docs','files','links'];
 
-        echo '<pre>',print_r($media),'</pre>';
+        //echo '<pre>',print_r($media),'</pre>';
 
         foreach($media as $var){
             if($var->media_type == 'image/jpeg'){ $return['photos'][] = $var; }

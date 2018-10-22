@@ -33711,7 +33711,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 }
             });
 
-            var endpoint = encodeURI("https://navica.kerigan.comm/api/v1/map-search" + request);
+            var endpoint = encodeURI("https://navica.kerigan.com/api/v1/map-search" + request);
             console.log(endpoint);
 
             axios.get(endpoint).then(function (response) {
@@ -33730,7 +33730,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var _this3 = this;
 
             var vm = this;
-            window.axios.get('https://navica.kerigan.comm/api/v1/listing/' + mlsAccount).then(function (response) {
+            window.axios.get('https://navica.kerigan.com/api/v1/listing/' + mlsAccount).then(function (response) {
                 vm.selectedProperty = response.data;
                 vm.propOpen = true;
             }).catch(function (e) {
@@ -34071,7 +34071,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             advancedSearch: false,
             omni: null,
             omniTerms: [],
-            baseUrl: 'https://navica.kerigan.comm/api/v1/omnibar'
+            baseUrl: 'https://navica.kerigan.com/api/v1/omnibar'
         };
     },
 
@@ -34235,7 +34235,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             omniTerms: [],
             advancedOpen: false,
             mapViewSelected: false,
-            baseUrl: 'https://navica.kerigan.comm/api/v1/omnibar'
+            baseUrl: 'https://navica.kerigan.com/api/v1/omnibar'
         };
     },
     created: function created() {
@@ -34814,6 +34814,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -72022,7 +72025,7 @@ MarkerClusterer.prototype.addMarkers = function (markers, opt_nodraw) {
     if (markers.hasOwnProperty(key)) {
       this.pushMarkerTo_(markers[key]);
     }
-  }
+  }  
   if (!opt_nodraw) {
     this.redraw_();
   }
@@ -72741,7 +72744,7 @@ webpackContext.id = 513;
     Licence: MIT
     (c) Thorsten Lünborg
   */
-
+  
 (function (global, factory) {
 	 true ? module.exports = factory(__webpack_require__(260)) :
 	typeof define === 'function' && define.amd ? define(['vue'], factory) :
@@ -76183,7 +76186,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\FavoriteButton.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\FavoriteButton.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FavoriteButton.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76217,7 +76220,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\FilterForm.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\FilterForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FilterForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76251,7 +76254,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\GoogleMap.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\GoogleMap.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] GoogleMap.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76285,7 +76288,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\MiniListing.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\MiniListing.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] MiniListing.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76323,7 +76326,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\PhotoGallery.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\PhotoGallery.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PhotoGallery.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76357,7 +76360,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\QuickSearch.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\QuickSearch.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] QuickSearch.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76391,7 +76394,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\SearchBar.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\SearchBar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SearchBar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76425,7 +76428,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\SortForm.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\SortForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SortForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76459,7 +76462,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Acreage.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Acreage.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Acreage.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76493,7 +76496,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Area.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Area.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Area.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76527,7 +76530,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Bathrooms.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Bathrooms.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Bathrooms.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76561,7 +76564,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Bedrooms.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Bedrooms.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Bedrooms.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76595,7 +76598,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Details.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Details.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Details.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76629,7 +76632,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\MaxPrice.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\MaxPrice.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] MaxPrice.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76663,7 +76666,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\MinPrice.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\MinPrice.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] MinPrice.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76701,7 +76704,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\OmniBar.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\OmniBar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] OmniBar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76735,7 +76738,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\OnClickOutside.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\OnClickOutside.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -76768,7 +76771,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\PropertyType.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\PropertyType.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PropertyType.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76802,7 +76805,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Status.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\Status.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Status.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -76836,7 +76839,7 @@ var Component = __webpack_require__(10)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\dev\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\TotalSqft.vue"
+Component.options.__file = "C:\\Users\\bbair\\.valet\\Sites\\98realestategroup\\wp-content\\themes\\98\\js\\components\\fields\\TotalSqft.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TotalSqft.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -78218,41 +78221,53 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("All Types")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "Detached Single Family"
+      "value": "RD"
     }
   }, [_vm._v("Single Family Homes")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "%Land%"
+      "value": "LR"
     }
   }, [_vm._v("Residential Lots & Land")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "Condominiums"
+      "value": "RC"
     }
   }, [_vm._v("Condos")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "%ASF%"
+      "value": "RA"
     }
   }, [_vm._v("Townhomes")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "%MULTI%"
+      "value": "RQ"
     }
   }, [_vm._v("Dup/Tri/Quadplex Units")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "%Comm%"
+      "value": "LC"
     }
-  }, [_vm._v("Commercial")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("Commercial Land")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "Pre-Construction"
+      "value": "CA"
+    }
+  }, [_vm._v("Apartments/Mult-Family")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "RP"
     }
   }, [_vm._v("Pre-Construction")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "%Mobile%"
+      "value": "RM"
     }
   }, [_vm._v("Mobile/Manufactured")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "%Business%"
+      "value": "LF"
     }
-  }, [_vm._v("Multi-Zone")])])])
+  }, [_vm._v("Farm/Timberland")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "CV"
+    }
+  }, [_vm._v("Vacant Land")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "CI"
+    }
+  }, [_vm._v("Industrial")])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

@@ -19,6 +19,9 @@ use Includes\Modules\MLS\Favorites;
 
 $fullListing =  new FullListing();
 $listing      = $fullListing->getListingInfo();
+
+// echo '<pre>',print_r($listing),'</pre>';
+
 $favorite     = new Favorites();
 $current_user = wp_get_current_user();
 $isFav        = $favorite->checkFavorites( $listing->mls_account, $current_user->ID );

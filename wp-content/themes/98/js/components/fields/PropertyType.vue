@@ -5,15 +5,18 @@
             v-model="selected" 
             class="prop-type-input custom-select" >
             <option value="Any">All Types</option>
-            <option value="Detached Single Family">Single Family Homes</option>
-            <option value="%Land%">Residential Lots &amp; Land</option>
-            <option value="Condominiums">Condos</option>
-            <option value="%ASF%">Townhomes</option>
-            <option value="%MULTI%">Dup/Tri/Quadplex Units</option>
-            <option value="%Comm%">Commercial</option>
-            <option value="Pre-Construction">Pre-Construction</option>
-            <option value="%Mobile%">Mobile/Manufactured</option>
-            <option value="%Business%">Multi-Zone</option>
+            <option value="RD">Single Family Homes</option>
+            <option value="LR">Residential Lots &amp; Land</option>
+            <option value="RC">Condos</option>
+            <option value="RA">Townhomes</option>
+            <option value="RQ">Dup/Tri/Quadplex Units</option>
+            <option value="LC">Commercial Land</option>
+            <option value="CA">Apartments/Mult-Family</option>
+            <option value="RP">Pre-Construction</option>
+            <option value="RM">Mobile/Manufactured</option>
+            <option value="LF">Farm/Timberland</option>
+            <option value="CV">Vacant Land</option>
+            <option value="CI">Industrial</option>
         </select>
     </div>
 </template>
