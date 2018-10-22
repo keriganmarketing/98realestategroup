@@ -78240,51 +78240,51 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("All Types")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "RD"
+      "value": "Detached Single Family"
     }
   }, [_vm._v("Single Family Homes")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "LR"
+      "value": "Residential Lots/Land"
     }
   }, [_vm._v("Residential Lots & Land")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "RC"
+      "value": "Condominium"
     }
   }, [_vm._v("Condos")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "RA"
+      "value": "ASF (Attached Single Family)"
     }
   }, [_vm._v("Townhomes")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "RQ"
+      "value": "Dup/Tri/Quad (Multi-Unit)"
     }
   }, [_vm._v("Dup/Tri/Quadplex Units")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "LC"
+      "value": "Commercial Land"
     }
   }, [_vm._v("Commercial Land")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "CA"
+      "value": "Apartments/Multi-Family"
     }
   }, [_vm._v("Apartments/Mult-Family")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "RP"
+      "value": "Pre-Construction"
     }
   }, [_vm._v("Pre-Construction")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "RM"
+      "value": "Mobile/Manufactured"
     }
   }, [_vm._v("Mobile/Manufactured")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "LF"
+      "value": "Farm/Timberland"
     }
   }, [_vm._v("Farm/Timberland")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "CV"
+      "value": "Vacant Land"
     }
   }, [_vm._v("Vacant Land")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "CI"
+      "value": "Industrial"
     }
   }, [_vm._v("Industrial")])])])
 },staticRenderFns: []}
