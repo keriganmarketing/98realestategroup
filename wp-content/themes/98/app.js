@@ -21285,7 +21285,7 @@ function applyToTag (styleElement, obj) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.16
+ * Vue.js v2.5.17
  * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
@@ -26374,7 +26374,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.16';
+Vue.version = '2.5.17';
 
 /*  */
 
@@ -53731,7 +53731,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.10';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -53995,7 +53995,7 @@ return jQuery;
   var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboRange + rsVarRange + ']');
 
   /** Used to detect strings that need a more robust regexp to match words. */
-  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 
   /** Used to assign default `context` object properties. */
   var contextProps = [
@@ -54941,20 +54941,6 @@ return jQuery;
       }
     }
     return result;
-  }
-
-  /**
-   * Gets the value at `key`, unless `key` is "__proto__".
-   *
-   * @private
-   * @param {Object} object The object to query.
-   * @param {string} key The key of the property to get.
-   * @returns {*} Returns the property value.
-   */
-  function safeGet(object, key) {
-    return key == '__proto__'
-      ? undefined
-      : object[key];
   }
 
   /**
@@ -57414,7 +57400,7 @@ return jQuery;
           if (isArguments(objValue)) {
             newValue = toPlainObject(objValue);
           }
-          else if (!isObject(objValue) || (srcIndex && isFunction(objValue))) {
+          else if (!isObject(objValue) || isFunction(objValue)) {
             newValue = initCloneObject(srcValue);
           }
         }
@@ -60335,6 +60321,22 @@ return jQuery;
         array[length] = isIndex(index, arrLength) ? oldArray[index] : undefined;
       }
       return array;
+    }
+
+    /**
+     * Gets the value at `key`, unless `key` is "__proto__".
+     *
+     * @private
+     * @param {Object} object The object to query.
+     * @param {string} key The key of the property to get.
+     * @returns {*} Returns the property value.
+     */
+    function safeGet(object, key) {
+      if (key == '__proto__') {
+        return;
+      }
+
+      return object[key];
     }
 
     /**
@@ -72740,7 +72742,7 @@ webpackContext.id = 513;
 
 /*
     portal-vue
-    Version: 1.3.0
+    Version: 1.4.0
     Licence: MIT
     (c) Thorsten Lünborg
   */
@@ -72751,7 +72753,7 @@ webpackContext.id = 513;
 	(global.PortalVue = factory(global.Vue));
 }(this, (function (Vue) { 'use strict';
 
-Vue = Vue && 'default' in Vue ? Vue['default'] : Vue;
+Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
@@ -73024,7 +73026,7 @@ function mergeFn (a, b) {
 }
 
 // import { transports } from './wormhole'
-var Target = {
+var PortalTarget = {
   abstract: false,
   name: 'portalTarget',
   props: {
@@ -73075,21 +73077,9 @@ var Target = {
   },
   beforeDestroy: function beforeDestroy() {
     this.unwatch();
-    this.$el.innerHTML = '';
   },
 
 
-  methods: {
-    emitChange: function emitChange(newTransports, oldTransports) {
-      if (this.multiple) {
-        this.$emit('change', [].concat(toConsumableArray(newTransports)), [].concat(toConsumableArray(oldTransports)));
-      } else {
-        var newTransport = newTransports.length === 0 ? undefined : newTransports[0];
-        var oldTransport = oldTransports.length === 0 ? undefined : oldTransports[0];
-        this.$emit('change', _extends({}, newTransport), _extends({}, oldTransport));
-      }
-    }
-  },
   computed: {
     ownTransports: function ownTransports() {
       var transports$$1 = this.transports[this.name] || [];
@@ -73101,18 +73091,8 @@ var Target = {
     passengers: function passengers() {
       return combinePassengers(this.ownTransports, this.slotProps);
     },
-    children: function children() {
-      return this.passengers.length !== 0 ? this.passengers : this.$slots.default || [];
-    },
     hasAttributes: function hasAttributes() {
       return Object.keys(this.attributes).length > 0;
-    },
-    noWrapper: function noWrapper() {
-      var noWrapper = !this.hasAttributes && this.slim;
-      if (noWrapper && this.children.length > 1) {
-        console.warn('[portal-vue]: PortalTarget with `slim` option received more than one child element.');
-      }
-      return noWrapper;
     },
     withTransition: function withTransition() {
       return !!this.transition;
@@ -73140,29 +73120,66 @@ var Target = {
       data.on = this.transitionEvents;
 
       return data;
+    },
+    transportedClasses: function transportedClasses() {
+      return this.ownTransports.map(function (transport) {
+        return transport.class;
+      }).reduce(function (array, subarray) {
+        return array.concat(subarray);
+      }, []);
+      //.filter((string, index, array) => array.indexOf(string) === index)
     }
   },
 
+  methods: {
+    emitChange: function emitChange(newTransports, oldTransports) {
+      if (this.multiple) {
+        this.$emit('change', [].concat(toConsumableArray(newTransports)), [].concat(toConsumableArray(oldTransports)));
+      } else {
+        var newTransport = newTransports.length === 0 ? undefined : newTransports[0];
+        var oldTransport = oldTransports.length === 0 ? undefined : oldTransports[0];
+        this.$emit('change', _extends({}, newTransport), _extends({}, oldTransport));
+      }
+    },
+
+    // can't be a computed prop because it has to "react" to $slot changes.
+    children: function children() {
+      return this.passengers.length !== 0 ? this.passengers : this.$slots.default || [];
+    },
+    noWrapper: function noWrapper() {
+      var noWrapper = !this.hasAttributes && this.slim;
+      if (noWrapper && this.children().length > 1) {
+        console.warn('[portal-vue]: PortalTarget with `slim` option received more than one child element.');
+      }
+      return noWrapper;
+    }
+  },
   render: function render(h) {
     this.$options.abstract = true;
-    var TransitionType = this.noWrapper ? 'transition' : 'transition-group';
+    var noWrapper = this.noWrapper();
+    var children = this.children();
+    var TransitionType = noWrapper ? 'transition' : 'transition-group';
     var Tag = this.tag;
 
     if (this.withTransition) {
       return h(
         TransitionType,
         babelHelperVueJsxMergeProps([this.transitionData, { 'class': 'vue-portal-target' }]),
-        [this.children]
+        [children]
       );
     }
 
     // Solves a bug where Vue would sometimes duplicate elements upon changing multiple or disabled
     var wrapperKey = this.ownTransports.length;
 
-    return this.noWrapper ? this.children[0] : h(
+    return noWrapper ? children[0] : h(
       Tag,
-      babelHelperVueJsxMergeProps([{ 'class': 'vue-portal-target' }, this.attributes, { key: wrapperKey }]),
-      [this.children]
+      babelHelperVueJsxMergeProps([{
+        'class': 'vue-portal-target ' + this.transportedClasses.join(' ')
+      }, this.attributes, {
+        key: wrapperKey
+      }]),
+      [children]
     );
   }
 };
@@ -73187,6 +73204,7 @@ var Portal = {
       } },
     tag: { type: [String], default: 'DIV' },
     targetEl: { type: inBrowser ? [String, HTMLElement] : String },
+    targetClass: { type: String },
     to: {
       type: String,
       default: function _default() {
@@ -73229,7 +73247,7 @@ var Portal = {
 
   watch: {
     to: function to(newValue, oldValue) {
-      oldValue && this.clear(oldValue);
+      oldValue && oldValue !== newValue && this.clear(oldValue);
       this.sendUpdate();
     },
     targetEl: function targetEl(newValue, oldValue) {
@@ -73245,11 +73263,13 @@ var Portal = {
     },
     sendUpdate: function sendUpdate() {
       var slotContent = this.normalizedSlots();
+
       if (slotContent) {
         wormhole.open({
           from: this.name,
           to: this.to,
           passengers: [].concat(toConsumableArray(slotContent)),
+          class: this.targetClass && this.targetClass.split(' '),
           order: this.order
         });
       } else {
@@ -73276,7 +73296,7 @@ var Portal = {
       }
 
       if (el) {
-        var newTarget = new Vue(_extends({}, Target, {
+        var newTarget = new Vue(_extends({}, PortalTarget, {
           parent: this,
           propsData: {
             name: this.to,
@@ -73301,21 +73321,13 @@ var Portal = {
     if (children.length && this.disabled) {
       // hack to make child components skip the portal when defining their $parent
       this.$options.abstract = true;
-      return children.length <= 1 && this.slim ? children[0] : h(
-        Tag,
-        null,
-        [this.normalizeChildren(children)]
-      );
+      return children.length <= 1 && this.slim ? children[0] : h(Tag, [this.normalizeChildren(children)]);
     } else {
-      return h(
-        Tag,
-        {
-          'class': 'v-portal',
-          style: 'display: none',
-          key: 'v-portal-placeholder'
-        },
-        []
-      );
+      return h(Tag, {
+        'class': 'v-portal',
+        style: 'display: none',
+        key: 'v-portal-placeholder'
+      });
       // h(this.tag, { class: { 'v-portal': true }, style: { display: 'none' }, key: 'v-portal-placeholder' })
     }
   }
@@ -73324,8 +73336,8 @@ var Portal = {
 function install(Vue$$1) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  Vue$$1.component(opts.portalName || 'portal', Portal);
-  Vue$$1.component(opts.portalTargetName || 'portalTarget', Target);
+  Vue$$1.component(opts.portalName || 'Portal', Portal);
+  Vue$$1.component(opts.portalTargetName || 'PortalTarget', PortalTarget);
 }
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use({ install: install });
@@ -73334,7 +73346,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 var index = {
   install: install,
   Portal: Portal,
-  PortalTarget: Target,
+  PortalTarget: PortalTarget,
   Wormhole: wormhole
 };
 
@@ -75541,9 +75553,16 @@ var TetherClass = (function (_Evented) {
             this.options.bodyElement.appendChild(this.element);
           }
         } else {
+          var isFullscreenElement = function isFullscreenElement(e) {
+            var d = e.ownerDocument;
+            var fe = d.fullscreenElement || d.webkitFullscreenElement || d.mozFullScreenElement || d.msFullscreenElement;
+            return fe === e;
+          };
+
           var offsetParentIsBody = true;
+
           var currentNode = this.element.parentNode;
-          while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY') {
+          while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY' && !isFullscreenElement(currentNode)) {
             if (getComputedStyle(currentNode).position !== 'static') {
               offsetParentIsBody = false;
               break;
