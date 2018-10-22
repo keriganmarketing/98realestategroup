@@ -123,6 +123,8 @@
 <style scoped>
     .photo-tile {
         overflow: hidden;
+    }
+    .photo-tile img {
         cursor: pointer;
     }
     .modal-frame {
