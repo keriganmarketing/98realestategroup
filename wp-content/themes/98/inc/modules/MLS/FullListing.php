@@ -80,8 +80,10 @@ class FullListing
         $media  = $this->listingInfo->data->media_objects->data;
         $return = [ 'photos','vtours','docs','files','links'];
 
+        echo '<pre>',print_r($media),'</pre>';
+
         foreach($media as $var){
-            if($var->media_type == 'Photo'){ $return['photos'][] = $var; }
+            if($var->media_type == 'image/jpeg'){ $return['photos'][] = $var; }
             if($var->media_type == 'Virtual Tour'){ $return['vtours'][] = $var; }
             if($var->media_type == 'Faxed in Documents'){ $return['docs'][] = $var; }
             if($var->media_type == 'File'){ $return['files'][] = $var; }
