@@ -15,7 +15,7 @@ class AgentListings {
 
     public function contactTheMothership()
     {
-        $client  = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
+        $client  = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
         $apiCall = $client->request(
             'GET', 'agent-listings/' . $this->agentID
         );
@@ -35,13 +35,13 @@ class AgentListings {
 
         if(is_array($allListings)){
             array_map(function($listing) use (&$activeListings, &$soldListings){
-                if($listing->status == 'Active' || $listing->status == 'Contingent' || $listing->status == 'Pending'){ 
-                    array_push($activeListings, $listing); 
+                if($listing->status == 'Active' || $listing->status == 'Contingent' || $listing->status == 'Pending'){
+                    array_push($activeListings, $listing);
                 }else{
                     if(date('Ymd', strtotime($listing->sold_on)) >= date('Ymd', strtotime('-6 months'))){
                         array_push($soldListings, $listing);
-                    } 
-                }  
+                    }
+                }
             }, $allListings);
         }
 

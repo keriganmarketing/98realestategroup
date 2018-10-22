@@ -38,7 +38,7 @@ class FullListing
 
     public function create()
     {
-        $client  = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
+        $client  = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
         $apiCall = $client->request(
             'GET', 'listing/' . $this->mlsNumber
         );
@@ -77,11 +77,11 @@ class FullListing
 
     public function assembleMedia()
     {
-        $media  = $this->listingInfo->media_objects->data;
+        $media  = $this->listingInfo->data->media_objects->data;
         $return = [ 'photos','vtours','docs','files','links'];
-    
+
         foreach($media as $var){
-            if($var->media_type == 'Photo'){ $return['photos'][] = $var; } 
+            if($var->media_type == 'Photo'){ $return['photos'][] = $var; }
             if($var->media_type == 'Virtual Tour'){ $return['vtours'][] = $var; }
             if($var->media_type == 'Faxed in Documents'){ $return['docs'][] = $var; }
             if($var->media_type == 'File'){ $return['files'][] = $var; }

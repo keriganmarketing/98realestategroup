@@ -55,12 +55,12 @@ class FeaturedProperties
           ));
     }
 
-    function postMeta() 
-    {         
+    function postMeta()
+    {
         global $post;
 
-        $custom = get_post_custom($post->ID);    
-         
+        $custom = get_post_custom($post->ID);
+
         echo '<input type="hidden" name="fprop-nonce" id="fprop-nonce" value="' .
         wp_create_nonce( 'fprop-nonce' ) . '" />';
     }
@@ -89,19 +89,19 @@ class FeaturedProperties
     public function savePost()
     {
         global $post;
-               
+
         if ( !wp_verify_nonce( $_POST['fprop-nonce'], 'fprop-nonce' )) {
             return $post->ID;
         }
-        
+
         if ( !current_user_can( 'edit_post', $post->ID ))
             return $post->ID;
     }
 
     public function postMessages( $messages ) {
- 
+
         global $post, $post_ID;
-       
+
         $messages['fprop'] = array(
           0 => '', // Unused. Messages start at index 1.
           1 => sprintf( __('Team member updated. <a href="%s">View item</a>'), esc_url( get_permalink($post_ID) ) ),
@@ -118,13 +118,13 @@ class FeaturedProperties
             date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
           10 => sprintf( __('Team member draft updated. <a target="_blank" href="%s">Preview member</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
         );
-       
+
         return $messages;
       }
 
       public function getFeaturedProp()
-      {    
-        $getFprop = get_posts( array( 
+      {
+        $getFprop = get_posts( array(
             'post_type'         => 'fprop',
             'posts_per_page'	=> -1,
             'orderby'			=> 'menu_order',
@@ -134,12 +134,12 @@ class FeaturedProperties
         ) );
 
         $featuredList = [];
-        
-        foreach ( $getFprop as $fprop ){            
+
+        foreach ( $getFprop as $fprop ){
             $featuredList[] = $fprop->post_title;
         }
 
-        $client     = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
+        $client     = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
         $mlsNumbers = implode('|', $featuredList);
 
         $apiCall = $client->request(
@@ -157,7 +157,7 @@ class FeaturedProperties
         $mlsNums = explode(' ', $request);
         echo 'hi!';
 
-        $client     = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
+        $client     = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
         $mlsNumbers = implode('|', $mlsNums);
 
         $apiCall = $client->request(

@@ -119,7 +119,7 @@
                 omniTerms: [],
                 advancedOpen: false,
                 mapViewSelected: false,
-                baseUrl: 'https://rafgc.kerigan.com/api/v1/omnibar'
+                baseUrl: 'https://navica.kerigan.com/api/v1/omnibar'
             }
         },
         created(){

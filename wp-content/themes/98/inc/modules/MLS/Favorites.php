@@ -62,7 +62,7 @@ class Favorites {
                 $favList[] = $fav->favorite_info_mlsnum;
             }
 
-            $client     = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
+            $client     = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
             $mlsNumbers = implode('|', $favList);
 
             $apiCall = $client->request(

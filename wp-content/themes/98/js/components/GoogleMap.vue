@@ -123,7 +123,7 @@ import GoogleMap from '../services/google-maps.service.js';
                     }
                 });
 
-                let endpoint = encodeURI("https://rafgc.kerigan.com/api/v1/map-search" + request);
+                let endpoint = encodeURI("https://navica.kerigan.com/api/v1/map-search" + request);
                 console.log(endpoint);
 
                 axios.get(endpoint)
@@ -143,7 +143,7 @@ import GoogleMap from '../services/google-maps.service.js';
 
             getProperty(mlsAccount) {
             let vm = this;
-            window.axios.get('https://rafgc.kerigan.com/api/v1/listing/' + mlsAccount)
+            window.axios.get('https://navica.kerigan.com/api/v1/listing/' + mlsAccount)
                 .then(response => {
                     vm.selectedProperty = response.data;
                     vm.propOpen = true;

@@ -103,7 +103,7 @@
                 advancedSearch: false,
                 omni: null,
                 omniTerms: [],
-                baseUrl: 'https://rafgc.kerigan.com/api/v1/omnibar'
+                baseUrl: 'https://navica.kerigan.com/api/v1/omnibar'
             }
         },
 

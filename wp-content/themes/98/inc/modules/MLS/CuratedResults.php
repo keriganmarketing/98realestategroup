@@ -78,7 +78,7 @@ class CuratedResults {
 
     public function contactTheMothership()
     {
-        $client  = new Client(['base_uri' => 'https://rafgc.kerigan.com/api/v1/']);
+        $client  = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
         $apiCall = $client->request(
             'GET', $this->endPoint . $this->makeRequest()
         );

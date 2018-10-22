@@ -33711,7 +33711,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 }
             });
 
-            var endpoint = encodeURI("https://rafgc.kerigan.com/api/v1/map-search" + request);
+            var endpoint = encodeURI("https://navica.kerigan.comm/api/v1/map-search" + request);
             console.log(endpoint);
 
             axios.get(endpoint).then(function (response) {
@@ -33730,7 +33730,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var _this3 = this;
 
             var vm = this;
-            window.axios.get('https://rafgc.kerigan.com/api/v1/listing/' + mlsAccount).then(function (response) {
+            window.axios.get('https://navica.kerigan.comm/api/v1/listing/' + mlsAccount).then(function (response) {
                 vm.selectedProperty = response.data;
                 vm.propOpen = true;
             }).catch(function (e) {
@@ -34071,7 +34071,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             advancedSearch: false,
             omni: null,
             omniTerms: [],
-            baseUrl: 'https://rafgc.kerigan.com/api/v1/omnibar'
+            baseUrl: 'https://navica.kerigan.comm/api/v1/omnibar'
         };
     },
 
@@ -34235,7 +34235,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             omniTerms: [],
             advancedOpen: false,
             mapViewSelected: false,
-            baseUrl: 'https://rafgc.kerigan.com/api/v1/omnibar'
+            baseUrl: 'https://navica.kerigan.comm/api/v1/omnibar'
         };
     },
     created: function created() {
@@ -72022,7 +72022,7 @@ MarkerClusterer.prototype.addMarkers = function (markers, opt_nodraw) {
     if (markers.hasOwnProperty(key)) {
       this.pushMarkerTo_(markers[key]);
     }
-  }  
+  }
   if (!opt_nodraw) {
     this.redraw_();
   }
@@ -72741,7 +72741,7 @@ webpackContext.id = 513;
     Licence: MIT
     (c) Thorsten Lünborg
   */
-  
+
 (function (global, factory) {
 	 true ? module.exports = factory(__webpack_require__(260)) :
 	typeof define === 'function' && define.amd ? define(['vue'], factory) :
