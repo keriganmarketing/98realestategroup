@@ -30,7 +30,9 @@ $selectedAgent = (isset($_GET['selected_agent']) && isset($_GET['reason']) && $_
 $agents     = new Team();
 $agentArray = $agents->getTeam();
 foreach($agentArray as $agent){
-	$agentOptions .= '<option value="'.$agent['name'].'" '.($selectedAgent == $agent['slug'] ? 'selected' : '').' >'.$agent['name'].'</option>';
+    if($agent['slug'] != 'kristy-lee'){
+        $agentOptions .= '<option value="'.$agent['name'].'" '.($selectedAgent == $agent['slug'] ? 'selected' : '').' >'.$agent['name'].'</option>';
+    }
 }
 
 $reasonArray = array(

@@ -4,7 +4,7 @@
             <div :class="itemClass" v-for="(photo, index) in photos" v-bind:key="photo.id" >
                 <div class="photo-tile has-text-centered">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <img @click="openViewer(index)" class="embed-responsive-item" style="height:auto;" :id="'photo-' + photo.id" :src="photo.url" :alt="photo.name" >
+                        <img @click="openViewer(index)" class="embed-responsive-item cursor-pointer" style="height:auto;" :id="'photo-' + photo.id" :src="photo.url" :alt="photo.name" >
                     </div>
                 </div>
             </div>
@@ -123,6 +123,7 @@
 <style scoped>
     .photo-tile {
         overflow: hidden;
+        cursor: pointer;
     }
     .modal-frame {
         z-index: 999999999999999;
