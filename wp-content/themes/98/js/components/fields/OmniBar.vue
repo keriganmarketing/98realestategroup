@@ -8,7 +8,7 @@
             class="search-select-input"
         >
             <span v-if="value !== null">{{ toTitleCase(value) }}</span>
-            <span v-else class="search-select-placeholder">Address/MLS#/Community</span>
+            <span v-else class="search-select-placeholder">Address, MLS, Area</span>
         </button>
         <div ref="dropdown" v-show="isOpen" class="search-select-dropdown">
             <input

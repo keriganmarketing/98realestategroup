@@ -78692,7 +78692,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [(_vm.value !== null) ? _c('span', [_vm._v(_vm._s(_vm.toTitleCase(_vm.value)))]) : _c('span', {
     staticClass: "search-select-placeholder"
-  }, [_vm._v("Address/MLS#/Community")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Address, MLS, Area")])]), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -78786,7 +78786,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-6 col-sm-6 col-lg-2"
+    staticClass: "col-xs-12 col-sm-4 col-md-3 col-xl-2 offset-md-3 offset-lg-0"
   }, [_c('omni-bar', {
     attrs: {
       "options": _vm.omniTerms,
@@ -78801,11 +78801,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "omni"
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-6 col-lg-2"
+    staticClass: "col-xs-6 col-sm-4 col-md-3 col-lg-2"
   }, [_c('area-field')], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-6 col-lg-2"
+    staticClass: "col-xs-6 col-sm-4 col-md-3 col-lg-2"
   }, [_c('property-type')], 1), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary dropdown-toggle col-xs-6 col-sm-3 col-lg-1",
+    staticClass: "btn btn-primary dropdown-toggle col-xs-6 col-md-4 col-lg-1 offset-md-3 offset-lg-0",
     attrs: {
       "type": "button",
       "data-toggle": "dropdown",
@@ -78816,7 +78816,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": _vm.toggleAdvanced
     }
   }, [_vm._v("Filter")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-danger col-xs-6 col-sm-3 col-lg-1",
+    staticClass: "btn btn-danger col-xs-6 col-md-5 col-lg-1",
     attrs: {
       "type": "submit"
     }
@@ -78876,10 +78876,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-lg-4"
+    staticClass: "col-xs-12 col-md-9 col-lg-3 col-xl-4 offset-md-3 offset-lg-0"
   }, [_c('p', {
     staticClass: "search-form-label"
-  }, [_vm._v("PROPERTY"), _c('br'), _vm._v("QUICK SEARCH")])])
+  }, [_vm._v("PROPERTY "), _c('span', [_vm._v("QUICK SEARCH")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
