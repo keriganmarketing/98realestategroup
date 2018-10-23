@@ -13,7 +13,7 @@ $current_user = wp_get_current_user();
 $isFav        = $favorite->checkFavorites( $listing->mls_account, $current_user->ID );
 
 $photos = $listing->media_objects->data;
-$preferredPhoto = (isset($photos[0]) && $photos[0]->media_type == 'Photo' ? $photos[0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
+$preferredPhoto = (isset($photos[0]) && $photos[0]->media_type == 'image/jpeg' ? $photos[0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
 
 ?>
 <div class="feat-prop-container">

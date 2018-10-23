@@ -15,7 +15,7 @@ use Includes\Modules\MLS\OfficeListings;
  * @package Ninetyeight Real Estate Group
  */
 
-$officeListings = new OfficeListings(131);
+$officeListings = new OfficeListings(258);
 $searchResults  = $officeListings->getListings();
 $currentRequest = $officeListings->getCurrentRequest();
 $resultMeta     = $officeListings->getResultMeta();

@@ -100,7 +100,10 @@ class QuickSearch
             }
         }
 
-        return $request . '&page=' . get_query_var( 'page' ) . '&excludes=St. George Island|Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County';
+        $request = $request . '&page=' . get_query_var( 'page' ) . '&excludes=St. George Island|Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County';
+        // echo $request;
+        
+        return $request;
     }
 
     public function contactTheMothership()

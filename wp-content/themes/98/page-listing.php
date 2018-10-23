@@ -19,12 +19,15 @@ use Includes\Modules\MLS\Favorites;
 
 $fullListing =  new FullListing();
 $listing      = $fullListing->getListingInfo();
+
+// echo '<pre>',print_r($listing),'</pre>';
+
 $favorite     = new Favorites();
 $current_user = wp_get_current_user();
 $isFav        = $favorite->checkFavorites( $listing->mls_account, $current_user->ID );
 $media        = $fullListing->getMedia();
 $photos       = $media['photos'];
-$tour         = (isset($media['vtours']) ? $media['vtours'][0] : null);
+$tour         = (isset($listing->virtual_tour) ? $listing->virtual_tour : null);
 $mainPhoto    = (isset($media['photos'][0]->url) ? $media['photos'][0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
 $location     = $listing->location;
 
@@ -69,14 +72,14 @@ get_header(); ?>
 								<?php } ?>
 							</div>
 							<div class="col-md-6">
-								<div id="req-info-btn" class="text-center">
+								<div id="req-info-btn" class="text-center text-md-right">
 									<form class="form form-inline" action="/contact/" method="get" style="display:inline;" >
 										<input type="hidden" name="reason_for_contact" value="Property inquiry" />
 										<input type="hidden" name="mls_number" value="<?php echo $listing->mls_account; ?>" />
 										<?php if(isset($agent)){ ?>
 										<input type="hidden" name="selected_agent" value="<?php echo $agent['slug']; ?>" />
 										<?php } ?>
-										<button type="submit" class="btn btn-primary" >Request Info</button>
+										<button type="submit" class="btn btn-primary mb-2 mt-5" >Request Info</button>
 
 										<?php if ($current_user->ID != 0){ ?>
 											<favorite-button 
@@ -87,11 +90,15 @@ get_header(); ?>
 											</favorite-button>
 										<?php }else{
 											$redirect_to = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
-											<a href="/sign-in?redirect_to=<?php echo $redirect_to; ?>" class="btn btn-danger">Sign in to save this property</a>
+											<a href="/sign-in?redirect_to=<?php echo $redirect_to; ?>" class="btn btn-danger mb-2">Sign in to save this property</a>
 										<?php } ?>
-
+										<?php if ($tour){ ?>
+											<a href="<?php echo $tour; ?>" target="_blank" class="btn btn-danger">View Virtual tour</a>
+										<?php } ?>
 									</form>
+
 								</div>
+
 							</div>
 						</div>
 						<div class="row">
@@ -116,42 +123,6 @@ get_header(); ?>
 							</div>
 
 							<div class="listing-details col-md-6">
-								<h3 class="left"><span>Media & Files</span></h3>
-								<table class="table">
-								<?php
-									if(!isset($listing->sold_on)){
-									if(isset($media['vtours'])){
-										foreach($media['vtours'] as $vtour){
-											echo '<tr><td>'.$vtour->media_type.'</td><td><a href="'.$vtour->url.'" target="_blank" ><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Open Tour</a></td></tr>';
-											$vTourLink = $vtour->url;
-										}
-										$vTour = TRUE;
-									}
-									if(isset($media['docs'])){
-										foreach($media['docs'] as $faxedDoc){
-											echo '<tr><td>'.$faxedDoc->media_type.'</td><td><a href="http://rafgc.net/RAFSGReports/media/'.$faxedDoc->file_name.'" target="_blank" ><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Open Document</a></td></tr>';
-										}
-									}
-									if(isset($media['files'])){
-										foreach($media['files'] as $file){
-											echo '<tr><td>'.$file->media_type.'</td><td><a href="http://rafgc.net/RAFSGReports/media/'.$file->file_name.'" target="_blank" ><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Open File</a></td></tr>';
-										}
-									}
-									if(isset($media['links'])){
-										foreach($media['links'] as $link){
-											echo '<tr><td>'.$link->media_type.'</td><td><a href="'.$link->url.'" target="_blank" ><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Open Link</a></td></tr>';
-										}
-									}
-								}
-
-									ob_flush();
-								?>
-								</table>
-							</div>
-						</div>
-						<div class="row">
-
-							<div class="listing-details col-md-6">
 								<h3 class="left"><span>Construction Details</span></h3>
 								<table class="table">
 								<?php if($listing->waterfront_feet != '' && $listing->waterfront_feet != '0'){ ?><tr><td>WF Feet</td><td><?php echo $listing->waterfront_feet; ?></td></tr><?php } ?>
@@ -170,7 +141,10 @@ get_header(); ?>
 								</table>
 							</div>
 							<?php ob_flush(); ?>
-							<div class="listing-details col-md-6">
+
+						</div>
+						<div class="row">
+							<div class="listing-details col">
 								<h3 class="left"><span>Area Information</span></h3>
 								<table class="table">
 								<?php if($listing->area != ''){ ?><tr><td>Area</td><td><?php echo $listing->area; ?></td></tr><?php } ?>
@@ -190,8 +164,8 @@ get_header(); ?>
 								</table>
 							</div>
 
-							<div class="clearfix"></div>
-							<div class="listing-map col-xs-12">
+							
+							<div class="listing-map col">
 								<h3>Map Location</h3>
 								<p>Due to new roads in our area, some properties may now show up in exactly the right location.</p>
 								<div class="listing-map-frame">
