@@ -7,7 +7,7 @@
                     for ${{ listingData.sold_for.toLocaleString() }}</span>
                 <span v-if="listingData.status == 'Pending'" class="status-flag under-contract">SALE PENDING</span>
                 <span v-if="listingData.status == 'Contingent'" class="status-flag contingent">SALE CONTINGENT</span>
-                <img :src="listingData.media_objects.data[0].url" class="img-responsive"
+                <img :src="listingData.media_objects.url" class="img-responsive"
                         :alt="'MLS Property ' + listingData.mls_account + ' for sale in ' + listingData.city"/>
             </div>
         </div>
