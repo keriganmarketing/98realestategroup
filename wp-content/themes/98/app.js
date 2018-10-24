@@ -78316,7 +78316,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("SALE CONTINGENT")]) : _vm._e(), _vm._v(" "), _c('img', {
     staticClass: "img-responsive",
     attrs: {
-      "src": _vm.listingData.media_objects.data[0].url,
+      "src": _vm.listingData.media_objects.url,
       "alt": 'MLS Property ' + _vm.listingData.mls_account + ' for sale in ' + _vm.listingData.city
     }
   })])]), _vm._v(" "), _c('div', {
