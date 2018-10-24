@@ -19,11 +19,13 @@
 	<a style="display:none;" class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'ninetyeight' ); ?></a>
     <div id="top">
         <header id="masthead" class="site-header">
-			<div class="top-phone pull-md-right" ><a href="tel:850-648-2200">(850) 648-2200</a></div>
+			<div class="top-phone mobile" ><a href="tel:850-648-2200">(850) 648-2200</a></div>
 			<div class="navbar-static-top navbar-transparent">
-				<div class="container">
+				<div class="container no-gutter">
 					
-					<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbar-header">
+					<div class="top-phone desktop" ><a href="tel:850-648-2200">(850) 648-2200</a></div>
+
+					<button class="navbar-toggler hidden-lg-up pull-xs-right" type="button" data-toggle="collapse" data-target="#navbar-header">
 						<span class="icon-box">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -48,6 +50,8 @@
 					<a href="/" class="navbar-brand">
 						<img src="/wp-content/themes/98/img/logo.svg" alt="98 Real Estate Group, Mexico Beach Florida" class="img-fluid" style="width:222px;"  >
 					</a>
+
+					
 
 				</div>
 			</div>

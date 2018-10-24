@@ -3,10 +3,10 @@
         <input type="hidden" name="q" value="search" >
         <div class="container no-gutter">
             <div class="row">
-                <div class="col-xs-12 col-md-9 col-lg-3 col-xl-4 offset-md-3 offset-lg-0">
+                <div class="col-xs-12 col-md-9 col-lg-4 offset-md-3 offset-lg-0">
                     <p class="search-form-label">PROPERTY <span>QUICK SEARCH</span></p>
                 </div>
-                <div class="col-xs-12 col-sm-4 col-md-3 col-xl-2 offset-md-3 offset-lg-0">
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
                     <omni-bar
                         v-model="omni"
                         :options="omniTerms"
@@ -20,15 +20,20 @@
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                     <property-type></property-type>
                 </div>
-                <button
-                    @click="toggleAdvanced"
-                    type="button"
-                    class="btn btn-primary dropdown-toggle col-xs-6 col-md-4 col-lg-1 offset-md-3 offset-lg-0"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    >Filter</button>
-                <button type="submit" class="btn btn-danger col-xs-6 col-md-5 col-lg-1" >Search</button>
+                <div class="col-xs-12 col-md-3 col-lg-2">
+                    <div class="row no-gutter">
+                        <button
+                            @click="toggleAdvanced"
+                            type="button"
+                            class="btn btn-primary dropdown-toggle col-xs-6"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            >Filter</button>
+                        <button type="submit" class="btn btn-danger col-xs-6" >Search</button>
+                    </div>
+                </div>
+                
             </div>
         </div>
         <div v-if="advancedSearch" id="advanced-menu" class="advanced-menu col-xs-12">

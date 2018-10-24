@@ -34062,6 +34062,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {},
@@ -78786,7 +78791,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-sm-4 col-md-3 col-xl-2 offset-md-3 offset-lg-0"
+    staticClass: "col-xs-12 col-sm-4 col-md-3 col-lg-2"
   }, [_c('omni-bar', {
     attrs: {
       "options": _vm.omniTerms,
@@ -78804,8 +78809,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-6 col-sm-4 col-md-3 col-lg-2"
   }, [_c('area-field')], 1), _vm._v(" "), _c('div', {
     staticClass: "col-xs-6 col-sm-4 col-md-3 col-lg-2"
-  }, [_c('property-type')], 1), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary dropdown-toggle col-xs-6 col-md-4 col-lg-1 offset-md-3 offset-lg-0",
+  }, [_c('property-type')], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-3 col-lg-2"
+  }, [_c('div', {
+    staticClass: "row no-gutter"
+  }, [_c('button', {
+    staticClass: "btn btn-primary dropdown-toggle col-xs-6",
     attrs: {
       "type": "button",
       "data-toggle": "dropdown",
@@ -78816,11 +78825,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": _vm.toggleAdvanced
     }
   }, [_vm._v("Filter")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-danger col-xs-6 col-md-5 col-lg-1",
+    staticClass: "btn btn-danger col-xs-6",
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("Search")])])]), _vm._v(" "), (_vm.advancedSearch) ? _c('div', {
+  }, [_vm._v("Search")])])])])]), _vm._v(" "), (_vm.advancedSearch) ? _c('div', {
     staticClass: "advanced-menu col-xs-12",
     attrs: {
       "id": "advanced-menu"
@@ -78876,7 +78885,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-xs-12 col-md-9 col-lg-3 col-xl-4 offset-md-3 offset-lg-0"
+    staticClass: "col-xs-12 col-md-9 col-lg-4 offset-md-3 offset-lg-0"
   }, [_c('p', {
     staticClass: "search-form-label"
   }, [_vm._v("PROPERTY "), _c('span', [_vm._v("QUICK SEARCH")])])])
