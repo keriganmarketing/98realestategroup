@@ -29,7 +29,7 @@ $preferredPhoto = (isset($photos[0]) && $photos[0]->media_type == 'image/jpeg' ?
             <?php if ( $isNew && $listing->status == 'Active' ) { ?>
                 <span class="status-flag just-listed">Just Listed</span>
             <?php } ?>
-            <?php if ( $listing->status == 'Sold' ) { ?>
+            <?php if ( $listing->status == 'Sold/Closed' ) { ?>
                 <span class="status-flag sold">Sold on <?php echo date( 'M j, Y', strtotime( $listing->sold_on ) ); ?><br>
                     for $<?php echo number_format( $listing->sold_for ); ?></span>
             <?php } ?>
