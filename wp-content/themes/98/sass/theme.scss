@@ -180,12 +180,6 @@ select[multiple] {
 	background: #562729;
 }
 
-#top .navbar-brand h1 span {
-	display: block;
-    text-indent: -9999px;
-    line-height: 0;
-}
-
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin-bottom: 0.5rem;
     font-weight: normal;
@@ -237,9 +231,14 @@ ul#primary-menu {
     padding: 0px;
 	text-align:right;
 }
+
+a.navbar-brand img {
+    width: 204px;
+}
+
 @media screen and (min-width: 768px){
 	ul#primary-menu li.menu-item {
-		display: inline-block;
+        display: inline-block;
 	}
 	
 	#mast { 
@@ -256,9 +255,10 @@ ul#primary-menu {
 		min-height: 360px;
 	}
 	
-	a.navbar-brand svg {
+	a.navbar-brand img {
 	    margin: 12px 0 -44px;
         float: left;
+        position: absolute;
 	}
 }
 
@@ -276,7 +276,7 @@ ul#primary-menu {
 }
 
 @media (max-width: 1299px) and (min-width:768px) { 
-	a.navbar-brand svg {
+	a.navbar-brand img {
 		position: absolute;
 		left:10px;
 		margin:0;
@@ -285,7 +285,7 @@ ul#primary-menu {
 }
 
 @media (max-width: 769px) { 
-	a.navbar-brand svg {
+	a.navbar-brand img {
 		position: absolute;
 	}
 	#top header {
