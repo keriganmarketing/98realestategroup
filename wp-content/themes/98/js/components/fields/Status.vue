@@ -6,7 +6,7 @@
             <span class="custom-control-label">Active</span>
         </label>
         <label class="custom-control custom-checkbox">
-            <input type="checkbox" name="status[sold]" value="Sold" class="custom-control-input" v-model="sold">
+            <input type="checkbox" name="status[sold]" value="Sold/Closed" class="custom-control-input" v-model="sold">
             <span class="custom-control-label">Sold</span>
         </label>
         <label class="custom-control custom-checkbox">

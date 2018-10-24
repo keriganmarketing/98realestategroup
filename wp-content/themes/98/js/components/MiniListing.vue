@@ -2,7 +2,7 @@
     <div class="feat-prop-container">
         <div class="embed-responsive embed-responsive-16by9">
             <div class="feat-prop-photo">
-                <span v-if="listingData.status == 'Sold'" class="status-flag sold">
+                <span v-if="listingData.status == 'Sold/Closed'" class="status-flag sold">
                     Sold on {{ formatDate(listingData.sold_on,'MM/DD/YYYY') }}<br>
                     for ${{ listingData.sold_for.toLocaleString() }}</span>
                 <span v-if="listingData.status == 'Pending'" class="status-flag under-contract">SALE PENDING</span>
