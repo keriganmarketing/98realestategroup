@@ -33731,7 +33731,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var vm = this;
             window.axios.get('https://navica.kerigan.com/api/v1/listing/' + mlsAccount).then(function (response) {
-                vm.selectedProperty = response.data;
+                vm.selectedProperty = response.data.data;
                 vm.propOpen = true;
             }).catch(function (e) {
                 _this3.errors.push(e);

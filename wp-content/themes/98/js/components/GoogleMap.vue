@@ -145,7 +145,7 @@ import GoogleMap from '../services/google-maps.service.js';
             let vm = this;
             window.axios.get('https://navica.kerigan.com/api/v1/listing/' + mlsAccount)
                 .then(response => {
-                    vm.selectedProperty = response.data;
+                    vm.selectedProperty = response.data.data;
                     vm.propOpen = true;
                 })
                 .catch(e => {
