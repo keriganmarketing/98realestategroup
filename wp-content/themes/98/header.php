@@ -23,7 +23,7 @@
 			<div class="navbar-static-top navbar-transparent">
 				<div class="container no-gutter">
 
-					<div class="top-phone desktop" ><a href="tel:850-648-2200">(850) 648-2200</a></div>
+					<!-- <div class="top-phone desktop" ><a href="tel:850-648-2200">(850) 648-2200</a></div> -->
 
 					<div class="navbar-collapse collapse navbar-toggleable-lg" id="navbar-header">
 						<?php wp_nav_menu( array(
