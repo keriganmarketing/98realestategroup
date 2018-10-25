@@ -25,15 +25,6 @@
 
 					<div class="top-phone desktop" ><a href="tel:850-648-2200">(850) 648-2200</a></div>
 
-					<button class="navbar-toggler hidden-lg-up pull-xs-right" type="button" data-toggle="collapse" data-target="#navbar-header">
-						<span class="icon-box">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</span>
-						MENU
-					</button>
-
 					<div class="navbar-collapse collapse navbar-toggleable-lg" id="navbar-header">
 						<?php wp_nav_menu( array(
 	 						'theme_location' => 'primary',
