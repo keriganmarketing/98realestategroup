@@ -19,7 +19,7 @@
 	<a style="display:none;" class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'ninetyeight' ); ?></a>
     <div id="top">
         <header id="masthead" class="site-header">
-			<div class="top-phone mobile" ><a href="tel:850-648-2200">(850) 648-2200</a></div>
+			<!-- <div class="top-phone mobile" ><a href="tel:850-648-2200">(850) 648-2200</a></div> -->
 			<div class="navbar-static-top navbar-transparent">
 				<div class="container no-gutter">
 
