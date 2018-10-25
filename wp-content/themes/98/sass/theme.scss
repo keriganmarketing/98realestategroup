@@ -177,7 +177,14 @@ select[multiple] {
 	position: relative;
 	width: 100%;
 	z-index: 6;
-	background: #562729;
+    background: #562729;
+
+    // .container {
+    //     @media screen and (min-width: 544px) and (max-width:1091px) {
+    //         width: calc(100% - 147px);
+    //         margin: 0;
+    //     }
+    // }
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -259,14 +266,8 @@ ul#primary-menu {
 
 }
 
-a.navbar-brand img {
-    width: 204px;
-}
 
 @media screen and (min-width: 768px){
-	ul#primary-menu li.menu-item {
-        display: inline-block;
-	}
 
 	#mast {
 		height: 100%;
@@ -282,11 +283,7 @@ a.navbar-brand img {
 		min-height: 360px;
 	}
 
-	a.navbar-brand img {
-	    margin: 12px 0 -44px;
-        float: left;
-        position: absolute;
-	}
+
 }
 
 @media screen and (min-width: 768px){
@@ -308,24 +305,26 @@ a.navbar-brand img {
 	z-index: 1;
 }
 
-@media (max-width: 1299px) and (min-width:768px) {
-	a.navbar-brand img {
-		position: absolute;
-		left:10px;
-		margin:0;
-		top:13px;
-	}
-}
+a.navbar-brand {
+    display: block;
+    padding: 0;
 
-@media (max-width: 769px) {
-	a.navbar-brand img {
-		position: absolute;
-	}
-	#top header {
-		/*min-height: 114px;*/
-	}
-    #searchbar form {
-        padding: 9px 10px 10px;
+    img {
+        margin: -59px 19px 0;
+        position: absolute;
+        width: 200px !important;
+
+        @media screen and (min-width: 544px){
+            margin-top: 15px;
+        }
+
+        @media screen and (min-width: 768px){
+            margin-top: 8px;
+        }
+
+        @media screen and (min-width: 1092px ) {
+            margin-top: 20px;
+        }
     }
 }
 
