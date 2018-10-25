@@ -27,16 +27,16 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-            <?php while ( have_posts() ) : the_post(); 
-            
+            <?php while ( have_posts() ) : the_post();
+
             get_template_part( 'template-parts/content', 'page' );
-            
+
             endwhile; // End of the loop. ?>
 
             <div class="container-wide">
                 <hr>
             </div>
-            
+
             <?php if(isset($listings) > 0){ ?>
             <div class="properties grid pb-4">
                 <div class="container-wide">
@@ -45,15 +45,15 @@ get_header(); ?>
                             <sort-form field-value="<?php echo $waterfrontListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
                             <filter-form field-value="<?php echo $waterfrontListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></filter-form>
                             <small class="text-muted" style="display:inline; padding-left:10px;" >
-                                Showing <?php echo $resultMeta->count; ?> 
-                                of <?php echo $resultMeta->total; ?> | 
-                                page <?php echo $resultMeta->current_page; ?> 
-                                of <?php echo $resultMeta->total_pages; ?> 
+                                Showing <?php echo $resultMeta->count; ?>
+                                of <?php echo $resultMeta->total; ?> |
+                                page <?php echo $resultMeta->current_page; ?>
+                                of <?php echo $resultMeta->total_pages; ?>
                             </small>
                         </div>
                         <div class="col-sm-4 text-md-right">
-                            
-                        </div>     
+
+                        </div>
                     </div>
                 </div>
                 <div class="container-wide mx-auto">
