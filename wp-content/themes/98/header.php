@@ -22,7 +22,7 @@
 			<div class="top-phone mobile" ><a href="tel:850-648-2200">(850) 648-2200</a></div>
 			<div class="navbar-static-top navbar-transparent">
 				<div class="container no-gutter">
-					
+
 					<div class="top-phone desktop" ><a href="tel:850-648-2200">(850) 648-2200</a></div>
 
 					<button class="navbar-toggler hidden-lg-up pull-xs-right" type="button" data-toggle="collapse" data-target="#navbar-header">
@@ -35,8 +35,8 @@
 					</button>
 
 					<div class="navbar-collapse collapse navbar-toggleable-lg" id="navbar-header">
-						<?php wp_nav_menu( array( 
-	 						'theme_location' => 'primary', 
+						<?php wp_nav_menu( array(
+	 						'theme_location' => 'primary',
 	 						'menu_id' => 'primary-menu',
 	 						'menu_class' => 'menu',
 	 						'container' => 'nav',
@@ -46,13 +46,14 @@
 	 						'items_wrap' => '<ul id="%1$s" class="nav navbar-nav navbar-right">%3$s</ul>',
  						) ); ?>
 					</div>
-					
-					<a href="/" class="navbar-brand">
-						<img src="/wp-content/themes/98/img/logo.svg" alt="98 Real Estate Group, Mexico Beach Florida" class="img-fluid" style="width:222px;"  >
-					</a>
-
-					
-
+					<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbar-header">
+						<span class="icon-box">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</span>
+					</button>
+					<a href="/" class="navbar-brand"><img src="/wp-content/themes/98/img/logo.svg" alt="98 Real Estate Group, Mexico Beach Florida" class="img-fluid" ></a>
 				</div>
 			</div>
 		</header>
