@@ -117,10 +117,6 @@ class Leads
 
     protected function validateCaptcha($response)
     {        
-        if(!isset($response)){
-            return true;
-        }
-
         $recaptcha = new \ReCaptcha\ReCaptcha(RECAPTCHA_SECRET);
         $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
             ->verify($response, $_SERVER['REMOTE_ADDR']);
