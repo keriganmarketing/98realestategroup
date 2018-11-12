@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ReCaptcha\\' => array($vendorDir . '/google/recaptcha/src/ReCaptcha'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'KeriganSolutions\\CPT\\' => array($vendorDir . '/kerigansolutions/cpt/src'),
     'Includes\\Modules\\' => array($baseDir . '/inc/modules'),

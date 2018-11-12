@@ -106,10 +106,30 @@ class Leads
         if($dataSubmitted['g-recaptcha-response'] == ''){ 
             $passCheck = false;
             $this->errors[] = 'Please indicate that you are not a robot.';
+        }elseif(!$this->validateCaptcha()){
+            $passCheck = false;
+            $this->errors[] = 'Google has identified this submission as spam.';
         }
 
         return $passCheck;
 
+    }
+
+    protected function validateCaptcha()
+    {
+        if(!isset($_POST['g-recaptcha-response'])){
+            return false;
+        }
+
+        $recaptcha = new \ReCaptcha\ReCaptcha(RECAPTCHA_SECRET);
+        $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
+            ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+
+        if ($resp->isSuccess()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
