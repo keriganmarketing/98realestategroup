@@ -11,7 +11,7 @@ class NewListings extends CuratedResults {
         parent::set('endPoint', 'new-listings');
         parent::set('searchParams', [
             'sort'   => $this->getSort(),
-            'excludes' => 'Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
+            'excludes' => 'St. George Island|Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
         ]);
     }
 
