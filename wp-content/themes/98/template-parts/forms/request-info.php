@@ -119,7 +119,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
             <textarea style="height:113px;" name="message" rows="4" class="form-control"><?php echo $message; ?></textarea>
         </div>
         
-            <div data-size="normal" data-theme="dark" style="display:inline-block;" class="g-recaptcha" data-sitekey="6LcuEg8UAAAAAO6jN3pzgpggylUDnGQPOd6-loWQ"></div>
+            <div data-size="normal" data-theme="dark" style="display:inline-block;" class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_KEY; ?>"></div>
 			<input type="text" name="secu" style="position: absolute; height: 1px; top: -50px; left: -50px; width: 1px; padding: 0; margin: 0; visibility: hidden;" >
             <button style="margin-top: 1rem;" type="submit" class="btn btn-danger btn-md pull-xs-right" >SEND</button>
     </div>

@@ -65,7 +65,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
             </div>
         </div> 
 
-        <div data-size="normal" data-theme="dark" style="display:inline-block; margin-top:1rem;" class="g-recaptcha" data-sitekey="6LcuEg8UAAAAAO6jN3pzgpggylUDnGQPOd6-loWQ"></div>
+        <div data-size="normal" data-theme="dark" style="display:inline-block; margin-top:1rem;" class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_KEY; ?>"></div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">

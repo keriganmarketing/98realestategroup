@@ -194,7 +194,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 
     <div class="row" >
         <div class="col-xs-12 form-group">
-            <div class="g-recaptcha" data-sitekey="6LcuEg8UAAAAAO6jN3pzgpggylUDnGQPOd6-loWQ"></div>
+            <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_KEY; ?>"></div>
         </div>
     </div>
     <div class="row">

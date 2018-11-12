@@ -106,7 +106,7 @@ class Leads
         if($dataSubmitted['g-recaptcha-response'] == ''){ 
             $passCheck = false;
             $this->errors[] = 'Please indicate that you are not a robot.';
-        }elseif(!$this->validateCaptcha()){
+        }elseif($this->validateCaptcha()){
             $passCheck = false;
             $this->errors[] = 'Google has identified this submission as spam.';
         }
@@ -118,7 +118,7 @@ class Leads
     protected function validateCaptcha()
     {
         if(!isset($_POST['g-recaptcha-response'])){
-            return false;
+            return true;
         }
 
         $recaptcha = new \ReCaptcha\ReCaptcha(RECAPTCHA_SECRET);
@@ -126,9 +126,9 @@ class Leads
             ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
         if ($resp->isSuccess()){
-            return true;
-        }else{
             return false;
+        }else{
+            return true;
         }
     }
 
