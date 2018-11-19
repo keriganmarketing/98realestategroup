@@ -27,7 +27,7 @@ $current_user = wp_get_current_user();
 $isFav        = $favorite->checkFavorites( $listing->mls_account, $current_user->ID );
 $media        = $fullListing->getMedia();
 $photos       = $media['photos'];
-$tour         = (isset($listing->virtual_tour) ? $listing->virtual_tour : null);
+$tour         = (isset($listing->virtual_tour) ? '//' . $listing->virtual_tour : null);
 $mainPhoto    = (isset($media['photos'][0]->url) ? $media['photos'][0]->url : get_template_directory_uri() . '/img/nophoto.jpg');
 $location     = $listing->location;
 
