@@ -111,6 +111,12 @@ class Leads
             $this->errors[] = 'Google has identified this submission as spam.';
         }
 
+        // if (function_exists('akismet_verify_key') && !empty(akismet_get_key())){
+        //     if ($this->checkSpam($dataSubmitted)){
+        //         $passCheck = false;
+        //     }
+        // }
+
         return $passCheck;
 
     }
@@ -127,6 +133,44 @@ class Leads
         }else{
             return true;
         }
+    }
+
+    public function getIP() 
+    {
+        $client  = @$_SERVER['HTTP_CLIENT_IP'];
+        $forwarded = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+        $remote  = $_SERVER['REMOTE_ADDR'];
+
+        if (filter_var($client, FILTER_VALIDATE_IP)) {
+            return $client;}
+        elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
+            return $forward;}
+        else {
+            return $remote;}
+    } 
+
+    public function checkSpam($dataSubmitted)
+    {
+        $client = new \Gothick\AkismetClient\Client(
+            site_url(),           // Your website's URL (this becomes Akismet's "blog" parameter)
+            "KMA Spam Checker",   // Your website or app's name (Used in the User-Agent: header when talking to Akismet)
+            "1.0",                // Your website or app's software version (Used in the User-Agent: header when talking to Akismet)
+            akismet_get_key()     
+        );
+
+        $result = $client->commentCheck([
+            'user_ip'              => $dataSubmitted['ip_address'],
+            'user_agent'           => $dataSubmitted['user_agent'],
+            'referrer'             => $dataSubmitted['referrer'],
+            'comment_author'       => $dataSubmitted['full_name'],
+            'comment_author_email' => $dataSubmitted['email_address'],
+            'comment_content'      => $dataSubmitted['message']
+        ], $_SERVER);
+
+        $spam = $result->isSpam();
+        //echo '<pre>',print_r($result),'</pre>';
+
+        return $spam; // Boolean 
     }
 
     /**
@@ -206,27 +250,6 @@ class Leads
         }
 
         return $resultArray;
-    }
-
-    protected function checkSpam($leadInfo)
-    {
-        // $akismet = new Akismet(site_url(), AKISMET_KEY);
-        // $akismet->setCommentAuthor($leadInfo['fullname']);
-        // $akismet->setCommentAuthorEmail($leadInfo['email_address']);
-        // if(isset($leadInfo['message']) && $leadInfo['message'] != ''){
-        //     $akismet->setCommentContent($leadInfo['message']);
-        // }
-
-        // if($akismet->isCommentSpam()){
-        //     //$akismet->submitSpam();
-        //     echo 'SPAM!';
-        //     return true; // comment is spam
-        // }else{
-        //     //$akismet->submitHam();
-        //     echo 'HAM!';
-        //     return false; // comment is not spam
-        // }
-        return false;
     }
 
     /*
