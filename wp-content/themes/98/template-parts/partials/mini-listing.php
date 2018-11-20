@@ -39,6 +39,10 @@ $preferredPhoto = (isset($photos[0]) && $photos[0]->media_type == 'image/jpeg' ?
             <?php if ( $listing->status == 'Contingent' ) { ?>
                 <span class="status-flag contingent">SALE CONTINGENT</span>
             <?php } ?>
+            <?php if ( $listing->original_list_price > $listing->price && $listing->status == 'Active' && $listing->original_list_price != 0) { ?>
+                <span class="status-flag reduced bg-danger">REDUCED <span style="text-decoration:line-through">$<?php echo number_format( $listing->original_list_price ); ?></span> 
+                <strong>$<?php echo number_format( $listing->price); ?></strong></span>
+            <?php } ?>
             <img src="<?php echo $preferredPhoto; ?>" class="img-responsive lazy"
                     alt="MLS Property <?php echo $listing->mls_account; ?> for sale in <?php echo $listing->city; ?>"/>
         </div>

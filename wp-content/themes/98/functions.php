@@ -11,6 +11,7 @@ use Includes\Modules\Team\Team;
 use Includes\Modules\Leads\Leads;
 use Includes\Modules\Helpers\CleanWP;
 use Includes\Modules\MLS\FeaturedProperties;
+use Includes\Modules\MLS\HotDeals;
 use Includes\Modules\MLS\Favorites;
 use Includes\Modules\Leads\LeadDashboard;
 
@@ -22,6 +23,7 @@ $team = new Team();
 $team->setupAdmin();
 
 new FeaturedProperties;
+new HotDeals;
 
 $favorites = new Favorites;
 $favorites->setupAdmin();
