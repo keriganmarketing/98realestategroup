@@ -127,9 +127,7 @@ class HotDeals
         $getHotDeal = get_posts( array(
             'post_type'         => 'hot-deal',
             'posts_per_page'	=> -1,
-            'orderby'			=> 'date',
-            'order'             => 'DESC',
-            'offset'			    => 0,
+            'offset'			=> 0,
             'post_status'		=> 'publish',
         ) );
 
