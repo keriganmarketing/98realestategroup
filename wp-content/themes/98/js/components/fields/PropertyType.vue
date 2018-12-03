@@ -5,7 +5,7 @@
             v-model="selected" 
             class="prop-type-input custom-select" >
             <option value="Any">All Types</option>
-            <option value="Residential">All Residential Homes</option>
+            <option value="Residential">All Homes</option>
             <option value="Detached Single Family">Single Family Homes</option>
             <option value="Residential Lots/Land">Residential Lots &amp; Land</option>
             <option value="Condominium">Condos</option>
