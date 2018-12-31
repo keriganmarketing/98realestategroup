@@ -6,13 +6,28 @@ use GuzzleHttp\Client;
 
 class HotDeals
 {
+    protected $mlsNumbers;
+    protected $searchResults;
+    protected $searchRequested;
 
     /**
      * Hot Deals constructor.
      * configure any options here
      */
-    public function __construct ()
+    public function __construct()
     {
+
+        $this->searchParams = [
+            'sort' => 'date_modified|desc',
+        ];
+        $this->searchResults = [];
+        $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);
+
+        //set default if no search performed
+        if(!$this->searchRequested){
+            $this->searchRequested = [];
+        }
+
         add_action( 'init', [$this, 'createPostType']);
         //add_action( 'admin_init', [$this, 'addMetaBoxes']);
         add_filter ('manage_edit-hot-deal_columns', [$this, 'editColumns']);
@@ -122,6 +137,31 @@ class HotDeals
         return $messages;
       }
 
+      //build URL for mothership contact
+        public function makeRequest()
+        {
+            $request = '?q=search';
+            foreach($this->searchParams as $key => $var){
+                if(is_array($var)){
+                    $request .= '&' . $key . '=';
+                    $i = 1;
+                    foreach($var as $k => $v){
+                        $request .= $v . ($i < count($var) ? '|' : '');
+                        $i++;
+                    }
+                }else{
+                    if($var != '' && $var != 'Any'){
+                        $request .= '&' . $key . '=' . $var;
+                    }
+                }
+            }
+
+            $request = $request . '&page=' . get_query_var( 'page' );
+            // echo $request;
+            
+            return $request;
+        }
+
       public function getHotProp()
       {
         $getHotDeal = get_posts( array(
@@ -138,15 +178,15 @@ class HotDeals
         }
 
         $client     = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
-        $mlsNumbers = implode('|', $HotList);
+        $this->mlsNumbers = implode('|', $HotList);
 
         $apiCall = $client->request(
-            'GET', 'listings?mlsNumbers=' . $mlsNumbers
+            'GET', 'listings?mlsNumbers=' . $this->mlsNumbers . $this->makeRequest()
         );
 
-        $results = json_decode($apiCall->getBody());
+        $this->searchResults = json_decode($apiCall->getBody());
 
-        return $results->data;
+        return $this->searchResults;
     }
 
     public function getUrlBuilder(){
@@ -155,15 +195,45 @@ class HotDeals
         $mlsNums = explode(' ', $request);
 
         $client     = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
-        $mlsNumbers = implode('|', $mlsNums);
+        $this->mlsNumbers = implode('|', $mlsNums);
 
         $apiCall = $client->request(
-            'GET', 'listings?mlsNumbers=' . $mlsNumbers
+            'GET', 'listings?mlsNumbers=' . $this->mlsNumbers . $this->makeRequest()
         );
 
-        $results = json_decode($apiCall->getBody());
+        $this->searchResults = json_decode($apiCall->getBody());
 
-        return $results->data;
+        return $this->searchResults;
     }
 
+    public function getCurrentRequest()
+    {
+        return json_encode($this->searchParams);
+    }
+
+    public function getResultMeta()
+    {
+        return ($this->resultsArePaginated() ? $this->searchResults->meta->pagination : null);
+    }
+
+    public function getSort()
+    {
+        return isset($this->searchParams['sort']) ? $this->searchParams['sort'] : 'date_modified|desc';
+    }
+
+    public function resultsArePaginated()
+    {
+        if(isset($this->searchResults->meta->pagination)){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function buildPagination()
+    {
+        
+        $pagination = new SearchPagination($this->getResultMeta(),$this->searchParams,true);
+        $pagination->buildPagination();
+    }
 }

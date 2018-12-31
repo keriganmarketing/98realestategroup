@@ -18,7 +18,13 @@ use Includes\Modules\MLS\SoldListings;
 use Includes\Modules\MLS\HotDeals;
 
 $hotDeals = new HotDeals();
-$listings = $hotDeals->getHotProp();
+
+$searchResults  = $hotDeals->getHotProp();
+$currentRequest = $hotDeals->getCurrentRequest();
+$resultMeta     = $hotDeals->getResultMeta();
+$listings       = $searchResults->data;
+
+//echo '<pre>',print_r($searchResults),'</pre>';
 
 $tendaysago = strtotime('-10 days');
 $tendaysago = date('Y-m-d',$tendaysago);
@@ -39,12 +45,27 @@ get_header(); ?>
                 <hr>
             </div>
             
-            <?php if(isset($listings) > 0){ ?>
+            <?php if(isset($searchResults->data) > 0){ ?>
             <div class="properties grid pb-4">
+                <div class="container-wide">
+                    <div class="row justify-content-between mb-4">
+                        <div class="col-sm-6">
+                            <small class="text-muted">
+                                Showing <?php echo $resultMeta->count; ?>
+                                of <?php echo $resultMeta->total; ?> |
+                                page <?php echo $resultMeta->current_page; ?>
+                                of <?php echo $resultMeta->total_pages; ?>
+                            </small>
+                        </div>
+                        <div class="col-sm-6 text-md-right">
+                            <sort-form field-value="<?php echo $hotDeals->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
+                        </div>
+                    </div>
+                </div>
                 <div class="container-wide mx-auto">
 
                     <div class="row justify-content-center align-items-center text-center">
-                    <?php foreach($listings as $listing){ ?>
+                    <?php foreach($searchResults->data as $listing){ ?>
                         <div class="feat-prop col-md-6 col-xl-3 text-center">
                             <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
                         </div>
@@ -54,6 +75,11 @@ get_header(); ?>
                 </div>
             </div>
             <div class="container mx-auto text-xs-center">
+                <?php if($hotDeals->resultsArePaginated()){ ?>
+                    <div class="pb-4">
+                        <?php $hotDeals->buildPagination(); ?>
+                    </div>
+                <?php } ?>
                 <hr>
                 <div class="pb-4">
                     <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>

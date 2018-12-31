@@ -6,11 +6,13 @@ class SearchPagination {
 
     protected $searchMeta;
     protected $searchParams;
+    protected $hideVars;
 
-    public function __construct($searchMeta, $searchParams)
+    public function __construct($searchMeta, $searchParams, $hideVars = false)
     {
         $this->searchMeta = $searchMeta;
         $this->searchParams = $searchParams;
+        $this->hideVars = $hideVars;
     }
 
     public function buildURL()
@@ -45,13 +47,11 @@ class SearchPagination {
         if(isset($pages->links->previous)){
             $link = $request . '&page=' . ($currentPage - 1);
             echo '<li class="page-item"><a class="page-link" href="'. $link .'" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
+                <span aria-hidden="true">&laquo;</span> Previous
             </a></li>';
         }else{
             echo '<li class="page-item disabled"><a class="page-link disabled" tabindex="-1" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
+                 <span aria-hidden="true">&laquo;</span> Previous
             </a></li>';
         }
 
@@ -84,13 +84,11 @@ class SearchPagination {
         if(isset($pages->links->next)){
             $link = $request . '&page=' . ($currentPage + 1);
             echo '<li class="page-item"><a class="page-link" href="'. $link .'" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
+                Next <span aria-hidden="true">&raquo;</span>
             </a></li>';
         }else{
             echo '<li class="page-item disabled"><a class="page-link disabled" tabindex="-1" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
+                Next <span aria-hidden="true">&raquo;</span>
             </a></li>';
         }
         
