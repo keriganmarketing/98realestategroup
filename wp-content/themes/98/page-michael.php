@@ -58,6 +58,7 @@ get_header(); ?>
                             </small>
                         </div>
                         <div class="col-sm-6 text-md-right">
+                        <?php echo $currentRequest; ?>
                             <sort-form field-value="<?php echo $hotDeals->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
                         </div>
                     </div>

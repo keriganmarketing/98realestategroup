@@ -9,6 +9,7 @@ class HotDeals
     protected $mlsNumbers;
     protected $searchResults;
     protected $searchRequested;
+    protected $approvedParams;
 
     /**
      * Hot Deals constructor.
@@ -16,7 +17,10 @@ class HotDeals
      */
     public function __construct()
     {
-
+        $this->approvedParams = [
+            'sort',
+            'page'
+        ];
         $this->searchParams = [
             'sort' => 'date_modified|desc',
         ];
@@ -140,6 +144,9 @@ class HotDeals
       //build URL for mothership contact
         public function makeRequest()
         {
+
+            $this->filterRequest();
+
             $request = '?q=search';
             foreach($this->searchParams as $key => $var){
                 if(is_array($var)){
@@ -204,6 +211,15 @@ class HotDeals
         $this->searchResults = json_decode($apiCall->getBody());
 
         return $this->searchResults;
+    }
+
+    public function filterRequest()
+    {
+        foreach($this->searchRequested as $key => $var){
+            if(in_array($key, $this->approvedParams)){
+                $this->searchParams[$key] = $var;
+            }
+        }
     }
 
     public function getCurrentRequest()
