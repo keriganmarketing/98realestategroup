@@ -34,8 +34,8 @@
             return {
                 active: true,
                 sold: false,
-                pending: false,
-                contingent: false
+                pending: true,
+                contingent: true
             }
         },
 
