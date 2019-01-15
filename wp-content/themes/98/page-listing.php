@@ -199,7 +199,7 @@ get_header(); ?>
                 </div>
 
 				<?php } else { ?>
-					<p>The property you have requested no longer exists.</p>
+					<p class="text-center py-5">The property you have requested no longer exists.</p>
 				<?php } ?>
 
 			</div>

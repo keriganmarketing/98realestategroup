@@ -77,6 +77,10 @@ class FullListing
 
     public function assembleMedia()
     {
+        if(! $this->listingInfo->data->media_objects->data){
+            return null;
+        }
+
         $media  = $this->listingInfo->data->media_objects->data;
         $return = [ 'photos','vtours','docs','files','links'];
 
