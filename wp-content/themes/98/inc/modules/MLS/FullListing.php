@@ -46,7 +46,7 @@ class FullListing
         $results = json_decode($apiCall->getBody());
         $this->listingInfo = $results;
 
-        return $results;
+        return $results; 
     }
 
     public function setListingSeo()

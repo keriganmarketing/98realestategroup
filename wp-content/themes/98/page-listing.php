@@ -45,9 +45,9 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 			
 			<div class="container-wide">
+			<?php if($listing){ ?>
 
-				<div class="row">
-					
+				<div class="row">					
 					<div class="property-left col-md-5">
 						<div class="embed-responsive embed-responsive-16by9">
 							<div class="main-prop-photo">
@@ -197,6 +197,10 @@ get_header(); ?>
                     <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>
                     </div>
                 </div>
+
+				<?php } else { ?>
+					<p>The property you have requested no longer exists.</p>
+				<?php } ?>
 
 			</div>
 			
