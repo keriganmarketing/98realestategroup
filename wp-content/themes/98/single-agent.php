@@ -14,6 +14,9 @@ $agent         = $team->getSingle($post->post_title);
 
 $agentListings = new AgentListings($post->contact_info_mls_id);
 $listings      = $agentListings->getListings();
+$solds         = $agentListings->getSoldListings();
+
+// echo '<pre>',print_r($listings),'</pre>';
 
 get_header(); ?>
 
@@ -37,10 +40,10 @@ get_header(); ?>
                                                     <p class="title"><?php echo $post->contact_info_title; ?></p>
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <?php if(count($listings['sold']) > 0){ ?>
+                                                    <?php if($solds){ ?>
                                                         <p class="text-xs-center pull-md-right agent-button"><a href="#sold" class="btn btn-info" >Properties I've Sold</a></p>
                                                     <?php } ?>
-                                                    <?php if(count($listings['active']) > 0){ ?>
+                                                    <?php if($listings){ ?>
                                                         <p class="text-xs-center pull-md-right agent-button"><a href="#mylistings" class="btn btn-info" >My Listings</a></p>
                                                     <?php } ?>
                                                 </div>
@@ -81,25 +84,25 @@ get_header(); ?>
             </div>
 
             <div class="container-wide">
-                <?php if(count($listings['active']) > 0){ ?>
+                <?php if($listings){ ?>
                 <a id="mylistings" class="pad-anchor"></a>
                 <h2 class="text-center">My Listings</h2>
                 <hr>
                 <div class="row justify-content-center">
-                    <?php foreach($listings['active'] as $listing){ ?>
+                    <?php foreach($listings as $listing){ ?>
                         <div class="feat-prop col-md-6 col-xl-3 text-center">
                             <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
                         </div>
                     <?php } ?>
                 </div>
                 <?php } ?>
-                <?php if(count($listings['sold']) > 0){ ?>
+                <?php if($solds){ ?>
                 <a id="sold" class="pad-anchor"></a>
                 <h2 class="text-center">Properties I've Sold</h2>
                 <p class="text-center"><em>In the last 6 months</em></p>
                 <hr>
                 <div class="row justify-content-center">
-                    <?php foreach($listings['sold'] as $listing){ ?>
+                    <?php foreach($solds as $listing){ ?>
                         <div class="feat-prop col-md-6 col-xl-3 text-center">
                             <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
                         </div>
