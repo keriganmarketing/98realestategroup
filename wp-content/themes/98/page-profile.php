@@ -76,10 +76,11 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
             $submittedData .= '</ul></td></tr>';
         }
     }
-    $submittedData .= '</tbody></table>';
+    $submittedData .= '</tbody></table>
+    <a href="https://www.98realestategroup.com/properties/url-builder/?mlsnumbers=' . implode('+', $savedArray) . '" >View all saved properties</a>';
 
     //echo $adminemail;
-    //$adminemail = 'bryan@kerigan.com';
+    $adminemail = 'bryan@kerigan.com';
 
     $leads->sendEmail(
         [
