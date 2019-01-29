@@ -80,7 +80,7 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
     <a href="https://www.98realestategroup.com/properties/url-builder/?mlsnumbers=' . implode('+', $savedArray) . '" >View all saved properties</a>';
 
     //echo $adminemail;
-    $adminemail = 'bryan@kerigan.com';
+    //$adminemail = 'bryan@kerigan.com';
 
     $leads->sendEmail(
         [
