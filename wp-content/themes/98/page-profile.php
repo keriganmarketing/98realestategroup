@@ -61,7 +61,7 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
         'Website Username' => $yourname,
         'Email Address' => $youremail,
         'Date Registered' => $current_user->user_registered,
-        'Saved Properties' => implode(',', $savedArray)
+        'Saved Properties' => implode(', ', $savedArray)
     );
 
     $submittedData = '<table cellpadding="0" cellspacing="0" border="0" style="width:100%" ><tbody>';
