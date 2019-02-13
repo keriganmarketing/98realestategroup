@@ -1,7 +1,7 @@
 <template>
     <div class="google-map" style="display:flex; width:100%; flex-wrap: wrap" >
-        <div ref="map" class="col-xs-12 col-md-9 col-lg-10" style="min-height: 600px; flex-grow:1" ></div>
-        <div v-if="propOpen" class="col-xs-12 col-md-3 col-lg-2">
+        <div ref="map" class="col-xs-12 col-md-9" style="min-height: 600px; flex-grow:1" ></div>
+        <div v-if="propOpen" class="col-xs-12 col-md-3 p-0" style="height:100%;">
             <mini-listing :listingData="selectedProperty"></mini-listing>
         </div>
     </div>

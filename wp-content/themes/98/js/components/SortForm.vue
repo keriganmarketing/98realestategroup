@@ -15,13 +15,14 @@
         <input v-if="searchTerms.waterview" type="hidden" name="waterview" :value="searchTerms.waterview" >
         <input v-if="searchTerms.foreclosure" type="hidden" name="foreclosure" :value="searchTerms.foreclosure" >
         <input v-if="searchTerms.page" type="hidden" name="page" :value="searchTerms.page" >
-        <input 
-            v-if="searchTerms.status"
-            v-for="(status, index) in searchTerms.status" 
-            type="hidden" 
-            :name="'status[' + index + ']'" 
-            :key="status" 
-            :value="status" >
+        <div v-if="searchTerms.status">
+            <input 
+                v-for="(status, index) in searchTerms.status" 
+                type="hidden" 
+                :name="'status[' + index + ']'" 
+                :key="status" 
+                :value="status" >
+        </div>
         <select name="sort" 
             v-model="selected" 
             class="custom-select" 
