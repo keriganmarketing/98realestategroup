@@ -13,10 +13,6 @@
             <input type="checkbox" name="status[contingent]" value="Contingent" class="custom-control-input" v-model="contingent">
             <span class="custom-control-label">Contingent</span>
         </label>
-        <label class="custom-control custom-checkbox">
-            <input type="checkbox" name="status[pending]" value="Pending" class="custom-control-input" v-model="pending">
-            <span class="custom-control-label">Pending</span>
-        </label>
 
     </div>
 </template>
@@ -42,7 +38,6 @@
         mounted () {
             this.active = this.searchTerms.active;
             this.sold = this.searchTerms.sold;
-            this.pending = this.searchTerms.pending;
             this.contingent = this.searchTerms.contingent;
         }
     }
