@@ -30,7 +30,6 @@
             return {
                 active: true,
                 sold: false,
-                pending: true,
                 contingent: true
             }
         },
