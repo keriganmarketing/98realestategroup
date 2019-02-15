@@ -38,7 +38,10 @@ class QuickSearch
         $this->searchParams = [
             'omni'   => '',
             'sort' => 'date_modified|desc',
-            'status' => 'Active|Contingent'
+            'status' => [
+                'active' => 'Active',
+                'contingent' => 'Contingent'
+            ]
         ];
         $this->searchResults = [];
         $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);
