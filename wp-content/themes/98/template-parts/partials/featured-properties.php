@@ -20,6 +20,6 @@ $tendaysago = date('Y-m-d',$tendaysago);
         <?php } ?>
         
         </div>
-        <p class="text-xs-center"><a href="/properties" class="btn btn-danger btn-lg"  >VIEW ALL DEALS</a></p>
+        <p class="text-xs-center"><a href="/properties/michael/" class="btn btn-danger btn-lg"  >VIEW ALL DEALS</a></p>
     </div>
 </div>
