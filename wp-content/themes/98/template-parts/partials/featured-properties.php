@@ -11,7 +11,7 @@ $tendaysago = date('Y-m-d',$tendaysago);
 ?>
 <div id="featured-properties-area">
     <div class="container-wide">
-        <h2>Featured Properties</h2>
+        <h2>Storm Damaged & Reduced Properties</h2>
         <div class="row justify-content-center align-items-center text-center">
         <?php foreach($listings as $listing){ ?>
             <div class="feat-prop col-md-6 col-xl-3 text-center">
@@ -20,6 +20,6 @@ $tendaysago = date('Y-m-d',$tendaysago);
         <?php } ?>
         
         </div>
-        <p class="text-xs-center"><a href="/properties" class="btn btn-danger btn-lg"  >ALL PROPERTIES</a></p>
+        <p class="text-xs-center"><a href="/properties" class="btn btn-danger btn-lg"  >VIEW ALL DEALS</a></p>
     </div>
 </div>
