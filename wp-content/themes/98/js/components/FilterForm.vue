@@ -13,13 +13,14 @@
         <input v-if="searchTerms.waterview" type="hidden" name="waterview" :value="searchTerms.waterview" >
         <input v-if="searchTerms.foreclosure" type="hidden" name="foreclosure" :value="searchTerms.foreclosure" >
         <input v-if="searchTerms.page" type="hidden" name="page" :value="searchTerms.page" >
-        <input 
-            v-if="searchTerms.status"
-            v-for="(status, index) in searchTerms.status" 
-            type="hidden" 
-            :name="'status[' + index + ']'" 
-            :key="status" 
-            :value="status" >
+        <div v-if="searchTerms.status" >
+            <input 
+                v-for="(status, index) in searchTerms.status" 
+                type="hidden" 
+                :name="'status[' + index + ']'" 
+                :key="status" 
+                :value="status" >
+        </div>
         <input v-if="searchTerms.sort" type="hidden" name="sort" :value="searchTerms.sort" >
         <area-field v-if="!hideArea" class="d-inline-block" :field-value="searchTerms.area" ></area-field>
         <property-type v-if="!hideType" class="d-inline-block" :field-value="searchTerms.propertyType" ></property-type>
@@ -32,7 +33,7 @@
         props: {
             fieldValue: {
                 type: String,
-                default: 'price|desc'
+                default: 'list_date|desc'
             },
             searchTerms: {
                 type: Object,

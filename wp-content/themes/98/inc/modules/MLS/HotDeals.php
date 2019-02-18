@@ -22,7 +22,7 @@ class HotDeals
             'page'
         ];
         $this->searchParams = [
-            'sort' => 'date_modified|desc',
+            'sort' => 'list_date|desc',
         ];
         $this->searchResults = [];
         $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);

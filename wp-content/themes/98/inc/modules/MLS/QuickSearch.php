@@ -37,7 +37,7 @@ class QuickSearch
         ];
         $this->searchParams = [
             'omni'   => '',
-            'sort' => 'date_modified|desc',
+            'sort' => 'list_date|desc',
             'status' => [
                 'active' => 'Active',
                 'contingent' => 'Contingent'

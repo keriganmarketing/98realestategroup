@@ -29,6 +29,7 @@
             style="width:auto;" >
             <option value="list_price|desc">Price - high to low</option>
 			<option value="list_price|asc">Price - low to high</option>
+            <option value="list_date|desc">Date Listed </option>
             <option value="date_modified|desc">Date Modified </option>
         </select><button type="submit" class="btn btn-info" >Sort</button>    
     </form>

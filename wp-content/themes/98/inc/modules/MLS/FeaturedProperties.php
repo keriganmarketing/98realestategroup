@@ -125,8 +125,8 @@ class FeaturedProperties
       public function getFeaturedProp()
       {
         $getFprop = get_posts( array(
-            'post_type'         => 'fprop',
-            'posts_per_page'	=> -1,
+            'post_type'         => 'hot-deal',
+            'posts_per_page'	=> 4,
             'orderby'			=> 'menu_order',
             'order'             => 'ASC',
             'offset'			    => 0,
@@ -143,7 +143,7 @@ class FeaturedProperties
         $mlsNumbers = implode('|', $featuredList);
 
         $apiCall = $client->request(
-            'GET', 'listings?mlsNumbers=' . $mlsNumbers
+            'GET', 'listings?mlsNumbers=' . $mlsNumbers . '&status=Active|Contingent'
         );
 
         $results = json_decode($apiCall->getBody());
