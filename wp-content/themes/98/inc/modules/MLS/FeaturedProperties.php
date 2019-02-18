@@ -143,7 +143,7 @@ class FeaturedProperties
         $mlsNumbers = implode('|', $featuredList);
 
         $apiCall = $client->request(
-            'GET', 'listings?mlsNumbers=' . $mlsNumbers . '&status=Active|Contingent'
+            'GET', 'listings?mlsNumbers=' . $mlsNumbers . '&status=Active|Contingent&sort=list_date|desc'
         );
 
         $results = json_decode($apiCall->getBody());
