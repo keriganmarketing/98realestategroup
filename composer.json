@@ -1,0 +1,5 @@
+{
+    "require": {
+        "gothick/php-akismet": "^1.0"
+    }
+}
