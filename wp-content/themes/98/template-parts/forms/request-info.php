@@ -62,6 +62,9 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 <a id="request-info-form" class="pad-anchor"></a>
 <form class="form leadform" enctype="multipart/form-data" method="post" action="#request-info-form" id="requestinfo">
 <input type="hidden" name="formID" value="requestinfo" >
+<input type="hidden" name="user_agent" value="<?php echo $_SERVER['HTTP_USER_AGENT']; ?>" >
+<input type="hidden" name="ip_address" value="<?php echo Includes\Modules\Leads\Leads::getIP(); ?>" >
+<input type="hidden" name="referrer" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" >
 <div class="row">
     <div class="col-sm-6"> 
         <div class="row">
