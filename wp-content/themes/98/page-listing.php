@@ -71,7 +71,14 @@ get_header(); ?>
 									<?php if ( $listing->original_list_price > $listing->price && $listing->status == 'Active' && $listing->original_list_price != 0) { ?>
 										<h3 class="listing-page-price"><span style="display:inline-block; padding:.25rem; font-size:1rem; border-radius:.2rem" class="bg-danger">Reduced!</span> <span style="text-decoration:line-through">$<?php echo number_format( $listing->original_list_price ); ?></span> $<?php echo number_format($listing->price); ?></h3>
 									<?php } else { ?>
-									<h3 class="listing-page-price">$<?php echo number_format($listing->price); ?></h3>
+									
+
+									<?php if($listing->price != null) { ?>
+										<h3 class="listing-page-price">$<?php echo number_format($listing->price); ?></h3>
+									<?php }elseif($listing->monthly_rent){ ?>
+										<h3 class="listing-page-price">$<?php echo number_format($listing->monthly_rent); ?> <small>/ mo.</small></h3>
+									<?php } ?>
+
 									<?php } ?>
 								<?php } ?>
 							</div>
