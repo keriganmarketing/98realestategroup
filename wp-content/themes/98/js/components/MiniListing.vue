@@ -22,7 +22,9 @@
             </div>
 
             <div class="feat-prop-section price">
-                <p><span class="price">${{ listingData.price.toLocaleString() }}</span></p>
+                <p v-if="listingData.price != null"><span class="price">${{ listingData.price.toLocaleString() }}</span></p>
+                <p v-if="listingData.monthly_rent != null" class="display-4 text-primary font-weight-bold">${{ listingData.monthly_rent.toLocaleString() }} 
+                    <small>/ mo.</small></p>
             </div>
 
             <div class="feat-prop-section" style="padding-bottom:1rem;">

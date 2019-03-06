@@ -60,7 +60,11 @@ $preferredPhoto = (isset($photos[0]) && $photos[0]->media_type == 'image/jpeg' ?
         </div>
 
         <div class="feat-prop-section price">
-            <p><span class="price">$<?php echo number_format( $listing->price ); ?></span></p>
+        <?php if($listing->price != null) { ?>
+            <p><span class="price">$<?php echo number_format($listing->price); ?></span></p>
+        <?php }elseif($listing->monthly_rent){ ?>
+            <p><span class="price">$<?php echo number_format($listing->monthly_rent); ?> <small>/ mo.</small></span></p>
+        <?php } ?>
         </div>
 
         <div class="feat-prop-section">
