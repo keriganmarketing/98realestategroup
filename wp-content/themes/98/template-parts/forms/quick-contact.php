@@ -39,6 +39,9 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 <a id="quick-contact-form" class="pad-anchor"></a>
 <form class="form leadform" enctype="multipart/form-data" method="post" action="#quick-contact-form" id="quickcontact">
 <input type="hidden" name="formID" value="quickcontact" >
+<input type="hidden" name="user_agent" value="{{user-agent}}" >
+<input type="hidden" name="ip_address" value="{{ip-address}}" >
+<input type="hidden" name="referrer" value="{{referrer}}" >
 <input type="hidden" value="<?php echo $selectedAgent; ?>" name="selected_agent" >
 <input type="hidden" value="Quick contact" name="reason_for_contact" >
 <input type="hidden" value="" name="mls_number" >
