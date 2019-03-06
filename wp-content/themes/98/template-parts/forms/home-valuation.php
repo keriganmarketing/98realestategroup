@@ -47,7 +47,9 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 <a id="homeval" class="pad-anchor"></a>
 <form class="form leadform" name="quoteform" id="mainForm" method="post" enctype="multipart/form-data" >
     <input type="hidden" name="formID" value="homevaluation" >
-    
+    <input type="hidden" name="user_agent" value="<?php echo $_SERVER['HTTP_USER_AGENT']; ?>" >
+    <input type="hidden" name="ip_address" value="<?php echo Includes\Modules\Leads\Leads::getIP(); ?>" >
+    <input type="hidden" name="referrer" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" >
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group sell-property">
