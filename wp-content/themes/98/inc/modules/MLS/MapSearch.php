@@ -37,7 +37,7 @@ class MapSearch
         ];
         $this->searchParams = [
             'omni'   => '',
-            'status' => ['active' => 'Active'],
+            'status' => ['active' => 'Active', 'contingent' => 'Contingent'],
             'excludes' => 'Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
         ];
         $this->searchResults = [];
