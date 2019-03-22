@@ -112,7 +112,12 @@
 
 <script>
     export default {
-        props: ['searchTerms'],
+        props: {
+            'searchTerms': {
+                type: Object,
+                default: {}
+            }
+        },
         data(){
             return {
                 omni: null,

@@ -103,12 +103,13 @@ export default class GoogleMap {
             let latLng = new google.maps.LatLng(markers[i].lat, markers[i].long)
             if (bounds.contains(latLng)) {
                 let listingClass = markers[i].class_name;
+                let listingStatus = markers[i].status.toLowerCase().replace("/closed","");
                 let marker = new google.maps.Marker({
                     position: latLng,
                     map: mapData.map,
                     draggable: false,
                     flat: true,
-                    icon: '/wp-content/themes/98/img/map-pin-' + listingClass + '-' + markers[i].status.toLowerCase() + '.png'
+                    icon: '/wp-content/themes/98/img/map-pin-' + listingClass + '-' + listingStatus + '.png'
                 });
                 visibleMarkers.push(marker);
 
