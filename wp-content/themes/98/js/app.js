@@ -23,6 +23,20 @@ require('./load-components');
 import PortalVue from 'portal-vue';
 Vue.use(PortalVue);
 
+import VueLazyload from 'vue-lazyload';
+
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: '/wp-content/themes/98/img/nophoto.jpg',
+  loading: '/wp-content/themes/98/img/loading.svg',
+  attempt: 1,
+  observer: true,
+  observerOptions: {
+    rootMargin: '0px',
+    threshold: 0.1
+  }
+})
+
 let app = new Vue({
 
     el: '#page',

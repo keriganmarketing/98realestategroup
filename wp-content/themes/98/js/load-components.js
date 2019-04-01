@@ -9,6 +9,7 @@ Vue.component('status-field', require('./components/fields/Status.vue'));
 Vue.component('property-type', require('./components/fields/PropertyType.vue'));
 Vue.component('area-field', require('./components/fields/Area.vue'));
 Vue.component('details-field', require('./components/fields/Details.vue'));
+Vue.component('listing-photo', require('./components/ListingPhoto.vue'));
 
 Vue.component('search-bar', require('./components/SearchBar.vue'));
 Vue.component('quick-search', require('./components/QuickSearch.vue'));

@@ -24,29 +24,29 @@ $preferredPhoto = (isset($photos[0]) && $photos[0]->media_type == 'image/jpeg' ?
         :user-id="<?php echo $current_user->ID; ?>" >
     </favorite-button>
     <a class="listing-link" href="/listing/<?php echo $listing->mls_account; ?>"></a>
-    <div class="embed-responsive embed-responsive-16by9">
-        <div class="feat-prop-photo">
-            <?php if ( $isNew && $listing->status == 'Active' ) { ?>
-                <span class="status-flag just-listed">Just Listed</span>
-            <?php } ?>
-            <?php if ( $listing->status == 'Sold/Closed' ) { ?>
-                <span class="status-flag sold">Sold on <?php echo date( 'M j, Y', strtotime( $listing->sold_on ) ); ?><br>
-                    for $<?php echo number_format( $listing->sold_for ); ?></span>
-            <?php } ?>
-            <?php if ( $listing->status == 'Pending' ) { ?>
-                <span class="status-flag under-contract">SALE PENDING</span>
-            <?php } ?>
-            <?php if ( $listing->status == 'Contingent' ) { ?>
-                <span class="status-flag contingent">SALE CONTINGENT</span>
-            <?php } ?>
-            <?php if ( $listing->original_list_price > $listing->price && $listing->status == 'Active' && $listing->original_list_price != 0) { ?>
-                <span class="status-flag reduced bg-danger">REDUCED <span style="text-decoration:line-through">$<?php echo number_format( $listing->original_list_price ); ?></span> 
-                <strong>$<?php echo number_format( $listing->price); ?></strong></span>
-            <?php } ?>
-            <img src="<?php echo $preferredPhoto; ?>" class="img-responsive lazy"
-                    alt="MLS Property <?php echo $listing->mls_account; ?> for sale in <?php echo $listing->city; ?>"/>
-        </div>
-    </div>
+    <listing-photo 
+        src="<?php echo $preferredPhoto; ?>" 
+        alt="MLS Property <?php echo $listing->mls_account; ?> for sale in <?php echo $listing->city; ?>"
+    >
+        <?php if ( $isNew && $listing->status == 'Active' ) { ?>
+            <span class="status-flag just-listed">Just Listed</span>
+        <?php } ?>
+        <?php if ( $listing->status == 'Sold/Closed' ) { ?>
+            <span class="status-flag sold">Sold on <?php echo date( 'M j, Y', strtotime( $listing->sold_on ) ); ?><br>
+                for $<?php echo number_format( $listing->sold_for ); ?></span>
+        <?php } ?>
+        <?php if ( $listing->status == 'Pending' ) { ?>
+            <span class="status-flag under-contract">SALE PENDING</span>
+        <?php } ?>
+        <?php if ( $listing->status == 'Contingent' ) { ?>
+            <span class="status-flag contingent">SALE CONTINGENT</span>
+        <?php } ?>
+        <?php if ( $listing->original_list_price > $listing->price && $listing->status == 'Active' && $listing->original_list_price != 0) { ?>
+            <span class="status-flag reduced bg-danger">REDUCED <span style="text-decoration:line-through">$<?php echo number_format( $listing->original_list_price ); ?></span> 
+            <strong>$<?php echo number_format( $listing->price); ?></strong></span>
+        <?php } ?>
+    </listing-photo>
+
     <div class="feat-prop-info">
 
         <div class="feat-prop-section">
