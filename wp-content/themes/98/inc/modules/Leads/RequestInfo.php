@@ -36,7 +36,7 @@ class RequestInfo extends Leads
         // echo '<pre style="color: #FFF;">',print_r($dataSubmitted),'</pre>';
         // echo '<pre style="color: #FFF;">',print_r($agentInfo),'</pre>';
         
-        parent::set('adminEmail', (isset($agentInfo['email_address']) && $agentInfo['email_address'] != '' ? $agentInfo['email_address'] : $this->adminEmail));
+        parent::set('adminEmail', (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail));
         // parent::set('adminEmail', 'bryan@kerigan.com');
 
         parent::addToDashboard($dataSubmitted);
