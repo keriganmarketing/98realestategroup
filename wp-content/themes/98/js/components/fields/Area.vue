@@ -22,6 +22,7 @@
         
             <option value="Port St. Joe" class="group">Port St. Joe</option>
             <option value="City of Port St. Joe">City of Port St. Joe</option>
+            <option value="Highland View">Highland View</option>
             <option value="Jones Homestead">Jones Homestead</option>
             <option value="Oak Grove">Oak Grove</option>
         
@@ -31,6 +32,7 @@
             <option value="Howard Creek">Howard Creek</option>
             <option value="Overstreet-North">Overstreet-North</option>
             <option value="Wewahitchka">Wewahitchka</option>
+            <option value="City of Wewahitchka">City of Wewahitchka</option>
             <option value="White City">White City</option>
 
         </select>
