@@ -180,8 +180,8 @@ get_header(); ?>
 								<h3>Map Location</h3>
 								<p>Due to new roads in our area, some properties may now show up in exactly the right location.</p>
 								<div class="listing-map-frame">
-									<div class="embed-responsive embed-responsive-4by3">
-										<div class="embed-responsive-item" id="map" style="border:1px solid #ddd;" ></div>
+									<div class="embed-responsive embed-responsive-4by3" style="border:1px solid #ddd !important;">
+										<div class="embed-responsive-item" id="map"  ></div>
 										<iframe 
 											class="embed-responsive-item"
 											frameborder="0" 
@@ -201,6 +201,11 @@ get_header(); ?>
 
                 <div class="row">
                     <div class="col-xs-12">
+					<?php
+					if($listing->listing_office_name != ''){ ?>
+                    <p class="text-center">This listing is managed by <?php echo $listing->listing_office_name; ?>.</p>
+                    <?php } ?>
+
                     <?php include(locate_template('template-parts/partials/disclaimer.php')); ?>
                     </div>
                 </div>
