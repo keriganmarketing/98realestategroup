@@ -16,9 +16,6 @@ class FullListing
     public function __construct()
     {
         $this->getMlsNumber();
-        $this->create();
-        $this->assembleMedia();
-        $this->setListingSeo();
     }
 
     public function getListingInfo()
@@ -34,6 +31,9 @@ class FullListing
         if(strlen($this->mlsNumber) > 3 && is_numeric($this->mlsNumber)){    
             add_filter( 'template_include', function(){
                 status_header(200, 'OK');
+                $this->create();
+                $this->assembleMedia();
+                $this->setListingSeo();
                 return TEMPLATEPATH . '/page-listing.php';
             } ) ;
         }
