@@ -86,14 +86,16 @@ class Favorites {
         register_rest_route( 'kerigansolutions/v1', '/add-favorite',
             [
                 'methods'         => 'POST',
-                'callback'        => [ $this, 'addFavorite' ]
+                'callback'        => [ $this, 'addFavorite' ],
+                'permission_callback' => '__return_true'
             ]
         );
 
         register_rest_route( 'kerigansolutions/v1', '/delete-favorite',
             [
                 'methods'         => 'POST',
-                'callback'        => [ $this, 'deleteFavorite' ]
+                'callback'        => [ $this, 'deleteFavorite' ],
+                'permission_callback' => '__return_true'
             ]
         );
     }

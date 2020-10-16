@@ -3,6 +3,7 @@
 namespace Includes\Modules\MLS;
 
 use GuzzleHttp\Client;
+use stdClass;
 
 class MapSearch
 {
@@ -40,7 +41,7 @@ class MapSearch
             'status' => ['active' => 'Active', 'contingent' => 'Contingent'],
             'excludes' => 'Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
         ];
-        $this->searchResults = [];
+        $this->searchResults = new stdClass;
         $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);
 
         //set default if no search performed

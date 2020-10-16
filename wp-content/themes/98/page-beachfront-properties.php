@@ -19,8 +19,8 @@ $waterfrontListings = new Waterfront();
 $searchResults      = $waterfrontListings->getListings();
 $currentRequest     = $waterfrontListings->getCurrentRequest();
 $resultMeta         = $waterfrontListings->getResultMeta();
+$pagination         = $waterfrontListings->buildPagination();
 $listings           = $searchResults->data;
-
 get_header(); ?>
 
 <div id="mid">
@@ -68,7 +68,7 @@ get_header(); ?>
             </div>
             <div class="container mx-auto text-xs-center">
                 <div class="pb-4">
-                    <?php $waterfrontListings->buildPagination(); ?>
+                    <?php echo $pagination; ?>
                 </div>
                 <hr>
                 <div class="pb-4">

@@ -3,6 +3,7 @@
 namespace Includes\Modules\MLS;
 
 use GuzzleHttp\Client;
+use stdClass;
 
 class HotDeals
 {
@@ -18,13 +19,12 @@ class HotDeals
     public function __construct()
     {
         $this->approvedParams = [
-            'sort',
-            'page'
+            'sort'
         ];
         $this->searchParams = [
             'sort' => 'list_date|desc',
         ];
-        $this->searchResults = [];
+        $this->searchResults = new stdClass();
         $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);
 
         //set default if no search performed
@@ -162,9 +162,6 @@ class HotDeals
                     }
                 }
             }
-
-            $request = $request . '&page=' . get_query_var( 'page' );
-            // echo $request;
             
             return $request;
         }
@@ -219,6 +216,9 @@ class HotDeals
             if(in_array($key, $this->approvedParams)){
                 $this->searchParams[$key] = $var;
             }
+            if($key == 'pg'){
+                $this->searchParams['page'] = $var;
+            }
         }
     }
 
@@ -248,8 +248,7 @@ class HotDeals
 
     public function buildPagination()
     {
-        
         $pagination = new SearchPagination($this->getResultMeta(),$this->searchParams,true);
-        $pagination->buildPagination();
+        return $pagination->buildPagination();
     }
 }
