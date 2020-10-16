@@ -14,6 +14,7 @@ use Includes\Modules\MLS\FeaturedProperties;
 use Includes\Modules\MLS\HotDeals;
 use Includes\Modules\MLS\Favorites;
 use Includes\Modules\Leads\LeadDashboard;
+use Includes\Modules\MLS\FullListing;
 
 require('vendor/autoload.php');
 
@@ -28,6 +29,8 @@ new HotDeals;
 $favorites = new Favorites;
 $favorites->setupAdmin();
 $favorites->addRoutes();
+
+$fullListing =  new FullListing();
 
 $leadDashboard = new LeadDashboard();
 if (is_admin()) {
