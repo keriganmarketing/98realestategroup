@@ -77,7 +77,7 @@ class RequestInfo extends Leads
         if($leadInfo['mls_number']!=''){
 
             $fullListing = new FullListing($leadInfo['mls_number']);
-            $listingInfo = $fullListing->getListingInfo();
+            $listingInfo = $fullListing->getListingInfo($leadInfo['mls_number']);
 
             $tableData .= '<tr><td width="50%"><img src="' . $fullListing->media['photos'][0]->url . '" width="100%" ></td>
             <td><table>

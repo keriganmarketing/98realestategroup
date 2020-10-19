@@ -18,9 +18,18 @@ class FullListing
         $this->getMlsNumber();
     }
 
-    public function getListingInfo()
+    public function getListingInfo($mls = null)
     {
-        return $this->listingInfo->data;
+        if(isset($this->listingInfo->data)){
+            return $this->listingInfo->data;
+        }else{
+            if(isset($mls)){
+                $this->mlsNumber = $mls;
+                $this->create();
+                $this->assembleMedia();
+                return $this->listingInfo->data;
+            }
+        }
     }
 
     public function getMlsNumber()
