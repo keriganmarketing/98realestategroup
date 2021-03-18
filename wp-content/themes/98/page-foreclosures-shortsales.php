@@ -19,6 +19,7 @@ $foreclosures       = new Foreclosures();
 $searchResults      = $foreclosures->getListings();
 $currentRequest     = $foreclosures->getCurrentRequest();
 $resultMeta         = $foreclosures->getResultMeta();
+$pagination         = $foreclosures->buildPagination();
 $listings           = $searchResults->data;
 
 get_header(); ?>
@@ -68,7 +69,7 @@ get_header(); ?>
             </div>
             <div class="container mx-auto text-xs-center">
                 <div class="pb-4">
-                    <?php $foreclosures->buildPagination(); ?>
+                    <?php echo $pagination; ?>
                 </div>
                 <hr>
                 <div class="pb-4">

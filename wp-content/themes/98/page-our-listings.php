@@ -19,6 +19,7 @@ $officeListings = new OfficeListings(258);
 $searchResults  = $officeListings->getListings();
 $currentRequest = $officeListings->getCurrentRequest();
 $resultMeta     = $officeListings->getResultMeta();
+$pagination     = $officeListings->buildPagination();
 $listings       = $searchResults->data;
 get_header(); ?>
 
@@ -67,7 +68,7 @@ get_header(); ?>
             </div>
             <div class="container mx-auto text-xs-center">
                 <div class="pb-4">
-                    <?php $officeListings->buildPagination(); ?>
+                    <?php echo $pagination; ?>
                 </div>
                 <hr>
                 <div class="pb-4">

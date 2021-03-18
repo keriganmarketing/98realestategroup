@@ -13,16 +13,9 @@ class FullListing
      * Search Constructor
      * @param string $mlsNumber - Basically just the $_GET variables
      */
-    public function __construct($mlsNumber='')
+    public function __construct()
     {
-        if($mlsNumber==''){
-            $this->getMlsNumber();
-        }else{
-            $this->mlsNumber = $mlsNumber;
-        }
-        $this->create();
-        $this->assembleMedia();
-        $this->setListingSeo();
+        $this->getMlsNumber();
     }
 
     public function getListingInfo()
@@ -34,6 +27,16 @@ class FullListing
     {
         $pathFragments = explode('listing/',$_SERVER['REQUEST_URI']);
         $this->mlsNumber = str_replace('/','',end($pathFragments));
+
+        if(strlen($this->mlsNumber) > 3 && is_numeric($this->mlsNumber)){    
+            add_filter( 'template_include', function(){
+                status_header(200, 'OK');
+                $this->create();
+                $this->assembleMedia();
+                $this->setListingSeo();
+                return TEMPLATEPATH . '/page-listing.php';
+            } ) ;
+        }
     }
 
     public function create()

@@ -19,6 +19,7 @@ $listings       = new QuickSearch();
 $searchResults  = $listings->getSearchResults();
 $currentRequest = $listings->getCurrentRequest();
 $resultMeta     = $listings->getResultMeta();
+$pagination     = $listings->buildPagination();
 get_header(); ?>
 
 <div id="mid">
@@ -65,7 +66,7 @@ get_header(); ?>
             </div>
             <div class="container mx-auto text-xs-center">
                 <div class="pb-4">
-                    <?php $listings->buildPagination(); ?>
+                    <?php echo $pagination; ?>
                 </div>
                 <hr>
                 <div class="pb-4">

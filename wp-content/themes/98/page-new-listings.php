@@ -19,6 +19,7 @@ $newListings    = new NewListings();
 $searchResults  = $newListings->getListings();
 $currentRequest = $newListings->getCurrentRequest();
 $resultMeta     = $newListings->getResultMeta();
+$pagination     = $newListings->buildPagination();
 $listings       = $searchResults->data;
 get_header(); ?>
 
@@ -67,7 +68,7 @@ get_header(); ?>
             </div>
             <div class="container mx-auto text-xs-center">
                 <div class="pb-4">
-                    <?php $newListings->buildPagination(); ?>
+                    <?php echo $pagination; ?>
                 </div>
                 <hr>
                 <div class="pb-4">

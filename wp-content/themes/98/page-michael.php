@@ -22,6 +22,7 @@ $hotDeals = new HotDeals();
 $searchResults  = $hotDeals->getHotProp();
 $currentRequest = $hotDeals->getCurrentRequest();
 $resultMeta     = $hotDeals->getResultMeta();
+$pagination     = $hotDeals->buildPagination();
 $listings       = $searchResults->data;
 
 //echo '<pre>',print_r($searchResults),'</pre>';
@@ -77,7 +78,7 @@ get_header(); ?>
             <div class="container mx-auto text-xs-center">
                 <?php if($hotDeals->resultsArePaginated()){ ?>
                     <div class="pb-4">
-                        <?php $hotDeals->buildPagination(); ?>
+                        <?php echo $pagination; ?>
                     </div>
                 <?php } ?>
                 <hr>

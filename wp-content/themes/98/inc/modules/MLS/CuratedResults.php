@@ -3,9 +3,11 @@
 namespace Includes\Modules\MLS;
 
 use GuzzleHttp\Client;
+use stdClass;
 
 class CuratedResults {
 
+    protected $approvedParams;
     protected $endPoint;
     protected $searchParams;
     protected $searchResults;
@@ -13,7 +15,7 @@ class CuratedResults {
 
     public function __construct()
     {
-        $this->searchResults   = [];
+        $this->searchResults   = new stdClass;
         $this->searchParams    = [
             'omni'   => '',
             'sort' => 'date_modified|desc',
@@ -29,8 +31,11 @@ class CuratedResults {
     {
         if(isset($_GET['q'])){
             foreach($_GET as $key => $var){
-                if($key != 'q'){
+                if($key != 'q' && $key != 'pg'){
                     $this->searchParams[$key] = $var;
+                }
+                if($key == 'pg'){
+                    $this->searchParams['page'] = $var;
                 }
             }
         }
@@ -48,7 +53,19 @@ class CuratedResults {
 
     public function getSort()
     {
-        return isset($this->searchParams['sort']) ? $this->searchParams['sort'] : 'date_modified|desc';
+        return isset($_GET['sort']) ? urldecode($_GET['sort']) : 'date_modified|desc';
+    }
+
+    public function filterRequest()
+    {
+        foreach($this->searchRequested as $key => $var){
+            if(in_array($key, $this->approvedParams)){
+                $this->searchParams[$key] = $var;
+            }
+            if($key == 'pg'){
+                $this->searchParams['page'] = $var;
+            }
+        }
     }
 
     public function makeRequest()
@@ -71,7 +88,7 @@ class CuratedResults {
             }
         }
 
-        return $request . '&page=' . get_query_var( 'page' ) . '&excludes=St. George Island|Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County';
+        return $request . '&excludes=St. George Island|Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County';
     }
 
     public function contactTheMothership()
@@ -94,6 +111,6 @@ class CuratedResults {
     public function buildPagination()
     {
         $pagination = new SearchPagination($this->getResultMeta(),$this->searchParams);
-        $pagination->buildPagination();
+        return $pagination->buildPagination();
     }
 }

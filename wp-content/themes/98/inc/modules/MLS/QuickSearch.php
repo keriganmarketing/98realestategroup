@@ -3,6 +3,7 @@
 namespace Includes\Modules\MLS;
 
 use GuzzleHttp\Client;
+use stdClass;
 
 class QuickSearch
 {
@@ -32,8 +33,7 @@ class QuickSearch
             'acreage',
             'waterfront',
             'waterview',
-            'sort',
-            'page'
+            'sort'
         ];
         $this->searchParams = [
             'omni'   => '',
@@ -43,7 +43,7 @@ class QuickSearch
                 'contingent' => 'Contingent'
             ]
         ];
-        $this->searchResults = [];
+        $this->searchResults = new stdClass();
         $this->searchRequested = (isset($_GET['q']) && $_GET['q'] == 'search' ? $_GET : []);
 
         //set default if no search performed
@@ -71,7 +71,7 @@ class QuickSearch
 
     public function getSort()
     {
-        return isset($this->searchParams['sort']) ? $this->searchParams['sort'] : 'date_modified|desc';
+        return isset($_GET['sort']) ? urldecode($_GET['sort']) : 'date_modified|desc';
     }
 
     public function filterRequest()
@@ -79,6 +79,9 @@ class QuickSearch
         foreach($this->searchRequested as $key => $var){
             if(in_array($key, $this->approvedParams)){
                 $this->searchParams[$key] = $var;
+            }
+            if($key == 'pg'){
+                $this->searchParams['page'] = $var;
             }
         }
     }
@@ -97,6 +100,7 @@ class QuickSearch
                     $request .= $v . ($i < count($var) ? '|' : '');
                     $i++;
                 }
+
             }else{
                 if($var != '' && $var != 'Any'){
                     $request .= '&' . $key . '=' . $var;
@@ -104,14 +108,12 @@ class QuickSearch
             }
         }
 
-        $request = $request . '&page=' . get_query_var( 'page' ) . '&excludes=St. George Island|Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County';
-        // echo $request;
-        
+        $request = $request . '&excludes=St. George Island|Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County';
         return $request;
     }
 
     public function contactTheMothership()
-    {
+    {        
         $client     = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
         $apiCall = $client->request(
             'GET', 'search' . $this->makeRequest()
@@ -123,6 +125,6 @@ class QuickSearch
     public function buildPagination()
     {
         $pagination = new SearchPagination($this->getResultMeta(),$this->searchParams);
-        $pagination->buildPagination();
+        return $pagination->buildPagination();
     }
 }

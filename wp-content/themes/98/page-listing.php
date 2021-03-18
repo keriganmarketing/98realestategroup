@@ -17,7 +17,7 @@ use Includes\Modules\MLS\Favorites;
  * @package Ninetyeight Real Estate Group
  */
 
-$fullListing =  new FullListing();
+
 $listing      = $fullListing->getListingInfo();
 
 // echo '<pre>',print_r($listing),'</pre>';
