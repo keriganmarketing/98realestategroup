@@ -74,7 +74,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
     <div class="row">
         <div class="col-md-6 form-group form-inline">
             <label for="phone1" class="control-label">Phone</label>
-            <input name="phone_number" type="text" id="phone" class="textbox form-control <?php echo ( $phone && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($phone != '' ? $phone : ''); ?>" placeholder="Phone Number *">
+            <input name="phone_number" type="text" id="phone" class="textbox form-control <?php echo ( $phone && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($phone != '' ? $phone : ''); ?>" placeholder="(###)###-###) *">
         </div>
         
         <div class="col-md-4 form-group <?php echo ( $selectedAgent=='' && $formSubmitted ? 'has-error' : ''); ?>">    										
