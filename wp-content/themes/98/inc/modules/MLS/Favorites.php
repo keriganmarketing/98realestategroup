@@ -14,6 +14,7 @@ class Favorites {
     public function setupAdmin()
     {
         $this->createPostType();
+        add_action('rest_api_init', [$this, 'addRoutes']);
     }
 
     public function createPostType()

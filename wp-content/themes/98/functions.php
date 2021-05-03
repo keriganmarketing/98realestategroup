@@ -28,7 +28,6 @@ new HotDeals;
 
 $favorites = new Favorites;
 $favorites->setupAdmin();
-$favorites->addRoutes();
 
 $fullListing =  new FullListing();
 
