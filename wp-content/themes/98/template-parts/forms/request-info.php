@@ -78,7 +78,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         <div class="form-group"> 
             <label>PHONE*</label>
             <div class="phone-group">
-                <input type="tel" name="phone_number" class="form-control" value="<?php echo $phone; ?>" placeholder="(850) ###-####" >
+                <input type="tel" name="phone_number" class="form-control" value="<?php echo $phone; ?>" placeholder="(###) ###-####" >
             </div>
         </div> 
         </div>
