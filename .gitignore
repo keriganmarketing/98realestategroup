@@ -12,6 +12,7 @@ tags/
 wp-config.php
 
 # Untracked prod files
-wp-content/uploads/**
-wp-admin/**
-wp-includes/**
+wp-content/plugins/
+wp-content/uploads/
+wp-admin/
+wp-includes/
