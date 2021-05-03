@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'scss_formatter' => $vendorDir . '/leafo/scssphp/scss.inc.php',
     'scss_formatter_compressed' => $vendorDir . '/leafo/scssphp/scss.inc.php',
     'scss_formatter_crunched' => $vendorDir . '/leafo/scssphp/scss.inc.php',
