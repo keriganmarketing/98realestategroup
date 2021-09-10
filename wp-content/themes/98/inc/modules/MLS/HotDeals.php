@@ -184,13 +184,20 @@ class HotDeals
         $client     = new Client(['base_uri' => 'https://navica.kerigan.com/api/v1/']);
         $this->mlsNumbers = implode('|', $HotList);
 
-        $apiCall = $client->request(
-            'GET', 'listings?mlsNumbers=' . $this->mlsNumbers . $this->makeRequest()
-        );
+        try {
+            $apiCall = $client->request(
+                'GET', 'listings?mlsNumbers=' . $this->mlsNumbers . $this->makeRequest()
+            );
+    
+            $this->searchResults = json_decode($apiCall->getBody());
+            return $this->searchResults;
 
-        $this->searchResults = json_decode($apiCall->getBody());
-
-        return $this->searchResults;
+        }catch (\Exception $e) {
+            $error = new \StdClass;
+            $error->data = [];
+            return $error;
+        }
+        
     }
 
     public function getUrlBuilder(){
