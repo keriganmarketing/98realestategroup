@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "autoprefixer": "^8.0.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "4.0.0-alpha.6",
     "chart.js": "^2.7.3",
