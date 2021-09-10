@@ -66,7 +66,7 @@ get_header(); ?>
                 <div class="container-wide mx-auto">
 
                     <div class="row justify-content-center align-items-center text-center">
-                    <?php foreach($searchResults->data as $listing){ ?>
+                    <?php foreach($listings as $listing){ ?>
                         <div class="feat-prop col-md-6 col-xl-3 text-center">
                             <?php include(locate_template('template-parts/partials/mini-listing.php')); ?>
                         </div>
