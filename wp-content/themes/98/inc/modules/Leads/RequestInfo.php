@@ -7,19 +7,16 @@ use Includes\Modules\MLS\FullListing;
 
 class RequestInfo extends Leads
 {
-    public function __construct ()
-    {
-        parent::__construct ();
-        parent::assembleLeadData(
-            [
-                'phone_number'       => 'Phone Number',
-                'reason_for_contact' => 'Reason for Contact',
-                'selected_agent'     => 'Selected Agent',
-                'mls_number'         => 'MLS Number',
-                'message'            => 'Message'
-            ]
-        );
-    }
+
+    public $additionalFields = [
+        'full_name'          => 'Name',
+        'email_address'      => 'Email Address',
+        'phone_number'       => 'Phone Number',
+        'reason_for_contact' => 'Reason for Contact',
+        'selected_agent'     => 'Selected Agent',
+        'mls_number'         => 'MLS Number',
+        'message'            => 'Message'
+    ];
 
     public function handleLead ($dataSubmitted = [])
     {
@@ -27,7 +24,7 @@ class RequestInfo extends Leads
             (isset($dataSubmitted['first_name']) ? $dataSubmitted['first_name'] . ' ' . $dataSubmitted['last_name'] : '')
         );
 
-        if(parent::checkSpam($dataSubmitted)){
+        if($this->checkSpam($dataSubmitted)){
             return null; //fail silently if spam
         }
 
@@ -36,21 +33,19 @@ class RequestInfo extends Leads
         // echo '<pre style="color: #FFF;">',print_r($dataSubmitted),'</pre>';
         // echo '<pre style="color: #FFF;">',print_r($agentInfo),'</pre>';
         
-        parent::set('adminEmail', (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail));
-        // parent::set('adminEmail', 'bryan@kerigan.com');
-
-        parent::addToDashboard($dataSubmitted);
-        if(parent::validateSubmission($dataSubmitted)){
+        // parent::set('adminEmail', (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail));
+        $this->adminEmail = (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail);
+        
+        if($this->validateSubmission($dataSubmitted)){
             echo '<div class="alert alert-success" role="alert">
             <strong>Your request has been received. We will review your submission and get back with you soon.</strong>
             </div>';
         }else{
-            $errors = parent::get('errors');
             echo '<div class="alert alert-danger" role="alert">
             <strong>Errors were found. Please correct the indicated fields below.</strong>';
-            if(count($errors) > 0){
+            if(count($this->errors) > 0){
                 echo '<ul>';
-                foreach($errors as $error){
+                foreach($this->errors as $error){
                     echo '<li>'.$error.'</li>';
                 }
                 echo '</ul>';
@@ -58,6 +53,8 @@ class RequestInfo extends Leads
             echo '</div>';
             return;
         }
+
+        $this->addToDashboard($dataSubmitted);
         $this->sendNotifications($dataSubmitted);
 
     }
@@ -90,7 +87,7 @@ class RequestInfo extends Leads
             </td></tr><tr><td>&nbsp;</td></tr>';
         }
 
-        parent::sendEmail(
+        $this->sendEmail(
             [
                 'to'        => $this->adminEmail,
                 'from'      => get_bloginfo().' <noreply@98realestategroup.com>',
@@ -104,7 +101,7 @@ class RequestInfo extends Leads
             ]
         );
 
-        parent::sendEmail(
+        $this->sendEmail(
             [
                 'to'        => $fullName . '<' . $emailAddress . '>',
                 'from'      => get_bloginfo().' <noreply@98realestategroup.com>',

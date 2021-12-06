@@ -204,7 +204,7 @@ if(isset($_POST['secu']) && $_POST['secu'] == '' && isset($_POST['formID']) && $
         if(!is_array($var)){
             $submittedData .= '<tr><td>'.$key.'</td><td>'.$var.'</td></tr>';
         }else{
-            $submittedData .= '<tr><td>'.$key.'</td><td '.$datastyle.'>';
+            $submittedData .= '<tr><td>'.$key.'</td><td>';
             foreach($var as $k => $v){
                 $submittedData .= '<span style="display:block;width:100%;">'.$v.'</span><br>';
             }

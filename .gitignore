@@ -4,6 +4,7 @@
 tags/
 .vscode
 bannerads
+.user.ini
 
 # Error logs and cache directories
 error_log

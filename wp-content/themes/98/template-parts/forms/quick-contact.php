@@ -17,12 +17,12 @@ $overrideFields = (isset($sessionAgent) && $sessionAgent != '' ? true : false);
 //IS USER LOGGED IN?
 $currentUser            = get_user_meta( get_current_user_id() );
 $currentUserInfo        = get_userdata( get_current_user_id() );
-$yourname               = ($currentUser['first_name'][0] != '' ? $currentUser['first_name'][0] : $yourname);
-$yourname               = ($currentUser['last_name'][0] != '' ? $yourname.' '.$currentUser['last_name'][0] : $yourname);
-$youremail              = (isset($currentUserInfo->user_email) ? $currentUserInfo->user_email : $youremail);
-$phone                  = (isset($currentUser['phone1'][0]) ? $currentUser['phone1'][0] : $phone);
+$yourname               = (is_array($currentUser) && $currentUser['first_name'][0] != '' ? $currentUser['first_name'][0] : $yourname);
+$yourname               = (is_array($currentUser) && $currentUser['last_name'][0] != '' ? $yourname.' '.$currentUser['last_name'][0] : $yourname);
+$youremail              = ($currentUserInfo && isset($currentUserInfo->user_email) ? $currentUserInfo->user_email : $youremail);
+$phone                  = (is_array($currentUser) && isset($currentUser['phone1'][0]) ? $currentUser['phone1'][0] : $phone);
 
-$selectedAgent = (isset($currentUser['your_agent'][0]) ? $currentUser['your_agent'][0] : null); //get agent from user data.
+$selectedAgent = (is_array($currentUser) && isset($currentUser['your_agent'][0]) ? $currentUser['your_agent'][0] : null); //get agent from user data.
 
 $formID                 = (isset($_POST['formID']) ? $_POST['formID'] : '');
 $securityFlag           = (isset($_POST['secu']) ? $_POST['secu'] : '');
@@ -39,9 +39,9 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 <a id="quick-contact-form" class="pad-anchor"></a>
 <form class="form leadform" enctype="multipart/form-data" method="post" action="#quick-contact-form" id="quickcontact">
 <input type="hidden" name="formID" value="quickcontact" >
-<input type="hidden" name="user_agent" value="{{user-agent}}" >
-<input type="hidden" name="ip_address" value="{{ip-address}}" >
-<input type="hidden" name="referrer" value="{{referrer}}" >
+<input type="hidden" name="user_agent" value="<?php echo $_SERVER['HTTP_USER_AGENT']; ?>" >
+<input type="hidden" name="ip_address" value="<?php echo (new Includes\Modules\Leads\Leads())->getIP(); ?>" >
+<input type="hidden" name="referrer" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" >
 <input type="hidden" value="<?php echo $selectedAgent; ?>" name="selected_agent" >
 <input type="hidden" value="Quick contact" name="reason_for_contact" >
 <input type="hidden" value="" name="mls_number" >

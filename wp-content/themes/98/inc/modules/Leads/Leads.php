@@ -6,14 +6,14 @@ use KeriganSolutions\CPT\CustomPostType;
 
 class Leads
 {
-    protected $postType;
-    public    $adminEmail;
-    public    $domain;
-    public    $ccEmail;
-    public    $bccEmail;
-    public    $additionalFields;
+    protected $postType = 'Lead';
+    public    $adminEmail = 'bryan@kerigan.com';
+    public    $domain = 'kerigan.com';
+    public    $ccEmail = 'web@kerigan.com';
+    public    $bccEmail = 'websites@kerigan.com';
+    public    $additionalFields = [];
     public    $siteName;
-    public    $errors;
+    public    $errors = [];
 
     /**
      * Leads constructor.
@@ -23,20 +23,10 @@ class Leads
     {
         date_default_timezone_set('America/Chicago');
 
-        $this->postType   = 'Lead';
-        $this->domain     = 'kerigan.com';
-
         //separate multiple email addresses with a ';'
         $this->adminEmail = 'zachchilds@gmail.com';
         $this->ccEmail    = 'zachchilds@gmail.com'; //Admin email only
-        $this->bccEmail   = 'support@kerigan.com';
 
-        //use this to merge in additional fields
-        $this->assembleLeadData([
-            //'name' => 'label'
-        ]);
-
-        $this->errors = [];
     }
 
     protected function set($var, $value)
@@ -76,9 +66,26 @@ class Leads
         if($this->checkSpam($dataSubmitted)){
             return null; //fail silently if spam
         }
+        
+        if($this->validateSubmission($dataSubmitted)){
+            echo '<div class="alert alert-success" role="alert">
+            <strong>Your request has been received. We will review your submission and get back with you soon.</strong>
+            </div>';
+        }else{
+            echo '<div class="alert alert-danger" role="alert">
+            <strong>Errors were found. Please correct the indicated fields below.</strong>';
+            if(count($this->errors) > 0){
+                echo '<ul>';
+                foreach($this->errors as $error){
+                    echo '<li>'.$error.'</li>';
+                }
+                echo '</ul>';
+            }
+            echo '</div>';
+            return;
+        }
 
         $this->addToDashboard($dataSubmitted);
-        if(!$this->validateSubmission($dataSubmitted)){ return false; }
         $this->sendNotifications($dataSubmitted);
     }
 
@@ -111,11 +118,11 @@ class Leads
             $this->errors[] = 'Google has identified this submission as spam.';
         }
 
-        // if (function_exists('akismet_verify_key') && !empty(akismet_get_key())){
-        //     if ($this->checkSpam($dataSubmitted)){
-        //         $passCheck = false;
-        //     }
-        // }
+        if (function_exists('akismet_verify_key') && !empty(akismet_get_key())){
+            if ($this->checkSpam($dataSubmitted)){
+                $passCheck = false;
+            }
+        }
 
         return $passCheck;
 
@@ -143,8 +150,8 @@ class Leads
 
         if (filter_var($client, FILTER_VALIDATE_IP)) {
             return $client;}
-        elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
-            return $forward;}
+        elseif (filter_var($forwarded, FILTER_VALIDATE_IP)) {
+            return $forwarded;}
         else {
             return $remote;}
     } 
@@ -168,7 +175,7 @@ class Leads
         ], $_SERVER);
 
         $spam = $result->isSpam();
-        //echo '<pre>',print_r($result),'</pre>';
+        // echo '<pre>',print_r($result),'</pre>';
 
         return $spam; // Boolean 
     }
@@ -212,21 +219,6 @@ class Leads
     protected function toFullAddress ($street, $street2, $city, $state, $zip)
     {
         return $street . ' ' . $street2 . ' ' . $city . ', ' . $state . '  ' . $zip;
-    }
-
-    /*
-     * Used to manage data retrieved by lead. Used by pretty much everything.
-     * Can pass in additional inputs. Arrays are merged to keep from duplicating fields.
-     * @param $input
-     */
-    protected function assembleLeadData ($input = [])
-    {
-        $default = [
-            'full_name'     => 'Name',
-            'email_address' => 'Email Address'
-        ];
-
-        $this->additionalFields = array_merge($default, $input);
     }
 
     public function getLeads($args = []){

@@ -17,13 +17,13 @@ $agentOptions           = '';
 //IS USER LOGGED IN?
 $currentUser            = get_user_meta( get_current_user_id() );
 $currentUserInfo        = get_userdata( get_current_user_id() );
-$yourname               = ($currentUser['first_name'][0] != '' ? $currentUser['first_name'][0] : $yourname);
-$yourname               = ($currentUser['last_name'][0] != '' ? $yourname.' '.$currentUser['last_name'][0] : $yourname);
-$youremail              = (isset($currentUserInfo->user_email) ? $currentUserInfo->user_email : $youremail);
-$phone                  = (isset($currentUser['phone1'][0]) ? $currentUser['phone1'][0] : $phone);
+$yourname               = (is_array($currentUser) && $currentUser['first_name'][0] != '' ? $currentUser['first_name'][0] : $yourname);
+$yourname               = (is_array($currentUser) && $currentUser['last_name'][0] != '' ? $yourname.' '.$currentUser['last_name'][0] : $yourname);
+$youremail              = ($currentUserInfo && isset($currentUserInfo->user_email) ? $currentUserInfo->user_email : $youremail);
+$phone                  = (is_array($currentUser) && isset($currentUser['phone1'][0]) ? $currentUser['phone1'][0] : $phone);
 
 $selectedAgent = (isset($_GET['selected_agent']) ? $_GET['selected_agent'] : null); //IF GET, then override.
-$selectedAgent = (isset($currentUser['your_agent'][0]) && $currentUser['your_agent'][0] != '' ? $currentUser['your_agent'][0] : $selectedAgent ); //get agent from user data.
+$selectedAgent = (is_array($currentUser) && isset($currentUser['your_agent'][0]) && $currentUser['your_agent'][0] != '' ? $currentUser['your_agent'][0] : $selectedAgent ); //get agent from user data.
 $selectedAgent = (isset($_GET['selected_agent']) && isset($_GET['reason']) && $_GET['reason'] == 'Just reaching out' ? $_GET['selected_agent'] : $selectedAgent ); //IF GET and from team, then override.
 
 //SELECT OPTIONS
@@ -63,7 +63,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 <form class="form leadform" enctype="multipart/form-data" method="post" action="#request-info-form" id="requestinfo">
 <input type="hidden" name="formID" value="requestinfo" >
 <input type="hidden" name="user_agent" value="<?php echo $_SERVER['HTTP_USER_AGENT']; ?>" >
-<input type="hidden" name="ip_address" value="<?php echo Includes\Modules\Leads\Leads::getIP(); ?>" >
+<input type="hidden" name="ip_address" value="<?php echo (new Includes\Modules\Leads\Leads())->getIP(); ?>" >
 <input type="hidden" name="referrer" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" >
 <div class="row">
     <div class="col-sm-6"> 
