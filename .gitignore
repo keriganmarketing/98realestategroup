@@ -17,6 +17,9 @@ wp-content/plugins/
 wp-content/uploads/
 wp-content/wflogs/
 wp-content/upgrade/
+wp-content/themes/*
+!wp-content/themes/98
+!wp-content/themes/index.php
 
 # WP CORE
 wp-admin/*
