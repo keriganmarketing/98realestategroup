@@ -34,7 +34,8 @@ class FullListing
 
     public function getMlsNumber()
     {
-        $pathFragments = explode('listing/',$_SERVER['REQUEST_URI']);
+        $pathFragments = explode('?', $_SERVER['REQUEST_URI'], 2);
+        $pathFragments = explode('listing/', $pathFragments[0]);
         $this->mlsNumber = str_replace('/','',end($pathFragments));
 
         if(strlen($this->mlsNumber) > 3 && is_numeric($this->mlsNumber)){    
