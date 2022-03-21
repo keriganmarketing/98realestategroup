@@ -94,8 +94,8 @@ class Leads
             </div>';
         }
 
-        // $this->addToDashboard($dataSubmitted);
-        // $this->sendNotifications($dataSubmitted);
+        $this->addToDashboard($dataSubmitted);
+        $this->sendNotifications($dataSubmitted);
 
         return true;
     }
