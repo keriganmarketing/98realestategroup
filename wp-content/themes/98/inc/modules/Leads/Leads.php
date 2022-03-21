@@ -15,18 +15,28 @@ class Leads
     public    $siteName;
     public    $errors = [];
 
+    public    $successMessage      = 'Your request has been received. We will review your submission and get back with you soon.';
+    
+    public    $fromName            = '98 Real Estate Website';
+    public    $fromEmail           = 'leads@mg.98realestategroup.com';
+
+    public    $subjectLine         = 'New lead submitted on website';
+    public    $emailHeadline       = 'You have a new lead from the website';
+    public    $emailText           = '<p style="font-size:18px; color:black;" >A lead was received from the website. Details are below:</p>';
+
+    public    $receiptSubjectLine  = 'Thank you for contacting 98 Real Estate Group';
+    public    $receiptHeadline     = 'Your website submission has been received';
+    public    $receiptText         = '<p style="font-size:18px; color:black;" >We\'ll review the information you\'ve provided and get back with you as soon as we can.</p>';
+
     /**
      * Leads constructor.
      * configure any options here
      */
     public function __construct ()
     {
-        date_default_timezone_set('America/Chicago');
-
         //separate multiple email addresses with a ';'
-        $this->adminEmail = 'zachchilds@gmail.com';
-        $this->ccEmail    = 'zachchilds@gmail.com'; //Admin email only
-
+        // $this->adminEmail = 'zachchilds@gmail.com';
+        // $this->ccEmail    = 'zachchilds@gmail.com'; //Admin email only
     }
 
     protected function set($var, $value)
@@ -63,15 +73,9 @@ class Leads
         $fullName = (isset($dataSubmitted['full_name']) ? $dataSubmitted['full_name'] : null);
         $dataSubmitted['full_name'] = (isset($dataSubmitted['first_name']) && isset($dataSubmitted['last_name']) ? $dataSubmitted['first_name'] . ' ' . $dataSubmitted['last_name'] : $fullName);
 
-        if($this->checkSpam($dataSubmitted)){
-            return null; //fail silently if spam
-        }
-        
-        if($this->validateSubmission($dataSubmitted)){
-            echo '<div class="alert alert-success" role="alert">
-            <strong>Your request has been received. We will review your submission and get back with you soon.</strong>
-            </div>';
-        }else{
+        $this->overrideData($dataSubmitted);
+
+        if(!$this->validateSubmission($dataSubmitted)){
             echo '<div class="alert alert-danger" role="alert">
             <strong>Errors were found. Please correct the indicated fields below.</strong>';
             if(count($this->errors) > 0){
@@ -82,11 +86,26 @@ class Leads
                 echo '</ul>';
             }
             echo '</div>';
-            return;
+
+            return false; 
+        }else{
+            echo '<div class="alert alert-success" role="alert">
+            <strong>' . $this->successMessage . '</strong>
+            </div>';
         }
 
-        $this->addToDashboard($dataSubmitted);
-        $this->sendNotifications($dataSubmitted);
+        // $this->addToDashboard($dataSubmitted);
+        // $this->sendNotifications($dataSubmitted);
+
+        return true;
+    }
+
+    /**
+     * Override email data based on form submitted
+     */
+    public function overrideData($dataSubmitted)
+    {
+        // To be used while extending this class
     }
 
     /*
@@ -106,78 +125,91 @@ class Leads
             $passCheck = false;
             $this->errors[] = 'The provided email was improperly formatted.';
         }
+
         if ($dataSubmitted['full_name'] == '') {
             $passCheck = false;
             $this->errors[] = 'Name is required.';
         }
-        if($dataSubmitted['g-recaptcha-response'] == ''){ 
-            $passCheck = false;
-            $this->errors[] = 'Please indicate that you are not a robot.';
-        }elseif($this->validateCaptcha($dataSubmitted['g-recaptcha-response'])){
-            $passCheck = false;
-            $this->errors[] = 'Google has identified this submission as spam.';
-        }
 
-        if (function_exists('akismet_verify_key') && !empty(akismet_get_key())){
-            if ($this->checkSpam($dataSubmitted)){
-                $passCheck = false;
-            }
+        if ($this->checkSpam($dataSubmitted)){
+            $passCheck = false;
+            $this->errors[] = 'Your message has been identified as spam.';
         }
 
         return $passCheck;
 
     }
 
-    protected function validateCaptcha($response)
-    {      
-        return false;
-          
-        $recaptcha = new \ReCaptcha\ReCaptcha(RECAPTCHA_SECRET);
-        $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])->verify($response, $_SERVER['REMOTE_ADDR']);
+    public function getIP()
+    {
+        $Ip = '0.0.0.0';
+        if (isset($_SERVER['HTTP_CLIENT_IP']) && $_SERVER['HTTP_CLIENT_IP'] != '')
+        $Ip = $_SERVER['HTTP_CLIENT_IP'];
+        elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] != '')
+        $Ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        elseif (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] != '')
+        $Ip = $_SERVER['REMOTE_ADDR'];
+        if (($CommaPos = strpos($Ip, ',')) > 0)
+        $Ip = substr($Ip, 0, ($CommaPos - 1));
 
-        if ($resp->isSuccess()){
-            return false;
-        }else{
-            return true;
-        }
+        return $Ip;
     }
 
-    public function getIP() 
+    public function getReferrer()
     {
-        $client  = @$_SERVER['HTTP_CLIENT_IP'];
-        $forwarded = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-        $remote  = $_SERVER['REMOTE_ADDR'];
+        return isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+    }
 
-        if (filter_var($client, FILTER_VALIDATE_IP)) {
-            return $client;}
-        elseif (filter_var($forwarded, FILTER_VALIDATE_IP)) {
-            return $forwarded;}
-        else {
-            return $remote;}
-    } 
-
-    public function checkSpam($dataSubmitted)
+    public function getUserAgent()
     {
-        $client = new \Gothick\AkismetClient\Client(
-            site_url(),           // Your website's URL (this becomes Akismet's "blog" parameter)
-            "KMA Spam Checker",   // Your website or app's name (Used in the User-Agent: header when talking to Akismet)
-            "1.0",                // Your website or app's software version (Used in the User-Agent: header when talking to Akismet)
-            akismet_get_key()     
-        );
+        return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+    }
 
-        $result = $client->commentCheck([
-            'user_ip'              => $dataSubmitted['ip_address'],
-            'user_agent'           => $dataSubmitted['user_agent'],
-            'referrer'             => $dataSubmitted['referrer'],
-            'comment_author'       => $dataSubmitted['full_name'],
-            'comment_author_email' => $dataSubmitted['email_address'],
-            'comment_content'      => $dataSubmitted['message']
-        ], $_SERVER);
+    public function checkSpam($data)
+    {
+        // not spam if akismet isn't active
+        if(!function_exists('akismet_http_post')) {
+            return false;
+        }
+    
+        global $akismet_api_host, $akismet_api_port;
+    
+        // data package to be delivered to Akismet
+        $commentData = [
+            'comment_author_email'  => $data['email_address'], //required
+            'blog'                  => site_url(),
+            'blog_lang'             => 'en_US',
+            'blog_charset'          => 'UTF-8',
+            'is_test'               => TRUE,
+        ];
 
-        $spam = $result->isSpam();
-        // echo '<pre>',print_r($result),'</pre>';
+        if(isset($data['ip_address'])){
+            $commentData['user_ip'] = $data['ip_address'];
+        }
+    
+        if(isset($data['user_agent'])){
+            $commentData['user_agent'] = $data['user_agent'];
+        }
+    
+        if(isset($data['referrer'])){
+            $commentData['referrer'] = $data['referrer'];
+        }
+    
+        if(isset($data['comment_author'])){
+            $commentData['comment_author'] = $data['full_name'];
+        }
+    
+        if(isset($data['comment_content'])){
+            $commentData['comment_content'] = $data['message'];
+        }
 
-        return $spam; // Boolean 
+        // construct the query string
+        $query_string = http_build_query( $commentData );
+        // post it to Akismet
+        $response = akismet_http_post( $query_string, $akismet_api_host, '/1.1/comment-check', $akismet_api_port );
+
+        // the result is the second item in the array, boolean
+        return $response[1] == 'true' ? true : false;
     }
 
     /**
@@ -260,16 +292,18 @@ class Leads
             }
         }
 
+        $tableData .= $this->additionalEmailData($leadInfo);
+
         $this->sendEmail(
             [
                 'to'        => $this->adminEmail,
-                'from'      => get_bloginfo() . ' <noreply@' . $this->domain . '>',
-                'subject'   => $this->postType . ' submitted on website',
+                'from'      => $this->fromName . ' <'. $this->fromEmail . '>',
+                'subject'   => $this->subjectLine,
                 'cc'        => $this->ccEmail,
                 'bcc'       => $this->bccEmail,
                 'replyto'   => $fullName . '<' . $emailAddress . '>',
-                'headline'  => 'You have a new ' . strtolower($this->postType),
-                'introcopy' => 'A ' . strtolower($this->postType) . ' was received from the website. Details are below:',
+                'headline'  => $this->emailHeadline,
+                'introcopy' => $this->emailText,
                 'leadData'  => $tableData
             ]
         );
@@ -277,15 +311,21 @@ class Leads
         $this->sendEmail(
             [
                 'to'        => $fullName . '<' . $emailAddress . '>',
-                'from'      => get_bloginfo() . ' <noreply@' . $this->domain . '>',
-                'subject'   => 'Your website submission has been received',
+                'from'      => $this->fromName . ' <'. $this->fromEmail . '>',
+                'subject'   => $this->receiptSubjectLine,
                 'bcc'       => $this->bccEmail,
-                'headline'  => 'Thank you',
-                'introcopy' => 'We\'ll review the information you\'ve provided and get back with you as soon as we can.',
+                'headline'  => $this->receiptHeadline,
+                'introcopy' => $this->receiptText,
                 'leadData'  => $tableData
             ]
         );
 
+    }
+
+    
+    public function additionalEmailData($leadInfo)
+    {
+        return '';
     }
 
     /**

@@ -8,7 +8,7 @@ class HomeValuation extends Leads
 {
 
     public $postType = 'Home Valuation';
-    public $adminEmail = 'bryan@kerigan.com';
+
     public $additionalFields = [
         'full_name'          => 'Name',
         'email_address'      => 'Email Address',
@@ -19,49 +19,35 @@ class HomeValuation extends Leads
         'property_details'   => 'Property Details'
     ];
 
-    public function handleLead ($dataSubmitted = [])
-    {
-        $dataSubmitted['full_name'] = (isset($dataSubmitted['full_name']) ? $dataSubmitted['full_name'] :
-            (isset($dataSubmitted['first_name']) ? $dataSubmitted['first_name'] . ' ' . $dataSubmitted['last_name'] : '')
-        );
+    public    $successMessage      = 'Your request has been received. We will review your submission and get back with you soon.';
+    
+    public    $fromName            = '98 Real Estate Website';
+    public    $fromEmail           = 'leads@mg.98realestategroup.com';
 
+    public    $subjectLine         = 'New home valuation lead submitted on website';
+    public    $emailHeadline       = 'You have a home valuation lead from the website';
+    public    $emailText           = '<p style="font-size:18px; color:black;" >A home valuation lead was received from the website. Details are below:</p>';
+
+    public    $receiptSubjectLine  = 'Thank you for contacting 98 Real Estate Group';
+    public    $receiptHeadline     = 'Your home valuation submission has been received';
+    public    $receiptText         = '<p style="font-size:18px; color:black;" >We\'ll review the information you\'ve provided and get back with you as soon as we can.</p>';
+
+    public function overrideData($dataSubmitted)
+    {
         $dataSubmitted['property_address'] = $this->toFullAddress(
             $dataSubmitted['listing_address'], $dataSubmitted['listing_address_2'],
             $dataSubmitted['listing_city'], $dataSubmitted['listing_state'], $dataSubmitted['listing_zip']
         );
 
         $dataSubmitted['message'] = $dataSubmitted['property_details'];
-        if($this->checkSpam($dataSubmitted)){
-            return null; //fail silently if spam
-        }
 
         $agent = new Team();
-        $agentInfo = $agent->assembleAgentData($dataSubmitted['selected_agent']);
-        // echo '<pre style="color: #FFF;">',print_r($dataSubmitted),'</pre>';
-        // echo '<pre style="color: #FFF;">',print_r($agentInfo),'</pre>';
+        $agentInfo = $agent->getSingle($dataSubmitted['selected_agent']);
+        // echo '<pre>',print_r($dataSubmitted),'</pre>';
+        // echo '<pre>',print_r($agentInfo),'</pre>';
         
-        $this->adminEmail = (isset($agentInfo['email_address']) && $agentInfo['email_address'] != '' ? $agentInfo['email_address'] : $this->adminEmail);
-        
-        if($this->validateSubmission($dataSubmitted)){
-            echo '<div class="alert alert-success" role="alert">
-            <strong>Your request has been received. We will review your submission and get back with you soon.</strong>
-            </div>';
-        }else{
-            echo '<div class="alert alert-danger" role="alert">
-            <strong>Errors were found. Please correct the indicated fields below.</strong>';
-            if(count($this->errors) > 0){
-                echo '<ul>';
-                foreach($this->errors as $error){
-                    echo '<li>'.$error.'</li>';
-                }
-                echo '</ul>';
-            }
-            echo '</div>';
-            return;
-        }
+        $this->adminEmail = (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail);
 
-        $this->addToDashboard($dataSubmitted);
-        $this->sendNotifications($dataSubmitted);
+        // echo $this->adminEmail;
     }
-
 }

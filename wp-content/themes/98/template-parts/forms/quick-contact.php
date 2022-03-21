@@ -1,7 +1,7 @@
 <?php
 
-use Includes\Modules\Team\Team;
-use Includes\Modules\Leads\RequestInfo;
+use Includes\Modules\Leads\SimpleContact;
+$form = new SimpleContact();
 
 //DEFAULT FORM VARS
 $yourname               = (isset($_GET['full_name']) ? $_GET['full_name'] : '');
@@ -28,20 +28,18 @@ $formID                 = (isset($_POST['formID']) ? $_POST['formID'] : '');
 $securityFlag           = (isset($_POST['secu']) ? $_POST['secu'] : '');
 $formSubmitted          = ($formID == 'quickcontact' && $securityFlag == '' ? TRUE : FALSE);
 
-if( $formSubmitted ){ //FORM WAS SUBMITTED
-
-    $leads = new RequestInfo();
-    $leads->handleLead($_POST);
-
+//FORM WAS SUBMITTED
+if( $formSubmitted ){ 
+    $form->handleLead($_POST);
 }
 
 ?>
 <a id="quick-contact-form" class="pad-anchor"></a>
 <form class="form leadform" enctype="multipart/form-data" method="post" action="#quick-contact-form" id="quickcontact">
 <input type="hidden" name="formID" value="quickcontact" >
-<input type="hidden" name="user_agent" value="<?php echo $_SERVER['HTTP_USER_AGENT']; ?>" >
-<input type="hidden" name="ip_address" value="<?php echo (new Includes\Modules\Leads\Leads())->getIP(); ?>" >
-<input type="hidden" name="referrer" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" >
+<input type="hidden" name="user_agent" value="<?php echo $form->getUserAgent(); ?>" >
+<input type="hidden" name="ip_address" value="<?php echo $form->getIP(); ?>" >
+<input type="hidden" name="referrer" value="<?php echo $form->getReferrer(); ?>" >
 <input type="hidden" value="<?php echo $selectedAgent; ?>" name="selected_agent" >
 <input type="hidden" value="Quick contact" name="reason_for_contact" >
 <input type="hidden" value="" name="mls_number" >
@@ -67,8 +65,6 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
                 <input type="tel" name="phone_number" class="form-control" value="<?php echo $phone; ?>" placeholder="(###) ###-####" >
             </div>
         </div> 
-
-        <div data-size="normal" data-theme="dark" style="display:inline-block; margin-top:1rem;" class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_KEY; ?>"></div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">

@@ -2,44 +2,40 @@
 
 namespace Includes\Modules\Leads;
 
+use Includes\Modules\Team\Team;
+
 class SimpleContact extends Leads
 {
-    public $postType = 'Contact Submission';
-    public $adminEmail = 'bryan@kerigan.com';
-    public $additionalFields = [
+    public $postType               = 'Contact Submission';
+
+    public $additionalFields       = [
         'full_name'     => 'Name',
         'email_address' => 'Email Address',
         'message'       => 'Message'
     ];
 
-    public function showForm()
+    public    $successMessage      = 'Your request has been received. We will review your submission and get back with you soon.';
+    
+    public    $fromName            = '98 Real Estate Website';
+    public    $fromEmail           = 'leads@mg.98realestategroup.com';
+
+    public    $subjectLine         = 'New lead submitted on website';
+    public    $emailHeadline       = 'You have a new lead from the website';
+    public    $emailText           = '<p style="font-size:18px; color:black;" >A lead was received from the website. Details are below:</p>';
+
+    public    $receiptSubjectLine  = 'Thank you for contacting 98 Real Estate Group';
+    public    $receiptHeadline     = 'Your website submission has been received';
+    public    $receiptText         = '<p style="font-size:18px; color:black;" >We\'ll review the information you\'ve provided and get back with you as soon as we can.</p>';
+
+    public function overrideData($dataSubmitted)
     {
-        $form = file_get_contents(locate_template('template-parts/forms/contact-form.php'));
-        $form = str_replace('{{user-agent}}', $_SERVER['HTTP_USER_AGENT'], $form);
-		$form = str_replace('{{ip-address}}', $this->getIP(), $form);
-        $form = str_replace('{{referrer}}', $_SERVER['HTTP_REFERER'], $form);
+        $agent = new Team();
+        $agentInfo = $agent->getSingle($dataSubmitted['selected_agent']);
+        // echo '<pre style="color: #FFF;">',print_r($dataSubmitted),'</pre>';
+        // echo '<pre style="color: #FFF;">',print_r($agentInfo),'</pre>';
         
-        $formSubmitted = (isset($_POST['sec']) ? ($_POST['sec'] == '' ? true : false) : false );
-        ob_start();
-        if($formSubmitted){
-            if($this->handleLead($_POST)){
-                echo '<p title="Success" class="is-success">Thank you for contacting us. Your message has been received.</p>';
-            }else{
-                echo '<p title="Error" class="is-danger">There was an error with your submission. Please try again.</p>';
-                echo $form;
-                return ob_get_clean();
-            }
-        }else{
-            echo $form;
-            return ob_get_clean();
-        }
-    }
+        $this->adminEmail = (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail);
 
-    public function setupShortcode()
-    {
-        add_shortcode( 'contact_form', function( $atts ){
-            return $this->showForm();
-        } );
+        // echo $this->adminEmail;
     }
-
 }

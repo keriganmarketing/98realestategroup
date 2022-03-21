@@ -11,7 +11,6 @@
 <link rel="profile" href="http://gmpg.org/xfn/11">
 
 <?php wp_head(); ?>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
 

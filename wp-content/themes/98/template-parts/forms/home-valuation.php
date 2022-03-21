@@ -2,6 +2,7 @@
 
 use Includes\Modules\Team\Team;
 use Includes\Modules\Leads\HomeValuation;
+$form = new HomeValuation();
 
 //DEFAULT FORM VARS
 $yourname            = (isset($_GET['full_name']) ? $_GET['full_name'] : '');
@@ -38,18 +39,15 @@ $securityFlag           = (isset($_POST['secu']) ? $_POST['secu'] : '');
 $formSubmitted          = ($formID == 'homevaluation' && $securityFlag == '' ? TRUE : FALSE);
 
 if( $formSubmitted ){ //FORM WAS SUBMITTED
-
-    $leads = new HomeValuation();
-    $leads->handleLead($_POST);
-
+    $form->handleLead($_POST);
 }
 ?>
 <a id="homeval" class="pad-anchor"></a>
 <form class="form leadform" name="quoteform" id="mainForm" method="post" enctype="multipart/form-data" >
     <input type="hidden" name="formID" value="homevaluation" >
-    <input type="hidden" name="user_agent" value="<?php echo $_SERVER['HTTP_USER_AGENT']; ?>" >
-    <input type="hidden" name="ip_address" value="<?php echo (new Includes\Modules\Leads\Leads())->getIP(); ?>" >
-    <input type="hidden" name="referrer" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" >
+    <input type="hidden" name="user_agent" value="<?php echo $form->getUserAgent(); ?>" >
+    <input type="hidden" name="ip_address" value="<?php echo $form->getIP(); ?>" >
+    <input type="hidden" name="referrer" value="<?php echo $form->getReferrer(); ?>" >
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group sell-property">
@@ -194,15 +192,10 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         <div class="col-xs-12 form-group">&nbsp;</div>
     </div>
 
-    <div class="row" >
-        <div class="col-xs-12 form-group">
-            <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_KEY; ?>"></div>
-        </div>
-    </div>
     <div class="row">
         <div id="listing-request" class="col-xs-12">
             <div class="form-group">
-            <input type="text" name="secu" value="" style="position:absolute; height:1px; width:1px; top:-10000px; left:-10000px;">
+                <input type="text" name="secu" value="" style="position:absolute; height:1px; width:1px; top:-10000px; left:-10000px;">
                 <button type="submit" class="btn btn-primary btn-lg" value="Submit Valuation Request">Submit Valuation Request<span class="glyphicon glyphicon-chevron-right"></span></button>
             </div>
         </div>
