@@ -40,12 +40,12 @@ class RequestInfo extends Leads
     {
         $agent = new Team();
         $agentInfo = $agent->getSingle($dataSubmitted['selected_agent']);
-        echo '<pre style="color: #FFF;">',print_r($dataSubmitted),'</pre>';
-        echo '<pre style="color: #FFF;">',print_r($agentInfo),'</pre>';
+        // echo '<pre style="color: #FFF;">',print_r($dataSubmitted),'</pre>';
+        // echo '<pre style="color: #FFF;">',print_r($agentInfo),'</pre>';
         
         $this->adminEmail = (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail);
 
-        echo $this->adminEmail;
+        // echo $this->adminEmail;
     }
 
     public function additionalEmailData($leadInfo)
