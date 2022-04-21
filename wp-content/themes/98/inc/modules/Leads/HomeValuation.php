@@ -19,6 +19,14 @@ class HomeValuation extends Leads
         'property_details'   => 'Property Details'
     ];
 
+    public  $requiredFields = [
+        'email_address',
+        'phone_number',
+        'full_name',
+        'property_address',
+        'property_type',
+    ];
+
     public    $successMessage      = 'Your request has been received. We will review your submission and get back with you soon.';
     
     public    $fromName            = '98 Real Estate Website';
@@ -47,7 +55,9 @@ class HomeValuation extends Leads
         // echo '<pre>',print_r($agentInfo),'</pre>';
         
         $this->adminEmail = (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail);
-
+        // $this->adminEmail = 'bryan@kerigan.com';
         // echo $this->adminEmail;
+
+        return $dataSubmitted;
     }
 }

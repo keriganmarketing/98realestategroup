@@ -28,6 +28,11 @@ class Leads
     public    $receiptHeadline     = 'Your website submission has been received';
     public    $receiptText         = '<p style="font-size:18px; color:black;" >We\'ll review the information you\'ve provided and get back with you as soon as we can.</p>';
 
+    public $requiredFields = [
+        'email_address',
+        'full_name', // dynamically created using first and last
+    ];
+
     /**
      * Leads constructor.
      * configure any options here
@@ -73,7 +78,7 @@ class Leads
         $fullName = (isset($dataSubmitted['full_name']) ? $dataSubmitted['full_name'] : null);
         $dataSubmitted['full_name'] = (isset($dataSubmitted['first_name']) && isset($dataSubmitted['last_name']) ? $dataSubmitted['first_name'] . ' ' . $dataSubmitted['last_name'] : $fullName);
 
-        $this->overrideData($dataSubmitted);
+        $dataSubmitted = $this->overrideData($dataSubmitted);
 
         if(!$this->validateSubmission($dataSubmitted)){
             echo '<div class="alert alert-danger" role="alert">
@@ -105,7 +110,7 @@ class Leads
      */
     public function overrideData($dataSubmitted)
     {
-        // To be used while extending this class
+        return $dataSubmitted;
     }
 
     /*
@@ -117,18 +122,21 @@ class Leads
     {
 
         $passCheck = true;
-        if ($dataSubmitted['email_address'] == '') {
-            $passCheck = false;
-            $this->errors[] = 'Email cannot be left blank.';
-        } elseif (!filter_var($dataSubmitted['email_address'], FILTER_VALIDATE_EMAIL) && !preg_match('/@.+\./',
-            $dataSubmitted['email_address'])) {
-            $passCheck = false;
-            $this->errors[] = 'The provided email was improperly formatted.';
-        }
 
-        if ($dataSubmitted['full_name'] == '') {
-            $passCheck = false;
-            $this->errors[] = 'Name is required.';
+        // loop through other required fields to make sure they are not blank
+        foreach($this->requiredFields as $field){
+            if ( $dataSubmitted[$field] === null || $dataSubmitted[$field] === '') {
+                $passCheck = false;
+                $this->errors[] = 'The ' . $this->additionalFields[$field] . ' field is required.';
+            }
+    
+            // check email formatting
+            if($field == 'email_address'){
+                if ( ! filter_var($dataSubmitted['email_address'], FILTER_VALIDATE_EMAIL)) {
+                    $passCheck = false;
+                    $this->errors[] = 'The email address you entered is invalid.';
+                }
+            }
         }
 
         if ($this->checkSpam($dataSubmitted)){

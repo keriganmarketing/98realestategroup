@@ -5,11 +5,16 @@ use Includes\Modules\Leads\HomeValuation;
 $form = new HomeValuation();
 
 //DEFAULT FORM VARS
-$yourname            = (isset($_GET['full_name']) ? $_GET['full_name'] : '');
-$youremail           = (isset($_GET['email_address']) ? $_GET['email_address'] : '');
-$phone               = (isset($_GET['phone_number']) ? $_GET['phone_number'] : '');
-$reason              = (isset($_GET['reason_for_contact']) ? $_GET['reason_for_contact'] : '');
-$mlsnumber           = (isset($_GET['mls_number']) ? $_GET['mls_number'] : '');
+$yourname            = (isset($_POST['full_name']) ? $_POST['full_name'] : '');
+$youremail           = (isset($_POST['email_address']) ? $_POST['email_address'] : '');
+$phone               = (isset($_POST['phone_number']) ? $_POST['phone_number'] : '');
+$listing_address     = (isset($_POST['listing_address']) ? $_POST['listing_address'] : '');
+$listing_address_2   = (isset($_POST['listing_address_2']) ? $_POST['listing_address_2'] : '');
+$listing_city        = (isset($_POST['listing_city']) ? $_POST['listing_city'] : '');
+$listing_state       = (isset($_POST['listing_state']) ? $_POST['listing_state'] : '');
+$listing_zip         = (isset($_POST['listing_zip']) ? $_POST['listing_zip'] : '');
+$property_type       = (isset($_POST['property_type']) ? $_POST['property_type'] : '');
+$property_details    = (isset($_POST['property_details']) ? $_POST['property_details'] : '');
 $agentOptions        = '';
 $listing_state       = '';
 
@@ -39,6 +44,9 @@ $securityFlag           = (isset($_POST['secu']) ? $_POST['secu'] : '');
 $formSubmitted          = ($formID == 'homevaluation' && $securityFlag == '' ? TRUE : FALSE);
 
 if( $formSubmitted ){ //FORM WAS SUBMITTED
+    $yourname            = (isset($_POST['full_name']) ? $_POST['full_name'] : '');
+    $youremail           = (isset($_POST['email_address']) ? $_POST['email_address'] : '');
+    $phone               = (isset($_POST['phone_number']) ? $_POST['phone_number'] : '');
     $form->handleLead($_POST);
 }
 ?>
@@ -61,18 +69,18 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
     <div class="row" >
         <div class="col-md-6 form-group">    										
             <label for="full_name" class="control-label">Name<span class="req">*</span></label>
-            <input type="text" class="form-control <?php echo ( $yourname && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($yourname != '' ? $yourname : ''); ?>" value="" name="full_name" required >
+            <input type="text" class="form-control <?php echo ( $yourname=='' && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($yourname != '' ? $yourname : ''); ?>" value="" name="full_name" required >
         </div>
         <div class="col-md-6 form-group">
             <label for="email" class="control-label">Email<span class="req">*</span></label>
-            <input type="text" class="form-control <?php echo( $youremail=='' && $formSubmitted ? 'has-error' : ''); ?>" value="" name="email_address" required >
+            <input type="text" class="form-control <?php echo( $youremail=='' && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($youremail != '' ? $youremail : ''); ?>" name="email_address" required >
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6 form-group form-inline">
             <label for="phone1" class="control-label">Phone</label>
-            <input name="phone_number" type="text" id="phone" class="textbox form-control <?php echo ( $phone && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($phone != '' ? $phone : ''); ?>" placeholder="(###)###-###) *">
+            <input name="phone_number" type="text" id="phone" class="textbox form-control <?php echo ( $phone=='' && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($phone != '' ? $phone : ''); ?>" placeholder="(###)###-###) *">
         </div>
         
         <div class="col-md-4 form-group <?php echo ( $selectedAgent=='' && $formSubmitted ? 'has-error' : ''); ?>">    										
@@ -98,14 +106,14 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
             <div class="row">
                 <div class="col-sm-8 form-group" id="addr1">
                     <label for="youraddr1" class="control-label">Listing Address<span class="req">*</span></label>
-                    <input type="text" class="form-control" value="" placeholder="Street" name="listing_address" required>
+                    <input type="text" class="form-control <?php echo ( $listing_address=='' && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($listing_address != '' ? $listing_address : ''); ?>" placeholder="Street" name="listing_address" required>
                 </div>
                 <div class="col-sm-4 form-group" id="addr2">
                     <label>&nbsp;</label>
-                    <input type="text" class="form-control" value="" placeholder="Apt/Suite" name="listing_address_2">
+                    <input type="text" class="form-control" value="<?php echo ($listing_address_2 != '' ? $listing_address_2 : ''); ?>" placeholder="Apt/Suite" name="listing_address_2">
                 </div>
                 <div class="col-xs-7 col-sm-5 form-group" id="city">
-                    <input type="text" class="form-control" value="" placeholder="City" name="listing_city" required>
+                    <input type="text" class="form-control <?php echo ( $listing_city=='' && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($listing_city != '' ? $listing_city : ''); ?>" placeholder="City" name="listing_city" required>
                 </div>
                 <div class="col-xs-6 col-sm-4 form-group" id="state">
                     <select class="form-control" required name="listing_state">
@@ -162,7 +170,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
                     </select>
                 </div>
                 <div class="col-xs-4 col-sm-3 form-group" id="zip">
-                    <input type="text" class="form-control" value="" placeholder="ZIP Code" name="listing_zip" required>
+                    <input type="text" class="form-control <?php echo ( $listing_zip=='' && $formSubmitted ? 'has-error' : ''); ?>" value="<?php echo ($listing_zip != '' ? $listing_zip : ''); ?>" placeholder="ZIP Code" name="listing_zip" required>
                 </div>
             </div>
         </div>
@@ -171,7 +179,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
     <div class="row">
         <div class="col-sm-8">
             <div class="form-group">
-                <label for="numBathrooms" class="control-label">Property Type<span class="req">*</span></label>
+                <label class="control-label">Property Type<span class="req">*</span></label>
                 <label class="radio-inline"><input type="radio" name="property_type" id="proptype1" value="Residential"> Residential</label>
                 <label class="radio-inline"><input type="radio" name="property_type" id="proptype2" value="Commercial"> Commercial</label>
                 <label class="radio-inline"><input type="radio" name="property_type" id="proptype3" value="Condo"> Condo</label>
@@ -184,7 +192,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         <div class="col-sm-8">
             <div class="form-group">
                 <label for="property_details" class="control-label">Property Details</label>
-                <textarea class="form-control" name="property_details"></textarea>
+                <textarea class="form-control" name="property_details"><?php echo ($property_details != '' ? $property_details : ''); ?></textarea>
             </div>
         </div>
     </div>

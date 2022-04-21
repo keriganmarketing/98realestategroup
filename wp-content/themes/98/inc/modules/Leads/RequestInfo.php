@@ -10,7 +10,7 @@ class RequestInfo extends Leads
 
     protected $postType = 'Lead';
 
-    public    $additionalFields = [
+    public  $additionalFields = [
                 'full_name'          => 'Name',
                 'email_address'      => 'Email Address',
                 'phone_number'       => 'Phone Number',
@@ -18,7 +18,15 @@ class RequestInfo extends Leads
                 'selected_agent'     => 'Selected Agent',
                 'mls_number'         => 'MLS Number',
                 'message'            => 'Message'
-              ];
+            ];
+
+    public  $requiredFields = [
+                'email_address',
+                'phone_number',
+                'full_name',
+                'reason_for_contact',
+                'message',
+            ];
 
     public    $siteName;
     public    $errors = [];
@@ -46,6 +54,8 @@ class RequestInfo extends Leads
         $this->adminEmail = (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail);
 
         // echo $this->adminEmail;
+
+        return $dataSubmitted;
     }
 
     public function additionalEmailData($leadInfo)

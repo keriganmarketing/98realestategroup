@@ -10,8 +10,16 @@ class SimpleContact extends Leads
 
     public $additionalFields       = [
         'full_name'     => 'Name',
+        'phone_number'  => 'Phone Number',
         'email_address' => 'Email Address',
         'message'       => 'Message'
+    ];
+
+    public $requiredFields         = [
+        'email_address',
+        'phone_number',
+        'full_name', // dynamically created using first and last
+        'message'
     ];
 
     public    $successMessage      = 'Your request has been received. We will review your submission and get back with you soon.';
@@ -35,7 +43,9 @@ class SimpleContact extends Leads
         // echo '<pre style="color: #FFF;">',print_r($agentInfo),'</pre>';
         
         $this->adminEmail = (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail);
-
+        // $this->adminEmail = 'bryan@kerigan.com';
         // echo $this->adminEmail;
+
+        return $dataSubmitted;
     }
 }
