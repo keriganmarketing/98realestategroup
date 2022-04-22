@@ -33,6 +33,10 @@ class Leads
         'full_name', // dynamically created using first and last
     ];
 
+    public  $blacklist = [
+        'danniesummer@partcafe.com'
+    ];
+
     /**
      * Leads constructor.
      * configure any options here
@@ -136,8 +140,14 @@ class Leads
                     $passCheck = false;
                     $this->errors[] = 'The email address you entered is invalid.';
                 }
+
+                if(in_array($dataSubmitted['email_address'], $this->blacklist)) {
+                    $passCheck = false;
+                    $this->errors[] = 'The email address you entered is blacklisted.';
+                }
             }
         }
+        
 
         if ($this->checkSpam($dataSubmitted)){
             $passCheck = false;
