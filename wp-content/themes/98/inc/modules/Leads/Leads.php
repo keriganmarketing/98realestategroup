@@ -34,7 +34,9 @@ class Leads
     ];
 
     public  $blacklist = [
-        'danniesummer@partcafe.com'
+        'danniesummer@partcafe.com',
+        'lois-daluz@e-correo.co',
+        'yourdomainaguru.cristina1@gmail.com'
     ];
 
     /**
