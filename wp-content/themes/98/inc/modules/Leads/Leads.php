@@ -38,7 +38,8 @@ class Leads
         'lois-daluz@e-correo.co',
         'yourdomainaguru.cristina1@gmail.com',
         'pl6@akihiro6710.hiraku95.officemail.in.net',
-        'meghan@riku76.officemail.fun'
+        'meghan@riku76.officemail.fun',
+        'russelcarlo@kogobee.com'
     ];
 
     /**
