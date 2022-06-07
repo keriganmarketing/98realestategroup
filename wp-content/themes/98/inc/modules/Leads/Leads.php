@@ -40,7 +40,10 @@ class Leads
         'pl6@akihiro6710.hiraku95.officemail.in.net',
         'meghan@riku76.officemail.fun',
         'russelcarlo@kogobee.com',
-        'theron-repass@vipitv.com'
+        'theron-repass@vipitv.com',
+        'lorenzodarwin@kogobee.com',
+        'jonasvaughan8@wing.onstir.com',
+        'jefferyqw1@hiroyuki6710.shiro37.inwebmail.fun'
     ];
 
     /**
