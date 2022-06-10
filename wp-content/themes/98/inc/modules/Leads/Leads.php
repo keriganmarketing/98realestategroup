@@ -7,8 +7,8 @@ use KeriganSolutions\CPT\CustomPostType;
 class Leads
 {
     protected $postType = 'Lead';
-    public    $adminEmail = 'bryan@kerigan.com';
-    public    $domain = 'kerigan.com';
+    public    $adminEmail = 'zachchilds@gmail.com';
+    public    $domain = 'mg.98realestategroup.com';
     public    $ccEmail = 'web@kerigan.com';
     public    $bccEmail = 'websites@kerigan.com';
     public    $additionalFields = [];
