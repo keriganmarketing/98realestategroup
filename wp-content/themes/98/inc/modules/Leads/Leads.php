@@ -43,7 +43,8 @@ class Leads
         'theron-repass@vipitv.com',
         'lorenzodarwin@kogobee.com',
         'jonasvaughan8@wing.onstir.com',
-        'jefferyqw1@hiroyuki6710.shiro37.inwebmail.fun'
+        'jefferyqw1@hiroyuki6710.shiro37.inwebmail.fun',
+        'xa20@naoki87.officemail.in.net'
     ];
 
     /**
