@@ -44,7 +44,8 @@ class Leads
         'lorenzodarwin@kogobee.com',
         'jonasvaughan8@wing.onstir.com',
         'jefferyqw1@hiroyuki6710.shiro37.inwebmail.fun',
-        'xa20@naoki87.officemail.in.net'
+        'xa20@naoki87.officemail.in.net',
+        'lisettevictor@nestmoon.com'
     ];
 
     /**
