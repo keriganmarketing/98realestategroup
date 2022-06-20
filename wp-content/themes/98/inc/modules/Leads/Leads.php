@@ -45,7 +45,9 @@ class Leads
         'jonasvaughan8@wing.onstir.com',
         'jefferyqw1@hiroyuki6710.shiro37.inwebmail.fun',
         'xa20@naoki87.officemail.in.net',
-        'lisettevictor@nestmoon.com'
+        'lisettevictor@nestmoon.com',
+        'desireegeorge@chiefdan.com',
+        'ye69@eiji44.officemail.fun'
     ];
 
     /**
