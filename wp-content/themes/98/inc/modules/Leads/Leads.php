@@ -47,7 +47,8 @@ class Leads
         'xa20@naoki87.officemail.in.net',
         'lisettevictor@nestmoon.com',
         'desireegeorge@chiefdan.com',
-        'ye69@eiji44.officemail.fun'
+        'ye69@eiji44.officemail.fun',
+        'winifredlenard@partcafe.com'
     ];
 
     /**
