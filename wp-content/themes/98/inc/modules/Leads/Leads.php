@@ -48,7 +48,8 @@ class Leads
         'lisettevictor@nestmoon.com',
         'desireegeorge@chiefdan.com',
         'ye69@eiji44.officemail.fun',
-        'winifredlenard@partcafe.com'
+        'winifredlenard@partcafe.com',
+        'melvinabarbara@kogobee.com'
     ];
 
     /**
