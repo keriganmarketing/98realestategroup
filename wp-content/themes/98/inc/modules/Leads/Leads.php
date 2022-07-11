@@ -49,7 +49,8 @@ class Leads
         'desireegeorge@chiefdan.com',
         'ye69@eiji44.officemail.fun',
         'winifredlenard@partcafe.com',
-        'melvinabarbara@kogobee.com'
+        'melvinabarbara@kogobee.com',
+        'vickietomczak4696@1secmail.com'
     ];
 
     /**
