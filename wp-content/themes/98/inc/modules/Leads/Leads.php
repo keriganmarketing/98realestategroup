@@ -50,7 +50,8 @@ class Leads
         'ye69@eiji44.officemail.fun',
         'winifredlenard@partcafe.com',
         'melvinabarbara@kogobee.com',
-        'vickietomczak4696@1secmail.com'
+        'vickietomczak4696@1secmail.com',
+        'marla@masato66.officemail.in.net'
     ];
 
     /**
