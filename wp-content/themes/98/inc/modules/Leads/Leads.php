@@ -51,7 +51,9 @@ class Leads
         'winifredlenard@partcafe.com',
         'melvinabarbara@kogobee.com',
         'vickietomczak4696@1secmail.com',
-        'marla@masato66.officemail.in.net'
+        'marla@masato66.officemail.in.net',
+        'bernardomartina@nestmoon.com',
+        'leilafg20@satoshi65.officemail.fun'
     ];
 
     /**
