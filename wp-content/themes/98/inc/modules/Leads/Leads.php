@@ -53,7 +53,8 @@ class Leads
         'vickietomczak4696@1secmail.com',
         'marla@masato66.officemail.in.net',
         'bernardomartina@nestmoon.com',
-        'leilafg20@satoshi65.officemail.fun'
+        'leilafg20@satoshi65.officemail.fun',
+        'floyd@rokuro1810.isamu15.meta1.in.net'
     ];
 
     /**
