@@ -56,7 +56,8 @@ class Leads
         'leilafg20@satoshi65.officemail.fun',
         'floyd@rokuro1810.isamu15.meta1.in.net',
         'suzette-forster22@edusath.com',
-        'dongdarwin@quelbroker.com'
+        'dongdarwin@quelbroker.com',
+        'laurencelogan@savedaday.com'
     ];
 
     /**
