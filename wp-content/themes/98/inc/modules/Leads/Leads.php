@@ -57,7 +57,9 @@ class Leads
         'floyd@rokuro1810.isamu15.meta1.in.net',
         'suzette-forster22@edusath.com',
         'dongdarwin@quelbroker.com',
-        'laurencelogan@savedaday.com'
+        'laurencelogan@savedaday.com',
+        'annettaarlette@smilietoys.com',
+        'louisamarlon@econgate.com'
     ];
 
     /**
