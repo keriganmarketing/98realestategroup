@@ -59,7 +59,8 @@ class Leads
         'dongdarwin@quelbroker.com',
         'laurencelogan@savedaday.com',
         'annettaarlette@smilietoys.com',
-        'louisamarlon@econgate.com'
+        'louisamarlon@econgate.com',
+        'lisasasha@dasemana.com'
     ];
 
     /**
