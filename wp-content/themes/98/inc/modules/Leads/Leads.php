@@ -60,7 +60,8 @@ class Leads
         'laurencelogan@savedaday.com',
         'annettaarlette@smilietoys.com',
         'louisamarlon@econgate.com',
-        'lisasasha@dasemana.com'
+        'lisasasha@dasemana.com',
+        'zacherycaro@awer.blastzane.com'
     ];
 
     /**
