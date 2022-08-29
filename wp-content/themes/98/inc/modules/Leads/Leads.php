@@ -61,7 +61,10 @@ class Leads
         'annettaarlette@smilietoys.com',
         'louisamarlon@econgate.com',
         'lisasasha@dasemana.com',
-        'zacherycaro@awer.blastzane.com'
+        'zacherycaro@awer.blastzane.com',
+        'lolasaranealis@awer.blastzane.com',
+        'brodiebostock42@awer.blastzane.com',
+        'santos.denehy@yahoo.com'
     ];
 
     /**
