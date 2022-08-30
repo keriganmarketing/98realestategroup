@@ -64,7 +64,8 @@ class Leads
         'zacherycaro@awer.blastzane.com',
         'lolasaranealis@awer.blastzane.com',
         'brodiebostock42@awer.blastzane.com',
-        'santos.denehy@yahoo.com'
+        'santos.denehy@yahoo.com',
+        'selenekyte54@third.bekkr.com'
     ];
 
     /**
