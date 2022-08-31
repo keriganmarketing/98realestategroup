@@ -67,7 +67,8 @@ class Leads
         'santos.denehy@yahoo.com',
         'selenekyte54@third.bekkr.com',
         'lorrieuh3@hiroyuki90.meta1.in.net',
-        'naomigaudet@1secmail.com'
+        'naomigaudet@1secmail.com',
+        'mia@thetrizzy.com'
     ];
 
     /**
