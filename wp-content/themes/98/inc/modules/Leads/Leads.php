@@ -66,7 +66,8 @@ class Leads
         'brodiebostock42@awer.blastzane.com',
         'santos.denehy@yahoo.com',
         'selenekyte54@third.bekkr.com',
-        'lorrieuh3@hiroyuki90.meta1.in.net'
+        'lorrieuh3@hiroyuki90.meta1.in.net',
+        'naomigaudet@1secmail.com'
     ];
 
     /**
