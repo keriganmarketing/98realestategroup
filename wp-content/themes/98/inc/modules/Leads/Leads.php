@@ -68,7 +68,8 @@ class Leads
         'selenekyte54@third.bekkr.com',
         'lorrieuh3@hiroyuki90.meta1.in.net',
         'naomigaudet@1secmail.com',
-        'mia@thetrizzy.com'
+        'mia@thetrizzy.com',
+        'carolinemildred@quelbroker.com'
     ];
 
     /**
