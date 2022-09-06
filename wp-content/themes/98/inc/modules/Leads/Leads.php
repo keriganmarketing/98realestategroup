@@ -69,7 +69,10 @@ class Leads
         'lorrieuh3@hiroyuki90.meta1.in.net',
         'naomigaudet@1secmail.com',
         'mia@thetrizzy.com',
-        'carolinemildred@quelbroker.com'
+        'carolinemildred@quelbroker.com',
+        'adrianneelmer@quelbroker.com',
+        'clariceconsiden@dcctb.com',
+        'tosharandall@savedaday.com'
     ];
 
     /**
