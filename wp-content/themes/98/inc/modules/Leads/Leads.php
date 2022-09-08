@@ -72,7 +72,11 @@ class Leads
         'carolinemildred@quelbroker.com',
         'adrianneelmer@quelbroker.com',
         'clariceconsiden@dcctb.com',
-        'tosharandall@savedaday.com'
+        'tosharandall@savedaday.com',
+        'gennieaguilar6343@1secmail.org',
+        'torybarta7965@knol-power.nl',
+        'cathernkidston4364@spambog.com',
+        'joycelynswaney@t.woeishyang.com'
     ];
 
     /**
