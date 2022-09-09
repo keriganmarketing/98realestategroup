@@ -76,7 +76,13 @@ class Leads
         'gennieaguilar6343@1secmail.org',
         'torybarta7965@knol-power.nl',
         'cathernkidston4364@spambog.com',
-        'joycelynswaney@t.woeishyang.com'
+        'joycelynswaney@t.woeishyang.com',
+        'vanmckinney6642@wwjmp.com',
+        'donaldbodnar24@third.bekkr.com',
+        'sherlyncage@vddaz.com',
+        'marvinrw5@fumio4510.itsuki40.officemail.fun',
+        'andreasbourgeois5457@mailmenot.io',
+        'charliebayly@1secmail.org'
     ];
 
     /**
@@ -255,11 +261,11 @@ class Leads
             $commentData['referrer'] = $data['referrer'];
         }
     
-        if(isset($data['comment_author'])){
+        if(isset($data['full_name'])){
             $commentData['comment_author'] = $data['full_name'];
         }
     
-        if(isset($data['comment_content'])){
+        if(isset($data['message'])){
             $commentData['comment_content'] = $data['message'];
         }
 
