@@ -50,7 +50,9 @@ class Leads
         'savedaday.com',
         'trick.sudeu.com',
         'vipitv.com',
-        'kogobee.com'
+        'kogobee.com',
+        'five.ceako.com',
+        'oil.papte.com'
     ];
 
     public  $blacklist = [
