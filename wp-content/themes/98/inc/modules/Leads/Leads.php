@@ -82,7 +82,15 @@ class Leads
         'sherlyncage@vddaz.com',
         'marvinrw5@fumio4510.itsuki40.officemail.fun',
         'andreasbourgeois5457@mailmenot.io',
-        'charliebayly@1secmail.org'
+        'charliebayly@1secmail.org',
+        'alexisbrubaker34@third.bekkr.com',
+        'ernestinahartmann62@third.bekkr.com',
+        'jodiepetra@quelbroker.com',
+        'halinaleckie72@trick.sudeu.com',
+        'sadiestambaugh57@plan.bekkr.com',
+        'lavernemcgrew51@prior.nedmr.com',
+        'danialgrider86@prior.nedmr.com',
+        'taylavalladares100@oil.papte.co'
     ];
 
     /**
