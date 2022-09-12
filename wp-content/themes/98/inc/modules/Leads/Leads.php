@@ -52,7 +52,11 @@ class Leads
         'vipitv.com',
         'kogobee.com',
         'five.ceako.com',
-        'oil.papte.com'
+        'oil.papte.com',
+        'stock.ceako.com',
+        'x24hr.com',
+        'discard.email',
+        'swegu.com'
     ];
 
     public  $blacklist = [
