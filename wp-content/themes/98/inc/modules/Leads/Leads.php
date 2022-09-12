@@ -14,6 +14,7 @@ class Leads
     public    $additionalFields = [];
     public    $siteName;
     public    $errors = [];
+    public    $notGood = false;
 
     public    $successMessage      = 'Your request has been received. We will review your submission and get back with you soon.';
     
@@ -31,6 +32,25 @@ class Leads
     public $requiredFields = [
         'email_address',
         'full_name', // dynamically created using first and last
+    ];
+
+    public  $blockedDomains = [
+        'partcafe.com',
+        'e-correo.co',
+        'officemail.in.net',
+        'quelbroker.com',
+        'third.bekkr.com',
+        'awer.blastzane.com',
+        'prior.nedmr.com',
+        'verywd.com',
+        'spambog.com',
+        'knol-power.nl',
+        '1secmail.com',
+        'meta1.in.net',
+        'savedaday.com',
+        'trick.sudeu.com',
+        'vipitv.com',
+        'kogobee.com'
     ];
 
     public  $blacklist = [
@@ -90,7 +110,9 @@ class Leads
         'sadiestambaugh57@plan.bekkr.com',
         'lavernemcgrew51@prior.nedmr.com',
         'danialgrider86@prior.nedmr.com',
-        'taylavalladares100@oil.papte.co'
+        'taylavalladares100@oil.papte.co',
+        'dorethamerchant61@prior.nedmr.com',
+        'kristiatencio57@tree.verywd.com'
     ];
 
     /**
@@ -139,8 +161,9 @@ class Leads
         $dataSubmitted['full_name'] = (isset($dataSubmitted['first_name']) && isset($dataSubmitted['last_name']) ? $dataSubmitted['first_name'] . ' ' . $dataSubmitted['last_name'] : $fullName);
 
         $dataSubmitted = $this->overrideData($dataSubmitted);
+        $this->validateSubmission($dataSubmitted);
 
-        if(!$this->validateSubmission($dataSubmitted)){
+        if($this->notGood){
             echo '<div class="alert alert-danger" role="alert">
             <strong>Errors were found. Please correct the indicated fields below.</strong>';
             if(count($this->errors) > 0){
@@ -180,38 +203,40 @@ class Leads
      */
     protected function validateSubmission($dataSubmitted)
     {
-
-        $passCheck = true;
-
         // loop through other required fields to make sure they are not blank
         foreach($this->requiredFields as $field){
             if ( $dataSubmitted[$field] === null || $dataSubmitted[$field] === '') {
-                $passCheck = false;
+                $this->notGood = true;
                 $this->errors[] = 'The ' . $this->additionalFields[$field] . ' field is required.';
             }
     
             // check email formatting
             if($field == 'email_address'){
                 if ( ! filter_var($dataSubmitted['email_address'], FILTER_VALIDATE_EMAIL)) {
-                    $passCheck = false;
+                    $this->notGood = true;
                     $this->errors[] = 'The email address you entered is invalid.';
-                }
-
-                if(in_array($dataSubmitted['email_address'], $this->blacklist)) {
-                    $passCheck = false;
-                    $this->errors[] = 'The email address you entered is blacklisted.';
                 }
             }
         }
-        
 
-        if ($this->checkSpam($dataSubmitted)){
-            $passCheck = false;
-            $this->errors[] = 'Your message has been identified as spam.';
+        if(in_array($dataSubmitted['email_address'], $this->blacklist)) {
+            $this->notGood = true;
+            $this->errors[] = 'The email address you entered is blacklisted.';
         }
 
-        return $passCheck;
+        foreach($this->blockedDomains as $string) {
+            if(strpos($dataSubmitted['email_address'], $string) !== false) 
+            {
+                
+                $this->notGood = true;
+                $this->errors[] = 'The email provider you entered is blacklisted.';
+            }
+        }
 
+        if ($this->checkSpam($dataSubmitted)){
+            $this->notGood = true;
+            $this->errors[] = 'Your message has been identified as spam.';
+        }
     }
 
     public function getIP()

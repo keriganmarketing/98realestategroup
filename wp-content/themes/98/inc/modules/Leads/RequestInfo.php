@@ -54,6 +54,7 @@ class RequestInfo extends Leads
         $this->adminEmail = (isset($agentInfo['email']) && $agentInfo['email'] != '' ? $agentInfo['email'] : $this->adminEmail);
 
         // echo $this->adminEmail;
+        // $this->adminEmail = 'bryan@kerigan.com';
 
         return $dataSubmitted;
     }
