@@ -56,7 +56,8 @@ class Leads
         '.ceako.com',
         'x24hr.com',
         'discard.email',
-        'swegu.com'
+        'swegu.com',
+        'mailmanila.com'
     ];
 
     public  $blacklist = [
