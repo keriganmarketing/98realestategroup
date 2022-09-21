@@ -57,7 +57,9 @@ class Leads
         'x24hr.com',
         'discard.email',
         'swegu.com',
-        'mailmanila.com'
+        'mailmanila.com',
+        'smilietoys.com',
+        '.dynainbox.com'
     ];
 
     public  $blacklist = [
