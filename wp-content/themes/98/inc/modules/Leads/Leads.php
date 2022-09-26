@@ -59,7 +59,11 @@ class Leads
         'swegu.com',
         'mailmanila.com',
         'smilietoys.com',
-        '.dynainbox.com'
+        '.dynainbox.com',
+        'anonmails.de',
+        'econgate.com',
+        'a-troninc.com',
+        '.thailandmovers.com'
     ];
 
     public  $blacklist = [
@@ -121,7 +125,10 @@ class Leads
         'danialgrider86@prior.nedmr.com',
         'taylavalladares100@oil.papte.co',
         'dorethamerchant61@prior.nedmr.com',
-        'kristiatencio57@tree.verywd.com'
+        'kristiatencio57@tree.verywd.com',
+        'rambomordo@hotmail.com',
+        'jordanjaceseo@gmail.com',
+        'ericka.joshua@gmail.com'
     ];
 
     /**
