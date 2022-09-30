@@ -64,7 +64,7 @@ class Leads
         'econgate.com',
         'a-troninc.com',
         '.thailandmovers.com',
-        '.roofvent.mom'
+        '.roofvent.'
     ];
 
     public  $blacklist = [
