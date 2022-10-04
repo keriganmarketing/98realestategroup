@@ -88,7 +88,8 @@ class Leads
         '.sudeu.com',
         '.nedmr.com',
         '.papte.co',
-        '.verywd.com'
+        '.verywd.com',
+        'esiix.com'
     ];
 
     // well-known domains
