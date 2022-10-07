@@ -89,7 +89,9 @@ class Leads
         '.nedmr.com',
         '.papte.co',
         '.verywd.com',
-        'esiix.com'
+        'esiix.com',
+        'rexsr.com',
+        'bobtamboli.com'
     ];
 
     // well-known domains
