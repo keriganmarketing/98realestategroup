@@ -91,7 +91,8 @@ class Leads
         '.verywd.com',
         'esiix.com',
         'rexsr.com',
-        'bobtamboli.com'
+        'bobtamboli.com',
+        'tony-ng.com'
     ];
 
     // well-known domains
@@ -101,7 +102,8 @@ class Leads
         'rambomordo@hotmail.com',
         'jordanjaceseo@gmail.com',
         'ericka.joshua@gmail.com',
-        'raushanahmullarkey805@aol.com'
+        'raushanahmullarkey805@aol.com',
+        'orimenas1970@yahoo.com'
     ];
 
     /**
