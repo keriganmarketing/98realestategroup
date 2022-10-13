@@ -92,7 +92,10 @@ class Leads
         'esiix.com',
         'rexsr.com',
         'bobtamboli.com',
-        'tony-ng.com'
+        'tony-ng.com',
+        'transatusa.com',
+        'ctcables.com',
+        'snterra.com'
     ];
 
     // well-known domains
