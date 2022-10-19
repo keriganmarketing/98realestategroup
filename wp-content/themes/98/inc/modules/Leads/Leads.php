@@ -95,7 +95,14 @@ class Leads
         'tony-ng.com',
         'transatusa.com',
         'ctcables.com',
-        'snterra.com'
+        'snterra.com',
+        'duxarea.com',
+        'ann-cole.com',
+        'findabridge.com',
+        'coylevarland.com',
+        'skincareproductoffers.com',
+        'skankville.com',
+        'callsbo.com'
     ];
 
     // well-known domains
