@@ -103,7 +103,8 @@ class Leads
         'skincareproductoffers.com',
         'skankville.com',
         'callsbo.com',
-        'incisives.com'
+        'incisives.com',
+        'ecorreos.space'
     ];
 
     // well-known domains
@@ -114,7 +115,11 @@ class Leads
         'jordanjaceseo@gmail.com',
         'ericka.joshua@gmail.com',
         'raushanahmullarkey805@aol.com',
-        'orimenas1970@yahoo.com'
+        'orimenas1970@yahoo.com',
+        'springertheresa473@yahoo.com',
+        'amaratucholski19@yahoo.com',
+        'assayamberbn3594@yahoo.com',
+        'lavetatakenakahf@yahoo.com'
     ];
 
     /**
