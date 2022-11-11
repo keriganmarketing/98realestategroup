@@ -119,7 +119,10 @@ class Leads
         'springertheresa473@yahoo.com',
         'amaratucholski19@yahoo.com',
         'assayamberbn3594@yahoo.com',
-        'lavetatakenakahf@yahoo.com'
+        'lavetatakenakahf@yahoo.com',
+        'veliawestover48@yahoo.com',
+        'katelandcoren91@yahoo.com',
+        'classiebourneka@yahoo.com'
     ];
 
     /**
