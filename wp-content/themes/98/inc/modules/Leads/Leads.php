@@ -104,7 +104,9 @@ class Leads
         'skankville.com',
         'callsbo.com',
         'incisives.com',
-        'ecorreos.space'
+        'ecorreos.space',
+        '5hike.com',
+        'xixeo.com'
     ];
 
     // well-known domains
@@ -122,7 +124,8 @@ class Leads
         'lavetatakenakahf@yahoo.com',
         'veliawestover48@yahoo.com',
         'katelandcoren91@yahoo.com',
-        'classiebourneka@yahoo.com'
+        'classiebourneka@yahoo.com',
+        'lillianathai833@yahoo.com'
     ];
 
     /**
