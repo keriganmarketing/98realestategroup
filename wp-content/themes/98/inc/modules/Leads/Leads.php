@@ -125,7 +125,8 @@ class Leads
         'veliawestover48@yahoo.com',
         'katelandcoren91@yahoo.com',
         'classiebourneka@yahoo.com',
-        'lillianathai833@yahoo.com'
+        'lillianathai833@yahoo.com',
+        'alaricmitchencw@yahoo.com'
     ];
 
     /**

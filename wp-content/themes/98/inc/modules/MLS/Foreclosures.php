@@ -8,7 +8,7 @@ class Foreclosures extends CuratedResults {
     {
         parent::set('endPoint', 'forclosures');
         parent::set('searchParams', [
-            'status' => ['active' => 'Active'],
+            // 'status' => ['active' => 'Active'],
             'sort'     => $this->getSort(),
             'excludes' => 'Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
         ]);
