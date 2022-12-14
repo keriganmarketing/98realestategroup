@@ -125,6 +125,11 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
                     class="form-control"><?php echo $message; ?></textarea>
             </div>
 
+            <label style="display: flex; position:absolute; top:-20px; left:-9999px; height: 10px; width: 10px; overflow:hidden;" >
+                <input name="terms" type="checkbox" tabindex="-1" > 
+                you must agree to our <a tabindex="-1" href="/privacy-policy/" >terms and conditions</a>.
+            </label>
+
             <input type="text" name="secu"
                 style="position: absolute; height: 1px; top: -50px; left: -50px; width: 1px; padding: 0; margin: 0; visibility: hidden;">
             <button style="margin-top: 1rem;" type="submit" class="btn btn-danger btn-md pull-xs-right">SEND</button>

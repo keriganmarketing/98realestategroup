@@ -71,6 +71,10 @@ if( $formSubmitted ){
             <label>MESSAGE</label>
             <textarea name="message" rows="4" class="form-control"></textarea>
         </div>
+        <label style="display: flex; position:absolute; top:-20px; left:-9999px; height: 10px; width: 10px; overflow:hidden;" >
+            <input name="terms" type="checkbox" tabindex="-1" > 
+            you must agree to our <a tabindex="-1" href="/privacy-policy/" >terms and conditions</a>.
+        </label>
         <div class="form-group">
 			<input type="text" name="secu" style="position: absolute; height: 1px; top: -50px; left: -50px; width: 1px; padding: 0; margin: 0; visibility: hidden;" >
             <button type="submit" class="btn btn-danger btn-md pull-md-right" >SEND</button>

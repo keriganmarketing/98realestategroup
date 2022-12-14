@@ -200,6 +200,11 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         <div class="col-xs-12 form-group">&nbsp;</div>
     </div>
 
+    <label style="display: flex; position:absolute; top:-20px; left:-9999px; height: 10px; width: 10px; overflow:hidden;" >
+        <input name="terms" type="checkbox" tabindex="-1" > 
+        you must agree to our <a tabindex="-1" href="/privacy-policy/" >terms and conditions</a>.
+    </label>
+
     <div class="row">
         <div id="listing-request" class="col-xs-12">
             <div class="form-group">

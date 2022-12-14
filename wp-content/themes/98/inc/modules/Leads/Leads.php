@@ -196,6 +196,11 @@ class Leads
             </div>';
         }
 
+        // silently discard bot submissions
+        if(isset($dataSubmitted['terms']) && $dataSubmitted['terms']) {
+            return true;
+        }
+
         $this->addToDashboard($dataSubmitted);
         $this->sendNotifications($dataSubmitted);
 
@@ -216,7 +221,7 @@ class Leads
      * @return boolean $passCheck
      */
     protected function validateSubmission($dataSubmitted)
-    {
+    {        
         // loop through other required fields to make sure they are not blank
         foreach($this->requiredFields as $field){
             if ( $dataSubmitted[$field] === null || $dataSubmitted[$field] === '') {
