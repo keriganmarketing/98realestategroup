@@ -53,7 +53,7 @@ class CuratedResults {
 
     public function getSort()
     {
-        return isset($_GET['sort']) ? urldecode($_GET['sort']) : 'date_modified|desc';
+        return isset($_GET['sort']) ? urldecode($_GET['sort']) : 'list_date|desc';
     }
 
     public function filterRequest()
