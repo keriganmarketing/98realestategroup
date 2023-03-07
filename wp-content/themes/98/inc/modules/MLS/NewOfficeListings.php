@@ -12,7 +12,7 @@ class NewOfficeListings extends CuratedResults {
         parent::set('endPoint', 'our-properties/' . $this->officeID);
         parent::set('searchParams', [
             'sort'   => $this->getSort(),
-            'status' => ['active' => 'Active'],
+            'status' => ['active' => 'Active', 'contingent' => 'Contingent'],
             'excludes' => 'Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
         ]);
     }

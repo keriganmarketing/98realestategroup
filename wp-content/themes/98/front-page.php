@@ -92,7 +92,7 @@ get_header(); ?>
 
     <div id="news-contact">
         <div class="container">
-            <div class="col-sm-4">
+            <div class="col-lg-4" style="padding:1.5rem 15px">
                 <h2>Market News</h2>
                 <?php
                 $args = array(
@@ -121,7 +121,7 @@ get_header(); ?>
                 ?>
                 <a href="/our-blog/" class="btn btn-info">MORE NEWS</a>
             </div>
-            <div class="col-sm-8">
+            <div class="col-lg-8" style="margin:1.5rem 0">
                 <h2>Quick Contact</h2>
                 <?php include(locate_template('template-parts/forms/quick-contact.php')); ?>
             </div>
