@@ -72,7 +72,7 @@ get_header(); ?>
                     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                         <div class="container-wide">
                             <div class="row">
-                                <div class="col-md-7 col-lg-6" style="padding: 1rem 5rem 0;" >
+                                <div class="front-content col-md-7 col-lg-6" >
                                     <div class="entry-content">
                                         <?php the_content(); ?>
                                     </div><!-- .entry-content -->

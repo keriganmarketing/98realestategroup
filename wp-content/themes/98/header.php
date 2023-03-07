@@ -12,6 +12,24 @@
 
 <?php wp_head(); ?>
 
+<style>
+	.front-content {
+		padding: 1rem 1.5rem 0;
+	}
+
+	@media screen and (min-width:768px) {
+		.front-content {
+			padding: 1rem 5rem 0 3rem;
+		}
+	}
+
+	@media screen and (min-width:1024px) {
+		.front-content {
+			padding: 1rem 5rem 0;
+		}
+	}
+</style>
+
 </head>
 
 <body <?php body_class(); ?>>
