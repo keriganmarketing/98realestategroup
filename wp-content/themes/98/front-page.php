@@ -33,7 +33,7 @@ get_header(); ?>
                         <p class="view">View</p></a>
                 </div>
                 <div class="company-listings huge-button col-sm-6 col-md-4"
-                     style="background-image: url('<?php echo get_template_directory_uri() . '/img/interior.jpg'; ?>');">
+                     style="background-image: url('<?php echo get_template_directory_uri() . '/img/interior.webp'; ?>');">
                     <a href="/properties/our-listings/" class="huge-button-link"><h2>98 Living</h2>
                         <p class="btn-intro">View our properties</p>
                         <div class="line"></div>
