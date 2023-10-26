@@ -40,7 +40,7 @@ get_header(); ?>
                         <p class="view">View</p></a>
                 </div>
                 <div class="map-search huge-button col-sm-6 col-md-4"
-                     style="background-image: url('<?php echo get_template_directory_uri() . '/img/mb-aerial.webp'; ?>');">
+                     style="background-image: url('<?php echo get_template_directory_uri() . '/img/mb-aerial.jpg'; ?>');">
                     <a href="/properties/map-search/" class="huge-button-link"><h2>Map Search</h2>
                         <p class="btn-intro">Explore neighborhoods</p>
                         <div class="line"></div>
