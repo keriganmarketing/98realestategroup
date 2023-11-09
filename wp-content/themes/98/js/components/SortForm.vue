@@ -31,6 +31,7 @@
 			<option value="list_price|asc">Price - low to high</option>
             <option value="list_date|desc">Date Listed </option>
             <option value="date_modified|desc">Date Modified </option>
+            <option value="sold_date|desc">Date Sold </option>
         </select><button type="submit" class="btn btn-info" >Sort</button>    
     </form>
 </template>

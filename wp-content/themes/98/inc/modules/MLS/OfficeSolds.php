@@ -11,7 +11,7 @@ class OfficeSolds extends CuratedResults {
         $this->officeID = $officeID;
         parent::set('endPoint', 'our-recently-sold/' . $this->officeID);
         parent::set('searchParams', [
-            'sort'     => $this->getSort(),
+            'sort'     => isset($_GET['sort']) ? urldecode($_GET['sort']) : 'sold_date|desc',
             'excludes' => 'Carrabelle|Apalachicola|Eastpoint|Other Counties|Jackson County|Calhoun County|Holmes County|Washington County'
         ]);
     }

@@ -32,15 +32,15 @@
         props: {
             dataOpenHouses: {
                 type: Number,
-                default: this.openHouses
+                default: ''
             },
             dataWaterFront: {
                 type: Number,
-                default: this.waterFront
+                default: ''
             },
             dataPool: {
                 type: Number,
-                default: this.pool
+                default: ''
             },
         },
         data () {

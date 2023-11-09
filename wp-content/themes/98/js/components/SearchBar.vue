@@ -113,7 +113,7 @@
 <script>
     export default {
         props: {
-            'searchTerms': {
+            searchTerms: {
                 type: Object,
                 default: {}
             }

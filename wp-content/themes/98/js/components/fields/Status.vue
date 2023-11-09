@@ -22,7 +22,7 @@
         props: {
             searchTerms: {
                 type: Array,
-                default: this.searchTerms
+                default: []
             }
         },
 

@@ -42,7 +42,7 @@ get_header(); ?>
                 <div class="container-wide">
                     <div class="row justify-content-between mb-4">
                         <div class="col-sm-8">
-                            <sort-form field-value="<?php echo $soldListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
+                            <sort-form field-value="<?php echo (isset($_GET['sort']) ? urldecode($_GET['sort']) : 'sold_date|desc'); ?>" :search-terms='<?php echo $currentRequest; ?>' ></sort-form>
                             <filter-form field-value="<?php echo $soldListings->getSort(); ?>" :search-terms='<?php echo $currentRequest; ?>' ></filter-form>
                             <small class="text-muted" style="display:inline; padding-left:10px;" >
                                 Showing <?php echo $resultMeta->count; ?> 

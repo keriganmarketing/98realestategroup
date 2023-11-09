@@ -21,15 +21,15 @@
         props: {
             dataWaterfront: {
                 type: String,
-                default: this.waterfront
+                default: ''
             },
             dataWaterview: {
                 type: String,
-                default: this.waterview
+                default: ''
             },
             dataForeclosure: {
                 type: String,
-                default: this.forclosure
+                default: ''
             },
         },
 
